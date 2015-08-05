@@ -1,3 +1,4 @@
+ae/.gitignore
 ae/connection.properties
 tools/target
 tools/.checkstyle
