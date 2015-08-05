@@ -1,0 +1,14 @@
+# Package Build Configuration
+name: PCK.AUTOMIC_AZURE
+
+source: ae
+
+# binary object resource mapping will be defined here
+# please add resources here
+binaries:
+  - object: RESOURCES/LIBS/PCK.AUTOMIC_AZURE.PRV.STORE
+    resources:
+      - name: AZURE 
+        type: BINARY
+        path: tools/target/azuretool.jar
+        version: 1.0.0 
