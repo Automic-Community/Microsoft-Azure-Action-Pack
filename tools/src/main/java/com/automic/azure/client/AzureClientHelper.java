@@ -4,6 +4,7 @@
 package com.automic.azure.client;
 
 import java.util.Arrays;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,5 +41,23 @@ public final class AzureClientHelper {
         LOGGER.info("Execution starts for action [" + action + "]...");
         AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
         useraction.executeAction(Arrays.copyOfRange(args, 1, args.length));
+    }
+    
+    public static void executeAction(Map<String,String> args) throws AzureException{
+    	 
+    	if(args.size()!=0){
+    		 String action = args.get("act");
+    		 if(action==null || action.isEmpty() ){
+    			 LOGGER.error(ExceptionConstants.INVALID_ACTION);
+    	            throw new AzureException(ExceptionConstants.INVALID_ACTION); 
+    		 }
+    		    action = action.toUpperCase();
+    	        LOGGER.info("Execution starts for action [" + action + "]...");
+    	        AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
+    	        args.remove("act");
+    	        useraction.executeAction(args);
+    	 }
+    	
+    	
     }
 }

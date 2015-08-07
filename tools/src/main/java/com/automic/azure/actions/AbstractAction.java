@@ -5,6 +5,7 @@ package com.automic.azure.actions;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -108,8 +109,8 @@ public abstract class AbstractAction {
                 client.destroy();
             }
         }
-    }
-
+    }   
+   
     /**
      * Method to log input parameters to the given action
      * 
@@ -218,6 +219,41 @@ public abstract class AbstractAction {
             throw new AzureException(msg);
         }
     }
+    
+    /**
+     * This method acts as template and decides how an action should proceed.It starts with logging of parameters
+     * ,then checking the number of arguments,then initialize the variables like docker URL, read and connection
+     * timeouts and filepath.Then it will call the REST API of docker and gets the response which then validated and at
+     * last prepares the out either in the form of xml or just a simple sysout.
+     * 
+     * @param args Array of arguments 
+     * @throws AzureException exception while executing an action
+     */
+    public final void executeAction(Map<String,String>args) throws AzureException {
+        Client client = null;
+        try {
+            logParameters(args);
+            checkNoOfargs(args.size());
+            initializeArguments(args);
+            validateInputs();
+            client = getClient();
+            ClientResponse response = executeSpecific(client);
+            validateResponse(response);
+            prepareOutput(response);
+        } finally {
+            if (client != null) {
+                client.destroy();
+            }
+        }
+    }
+
+    
+    protected abstract void logParameters(Map<String,String>args);
+    
+    protected abstract void initializeArguments(Map<String,String>args);
+    
+    
+    
 
     /**
      * Method to create an instance of {@link Client} using docker URL, certificate file path, connection timeout and
