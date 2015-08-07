@@ -33,6 +33,13 @@ public final class ExceptionConstants {
     public static final String DIRECTORY_ALREADY_EXISTS = "Invalid directory [%s]. Possibly directory already exists";
     public static final String IO_ERROR = "Unknown IO Error";
     public static final String MISSING_REQUIRED_PARAM = "[%s] is missing";
+    
+    public static final String AZURE_CERTIFICATE_MISSING = "Azure certificate not available at specified path";
+    public static final String PASSWORD_ERROR = "Password should not blank";
+    public static final String EMPTY_SERVICE_NAME = "Service name should not blank";
+    public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not blank";
+    public static final String EMPTY_ROLE_NAME = "Role name should not blank";
+    public static final String EMPTY_SUBSCTIPTION_ID = "Subscription id should not blank";
 
     private ExceptionConstants() {
     }

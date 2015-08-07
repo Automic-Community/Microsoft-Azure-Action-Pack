@@ -40,7 +40,11 @@ public final class AzureOptions {
 		options.addOption("sid", "subscriptionId", true, "Subscription ID");
 		options.addOption("ksl", "keystore", true, "Keystore location");
 		options.addOption("pwd", "password", true, "Keystore password");
-		options.addOption("h", "help", false, "show help.");
+		options.addOption("url", "azureurl", true, "Azure cloud url");
+		options.addOption("ser", "servicename", true, "Azure cloud service name");
+		options.addOption("dep", "deploymentname", true, "Azure deployment  name");
+		options.addOption("rol", "rolename", true, "Role name (VM name)");
+		options.addOption("h",   "help", false, "show help.");
 
 	}
 

@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.actions.AbstractAction;
 import com.automic.azure.actions.ActionFactory;
-import com.automic.azure.constants.Action;
+//import com.automic.azure.constants.Action;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 
@@ -31,7 +31,7 @@ public final class AzureClientHelper {
      * @param args array of String args
      * @throws AzureException 
      */
-    public static void executeAction(String[] args) throws AzureException {
+  /*  public static void executeAction(String[] args) throws AzureException {
         String action = args[0].trim();
         if (action.isEmpty()) {
             LOGGER.error(ExceptionConstants.INVALID_ACTION);
@@ -41,7 +41,7 @@ public final class AzureClientHelper {
         LOGGER.info("Execution starts for action [" + action + "]...");
         AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
         useraction.executeAction(Arrays.copyOfRange(args, 1, args.length));
-    }
+    }*/
     
     public static void executeAction(Map<String,String> args) throws AzureException{
     	 
@@ -53,7 +53,7 @@ public final class AzureClientHelper {
     		 }
     		    action = action.toUpperCase();
     	        LOGGER.info("Execution starts for action [" + action + "]...");
-    	        AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
+    	        AbstractAction useraction = ActionFactory.getAction(action);
     	        args.remove("act");
     	        useraction.executeAction(args);
     	 }

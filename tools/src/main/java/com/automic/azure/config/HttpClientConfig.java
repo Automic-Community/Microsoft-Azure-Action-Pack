@@ -32,7 +32,7 @@ public final class HttpClientConfig {
      * @return an instance of {@link Client}
      * @throws AzureException
      */
-    public static Client getClient(String protocol, String certificatePath, int connectionTimeOut, int readTimeOut)
+    public static Client getClient(String protocol, String certificatePath, char [] password, int connectionTimeOut, int readTimeOut)
             throws AzureException {
         Client client;
 
@@ -43,7 +43,7 @@ public final class HttpClientConfig {
         config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
 
         if (Constants.HTTPS.equalsIgnoreCase(protocol)) {
-            validateCertificates(certificatePath, config);
+            validateCertificates(certificatePath, password, config);
         }
         client = Client.create(config);
 
@@ -56,7 +56,7 @@ public final class HttpClientConfig {
      * @param config config to Docker connection
      * @throws AzureException
      */
-    private static void validateCertificates(String certificatePath, ClientConfig config)
+    private static void validateCertificates(String certificatePath, char [] password, ClientConfig config)
             throws AzureException {
 
         /*if (!certificatePath.isEmpty()) {
@@ -70,7 +70,7 @@ public final class HttpClientConfig {
             LOGGER.error(ExceptionConstants.EMPTY_DOCKER_CERITIFCATE_PATH);
             throw new AzureException(ExceptionConstants.EMPTY_DOCKER_CERITIFCATE_PATH);
         } */
-        CertificatesManagement certs = new CertificatesManagement(Paths.get(certificatePath));
+        CertificatesManagement certs = new CertificatesManagement(Paths.get(certificatePath), password);
         HTTPSProperties props = new HTTPSProperties(certs.hostnameVerifier(), certs.sslContext());
         config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);
 

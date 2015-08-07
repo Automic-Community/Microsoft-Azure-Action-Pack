@@ -3,7 +3,7 @@ package com.automic.azure.actions;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.automic.azure.constants.Action;
+//import com.automic.azure.constants.Action;
 import com.automic.azure.exceptions.AzureException;
 
 /**
@@ -29,17 +29,19 @@ public final class ActionFactory {
 	 * @throws AzureException
 	 *             if no matching implementation could be found
 	 */
-	public static AbstractAction getAction(Action enumAction)
+	public static AbstractAction getAction(String actionName)
 			throws AzureException {
 
 		AbstractAction action = null;
 
-		switch (enumAction) {
-		case VERSION:
+		switch (actionName) {
+		/*case VERSION:
+			break;*/
+		case "START_ROLE":
+			action = new StartVM();
 			break;
 		default:
-			String msg = "Invalid Action.. Please enter valid action "
-					+ Action.getActionNames();
+			String msg = "Invalid Action.. Please enter valid action : START_ROLE";
 			LOGGER.error(msg);
 			throw new AzureException(msg);
 		}

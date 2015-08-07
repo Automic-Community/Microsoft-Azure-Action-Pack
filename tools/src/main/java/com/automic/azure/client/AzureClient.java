@@ -11,7 +11,7 @@ import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 import com.automic.azure.utility.CommonUtil;
 import com.sun.jersey.api.client.ClientHandlerException;
-
+import static com.automic.azure.utility.CommonUtil.printErr;
 
 /**
  * Main Class is the insertion point of docker interaction api when called from AE implementation. It delegates the
@@ -50,7 +50,7 @@ public final class AzureClient {
      */
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.err.println("No arguments received...");
+        	printErr("No arguments received...");
             System.exit(1);
         }
         
@@ -67,15 +67,15 @@ public final class AzureClient {
             LOGGER.error("Action  FAILED ,possible reason :: ", e);
             responseCode = clientHandlerExceptionHandling(e);
         } catch (AzureException e) {
-            System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR, e.getMessage()));
+            printErr(CommonUtil.formatMessage(RESPONSE_ERROR, e.getMessage()));
         } catch (Exception e) {
             LOGGER.error("Action  FAILED ,possible reason :: ", e);
-            System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR,
+            printErr(CommonUtil.formatMessage(RESPONSE_ERROR,
                     ExceptionConstants.GENERIC_ERROR_MSG));
         }
 
         if (responseCode != RESPONSE_OK) {
-            System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR, ERRORMSG));
+        	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, ERRORMSG));
         }
 
         LOGGER.info("@@@@@@@ Execution ends for action  with response code : " + responseCode);
@@ -97,18 +97,18 @@ public final class AzureClient {
 
         if (th != null) {
             if (th instanceof java.net.SocketTimeoutException) {
-                System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR, CONNECTION_TIMEOUT));
+            	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, CONNECTION_TIMEOUT));
                 responseCode = RESPONSE_CONNECT_TIMEOUT;
             } else if (th instanceof java.net.ConnectException) {
-                System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR, UNABLE_TO_CONNECT));
+            	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, UNABLE_TO_CONNECT));
 
             } else {
                 String errMsg = (e.getMessage()!=null && !e.getMessage().isEmpty()?e.getMessage():ExceptionConstants.GENERIC_ERROR_MSG);
-                System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR, errMsg));
+                printErr(CommonUtil.formatMessage(RESPONSE_ERROR, errMsg));
 
             }
         } else {
-            System.err.println(CommonUtil.formatMessage(RESPONSE_ERROR, ExceptionConstants.GENERIC_ERROR_MSG));
+        	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, ExceptionConstants.GENERIC_ERROR_MSG));
 
         }
         return responseCode;

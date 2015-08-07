@@ -18,6 +18,7 @@ import com.automic.azure.utility.URLValidator;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import static com.automic.azure.utility.CommonUtil.printErr;
 
 /**
  * 
@@ -26,27 +27,7 @@ import com.sun.jersey.api.client.ClientResponse;
  * to initialize arguments, validate parameters, prepare API response and exception handling.
  * 
  */
-public abstract class AbstractAction {
-
-    /**
-     * index for value of connection timeout in parameter array
-     */
-    protected static final int CONNECTION_TIMEOUT_INDEX = 0;
-    
-    /**
-     * index for value of read timeout in parameter array
-     */
-    protected static final int READ_TIMEOUT_INDEX = 1;
-    
-    /**
-     * index for value of docker URL in parameter array
-     */
-    protected static final int AZURE_URL_INDEX = 2;
-    
-    /**
-     * index for value of certificate path in parameter array
-     */
-    protected static final int CERTIFICATE_INDEX = 3;
+public abstract class AbstractAction { 
 
     private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
 
@@ -55,14 +36,24 @@ public abstract class AbstractAction {
     private static final int END_HTTP_CODE = 300;
 
     /**
-     * Docker URL
+     * Azure URL
      */
-    protected String dockerUrl;
+    protected String azureUrl;
     
     /**
      * Certificate file path
      */
     protected String certFilePath;
+    
+    /**
+     * key store password
+     */
+    private char[] password;
+    
+    /**
+     * Microsoft subscription id
+     */
+    protected String subscriptionId;
 
     /**
      * Connection timeout in milliseconds
@@ -72,69 +63,17 @@ public abstract class AbstractAction {
     /**
      * Read timeout in milliseconds
      */
-    private int readTimeOut;
-    
-    /**
-     * Argument count as expected by an implementation of {@link AbstractAction}
-     */
-    private int argsCount;
+    private int readTimeOut;   
+  
 
-    public AbstractAction(int argsCount) {
-        this.argsCount = argsCount;
-    }
-
-    /**
-     * This method acts as template and decides how an action should proceed.It starts with logging of parameters
-     * ,then checking the number of arguments,then initialize the variables like docker URL, read and connection
-     * timeouts and filepath.Then it will call the REST API of docker and gets the response which then validated and at
-     * last prepares the out either in the form of xml or just a simple sysout.
-     * 
-     * @param args Array of arguments 
-     * @throws AzureException exception while executing an action
-     */
-    public final void executeAction(String[] args) throws AzureException {
-        Client client = null;
-        try {
-            logParameters(args);
-            checkNoOfargs(args.length);
-            trim(args);
-            initializeArguments(args);
-            validateInputs();
-            client = getClient();
-            ClientResponse response = executeSpecific(client);
-            validateResponse(response);
-            prepareOutput(response);
-        } finally {
-            if (client != null) {
-                client.destroy();
-            }
-        }
-    }   
-   
-    /**
-     * Method to log input parameters to the given action
-     * 
-     * @param args Array of arguments
-     */
-    protected abstract void logParameters(String[] args);
-
-    /**
-     * Method to trim parameters
-     * @param args
-     */
-    protected void trim(String[] args) {
-        for (int i = 0; i < args.length; i++) {
-            args[i] = args[i].trim();
-        }
-    }
-
+  
     /**
      * This method is used to initialize the arguments
      * 
      * @param args
      * @throws AzureException
      */
-    protected abstract void initialize(String[] args) throws AzureException;
+    protected abstract void initialize(Map<String,String>args) throws AzureException;
 
     /**
      * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
@@ -168,35 +107,24 @@ public abstract class AbstractAction {
      */
     protected abstract void prepareOutput(ClientResponse response) throws AzureException;
 
-    /**
-     * Method to check no of arguments are sufficient or not. Throws an exception if count is less than the argument
-     * expected.
-     * 
-     * @param count
-     *            No of arguments
-     * @throws AzureException
-     */
-    private void checkNoOfargs(int count) throws AzureException {
-        if (count < argsCount) {
-            LOGGER.error(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-            throw new AzureException(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-        }
-    }
 
     /**
      * Method to initialize arguments before processing them in an action
      * @param args String array of arguments
      * @throws AzureException
      */
-    private void initializeArguments(String[] args) throws AzureException {
-        connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(args[AbstractAction.CONNECTION_TIMEOUT_INDEX]);
-        readTimeOut = CommonUtil.getAndCheckUnsignedValue(args[AbstractAction.READ_TIMEOUT_INDEX]);
-        dockerUrl = args[AbstractAction.AZURE_URL_INDEX];
-        certFilePath = (args.length > AbstractAction.CERTIFICATE_INDEX) ? args[AbstractAction.CERTIFICATE_INDEX]
-                : "";
-        validateGeneralInputs();
-        initialize(args);
-    }
+    protected  void initializeArguments(Map<String,String>args) throws AzureException{
+    	
+    	 connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(args.get("cto"));
+         readTimeOut = CommonUtil.getAndCheckUnsignedValue(args.get("rto"));
+         azureUrl = args.get("url");
+         certFilePath = args.get("ksl");
+         password = args.get("pwd") != null ? args.get("pwd").toCharArray() : null;
+         subscriptionId = args.get("sid");
+         validateGeneralInputs();
+         initialize(args);    	
+    }  
+
 
     /**
      * Method to validate Input parameters
@@ -213,8 +141,25 @@ public abstract class AbstractAction {
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
-        if (!URLValidator.validateURL(dockerUrl)) {
-            String msg = String.format(ExceptionConstants.INVALID_AZURE_URL, dockerUrl);
+        if (!URLValidator.validateURL(azureUrl)) {
+            String msg = String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl);
+            LOGGER.error(msg);
+            throw new AzureException(msg);
+        }
+        if (!Validator.checkNotEmpty(subscriptionId)) {
+            String msg = String.format(ExceptionConstants.EMPTY_SUBSCTIPTION_ID, subscriptionId);
+            LOGGER.error(msg);
+            throw new AzureException(msg);
+        }
+        
+        if (!Validator.checkFileExistsAndIsFile(certFilePath)) {
+            String msg = String.format(ExceptionConstants.INVALID_FILE, certFilePath);
+            LOGGER.error(msg);
+            throw new AzureException(msg);
+        }
+        
+        if (password == null || password.length < 1) {
+            String msg = ExceptionConstants.PASSWORD_ERROR;
             LOGGER.error(msg);
             throw new AzureException(msg);
         }
@@ -233,7 +178,6 @@ public abstract class AbstractAction {
         Client client = null;
         try {
             logParameters(args);
-            checkNoOfargs(args.size());
             initializeArguments(args);
             validateInputs();
             client = getClient();
@@ -247,14 +191,15 @@ public abstract class AbstractAction {
         }
     }
 
+    /**
+     * Method to log input parameters to the given action
+     * 
+     * @param args  HashMap of arguments {@link HashMap}
+     */  
     
-    protected abstract void logParameters(Map<String,String>args);
+    protected abstract void logParameters(Map<String,String> args);
     
-    protected abstract void initializeArguments(Map<String,String>args);
-    
-    
-    
-
+   
     /**
      * Method to create an instance of {@link Client} using docker URL, certificate file path, connection timeout and
      * read timeout.
@@ -264,10 +209,10 @@ public abstract class AbstractAction {
      */
     private Client getClient() throws AzureException {
         try {
-            return HttpClientConfig.getClient(new URL(dockerUrl).getProtocol(), this.certFilePath,
+            return HttpClientConfig.getClient(new URL(azureUrl).getProtocol(), this.certFilePath, password,
                     connectionTimeOut, readTimeOut);
         } catch (MalformedURLException ex) {
-            String msg = String.format(ExceptionConstants.INVALID_AZURE_URL, dockerUrl);
+            String msg = String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl);
             LOGGER.error(msg, ex);
             throw new AzureException(msg);
         }
@@ -297,7 +242,7 @@ public abstract class AbstractAction {
      * @return Docker response code
      */
     private String buildDockerResponse(int status, String message) {
-        StringBuilder responseBuilder = new StringBuilder("Docker Response: ");
+        StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
         responseBuilder.append("StatusCode: [");
         responseBuilder.append(status).append("]");
         if (Validator.checkNotEmpty(message)) {
@@ -316,7 +261,7 @@ public abstract class AbstractAction {
     private String getHttpErrorMsg(ClientResponse response) {
         String msg = response.getEntity(String.class);
         String errMsg = buildDockerResponse(response.getStatus(), msg);
-        System.err.println(errMsg);
+        printErr(errMsg);
         LOGGER.error(errMsg);
         return getErrorMessage(response.getStatus());
     }
