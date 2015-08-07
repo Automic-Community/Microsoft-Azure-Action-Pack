@@ -69,7 +69,6 @@ public final class AzureOptions {
 
 	private void help() {
 		HelpFormatter formater = new HelpFormatter();
-
 		formater.printHelp("Azure", options);
 
 	}

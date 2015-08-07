@@ -1,6 +1,18 @@
 package com.automic.azure.config;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Paths;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.UnrecoverableKeyException;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,15 +37,20 @@ public final class HttpClientConfig {
 
     /**
      * Creates an instance of {@link Client} using parameters specified.  
-     * @param protocol either http or https
-     * @param certificatePath path to connection certificates
+     * @param 
+     * @param 
      * @param connectionTimeOut timeout in milliseconds
      * @param readTimeOut read timeout in milliseconds
      * @return an instance of {@link Client}
      * @throws AzureException
+     * @throws IOException 
+     * @throws NoSuchAlgorithmException 
+     * @throws KeyStoreException 
+     * @throws KeyManagementException 
+     * @throws UnrecoverableKeyException 
      */
-    public static Client getClient(String protocol, String certificatePath, int connectionTimeOut, int readTimeOut)
-            throws AzureException {
+     public static Client getClient(String keyStore,String password, int connectionTimeOut, int readTimeOut)
+            throws AzureException, UnrecoverableKeyException, KeyManagementException, KeyStoreException, NoSuchAlgorithmException, IOException {
         Client client;
 
         ClientConfig config = new DefaultClientConfig();
@@ -41,39 +58,53 @@ public final class HttpClientConfig {
        
         config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
         config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
-
-        if (Constants.HTTPS.equalsIgnoreCase(protocol)) {
-            validateCertificates(certificatePath, config);
-        }
+        SSLSocketFactory sslFactory = getSSLSocketFactory(keyStore,	password);
+        
+        
         client = Client.create(config);
 
         return client;
     }
+    
+    
+    private static SSLSocketFactory getSSLSocketFactory(String keyStoreName,
+			String password) throws UnrecoverableKeyException,
+			KeyStoreException, NoSuchAlgorithmException,
+			KeyManagementException, IOException {
+		KeyStore ks = getKeyStore(keyStoreName, password);
+		KeyManagerFactory keyManagerFactory = KeyManagerFactory
+				.getInstance("SunX509");
+		keyManagerFactory.init(ks, password.toCharArray());
 
-    /**
-     * Method to validate certificates specified at system path with that of the Docker URL specified.
-     * @param certificatePath Path to certificates
-     * @param config config to Docker connection
-     * @throws AzureException
-     */
-    private static void validateCertificates(String certificatePath, ClientConfig config)
-            throws AzureException {
+		SSLContext context = SSLContext.getInstance("TLS");
+		context.init(keyManagerFactory.getKeyManagers(), null,
+				new SecureRandom());
 
-        /*if (!certificatePath.isEmpty()) {
-            File tmpFile = new File(certificatePath);
+		return context.getSocketFactory();
+	}
+    
+    
+    private static KeyStore getKeyStore(String keyStoreName, String password)
+			throws IOException {
+		KeyStore ks = null;
+		FileInputStream fis = null;
+		try {
+			ks = KeyStore.getInstance("JKS");
+			char[] passwordArray = password.toCharArray();
+			fis = new java.io.FileInputStream(keyStoreName);
+			ks.load(fis, passwordArray);
+			fis.close();
 
-            if (tmpFile.getParentFile() == null || !tmpFile.getParentFile().exists()) {
-                LOGGER.error("Invalid docker-certificate-path : " + certificatePath);
-                throw new AzureException(ExceptionConstants.DOCKER_CERTIFICATE_MISSING);
-            }
-        } else {
-            LOGGER.error(ExceptionConstants.EMPTY_DOCKER_CERITIFCATE_PATH);
-            throw new AzureException(ExceptionConstants.EMPTY_DOCKER_CERITIFCATE_PATH);
-        } */
-        CertificatesManagement certs = new CertificatesManagement(Paths.get(certificatePath));
-        HTTPSProperties props = new HTTPSProperties(certs.hostnameVerifier(), certs.sslContext());
-        config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (fis != null) {
+				fis.close();
+			}
+		}
+		return ks;
+	}
 
-    }
 
 }

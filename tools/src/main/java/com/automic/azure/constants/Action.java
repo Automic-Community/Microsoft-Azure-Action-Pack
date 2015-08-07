@@ -17,6 +17,7 @@ public enum Action {
         StringBuilder sb = new StringBuilder("[");
         for (int i = 0; i < actions.length; i++) {
             sb.append(actions[i].name());
+            sb.append(" ");
         }
         sb.append("]");
         return sb.toString();

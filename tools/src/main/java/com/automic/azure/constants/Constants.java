@@ -20,6 +20,10 @@ public final class Constants {
      * int constant for IO Buffer used to buffer the data.
      */
     public static final int IO_BUFFER_SIZE = 4 * 1024;
+    
+    public static final String AZURE_BASE_URL = "https://management.core.windows.net";
+    
+    public static final String X_MS_VERSION = "2012-02-21";
 
     private Constants() {
     }

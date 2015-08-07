@@ -3,8 +3,13 @@
  */
 package com.automic.azure.actions;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -54,15 +59,18 @@ public abstract class AbstractAction {
     private static final int BEGIN_HTTP_CODE = 200;
     private static final int END_HTTP_CODE = 300;
 
-    /**
-     * Docker URL
-     */
-    protected String dockerUrl;
+  
     
     /**
-     * Certificate file path
+     * keystore path
      */
-    protected String certFilePath;
+    protected String keyStore;
+    
+    /**
+     *Keystore password 
+     */
+    
+    protected String password;
 
     /**
      * Connection timeout in milliseconds
@@ -191,9 +199,7 @@ public abstract class AbstractAction {
     private void initializeArguments(String[] args) throws AzureException {
         connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(args[AbstractAction.CONNECTION_TIMEOUT_INDEX]);
         readTimeOut = CommonUtil.getAndCheckUnsignedValue(args[AbstractAction.READ_TIMEOUT_INDEX]);
-        dockerUrl = args[AbstractAction.AZURE_URL_INDEX];
-        certFilePath = (args.length > AbstractAction.CERTIFICATE_INDEX) ? args[AbstractAction.CERTIFICATE_INDEX]
-                : "";
+       
         validateGeneralInputs();
         initialize(args);
     }
@@ -213,11 +219,7 @@ public abstract class AbstractAction {
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
-        if (!URLValidator.validateURL(dockerUrl)) {
-            String msg = String.format(ExceptionConstants.INVALID_AZURE_URL, dockerUrl);
-            LOGGER.error(msg);
-            throw new AzureException(msg);
-        }
+        
     }
     
     /**
@@ -263,14 +265,14 @@ public abstract class AbstractAction {
      * @throws AzureException
      */
     private Client getClient() throws AzureException {
-        try {
-            return HttpClientConfig.getClient(new URL(dockerUrl).getProtocol(), this.certFilePath,
-                    connectionTimeOut, readTimeOut);
-        } catch (MalformedURLException ex) {
-            String msg = String.format(ExceptionConstants.INVALID_AZURE_URL, dockerUrl);
-            LOGGER.error(msg, ex);
-            throw new AzureException(msg);
-        }
+    	try {
+			return HttpClientConfig.getClient(this.keyStore,this.password,
+			        connectionTimeOut, readTimeOut);
+		} catch (UnrecoverableKeyException | KeyManagementException | KeyStoreException | NoSuchAlgorithmException
+				| IOException e) {
+						e.printStackTrace();
+		}
+		return null;
     }
 
     /**
