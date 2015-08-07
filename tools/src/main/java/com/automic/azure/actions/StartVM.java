@@ -8,8 +8,11 @@ package com.automic.azure.actions;
 import static java.nio.file.Files.readAllBytes;
 import static java.nio.file.Paths.get;
 import static com.automic.azure.utility.CommonUtil.print;
+
 import java.io.IOException;
 import java.util.Map;
+
+import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.logging.log4j.LogManager;
@@ -91,7 +94,7 @@ public class StartVM extends AbstractAction {
          WebResource webResource = client.resource(url);
          print("Calling url " + webResource.getURI());
 
-         response = webResource.entity(getDescriptor().getBytes(), "application/xml").header("x-ms-version", "2013-11-01").post(ClientResponse.class);
+         response = webResource.entity(getDescriptor().getBytes(), MediaType.APPLICATION_XML).header(X_MS_VERSION, X_MS_VERSION_VAL).post(ClientResponse.class);
 
          return response;
     }

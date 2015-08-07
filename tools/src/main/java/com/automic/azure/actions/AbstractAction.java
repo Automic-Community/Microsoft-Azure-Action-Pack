@@ -34,6 +34,8 @@ public abstract class AbstractAction {
     
     private static final int BEGIN_HTTP_CODE = 200;
     private static final int END_HTTP_CODE = 300;
+    protected static final String X_MS_VERSION = "x-ms-version";
+    protected static final String X_MS_VERSION_VAL = "2013-11-01";
 
     /**
      * Azure URL

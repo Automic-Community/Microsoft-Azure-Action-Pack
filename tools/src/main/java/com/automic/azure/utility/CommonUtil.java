@@ -190,7 +190,7 @@ public final class CommonUtil {
     
     public static void printErr(Object obj){
     	
-    	System.out.println(obj);
+    	System.err.println(obj);
     	
     }
 
