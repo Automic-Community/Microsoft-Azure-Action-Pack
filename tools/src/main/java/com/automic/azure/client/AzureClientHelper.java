@@ -3,17 +3,20 @@
  */
 package com.automic.azure.client;
 
-import java.util.Arrays;
 import java.util.Map;
 
+import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.actions.AbstractAction;
 import com.automic.azure.actions.ActionFactory;
+import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.constants.Action;
+import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
+import com.automic.azure.utility.CommonUtil;
 
 
 /**
@@ -23,41 +26,30 @@ public final class AzureClientHelper {
 
     private static final Logger LOGGER = LogManager.getLogger(AzureClientHelper.class);
     
-    private AzureClientHelper() {
-    }
-
+    
     /**
      * Method to delegate parameters to an instance of {@link AbstractAction} based on the value of Action parameter. 
-     * @param args array of String args
+     * @param map of options with key as option name and value is option value
      * @throws AzureException 
-     */
-    public static void executeAction(String[] args) throws AzureException {
-        String action = args[0].trim();
-        if (action.isEmpty()) {
-            LOGGER.error(ExceptionConstants.INVALID_ACTION);
-            throw new AzureException(ExceptionConstants.INVALID_ACTION);
-        }
-        action = action.toUpperCase();
-        LOGGER.info("Execution starts for action [" + action + "]...");
-        AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
-        useraction.executeAction(Arrays.copyOfRange(args, 1, args.length));
+     */    
+    public static void executeAction(String [] orignalArgs) throws AzureException{    	
+    	 Options compulsoryOptions = AzureOptions.initializeCompulsoryOptions();
+    	
+    	 Map<String, String> argsMap = CommonUtil.parseCommandLine(compulsoryOptions,orignalArgs);
+    	 
+    	 if (argsMap.size() > 0 && argsMap.containsKey(Constants.ACTION)){
+    		 String action = argsMap.get(Constants.ACTION).toUpperCase();
+    		 LOGGER.info("Execution starts for action [" + action + "]...");
+ 	         AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action)); 
+ 	        useraction.executeAction(compulsoryOptions,orignalArgs,action);
+    	 }else {
+    		 LOGGER.error(ExceptionConstants.INVALID_ACTION);
+	            throw new AzureException(ExceptionConstants.INVALID_ACTION);
+    	 }    	
+    	
     }
     
-    public static void executeAction(Map<String,String> args) throws AzureException{
-    	 
-    	if(args.size()!=0){
-    		 String action = args.get("act");
-    		 if(action==null || action.isEmpty() ){
-    			 LOGGER.error(ExceptionConstants.INVALID_ACTION);
-    	            throw new AzureException(ExceptionConstants.INVALID_ACTION); 
-    		 }
-    		    action = action.toUpperCase();
-    	        LOGGER.info("Execution starts for action [" + action + "]...");
-    	        AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
-    	        args.remove("act");
-    	        useraction.executeAction(args);
-    	 }
-    	
-    	
+    private AzureClientHelper() {
     }
+    
 }

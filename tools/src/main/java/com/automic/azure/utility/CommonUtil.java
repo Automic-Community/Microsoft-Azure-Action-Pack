@@ -8,7 +8,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -181,5 +190,53 @@ public final class CommonUtil {
         }
         return ret;
     }
+    
+    /**
+     * Method parses command line argument against the given Options and provides Map<String,String>
+     * which contains key as option short name and value as argument value
+     * @param Options options 
+     * @param String[] args
+     * @return Map<String,String>
+     */
+    public static Map<String, String> parseCommandLine(Options options,String[] args) throws AzureException {
+    	return parseCommandLine(options,args,"");
+    }
+    public static Map<String, String> parseCommandLine(Options options,String[] args,String helpHeader) throws AzureException {		
+   	 Map<String, String> argsMap = new HashMap<String,String>(10);
+		CommandLineParser parser = new DefaultParser();
+		CommandLine cmd = null;
+		
+		try {
+			cmd = parser.parse(options, args,true);
+			
+		} catch (ParseException e) {
+			LOGGER.error("Error parsing the command line options ", e);			
+			throw new AzureException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()));
+		}
+		
+		if(cmd.hasOption('h') || cmd.hasOption("help")){
+			help(helpHeader,options);
+		}
+			for (Option option : cmd.getOptions()) {
+				String value = option.getValue().trim();
+				if(option.hasArg() && option.isRequired() && value.isEmpty()){
+					throw new AzureException(String.format(ExceptionConstants.OPTION_VALUE_MISSING,option.getOpt(),option.getDescription()));
+				}
+				argsMap.put(option.getOpt(), value);
+			}
+		
+		return argsMap;
+	
+	}
+    
+    public static void help(String helpHeader, Options options) {
+		HelpFormatter formater = new HelpFormatter();
+		
+		helpHeader = (helpHeader.isEmpty())?"..":helpHeader;
+		formater.printHelp(helpHeader, options);
+		
+		System.exit(0);
+		
+	}
 
 }

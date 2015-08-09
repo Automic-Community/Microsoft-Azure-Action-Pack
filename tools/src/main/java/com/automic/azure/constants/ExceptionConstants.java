@@ -1,5 +1,7 @@
 package com.automic.azure.constants;
 
+
+
 /**
  * Constant class containing messages to describe Exception Scenarios.
  * 
@@ -33,6 +35,10 @@ public final class ExceptionConstants {
     public static final String DIRECTORY_ALREADY_EXISTS = "Invalid directory [%s]. Possibly directory already exists";
     public static final String IO_ERROR = "Unknown IO Error";
     public static final String MISSING_REQUIRED_PARAM = "[%s] is missing";
+	public static final String EMPTY_SUBSCRIPTION_ID = "Subscription id must not be empty";
+	public static final String EMPTY_PASSWORD = "Password cannot be empty";
+	public static final String OPTION_VALUE_MISSING = "Value for option %s [%s]is missing";
+	public static final String INVALID_ARGS = "Improper Args, probable cause : %s";
 
     private ExceptionConstants() {
     }

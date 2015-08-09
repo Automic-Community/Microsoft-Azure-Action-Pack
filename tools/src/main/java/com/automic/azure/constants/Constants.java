@@ -23,7 +23,25 @@ public final class Constants {
     
     public static final String AZURE_BASE_URL = "https://management.core.windows.net";
     
-    public static final String X_MS_VERSION = "2012-02-21";
+    public static final String X_MS_VERSION = "x-ms-version";
+    
+    public static final String X_MS_VERSION_VALUE = "2012-03-01";
+    
+    public static final String HELP = "h";
+
+	public static final String PASSWORD = "pwd";
+
+	public static final String KEYSTORE_LOCATION = "ksl";
+
+	public static final String SUBSCRIPTION_ID = "sid";
+
+	public static final String CONNECTION_TIMEOUT = "cto";
+
+	public static final String READ_TIMEOUT = "rto";
+
+	public static final String ACTION = "act";
+
+	public static final String OUTPUT_FILE = "ofl";
 
     private Constants() {
     }

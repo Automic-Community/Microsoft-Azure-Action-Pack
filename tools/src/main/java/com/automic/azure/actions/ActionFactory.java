@@ -36,6 +36,7 @@ public final class ActionFactory {
 
 		switch (enumAction) {
 		case VERSION:
+			action = new GetSubscriptionInfoAction();
 			break;
 		default:
 			String msg = "Invalid Action.. Please enter valid action "
