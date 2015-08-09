@@ -44,7 +44,7 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	
 	@Override
 	protected Options initializeOptions() {	
-		 actionOptions.addOption(Option.builder(Constants.OUTPUT_FILE).required(false).hasArg().longOpt(FILE_LONG_OPT).desc(FILE_DESC).build());
+		 actionOptions.addOption(Option.builder(Constants.OUTPUT_FILE).required(true).hasArg().longOpt(FILE_LONG_OPT).desc(FILE_DESC).build());
 		return actionOptions;
 	}
 	
@@ -61,7 +61,7 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
 	@Override
 	protected void validateInputs(Map<String, String> argumentMap) throws AzureException {		
-		if (!Validator.checkFileExistsAndIsFile(filePath)) {
+		if (!Validator.checkFileFolderExists(filePath)) {
 			LOGGER.error(ExceptionConstants.INVALID_FILE);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, filePath));
 		}
@@ -81,13 +81,6 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
         return response;
 	}
-
-	@Override
-	protected String getErrorMessage(int errorCode) {
-		
-		return null;
-	}
-
 	
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {

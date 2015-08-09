@@ -229,8 +229,8 @@ public abstract class AbstractAction {
 	 * @param errorCode
 	 *            error code
 	 * @return Error message that describes error code
-	 */
-	protected abstract String getErrorMessage(int errorCode);
+	 *//*
+	protected abstract String getErrorMessage(int errorCode);*/
 
 	/**
 	 * Method to prepare output based on Response of an HTTP request to client.
@@ -302,7 +302,7 @@ public abstract class AbstractAction {
 		String errMsg = buildDockerResponse(response.getStatus(), msg);
 		System.err.println(errMsg);
 		LOGGER.error(errMsg);
-		return getErrorMessage(response.getStatus());
+		return msg;
 	}
 
 }
