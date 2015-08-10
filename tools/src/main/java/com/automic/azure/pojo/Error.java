@@ -3,13 +3,13 @@ package com.automic.azure.pojo;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="Error" , namespace="http://schemas.microsoft.com/windowsazure") 
+@XmlRootElement(name="Error", namespace="http://schemas.microsoft.com/windowsazure") 
 public class Error {
 	
 	private String code;
 	private String message;
 	
-	@XmlElement(name="Code")  
+	@XmlElement(name="Code", namespace="http://schemas.microsoft.com/windowsazure")  
 	public String getCode() {
 		return code;
 	}
@@ -17,7 +17,7 @@ public class Error {
 		this.code = code;
 	}
 	
-	@XmlElement(name="Message")
+	@XmlElement(name="Message", namespace="http://schemas.microsoft.com/windowsazure")
 	public String getMessage() {
 		return message;
 	}

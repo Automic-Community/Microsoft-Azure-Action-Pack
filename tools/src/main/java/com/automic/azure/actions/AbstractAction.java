@@ -93,8 +93,8 @@ public abstract class AbstractAction {
 	 * This method acts as template and decides how an action should proceed.It
 	 * starts with initializing compulsory Options followed by action Options Initializations
 	 * then logging of parameters ,then checking the number of
-	 * arguments,then initialize the variables like docker URL, read and
-	 * connection timeouts and filepath.Then it will call the REST API of docker
+	 * arguments,then initialize the variables like Azure URL, read and
+	 * connection timeouts and filepath.Then it will call the REST API of Azure
 	 * and gets the response which then validated and at last prepares the out
 	 * either in the form of xml or just a simple sysout.
 	 * 
@@ -246,7 +246,7 @@ public abstract class AbstractAction {
 	
 
 	/**
-	 * Method to create an instance of {@link Client} using docker URL,
+	 * Method to create an instance of {@link Client} using Azure URL,
 	 * certificate file path, connection timeout and read timeout.
 	 * 
 	 * @return an instance of {@link Client}
@@ -273,16 +273,16 @@ public abstract class AbstractAction {
 	}
 
 	/**
-	 * Method to build docker response from status code and message.
+	 * Method to build Azure response from status code and message.
 	 * 
 	 * @param status
 	 *            Status code
 	 * @param message
 	 *            Status message
-	 * @return Docker response code
+	 * @return Azure response code
 	 */
 	private String buildAzureResponse(int status, String message) {
-		StringBuilder responseBuilder = new StringBuilder("Docker Response: ");
+		StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
 		responseBuilder.append("StatusCode: [");
 		responseBuilder.append(status).append("]");
 		if (Validator.checkNotEmpty(message)) {

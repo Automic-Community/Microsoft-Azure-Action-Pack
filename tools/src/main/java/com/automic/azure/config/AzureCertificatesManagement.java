@@ -26,7 +26,7 @@ import com.automic.azure.exceptions.AzureException;
 
 
 /**
- * DockerCertificates holds certificates for connecting to an HTTPS-secured Docker instance with client/server
+ * AzureCertificatesManagement holds certificates for connecting to an HTTPS-secured Azure instance with client/server
  * authentication.
  */
 public class AzureCertificatesManagement {
@@ -84,7 +84,7 @@ public class AzureCertificatesManagement {
 	}
    
     /**
-     * Method to get the instance of {@link SSLContext} for Docker connection
+     * Method to get the instance of {@link SSLContext} for Azure connection
      * @return
      */
     public SSLContext getSslContext() {

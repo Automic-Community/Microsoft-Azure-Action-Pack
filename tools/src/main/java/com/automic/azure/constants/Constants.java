@@ -1,7 +1,7 @@
 package com.automic.azure.constants;
 
 /**
- * Class contains all the constants used in Docker java application.
+ * Class contains all the constants used in Azure java application.
  * 
  */
 public final class Constants {   
@@ -25,7 +25,7 @@ public final class Constants {
     
     public static final String X_MS_VERSION = "x-ms-version";
     
-    public static final String X_MS_VERSION_VALUE = "2012-03-01";
+    public static final String X_MS_VERSION_VALUE = "2013-11-01";
     public static final String REQUEST_TOKENID_KEY = "x-ms-request-id";
     
     public static final String HELP = "h";
@@ -47,6 +47,7 @@ public final class Constants {
 	public static final String SERVICE_NAME = "ser";
 	public static final String DEPLOYMENT_NAME = "dep";
 	public static final String ROLE_NAME = "rol";
+	public static final String OPERATIONTYPE="ShutdownRoleOperation";
 
     private Constants() {
     }

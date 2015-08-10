@@ -33,8 +33,7 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class StartRoleAction extends AbstractAction {
 
-	private static final Logger LOGGER = LogManager
-			.getLogger(StartRoleAction.class);
+	private static final Logger LOGGER = LogManager.getLogger(StartRoleAction.class);
 
 	private static final int NO_OF_ARGS = 8;
 	private final String SERVICE_LONG_OPT = "servicename";
@@ -140,8 +139,7 @@ public class StartRoleAction extends AbstractAction {
 	private String getDescriptor() {
 		String requestBodyContent = "";
 		try {
-			requestBodyContent = readFileFromPath("./resource/startVm.xml",
-					false);
+			requestBodyContent = readFileFromPath("./resource/startVm.xml",	false);
 		} catch (IOException e) {
 			LOGGER.error(" Exception in Reading [startVm.xml] File :" + e);
 			new AzureException(e.getMessage());

@@ -33,7 +33,7 @@ import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 
 /**
- * Docker utility class 
+ * Azure utility class 
  * 
  */
 public final class CommonUtil {
@@ -214,7 +214,7 @@ public final class CommonUtil {
 		CommandLine cmd = null;
 		
 		try {
-			cmd = parser.parse(options, args,true);
+			cmd = parser.parse(options, args, true);
 			
 		} catch (ParseException e) {
 			LOGGER.error("Error parsing the command line options ", e);			
@@ -276,14 +276,12 @@ public final class CommonUtil {
               Object obj = null;
 			try {
 					jaxbContext = JAXBContext.newInstance(cls);
-					Unmarshaller jaxbUnmarshaller;jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+					Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 					obj = (Object) jaxbUnmarshaller.unmarshal(new StringReader(xmlString));
 			} catch (JAXBException e) {
 					LOGGER.error(" Exception in Parsing xml string to object"+e);
-					throw new AzureException(e.getMessage());
-				
-			}           
-             
+					throw new AzureException(e.getMessage());				
+			}              
 			return obj;
     }
 

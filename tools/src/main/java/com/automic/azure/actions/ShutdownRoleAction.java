@@ -119,17 +119,18 @@ public class ShutdownRoleAction extends AbstractAction {
     	}  
     }
     
-	private String getDescriptor() {
+	private String getDescriptor() throws AzureException {
 		String requestBodyContent = "";
 
 		Shutdown sd = new Shutdown();
-		sd.setOperationType("ShutdownRoleOperation");
-		sd.setPostShutdownAction("StoppedDeallocated");
+		sd.setOperationType(Constants.OPERATIONTYPE);
+		sd.setPostShutdownAction("Stopped");
 
 		try {
 			requestBodyContent = CommonUtil.ObjectToXmlString(sd, Shutdown.class);
 		} catch (JAXBException e) {
 			LOGGER.error(" Exception in marshaling [Shutdown] Object :" + e);
+			throw new AzureException(e.getMessage());
 		}
 		return requestBodyContent;
 	}
