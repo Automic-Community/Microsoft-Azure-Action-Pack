@@ -9,7 +9,7 @@
 </HEADER>
 <STORE>
 <resourceList>
-<row checksum="4392F2845099AAABB94CEB17A1C588144BD4DAA8AF13DE9DFA5A17CEEAFA09A3" fileType="BINARY" filename="azuretool.jar" hw="*" id="AZURE-ALL-ALL-ALL" name="AZURE" platform="*" resname="PCK.AUTOMIC_AZURE.PRV.STORE-AZURE-ALL-ALL-ALL" size="3251623" sw="*" type="3" version="1.0.0"/>
+<row checksum="1A8135567F56525071CFE494C16AF6889AE9E2A563169313B6357551C12F8E4A" fileType="BINARY" filename="azure-tool.jar" hw="*" id="AZURE-ALL-ALL-ALL" name="AZURE" platform="*" resname="PCK.AUTOMIC_AZURE.PRV.STORE-AZURE-ALL-ALL-ALL" size="3264323" sw="*" type="3" version="1.0.0"/>
 </resourceList>
 </STORE>
 <DOCU_Docu state="1" type="text">
