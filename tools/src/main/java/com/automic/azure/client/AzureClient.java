@@ -6,7 +6,6 @@ package com.automic.azure.client;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.automic.azure.config.AzureOptions;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 import com.automic.azure.utility.CommonUtil;
@@ -52,16 +51,12 @@ public final class AzureClient {
         if (args.length == 0) {
         	printErr("No arguments received...");
             System.exit(1);
-        }
-        
-       
-        
+        }        
 
         int responseCode = RESPONSE_NOT_OK;
 
         try {
-            AzureClientHelper.executeAction(new AzureOptions(args).parse());
-             
+            AzureClientHelper.executeAction(args);             
             responseCode = RESPONSE_OK;
         } catch (ClientHandlerException e) {
             LOGGER.error("Action  FAILED ,possible reason :: ", e);

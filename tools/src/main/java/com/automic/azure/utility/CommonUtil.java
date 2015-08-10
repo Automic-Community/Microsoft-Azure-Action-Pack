@@ -10,12 +10,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -190,23 +199,67 @@ public final class CommonUtil {
     }
     
     /**
+     * Method parses command line argument against the given Options and provides Map<String,String>
+     * which contains key as option short name and value as argument value
+     * @param Options options 
+     * @param String[] args
+     * @return Map<String,String>
+     */
+    public static Map<String, String> parseCommandLine(Options options,String[] args) throws AzureException {
+    	return parseCommandLine(options,args,"");
+    }
+    public static Map<String, String> parseCommandLine(Options options,String[] args,String helpHeader) throws AzureException {		
+   	 Map<String, String> argsMap = new HashMap<String,String>(10);
+		CommandLineParser parser = new DefaultParser();
+		CommandLine cmd = null;
+		
+		try {
+			cmd = parser.parse(options, args,true);
+			
+		} catch (ParseException e) {
+			LOGGER.error("Error parsing the command line options ", e);			
+			throw new AzureException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()));
+		}
+		
+		if(cmd.hasOption('h') || cmd.hasOption("help")){
+			help(helpHeader,options);
+		}
+			for (Option option : cmd.getOptions()) {
+				String value = option.getValue().trim();
+				if(option.hasArg() && option.isRequired() && value.isEmpty()){
+					throw new AzureException(String.format(ExceptionConstants.OPTION_VALUE_MISSING,option.getOpt(),option.getDescription()));
+				}
+				argsMap.put(option.getOpt(), value);
+			}
+		
+		return argsMap;
+	
+	}
+    
+    public static void help(String helpHeader, Options options) {
+		HelpFormatter formater = new HelpFormatter();
+		
+		helpHeader = (helpHeader.isEmpty())?"..":helpHeader;
+		formater.printHelp(helpHeader, options);
+		
+		System.exit(0);
+		
+	}
+
+    /**
      * Prints an Object and then terminate the line.
      * @param obj {@link Object}
      */
-    public static void print(Object obj){
-    	
-    	System.out.println(obj);
-    	
+    public static void print(Object obj){    	
+    	System.out.println(obj);    	
     }
     
     /**
      * Prints an Object as an error then terminate the line.
      * @param obj {@link Object}
      */
-    public static void printErr(Object obj){
-    	
-    	System.err.println(obj);
-    	
+    public static void printErr(Object obj){    	
+    	System.err.println(obj);    	
     }
     
     /**
@@ -214,12 +267,24 @@ public final class CommonUtil {
      * @param xmlString
      * @param cls
      * @return Object
+     * @throws AzureException 
      * @throws JAXBException
      */
-    public static Object xmlToObject(String xmlString, Class<? extends Object> cls) throws JAXBException {      		  
-              JAXBContext jaxbContext = JAXBContext.newInstance(cls);           
-              Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();    
-              return (Object) jaxbUnmarshaller.unmarshal(new StringReader(xmlString));       	
+    public static Object xmlToObject(String xmlString, Class<? extends Object> cls) throws AzureException { 
+    	
+              JAXBContext jaxbContext = null;
+              Object obj = null;
+			try {
+					jaxbContext = JAXBContext.newInstance(cls);
+					Unmarshaller jaxbUnmarshaller;jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+					obj = (Object) jaxbUnmarshaller.unmarshal(new StringReader(xmlString));
+			} catch (JAXBException e) {
+					LOGGER.error(" Exception in Parsing xml string to object"+e);
+					throw new AzureException(e.getMessage());
+				
+			}           
+             
+			return obj;
     }
 
     public static String ObjectToXmlString(Object obj, Class<? extends Object> cls) throws JAXBException {      		  
