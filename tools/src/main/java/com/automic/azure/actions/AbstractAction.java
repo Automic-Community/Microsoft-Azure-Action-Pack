@@ -7,11 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
@@ -68,7 +70,7 @@ public abstract class AbstractAction {
 	private int argsCount;
 	
 	
-	protected  Options actionOptions = new Options();
+	protected  Options actionOptions = AzureOptions.getAzureOptions();
 	
 	protected  Map<String, String> actionArgsMap = new HashMap<String, String>(10);
 
@@ -86,6 +88,8 @@ public abstract class AbstractAction {
 			args[i] = args[i].trim();
 		}
 	}
+	
+	
 
 	/**
 	 * This method acts as template and decides how an action should proceed.It
@@ -101,12 +105,11 @@ public abstract class AbstractAction {
 	 * @throws AzureException
 	 *             exception while executing an action
 	 */
-	public final void executeAction(Options compulsoryOptions,String[] orignalArgs,String actionName) throws AzureException {
+	public final void executeAction(String[] commandLineArgs) throws AzureException {
 		Client client = null;
 		try {
-			this.actionOptions = compulsoryOptions;
-			this.actionOptions = initializeOptions();
-			actionArgsMap = CommonUtil.parseCommandLine(this.actionOptions,orignalArgs,actionName);
+			initializeCompulsoryOptions();
+			actionArgsMap = CommonUtil.getMapFromCmdLine(initializeOptions(),commandLineArgs);
 			logParameters(actionArgsMap);
 			checkNoOfargs(actionArgsMap.size());
 			initializeArguments(actionArgsMap);
@@ -120,6 +123,15 @@ public abstract class AbstractAction {
 				client.destroy();
 			}
 		}
+	}
+	
+	private void initializeCompulsoryOptions(){
+		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().longOpt("readtimeout").desc("Read timeout").build());
+		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().longOpt("connectiontimeout").desc("connection timeout").build());
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().longOpt("subscriptionId").desc("Subscription ID").build());
+		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().longOpt("keystore").desc("Keystore location").build());
+		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().longOpt("password").desc("Keystore password").build());
+		actionOptions.addOption(Option.builder(Constants.HELP).required(false).longOpt("help").desc("show help.").build());
 	}
 	
     	
