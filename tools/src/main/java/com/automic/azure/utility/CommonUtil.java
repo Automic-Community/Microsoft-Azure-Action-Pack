@@ -8,6 +8,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -182,16 +189,44 @@ public final class CommonUtil {
         return ret;
     }
     
+    /**
+     * Prints an Object and then terminate the line.
+     * @param obj {@link Object}
+     */
     public static void print(Object obj){
     	
     	System.out.println(obj);
     	
     }
     
+    /**
+     * Prints an Object as an error then terminate the line.
+     * @param obj {@link Object}
+     */
     public static void printErr(Object obj){
     	
     	System.err.println(obj);
     	
     }
+    
+    /**
+     * This method take xml as string and xml representation class as input and return Object of xml representation
+     * @param xmlString
+     * @param cls
+     * @return Object
+     * @throws JAXBException
+     */
+    public static Object xmlToObject(String xmlString, Class<? extends Object> cls) throws JAXBException {      		  
+              JAXBContext jaxbContext = JAXBContext.newInstance(cls);           
+              Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();    
+              return (Object) jaxbUnmarshaller.unmarshal(new StringReader(xmlString));       	
+    }
 
+    public static String ObjectToXmlString(Object obj, Class<? extends Object> cls) throws JAXBException {      		  
+    		StringWriter writer = new StringWriter();
+    		JAXBContext context = JAXBContext.newInstance(cls);            
+    		Marshaller m = context.createMarshaller();
+    		m.marshal(obj, writer);		
+    		return  writer.toString(); 	
+    }
 }

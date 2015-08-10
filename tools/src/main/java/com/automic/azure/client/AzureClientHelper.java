@@ -6,6 +6,8 @@ package com.automic.azure.client;
 import java.util.Arrays;
 import java.util.Map;
 
+import javax.xml.bind.JAXBException;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,6 +32,7 @@ public final class AzureClientHelper {
      * Method to delegate parameters to an instance of {@link AbstractAction} based on the value of Action parameter. 
      * @param args array of String args
      * @throws AzureException 
+     * @throws JAXBException 
      */
   /*  public static void executeAction(String[] args) throws AzureException {
         String action = args[0].trim();
@@ -43,7 +46,7 @@ public final class AzureClientHelper {
         useraction.executeAction(Arrays.copyOfRange(args, 1, args.length));
     }*/
     
-    public static void executeAction(Map<String,String> args) throws AzureException{
+    public static void executeAction(Map<String,String> args) throws AzureException, JAXBException{
     	 
     	if(args.size()!=0){
     		 String action = args.get("act");

@@ -4,10 +4,8 @@ package com.automic.azure.actions;
  * 
  */
 
-
-import static java.nio.file.Files.readAllBytes;
-import static java.nio.file.Paths.get;
 import static com.automic.azure.utility.CommonUtil.print;
+import static com.automic.azure.utility.CommonUtil.readFileFromPath;
 
 import java.io.IOException;
 import java.util.Map;
@@ -29,9 +27,9 @@ import com.sun.jersey.api.client.WebResource;
  * Action class to export the existing container as zip/tar file.It creates the zip/tar at the specified valid location.
  * It will throw error if container id does not exists or file path is invalid
  */
-public class StartVM extends AbstractAction {
+public class RestartRoleAction extends AbstractAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(StartVM.class);
+    private static final Logger LOGGER = LogManager.getLogger(RestartRoleAction.class);
 
     /*A value that uniquely identifies a request made against the management service*/
     private static final String REQUEST_TOKENID_KEY = "x-ms-request-id";
@@ -84,11 +82,7 @@ public class StartVM extends AbstractAction {
 
     @Override
     protected ClientResponse executeSpecific(Client client) throws AzureException {
-
          ClientResponse response = null;
-
-         //List locations     
-         //https://management.core.windows.net/<subscription-id>/services/hostedservices/<service-name>/deployments/<deployment-name>/roleinstances/<role-name>/Operations
          String url = azureUrl+"/%s/services/hostedservices/%s/deployments/%s/roleinstances/%s/Operations";
          url = String.format(url, subscriptionId, serviceName,deploymentName, roleName);
          WebResource webResource = client.resource(url);
@@ -128,24 +122,21 @@ public class StartVM extends AbstractAction {
     	
     	if(response != null){
     		LOGGER.info(" Returned request token id :"+response.getHeaders().get(REQUEST_TOKENID_KEY));
-    	}
-    	
-    	 print(response.getStatus());
+    	}    	
          print("TOKEN ID : "+response.getHeaders().get(REQUEST_TOKENID_KEY));
      
          
     }
     
-    private String getDescriptor(){
-        
-        String descriptoreContent="";
-       try {
-           descriptoreContent = new String(readAllBytes(get("./resource/startVm.xml")));
-       } catch (IOException e) {
-           e.printStackTrace();
-       }     
-        return descriptoreContent;
-    }    
+  private String getDescriptor(){        
+        String requestBodyContent="";      
+    	   try {
+			requestBodyContent = readFileFromPath("./resource/restartRole.xml", false);
+		} catch (IOException e) {
+			LOGGER.error(" Exception in Reading [restartRole.xml] File :"+e);
+		}         
+        return requestBodyContent;
+    }
    
 }
 

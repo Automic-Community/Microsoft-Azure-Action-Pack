@@ -38,10 +38,16 @@ public final class ActionFactory {
 		/*case VERSION:
 			break;*/
 		case "START_ROLE":
-			action = new StartVM();
+			action = new StartRoleAction();
+			break;
+		case "RESTART_ROLE":
+			action = new RestartRoleAction();
+			break;
+		case "SHUTDOWN_ROLE":
+			action = new ShutdownRoleAction();
 			break;
 		default:
-			String msg = "Invalid Action.. Please enter valid action : START_ROLE";
+			String msg = "Invalid Action.. Please enter valid action : ";
 			LOGGER.error(msg);
 			throw new AzureException(msg);
 		}

@@ -3,12 +3,18 @@
  */
 package com.automic.azure.actions;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.ExceptionConstants;
@@ -18,6 +24,7 @@ import com.automic.azure.utility.URLValidator;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.automic.azure.pojo.Error;
 import static com.automic.azure.utility.CommonUtil.printErr;
 
 /**
@@ -175,8 +182,9 @@ public abstract class AbstractAction {
      * 
      * @param args Array of arguments 
      * @throws AzureException exception while executing an action
+     * @throws JAXBException 
      */
-    public final void executeAction(Map<String,String>args) throws AzureException {
+    public final void executeAction(Map<String,String>args) throws AzureException, JAXBException {
         Client client = null;
         try {
             logParameters(args);
@@ -226,8 +234,9 @@ public abstract class AbstractAction {
      * 
      * @param response
      * @throws AzureException
+     * @throws JAXBException 
      */
-    private void validateResponse(ClientResponse response) throws AzureException {
+    private void validateResponse(ClientResponse response) throws AzureException, JAXBException {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
               throw new AzureException(getHttpErrorMsg(response));
@@ -259,9 +268,12 @@ public abstract class AbstractAction {
      * @param response
      *            an instance of {@link ClientResponse}
      * @return a String of error message
+     * @throws JAXBException 
      */
-    private String getHttpErrorMsg(ClientResponse response) {
-        String msg = response.getEntity(String.class);
+    private String getHttpErrorMsg(ClientResponse response) throws JAXBException {
+        String msg = response.getEntity(String.class);        
+        Error e = (Error) CommonUtil.xmlToObject(msg, Error.class);
+       	msg = e.getCode()+" | "+e.getMessage();
         String errMsg = buildDockerResponse(response.getStatus(), msg);
         printErr(errMsg);
         LOGGER.error(errMsg);

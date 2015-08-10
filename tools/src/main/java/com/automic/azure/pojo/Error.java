@@ -1,0 +1,28 @@
+package com.automic.azure.pojo;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name="Error" , namespace="http://schemas.microsoft.com/windowsazure") 
+public class Error {
+	
+	private String code;
+	private String message;
+	
+	@XmlElement(name="Code")  
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	
+	@XmlElement(name="Message")
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}	
+	
+}
