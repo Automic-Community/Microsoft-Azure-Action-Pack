@@ -38,9 +38,9 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	
 
 	
-	public GetSubscriptionInfoAction() {
-		super(NO_OF_ARGS);
-	}
+//	public GetSubscriptionInfoAction() {
+//		super(NO_OF_ARGS);
+//	}
 	
 	
 	@Override

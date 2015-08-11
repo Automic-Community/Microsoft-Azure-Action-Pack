@@ -1,10 +1,10 @@
-package com.automic.azure.pojo;
+package com.automic.azure.modal;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="ShutdownRoleOperation ", namespace="http://schemas.microsoft.com/windowsazure") 
-public class Shutdown {
+public class ShutdownVM {
 	
 	private String operationType;
 	private String postShutdownAction;

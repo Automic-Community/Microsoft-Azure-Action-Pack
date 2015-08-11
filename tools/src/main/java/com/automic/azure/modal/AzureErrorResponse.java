@@ -1,10 +1,10 @@
-package com.automic.azure.pojo;
+package com.automic.azure.modal;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="Error", namespace="http://schemas.microsoft.com/windowsazure") 
-public class Error {
+public class AzureErrorResponse {
 	
 	private String code;
 	private String message;

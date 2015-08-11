@@ -9,18 +9,17 @@ import static com.automic.azure.utility.CommonUtil.print;
 import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.JAXBException;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.StandardLevel;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
-import com.automic.azure.pojo.Shutdown;
-import com.automic.azure.utility.CommonUtil;
+import com.automic.azure.modal.ShutdownVM;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -33,21 +32,16 @@ public class ShutdownRoleAction extends AbstractAction {
 
     private static final Logger LOGGER = LogManager.getLogger(ShutdownRoleAction.class);
 
-    private static final int NO_OF_ARGS = 8;    
-    private final String SERVICE_LONG_OPT = "servicename";
-    private final String SERVICE_DESC = "Azure cloud service name";    
-    private final String DEPLOYMENT_LONG_OPT = "deploymentname";
-    private final String DEPLOYMENT_DESC = "Azure cloud deployment  name";    
-    private final String ROLE_LONG_OPT = "rolename";
-    private final String ROLE_DESC = "Role name (VM name)";    
+    private static final String SERVICE_LONG_OPT = "servicename";
+    private static final String SERVICE_DESC = "Azure cloud service name";    
+    private static final String DEPLOYMENT_LONG_OPT = "deploymentname";
+    private static final String DEPLOYMENT_DESC = "Azure cloud deployment  name";    
+    private static final String ROLE_LONG_OPT = "rolename";
+    private static final String ROLE_DESC = "Role name (VM name)";    
     private String serviceName;
     private String deploymentName;
     private String roleName;       
 
-    public ShutdownRoleAction() {
-		super(NO_OF_ARGS);
-	}
-       
     @Override
     protected void logParameters(Map<String,String> args) {
 
@@ -97,12 +91,16 @@ public class ShutdownRoleAction extends AbstractAction {
 
     @Override
     protected ClientResponse executeSpecific(Client client) throws AzureException {
-         ClientResponse response = null;       
+         ClientResponse response = null;     
+         ShutdownVM sd = new ShutdownVM();
+ 		 sd.setOperationType(Constants.OPERATIONTYPE);
+ 		 sd.setPostShutdownAction("Stopped");
+ 		
          String url = Constants.AZURE_BASE_URL+"/%s/services/hostedservices/%s/deployments/%s/roleinstances/%s/Operations";
          url = String.format(url, subscriptionId, serviceName,deploymentName, roleName);
          WebResource webResource = client.resource(url);
-         print("Calling url " + webResource.getURI());
-         response = webResource.entity(getDescriptor().getBytes(), MediaType.APPLICATION_XML).header(Constants.X_MS_VERSION,Constants.X_MS_VERSION_VALUE).post(ClientResponse.class);
+         print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
+         response = webResource.entity(sd, MediaType.APPLICATION_XML).header(Constants.X_MS_VERSION,Constants.X_MS_VERSION_VALUE).post(ClientResponse.class);
          return response;
     }  
 
@@ -113,21 +111,19 @@ public class ShutdownRoleAction extends AbstractAction {
      */
     @Override
     protected void prepareOutput(ClientResponse response)throws AzureException {     	
-    	if(response != null){
-    		LOGGER.info(" Returned request token id :"+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
-    		print("TOKEN ID : "+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
-    	}  
+    		//LOGGER.info(" Returned request token id :"+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
+    		print("TOKEN ID : "+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY), LOGGER, StandardLevel.INFO);
+    	  
     }
     
-	private String getDescriptor() throws AzureException {
+	/*private String getDescriptor() throws AzureException {
 		String requestBodyContent = "";
-
-		Shutdown sd = new Shutdown();
+		ShutdownVM sd = new ShutdownVM();
 		sd.setOperationType(Constants.OPERATIONTYPE);
 		sd.setPostShutdownAction("Stopped");
 
 		try {
-			requestBodyContent = CommonUtil.ObjectToXmlString(sd, Shutdown.class);
+			requestBodyContent = CommonUtil.ObjectToXmlString(sd, ShutdownVM.class);
 		} catch (JAXBException e) {
 			LOGGER.error(" Exception in marshaling [Shutdown] Object :" + e);
 			throw new AzureException(e.getMessage());
@@ -135,7 +131,7 @@ public class ShutdownRoleAction extends AbstractAction {
 		return requestBodyContent;
 	}
 
-
+*/
 
 }
 

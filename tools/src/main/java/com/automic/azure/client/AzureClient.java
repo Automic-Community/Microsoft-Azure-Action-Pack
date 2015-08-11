@@ -5,12 +5,14 @@ package com.automic.azure.client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.StandardLevel;
 
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 import com.automic.azure.utility.CommonUtil;
 import com.sun.jersey.api.client.ClientHandlerException;
-import static com.automic.azure.utility.CommonUtil.printErr;
+
+import static com.automic.azure.utility.CommonUtil.print;
 
 /**
  * Main Class is the insertion point of Azure interaction api when called from AE implementation. It delegates the
@@ -49,7 +51,7 @@ public final class AzureClient {
      */
     public static void main(String[] args) {
         if (args.length == 0) {
-        	printErr("No arguments received...");
+        	print("No arguments received...", LOGGER, StandardLevel.OFF);
             System.exit(1);
         }        
 
@@ -62,15 +64,14 @@ public final class AzureClient {
             LOGGER.error("Action  FAILED ,possible reason :: ", e);
             responseCode = clientHandlerExceptionHandling(e);
         } catch (AzureException e) {
-            printErr(CommonUtil.formatMessage(RESPONSE_ERROR, e.getMessage()));
+            print(CommonUtil.formatMessage(RESPONSE_ERROR, e.getMessage()), LOGGER, StandardLevel.OFF);
         } catch (Exception e) {
             LOGGER.error("Action  FAILED ,possible reason :: ", e);
-            printErr(CommonUtil.formatMessage(RESPONSE_ERROR,
-                    ExceptionConstants.GENERIC_ERROR_MSG));
+            print(CommonUtil.formatMessage(RESPONSE_ERROR, ExceptionConstants.GENERIC_ERROR_MSG), LOGGER, StandardLevel.OFF);
         }
 
         if (responseCode != RESPONSE_OK) {
-        	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, ERRORMSG));
+        	print(CommonUtil.formatMessage(RESPONSE_ERROR, ERRORMSG), LOGGER, StandardLevel.OFF);
         }
 
         LOGGER.info("@@@@@@@ Execution ends for action  with response code : " + responseCode);
@@ -92,18 +93,18 @@ public final class AzureClient {
 
         if (th != null) {
             if (th instanceof java.net.SocketTimeoutException) {
-            	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, CONNECTION_TIMEOUT));
+            	print(CommonUtil.formatMessage(RESPONSE_ERROR, CONNECTION_TIMEOUT), LOGGER, StandardLevel.OFF);
                 responseCode = RESPONSE_CONNECT_TIMEOUT;
             } else if (th instanceof java.net.ConnectException) {
-            	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, UNABLE_TO_CONNECT));
+            	print(CommonUtil.formatMessage(RESPONSE_ERROR, UNABLE_TO_CONNECT), LOGGER, StandardLevel.OFF);
 
             } else {
                 String errMsg = (e.getMessage()!=null && !e.getMessage().isEmpty()?e.getMessage():ExceptionConstants.GENERIC_ERROR_MSG);
-                printErr(CommonUtil.formatMessage(RESPONSE_ERROR, errMsg));
+                print(CommonUtil.formatMessage(RESPONSE_ERROR, errMsg), LOGGER, StandardLevel.OFF);
 
             }
         } else {
-        	printErr(CommonUtil.formatMessage(RESPONSE_ERROR, ExceptionConstants.GENERIC_ERROR_MSG));
+        	print(CommonUtil.formatMessage(RESPONSE_ERROR, ExceptionConstants.GENERIC_ERROR_MSG), LOGGER, StandardLevel.OFF);
 
         }
         return responseCode;

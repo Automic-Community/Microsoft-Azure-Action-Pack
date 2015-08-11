@@ -25,6 +25,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.apache.logging.log4j.spi.StandardLevel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -250,40 +251,54 @@ public final class CommonUtil {
      * Prints an Object and then terminate the line.
      * @param obj {@link Object}
      */
-    public static void print(Object obj){    	
+  /*  public static void print(Object obj){    	
     	System.out.println(obj);    	
-    }
+    }*/
     
     /**
      * Prints an Object as an error then terminate the line.
      * @param obj {@link Object}
      */
-    public static void printErr(Object obj){    	
-    	System.err.println(obj);    	
+    public static void print(Object obj, Logger log, StandardLevel level){ 
+    	
+    	switch(level){    	
+    	case INFO:
+    		log.info(obj);
+    		break;
+    	case ERROR:
+    		log.error(obj);
+    		break;
+    	case OFF:
+    		break;
+    	default:
+    		log.info(obj);    		
+    	}
+    	System.out.println(obj);    	
     }
     
-    /**
+   /* *//**
      * This method take xml as string and xml representation class as input and return Object of xml representation
      * @param xmlString
      * @param cls
+     * @return 
      * @return Object
      * @throws AzureException 
      * @throws JAXBException
-     */
-    public static Object xmlToObject(String xmlString, Class<? extends Object> cls) throws AzureException { 
+     *//*
+    public static <T> T xmlToObject(String xmlString, Class<T> cls) throws AzureException { 
     	
               JAXBContext jaxbContext = null;
-              Object obj = null;
+              T obj = null;
 			try {
 					jaxbContext = JAXBContext.newInstance(cls);
 					Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-					obj = (Object) jaxbUnmarshaller.unmarshal(new StringReader(xmlString));
+					obj = (T) jaxbUnmarshaller.unmarshal(new StringReader(xmlString));
 			} catch (JAXBException e) {
 					LOGGER.error(" Exception in Parsing xml string to object"+e);
 					throw new AzureException(e.getMessage());				
 			}              
 			return obj;
-    }
+    }*/
 
     public static String ObjectToXmlString(Object obj, Class<? extends Object> cls) throws JAXBException {      		  
     		StringWriter writer = new StringWriter();

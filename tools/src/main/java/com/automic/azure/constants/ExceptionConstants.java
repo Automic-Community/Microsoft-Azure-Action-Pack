@@ -40,9 +40,9 @@ public final class ExceptionConstants {
 	public static final String OPTION_VALUE_MISSING = "Value for option %s [%s]is missing";
 	public static final String INVALID_ARGS = "Improper Args, probable cause : %s";	
 	public static final String AZURE_CERTIFICATE_MISSING = "Azure certificate not available at specified path";   
-    public static final String EMPTY_SERVICE_NAME = "Service name should not blank";
-    public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not blank";
-    public static final String EMPTY_ROLE_NAME = "Role name should not blank";
+    public static final String EMPTY_SERVICE_NAME = "Service name should not left blank";
+    public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not left blank";
+    public static final String EMPTY_ROLE_NAME = "Role name should not left blank";
 
     private ExceptionConstants() {
     }

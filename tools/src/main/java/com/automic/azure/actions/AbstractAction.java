@@ -3,6 +3,8 @@
  */
 package com.automic.azure.actions;
 
+import static com.automic.azure.utility.CommonUtil.print;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,17 +13,17 @@ import org.apache.commons.cli.Options;
 import org.apache.commons.httpclient.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.StandardLevel;
 
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
+import com.automic.azure.modal.AzureErrorResponse;
 import com.automic.azure.utility.CommonUtil;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import static com.automic.azure.utility.CommonUtil.printErr; 
-import com.automic.azure.pojo.Error;
 
 /**
  * 
@@ -73,11 +75,7 @@ public abstract class AbstractAction {
 	protected  Options actionOptions = new Options();
 	
 	protected  Map<String, String> actionArgsMap = new HashMap<String, String>(10);
-
-	public AbstractAction(int argsCount) {
-		this.argsCount = argsCount;
-	}
-
+	
 	/**
 	 * Method to trim parameters
 	 * 
@@ -301,12 +299,10 @@ public abstract class AbstractAction {
 	 * @throws AzureException 
 	 */
 	private String getHttpErrorMsg(ClientResponse response) throws AzureException {
-		  String msg = response.getEntity(String.class);        
-	        Error e = (Error) CommonUtil.xmlToObject(msg, Error.class);	       
-	        String errMsg = buildAzureResponse(response.getStatus(), e.getMessage());
-	        printErr(errMsg);
-	        LOGGER.error(errMsg);
-		return e.getCode();
+			AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);        
+	        String errMsg = buildAzureResponse(response.getStatus(), error.getMessage());
+	        print(errMsg, LOGGER, StandardLevel.ERROR);
+		return error.getCode();
 	}
 
 }

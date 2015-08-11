@@ -14,9 +14,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.StandardLevel;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
@@ -35,21 +35,16 @@ public class RestartRoleAction extends AbstractAction {
   
 	private static final Logger LOGGER = LogManager.getLogger(RestartRoleAction.class);
 
-	private static final int NO_OF_ARGS = 8;    
-    private final String SERVICE_LONG_OPT = "servicename";
-    private final String SERVICE_DESC = "Azure cloud service name";    
-    private final String DEPLOYMENT_LONG_OPT = "deploymentname";
-    private final String DEPLOYMENT_DESC = "Azure cloud deployment  name";    
-    private final String ROLE_LONG_OPT = "rolename";
-    private final String ROLE_DESC = "Role name (VM name)";    
+    private static final String SERVICE_LONG_OPT = "servicename";
+    private static final String SERVICE_DESC = "Azure cloud service name";    
+    private static final String DEPLOYMENT_LONG_OPT = "deploymentname";
+    private static final String DEPLOYMENT_DESC = "Azure cloud deployment  name";    
+    private static final String ROLE_LONG_OPT = "rolename";
+    private static final String ROLE_DESC = "Role name (VM name)";    
     private String serviceName;
     private String deploymentName;
     private String roleName;
     
-    public RestartRoleAction() {
-		super(NO_OF_ARGS);
-	}       
-
     @Override
     protected void logParameters(Map<String,String> args) {
 
@@ -64,14 +59,6 @@ public class RestartRoleAction extends AbstractAction {
 
     }
 
-   /* @Override
-    protected void initialize(Map<String,String>args) throws AzureException {
-    	serviceName = args.get("ser");
-    	deploymentName = args.get("dep");
-    	roleName = args.get("rol");
-       
-    }*/
-    
     @Override
 	protected Options initializeOptions() {	
     	
@@ -115,7 +102,7 @@ public class RestartRoleAction extends AbstractAction {
          String url = Constants.AZURE_BASE_URL+"/%s/services/hostedservices/%s/deployments/%s/roleinstances/%s/Operations";
          url = String.format(url, subscriptionId, serviceName,deploymentName, roleName);
          WebResource webResource = client.resource(url);
-         print("Calling url " + webResource.getURI());
+         print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
          response = webResource.entity(getDescriptor().getBytes(), MediaType.APPLICATION_XML).header(Constants.X_MS_VERSION,Constants.X_MS_VERSION_VALUE).post(ClientResponse.class);
          return response;
     }    
@@ -129,8 +116,8 @@ public class RestartRoleAction extends AbstractAction {
     protected void prepareOutput(ClientResponse response)throws AzureException {   
     	
     	if(response != null){
-    		LOGGER.info(" Returned request token id :"+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
-    		print("TOKEN ID : "+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
+    		//LOGGER.info(" Returned request token id :"+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
+    		print("TOKEN ID : "+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY), LOGGER, StandardLevel.INFO);
     	} 
     }
     
