@@ -64,21 +64,14 @@ public class AzureCertificatesManagement {
     private static KeyStore getKeyStore(String keyStoreName, String password)
 			throws IOException {
 		KeyStore ks = null;
-		FileInputStream fis = null;
-		try {
+		try(FileInputStream fis = new java.io.FileInputStream(keyStoreName);) {
 			ks = KeyStore.getInstance("JKS");
 			char[] passwordArray = password.toCharArray();
-			fis = new java.io.FileInputStream(keyStoreName);
 			ks.load(fis, passwordArray);
 			fis.close();
-
 		} catch (KeyStoreException |NoSuchAlgorithmException | CertificateException e) {
-			
-		} finally {
-			if (fis != null) {
-				fis.close();
-			}
-		}
+			LOGGER.error("Exception in lodading KeyStore "+ e);
+		} 
 		return ks;
 	}
    

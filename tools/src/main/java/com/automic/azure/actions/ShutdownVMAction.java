@@ -45,6 +45,7 @@ public class ShutdownVMAction extends AbstractAction {
 	private static final String POST_SHUTDOWN_OPT = "postshutdown";
 	private static final String POST_SHUTDOWN_DESC = "Optional. Specifies how the Virtual Machine should be shut down";
 
+	private String subscriptionId;
 	private String serviceName;
 	private String deploymentName;
 	private String roleName;
@@ -61,13 +62,13 @@ public class ShutdownVMAction extends AbstractAction {
         LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
         LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
         LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
-        LOGGER.info("Role name/ Vm Name = " + args.get(POST_SHUTDOWN_OPT));
+        LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
 
 	}
 
 	@Override
 	protected Options initializeOptions() {
-
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
 				.hasArg().desc(SERVICE_DESC).build());
 		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT)
@@ -75,7 +76,7 @@ public class ShutdownVMAction extends AbstractAction {
 		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
 				.hasArg().desc(ROLE_DESC).build());
 		actionOptions.addOption(Option.builder(POST_SHUTDOWN_OPT)
-				.required(false).hasArg().desc(POST_SHUTDOWN_DESC).build());
+				.required(true).hasArg().desc(POST_SHUTDOWN_DESC).build());
 
 		return actionOptions;
 	}
@@ -86,11 +87,16 @@ public class ShutdownVMAction extends AbstractAction {
 		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
 		roleName = argumentMap.get(ROLE_OPT);
 		postShutdownAction = argumentMap.get(POST_SHUTDOWN_OPT);
+		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
-	protected void validateInputs(Map<String, String> argumentMap)
+	protected void validateInputs()
 			throws AzureException {
+		if (!Validator.checkNotEmpty(subscriptionId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		}
 		if (!Validator.checkNotEmpty(serviceName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);

@@ -42,10 +42,6 @@ public abstract class AbstractAction {
 	private static final int BEGIN_HTTP_CODE = 200;
 	private static final int END_HTTP_CODE = 300;
 	
-	/**
-	 *subscription_id
-	 * */
-	protected String subscriptionId;
 
 	/**
 	 * keystore path
@@ -111,9 +107,8 @@ public abstract class AbstractAction {
 			initializeCompulsoryOptions();
 			actionArgsMap = CommonUtil.getMapFromCmdLine(initializeOptions(),commandLineArgs);
 			logParameters(actionArgsMap);
-			checkNoOfargs(actionArgsMap.size());
 			initializeArguments(actionArgsMap);
-			validateInputs(actionArgsMap);
+			validateInputs();
 			client = getClient();
 			ClientResponse response = executeSpecific(client);
 			validateResponse(response);
@@ -128,7 +123,6 @@ public abstract class AbstractAction {
 	private void initializeCompulsoryOptions(){
 		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().desc("Read timeout").build());
 		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
 		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
 		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
@@ -155,25 +149,10 @@ public abstract class AbstractAction {
 
 	protected abstract void logParameters(Map<String, String> argumentMap);
 	
-	/**
-	 * Method to check no of arguments are sufficient or not. Throws an
-	 * exception if count is less than the argument expected.
-	 * 
-	 * @param count
-	 *            No of arguments
-	 * @throws AzureException
-	 */
-	private void checkNoOfargs(int count) throws AzureException {
-		if (count < argsCount) {
-			LOGGER.error(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-			throw new AzureException(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-		}
-	}
 
 	private void initializeArguments(Map<String, String> argumentMap) throws AzureException {
 		this.connectionTimeOut = Integer.parseInt(argumentMap.get(Constants.CONNECTION_TIMEOUT));
 		this.readTimeOut = Integer.parseInt(argumentMap.get(Constants.READ_TIMEOUT));
-		this.subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 		this.keyStore = argumentMap.get(Constants.KEYSTORE_LOCATION);
 		this.password = argumentMap.get(Constants.PASSWORD);
 		
@@ -198,22 +177,12 @@ public abstract class AbstractAction {
 			LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
 			throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
 		}
-		
-		/*if (this.subscriptionId.isEmpty()) {
-			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-		}*/
-		
+				
 		if (!Validator.checkFileExistsAndIsFile(this.keyStore)) {
 			LOGGER.error(ExceptionConstants.INVALID_FILE);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
 		}
 		
-		/*if (this.password.isEmpty()) {
-			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-			throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-		}*/
-
 	}
 
 	protected abstract void initialize(Map<String, String> argumentMap) ;
@@ -223,7 +192,7 @@ public abstract class AbstractAction {
 	 * 
 	 * @throws AzureException
 	 */
-	protected abstract void validateInputs(Map<String, String> argumentMap) throws AzureException;
+	protected abstract void validateInputs() throws AzureException;
 
 	/**
 	 * Method to write action specific logic.
@@ -234,16 +203,7 @@ public abstract class AbstractAction {
 	 * @throws AzureException
 	 */
 	protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
-
-	/**
-	 * Method to generate Error Message based on error code
-	 * 
-	 * @param errorCode
-	 *            error code
-	 * @return Error message that describes error code
-	 *//*
-	protected abstract String getErrorMessage(int errorCode);*/
-
+	
 	/**
 	 * Method to prepare output based on Response of an HTTP request to client.
 	 * 

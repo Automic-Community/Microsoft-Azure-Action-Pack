@@ -18,20 +18,19 @@ import com.automic.azure.constants.Constants;
  * options should be added to the same object (i.e azureOptions object) instantiated by this class*/
 public final class AzureOptions {
 	
-	public static Options getAzureOptions() {
-		return azureOptions;
-	}
-
-	private static Options azureOptions = new Options();
-	
 	private static final boolean ISREQUIRED = true;
+	private static Options azureOpts = new Options();
+	
+	public static Options getAzureOptions() {
+		return azureOpts;
+	}	
 	
 	public static Options initializeActionOptions(){
 		
-		azureOptions.addOption(Option.builder(Constants.ACTION).required(ISREQUIRED).hasArg().desc("Name of the action").build());		
-		azureOptions.addOption(Option.builder(Constants.HELP).required(!ISREQUIRED).desc("show help.").build());	
+		azureOpts.addOption(Option.builder(Constants.ACTION).required(ISREQUIRED).hasArg().desc("Name of the action").build());		
+		azureOpts.addOption(Option.builder(Constants.HELP).required(!ISREQUIRED).desc("show help.").build());	
 		
-		return azureOptions;
+		return azureOpts;
 	}
 	
 	

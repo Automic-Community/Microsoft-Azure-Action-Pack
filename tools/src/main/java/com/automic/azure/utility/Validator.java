@@ -22,7 +22,7 @@ public final class Validator {
      * @return true or false
      */
     public static boolean checkNotNull(Object field) {
-        return (field != null);
+        return field != null;
     }
 
     /**
@@ -31,7 +31,7 @@ public final class Validator {
      * @return true if String is not empty else false
      */
     public static boolean checkNotEmpty(String field) {
-        return (field != null && !field.isEmpty());
+        return field != null && !field.isEmpty();
     }
 
     /**
@@ -40,7 +40,7 @@ public final class Validator {
      * @return true or false
      */
     public static boolean checkFileExists(String filePath) {
-        return (checkNotEmpty(filePath) && checkFileExists(new File(filePath)));
+        return checkNotEmpty(filePath) && checkFileExists(new File(filePath));
     }
 
     /**
@@ -49,7 +49,7 @@ public final class Validator {
      * @return true or false
      */
     public static boolean checkFileExists(File file) {
-        return (checkNotNull(file) && file.exists());
+        return checkNotNull(file) && file.exists();
     }
 
     /**
@@ -58,7 +58,7 @@ public final class Validator {
      * @return true or false
      */
     public static boolean checkFileExistsAndIsFile(String filePath) {
-        return (checkFileExists(filePath) && new File(filePath).isFile());
+        return checkFileExists(filePath) && new File(filePath).isFile();
     }
 
     /**
@@ -96,7 +96,7 @@ public final class Validator {
      * @return true or false
      */
     public static boolean checkIfValidDirectory(String dirPath) {
-        return (!dirPath.isEmpty() && Files.isDirectory(Paths.get(dirPath)));
+        return !dirPath.isEmpty() && Files.isDirectory(Paths.get(dirPath));
     }
 
     /**
@@ -107,7 +107,7 @@ public final class Validator {
      * @return true or false
      */
     public static boolean isValidText(String pattern, String text) {
-        return (Pattern.matches(pattern, text));
+        return Pattern.matches(pattern, text);
     }
 
 }

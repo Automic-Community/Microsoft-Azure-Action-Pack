@@ -99,7 +99,7 @@ public final class AzureClient {
             	print(CommonUtil.formatMessage(RESPONSE_ERROR, UNABLE_TO_CONNECT), LOGGER, StandardLevel.OFF);
 
             } else {
-                String errMsg = (e.getMessage()!=null && !e.getMessage().isEmpty()?e.getMessage():ExceptionConstants.GENERIC_ERROR_MSG);
+                String errMsg = e.getMessage()!=null && !e.getMessage().isEmpty()?e.getMessage():ExceptionConstants.GENERIC_ERROR_MSG;
                 print(CommonUtil.formatMessage(RESPONSE_ERROR, errMsg), LOGGER, StandardLevel.OFF);
 
             }

@@ -32,9 +32,11 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	private String filePath;
 	private final String FILE_LONG_OPT = "outputFile";
 	private final String FILE_DESC = "Output file location";
+	private String subscriptionId;
 
 	@Override
 	protected Options initializeOptions() {
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(Constants.OUTPUT_FILE).required(true).hasArg().longOpt(FILE_LONG_OPT)
 				.desc(FILE_DESC).build());
 		return actionOptions;
@@ -49,10 +51,15 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	@Override
 	protected void initialize(Map<String, String> argumentMap) {
 		filePath = argumentMap.get(Constants.OUTPUT_FILE);
+		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
-	protected void validateInputs(Map<String, String> argumentMap) throws AzureException {
+	protected void validateInputs() throws AzureException {
+		if (!Validator.checkNotEmpty(subscriptionId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		}
 		if (!Validator.checkFileFolderExists(filePath)) {
 			LOGGER.error(ExceptionConstants.INVALID_FILE);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, filePath));
