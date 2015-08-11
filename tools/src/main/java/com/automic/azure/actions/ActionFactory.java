@@ -38,14 +38,14 @@ public final class ActionFactory {
 		case VERSION:
 			action = new GetSubscriptionInfoAction();
 			break;
-		case START_ROLE:
-			action = new StartRoleAction();
+		case START_VM:
+			action = new StartVMAction();
 			break;
-		case RESTART_ROLE:
-			action = new RestartRoleAction();
+		case RESTART_VM:
+			action = new RestartVMAction();
 			break;
-		case SHUTDOWN_ROLE:
-			action = new ShutdownRoleAction();
+		case SHUTDOWN_VM:
+			action = new ShutdownVMAction();
 			break;
 		default:
 			String msg = "Invalid Action.. Please enter valid action "

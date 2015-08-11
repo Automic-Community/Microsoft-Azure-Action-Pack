@@ -48,6 +48,14 @@ public final class Constants {
 	public static final String DEPLOYMENT_NAME = "dep";
 	public static final String ROLE_NAME = "rol";
 	public static final String OPERATIONTYPE="ShutdownRoleOperation";
+	public static final String SERVICES_PATH = "services";
+	public static final String HOSTEDSERVICES_PATH ="hostedservices";
+	public static final String DEPLOYMENTS_PATH ="deployments";
+	public static final String ROLEINSTANCES_PATH = "roleinstances";
+	public static final String OPERATIONS_PATH = "Operations";
+	public static final String EMPTY = "";
+	public static final String STOPPED = "Stopped";
+	
 
     private Constants() {
     }

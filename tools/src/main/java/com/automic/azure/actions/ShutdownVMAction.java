@@ -6,6 +6,7 @@ package com.automic.azure.actions;
 
 import static com.automic.azure.utility.CommonUtil.print;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
@@ -28,19 +29,23 @@ import com.sun.jersey.api.client.WebResource;
  * Action class to export the existing container as zip/tar file.It creates the zip/tar at the specified valid location.
  * It will throw error if container id does not exists or file path is invalid
  */
-public class ShutdownRoleAction extends AbstractAction {
+public class ShutdownVMAction extends AbstractAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(ShutdownRoleAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(ShutdownVMAction.class);
 
     private static final String SERVICE_LONG_OPT = "servicename";
     private static final String SERVICE_DESC = "Azure cloud service name";    
     private static final String DEPLOYMENT_LONG_OPT = "deploymentname";
     private static final String DEPLOYMENT_DESC = "Azure cloud deployment  name";    
     private static final String ROLE_LONG_OPT = "rolename";
-    private static final String ROLE_DESC = "Role name (VM name)";    
+    private static final String ROLE_DESC = "Role name (VM name)"; 
+    private static final String POST_SHUTDOWN_LONG_OPT = "postshutdown";
+    private static final String POST_SHUTDOWN_DESC = "Optional. Specifies how the Virtual Machine should be shut down"; 
+    
     private String serviceName;
     private String deploymentName;
-    private String roleName;       
+    private String roleName;
+    private String postShutdownAction;
 
     @Override
     protected void logParameters(Map<String,String> args) {
@@ -59,18 +64,22 @@ public class ShutdownRoleAction extends AbstractAction {
     @Override
   	protected Options initializeOptions() {	
       	
-  		 actionOptions.addOption(Option.builder(Constants.SERVICE_NAME).required(true).hasArg().longOpt(SERVICE_LONG_OPT).desc(SERVICE_DESC).build());
-  		 actionOptions.addOption(Option.builder(Constants.DEPLOYMENT_NAME).required(true).hasArg().longOpt(DEPLOYMENT_LONG_OPT).desc(DEPLOYMENT_DESC).build());
-  		 actionOptions.addOption(Option.builder(Constants.ROLE_NAME).required(true).hasArg().longOpt(ROLE_LONG_OPT).desc(ROLE_DESC).build());
-  		return actionOptions;
+  		 actionOptions.addOption(Option.builder(SERVICE_LONG_OPT).required(true).hasArg()/*.longOpt(SERVICE_LONG_OPT)*/.desc(SERVICE_DESC).build());
+  		 actionOptions.addOption(Option.builder(DEPLOYMENT_LONG_OPT).required(true).hasArg()/*.longOpt(DEPLOYMENT_LONG_OPT)*/.desc(DEPLOYMENT_DESC).build());
+  		 actionOptions.addOption(Option.builder(ROLE_LONG_OPT).required(true).hasArg()/*.longOpt(ROLE_LONG_OPT)*/.desc(ROLE_DESC).build());
+  		 actionOptions.addOption(Option.builder(POST_SHUTDOWN_LONG_OPT).required(false).hasArg()/*.longOpt(POST_SHUTDOWN_LONG_OPT)*/.desc(POST_SHUTDOWN_DESC).build());
+
+  		 return actionOptions;
   	}
     
 	@Override
 	protected void initialize(Map<String, String> argumentMap) {
 
-		serviceName = argumentMap.get(Constants.SERVICE_NAME);
-		deploymentName = argumentMap.get(Constants.DEPLOYMENT_NAME);
-		roleName = argumentMap.get(Constants.ROLE_NAME);
+		serviceName = argumentMap.get(SERVICE_LONG_OPT);
+		deploymentName = argumentMap.get(DEPLOYMENT_LONG_OPT);
+		roleName = argumentMap.get(ROLE_LONG_OPT);
+		postShutdownAction = argumentMap.get(POST_SHUTDOWN_LONG_OPT);
+		postShutdownAction = postShutdownAction == null || Constants.EMPTY.equals(postShutdownAction) ? Constants.STOPPED : postShutdownAction;
 	}
 
     @Override
@@ -111,8 +120,8 @@ public class ShutdownRoleAction extends AbstractAction {
      */
     @Override
     protected void prepareOutput(ClientResponse response)throws AzureException {     	
-    		//LOGGER.info(" Returned request token id :"+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
-    		print("TOKEN ID : "+response.getHeaders().get(Constants.REQUEST_TOKENID_KEY), LOGGER, StandardLevel.INFO);
+    	List<String> tokenid=  response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);		
+		print("UC4RB_AZR_REQUEST_ID  ::="+ tokenid.get(0), LOGGER, StandardLevel.INFO);	
     	  
     }
     

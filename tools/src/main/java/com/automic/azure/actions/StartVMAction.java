@@ -8,6 +8,8 @@ import static com.automic.azure.utility.CommonUtil.print;
 import static com.automic.azure.utility.CommonUtil.readFileFromPath;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
@@ -31,10 +33,10 @@ import com.sun.jersey.api.client.WebResource;
  * zip/tar at the specified valid location. It will throw error if container id
  * does not exists or file path is invalid
  */
-public class StartRoleAction extends AbstractAction {
+public class StartVMAction extends AbstractAction {
 
 	private static final Logger LOGGER = LogManager
-			.getLogger(StartRoleAction.class);
+			.getLogger(StartVMAction.class);
 
 	private static final String SERVICE_LONG_OPT = "servicename";
 	private static final String SERVICE_DESC = "Azure cloud service name";
@@ -63,14 +65,14 @@ public class StartRoleAction extends AbstractAction {
 	@Override
 	protected Options initializeOptions() {
 
-		actionOptions.addOption(Option.builder(Constants.SERVICE_NAME)
-				.required(true).hasArg().longOpt(SERVICE_LONG_OPT)
+		actionOptions.addOption(Option.builder(SERVICE_LONG_OPT)
+				.required(true).hasArg()/*.longOpt(SERVICE_LONG_OPT)*/
 				.desc(SERVICE_DESC).build());
-		actionOptions.addOption(Option.builder(Constants.DEPLOYMENT_NAME)
-				.required(true).hasArg().longOpt(DEPLOYMENT_LONG_OPT)
+		actionOptions.addOption(Option.builder(DEPLOYMENT_LONG_OPT)
+				.required(true).hasArg()/*.longOpt(DEPLOYMENT_LONG_OPT)*/
 				.desc(DEPLOYMENT_DESC).build());
-		actionOptions.addOption(Option.builder(Constants.ROLE_NAME)
-				.required(true).hasArg().longOpt(ROLE_LONG_OPT).desc(ROLE_DESC)
+		actionOptions.addOption(Option.builder(ROLE_LONG_OPT)
+				.required(true).hasArg()/*.longOpt(ROLE_LONG_OPT)*/.desc(ROLE_DESC)
 				.build());
 		return actionOptions;
 	}
@@ -78,9 +80,9 @@ public class StartRoleAction extends AbstractAction {
 	@Override
 	protected void initialize(Map<String, String> argumentMap) {
 
-		serviceName = argumentMap.get(Constants.SERVICE_NAME);
-		deploymentName = argumentMap.get(Constants.DEPLOYMENT_NAME);
-		roleName = argumentMap.get(Constants.ROLE_NAME);
+		serviceName = argumentMap.get(SERVICE_LONG_OPT);
+		deploymentName = argumentMap.get(DEPLOYMENT_LONG_OPT);
+		roleName = argumentMap.get(ROLE_LONG_OPT);
 	}
 
 	@Override
@@ -109,6 +111,8 @@ public class StartRoleAction extends AbstractAction {
 		url = String.format(url, subscriptionId, serviceName, deploymentName,
 				roleName);
 		WebResource webResource = client.resource(url);
+		/*WebResource webResource = client.resource(Constants.AZURE_BASE_URL).path(Constants.SERVICES_PATH).path(Constants.HOSTEDSERVICES_PATH).path(subscriptionId)
+				.path(Constants.DEPLOYMENTS_PATH).path(serviceName).path(Constants.ROLEINSTANCES_PATH).path(deploymentName).path(Constants.OPERATIONS_PATH);*/
 		print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
 		response = webResource
 				.entity(getDescriptor().getBytes(), MediaType.APPLICATION_XML)
@@ -125,11 +129,8 @@ public class StartRoleAction extends AbstractAction {
 	 */
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
-
-		if (response != null) {
-			//LOGGER.info(" Returned request token id :"+ response.getHeaders().get(Constants.REQUEST_TOKENID_KEY));
-			print("TOKEN ID : "	+ response.getHeaders().get(Constants.REQUEST_TOKENID_KEY), LOGGER, StandardLevel.INFO);
-		}
+			List<String> tokenid=  response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);		
+			print("UC4RB_AZR_REQUEST_ID  ::="+ tokenid.get(0), LOGGER, StandardLevel.INFO);		
 	}
 
 	private String getDescriptor() {
