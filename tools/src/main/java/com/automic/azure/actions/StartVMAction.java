@@ -54,28 +54,27 @@ public class StartVMAction extends AbstractAction {
 	protected void logParameters(Map<String, String> args) {
 
 		LOGGER.info("Input parameters -->");
-        LOGGER.info("Connection Timeout = " + args.get(Constants.CONNECTION_TIMEOUT));
-        LOGGER.info("Read-timeout = " + args.get(Constants.READ_TIMEOUT));       
-        LOGGER.info("Certificate-path = " + args.get(Constants.KEYSTORE_LOCATION));
-        LOGGER.info("Certificate-path = " + args.get(Constants.SUBSCRIPTION_ID));
-        LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
-        LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
-        LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
+		LOGGER.info("Connection Timeout = "
+				+ args.get(Constants.CONNECTION_TIMEOUT));
+		LOGGER.info("Read-timeout = " + args.get(Constants.READ_TIMEOUT));
+		LOGGER.info("Certificate-path = "
+				+ args.get(Constants.KEYSTORE_LOCATION));
+		LOGGER.info("Certificate-path = " + args.get(Constants.SUBSCRIPTION_ID));
+		LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
+		LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
+		LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
 
 	}
 
 	@Override
 	protected Options initializeOptions() {
 
-		actionOptions.addOption(Option.builder(SERVICE_OPT)
-				.required(true).hasArg()
-				.desc(SERVICE_DESC).build());
-		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT)
-				.required(true).hasArg()
-				.desc(DEPLOYMENT_DESC).build());
-		actionOptions.addOption(Option.builder(ROLE_OPT)
-				.required(true).hasArg().desc(ROLE_DESC)
-				.build());
+		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
+				.hasArg().desc(SERVICE_DESC).build());
+		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT).required(true)
+				.hasArg().desc(DEPLOYMENT_DESC).build());
+		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
+				.hasArg().desc(ROLE_DESC).build());
 		return actionOptions;
 	}
 
@@ -88,7 +87,7 @@ public class StartVMAction extends AbstractAction {
 	}
 
 	@Override
-	protected void validateInputs(Map<String, String> argumentMap)
+	protected void validateInputs()
 			throws AzureException {
 		if (!Validator.checkNotEmpty(serviceName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
@@ -108,15 +107,14 @@ public class StartVMAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client)
 			throws AzureException {
 		ClientResponse response = null;
-		String url = Constants.AZURE_BASE_URL
-				+ "/%s/services/hostedservices/%s/deployments/%s/roleinstances/%s/Operations";
-		url = String.format(url, subscriptionId, serviceName, deploymentName,
-				roleName);
-		WebResource webResource = client.resource(Constants.AZURE_BASE_URL).path(subscriptionId).path(Constants.SERVICES_PATH).path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
-				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName).path(Constants.ROLEINSTANCES_PATH).path(roleName).path(Constants.OPERATIONS_PATH);
+		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
+				.path(subscriptionId).path(Constants.SERVICES_PATH)
+				.path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
+				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
+				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
+				.path(Constants.OPERATIONS_PATH);
 		print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
-		response = webResource
-				.entity(new StartVm(), MediaType.APPLICATION_XML)
+		response = webResource.entity(new StartVm(), MediaType.APPLICATION_XML)
 				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
 				.post(ClientResponse.class);
 
@@ -130,7 +128,9 @@ public class StartVMAction extends AbstractAction {
 	 */
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
-			List<String> tokenid=  response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);		
-			print("UC4RB_AZR_REQUEST_ID  ::="+ tokenid.get(0), LOGGER, StandardLevel.INFO);		
+		List<String> tokenid = response.getHeaders().get(
+				Constants.REQUEST_TOKENID_KEY);
+		print("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0), LOGGER,
+				StandardLevel.INFO);
 	}
 }

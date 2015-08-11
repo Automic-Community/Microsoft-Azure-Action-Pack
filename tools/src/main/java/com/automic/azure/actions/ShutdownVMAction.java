@@ -75,7 +75,7 @@ public class ShutdownVMAction extends AbstractAction {
 		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
 				.hasArg().desc(ROLE_DESC).build());
 		actionOptions.addOption(Option.builder(POST_SHUTDOWN_OPT)
-				.required(false).hasArg().desc(POST_SHUTDOWN_DESC).build());
+				.required(true).hasArg().desc(POST_SHUTDOWN_DESC).build());
 
 		return actionOptions;
 	}
@@ -89,7 +89,7 @@ public class ShutdownVMAction extends AbstractAction {
 	}
 
 	@Override
-	protected void validateInputs(Map<String, String> argumentMap)
+	protected void validateInputs()
 			throws AzureException {
 		if (!Validator.checkNotEmpty(serviceName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);

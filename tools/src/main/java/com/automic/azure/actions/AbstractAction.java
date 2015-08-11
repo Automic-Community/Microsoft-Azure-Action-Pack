@@ -111,9 +111,8 @@ public abstract class AbstractAction {
 			initializeCompulsoryOptions();
 			actionArgsMap = CommonUtil.getMapFromCmdLine(initializeOptions(),commandLineArgs);
 			logParameters(actionArgsMap);
-			checkNoOfargs(actionArgsMap.size());
 			initializeArguments(actionArgsMap);
-			validateInputs(actionArgsMap);
+			validateInputs();
 			client = getClient();
 			ClientResponse response = executeSpecific(client);
 			validateResponse(response);
@@ -155,20 +154,6 @@ public abstract class AbstractAction {
 
 	protected abstract void logParameters(Map<String, String> argumentMap);
 	
-	/**
-	 * Method to check no of arguments are sufficient or not. Throws an
-	 * exception if count is less than the argument expected.
-	 * 
-	 * @param count
-	 *            No of arguments
-	 * @throws AzureException
-	 */
-	private void checkNoOfargs(int count) throws AzureException {
-		if (count < argsCount) {
-			LOGGER.error(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-			throw new AzureException(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-		}
-	}
 
 	private void initializeArguments(Map<String, String> argumentMap) throws AzureException {
 		this.connectionTimeOut = Integer.parseInt(argumentMap.get(Constants.CONNECTION_TIMEOUT));
@@ -198,22 +183,12 @@ public abstract class AbstractAction {
 			LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
 			throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
 		}
-		
-		/*if (this.subscriptionId.isEmpty()) {
-			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-		}*/
-		
+				
 		if (!Validator.checkFileExistsAndIsFile(this.keyStore)) {
 			LOGGER.error(ExceptionConstants.INVALID_FILE);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
 		}
 		
-		/*if (this.password.isEmpty()) {
-			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-			throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-		}*/
-
 	}
 
 	protected abstract void initialize(Map<String, String> argumentMap) ;
@@ -223,7 +198,7 @@ public abstract class AbstractAction {
 	 * 
 	 * @throws AzureException
 	 */
-	protected abstract void validateInputs(Map<String, String> argumentMap) throws AzureException;
+	protected abstract void validateInputs() throws AzureException;
 
 	/**
 	 * Method to write action specific logic.
@@ -234,16 +209,7 @@ public abstract class AbstractAction {
 	 * @throws AzureException
 	 */
 	protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
-
-	/**
-	 * Method to generate Error Message based on error code
-	 * 
-	 * @param errorCode
-	 *            error code
-	 * @return Error message that describes error code
-	 *//*
-	protected abstract String getErrorMessage(int errorCode);*/
-
+	
 	/**
 	 * Method to prepare output based on Response of an HTTP request to client.
 	 * 

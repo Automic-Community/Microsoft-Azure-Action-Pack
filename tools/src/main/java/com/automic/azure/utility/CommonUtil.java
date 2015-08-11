@@ -130,7 +130,7 @@ public final class CommonUtil {
 				try {
 					is.close();
 				} catch (IOException io) {
-					// log the error
+					LOGGER.error("Exception in closing input stream "+io);
 				}
 			}
 		}
@@ -167,7 +167,7 @@ public final class CommonUtil {
 	 * @return
 	 */
 	public static String formatMessage(String type, String message) {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append(type).append(" | ").append(message);
 		return sb.toString();
 	}
@@ -315,14 +315,5 @@ public final class CommonUtil {
     	}
     	System.out.println(obj);    	
     }
-    
-  
-    public static String ObjectToXmlString(Object obj, Class<? extends Object> cls) throws JAXBException {      		  
-    		StringWriter writer = new StringWriter();
-    		JAXBContext context = JAXBContext.newInstance(cls);            
-    		Marshaller m = context.createMarshaller();
-    		m.marshal(obj, writer);		
-    		return  writer.toString(); 	
-    }
-
+     
 }

@@ -30,8 +30,7 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
 	private static final Logger LOGGER = LogManager.getLogger(GetSubscriptionInfoAction.class);
 
-    private static final int NO_OF_ARGS = 6;
-    
+ 
     private String filePath;
     private final String FILE_LONG_OPT = "outputFile";
     private final String FILE_DESC = "Output file location";
