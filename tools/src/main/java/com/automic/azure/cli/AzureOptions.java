@@ -28,8 +28,8 @@ public final class AzureOptions {
 	
 	public static Options initializeActionOptions(){
 		
-		azureOptions.addOption(Option.builder(Constants.ACTION).required(ISREQUIRED).hasArg().longOpt("action").desc("Name of the action").build());		
-		azureOptions.addOption(Option.builder(Constants.HELP).required(!ISREQUIRED).longOpt("help").desc("show help.").build());	
+		azureOptions.addOption(Option.builder(Constants.ACTION).required(ISREQUIRED).hasArg().desc("Name of the action").build());		
+		azureOptions.addOption(Option.builder(Constants.HELP).required(!ISREQUIRED).desc("show help.").build());	
 		
 		return azureOptions;
 	}
