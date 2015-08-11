@@ -44,7 +44,7 @@ public final class ExceptionConstants {
     public static final String EMPTY_SERVICE_NAME = "Service name should not left blank";
     public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not left blank";
     public static final String EMPTY_ROLE_NAME = "Role name should not left blank";
-    public static final String EMPTY_POSTSHUTDOWN_ACTION = "Role name should not left blank";
+    public static final String EMPTY_POSTSHUTDOWN_ACTION = "Post shutdown action should not left blank";
 
     private ExceptionConstants() {
     }
