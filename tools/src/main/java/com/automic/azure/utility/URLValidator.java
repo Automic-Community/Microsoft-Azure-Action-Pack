@@ -24,32 +24,32 @@ public final class URLValidator {
     }
 
     /**
-     * Method to validate Docker URL. It validates connection protocol, Port numbers if specified. Also throws a
+     * Method to validate Azure URL. It validates connection protocol, Port numbers if specified. Also throws a
      * {@link MalformedURLException} if URL is invalid.
      * 
-     * @param dockerUrl
-     *            String representing Docker URL
+     * @param azureUrl
+     *            String representing Azure URL
      * @return true if URL is valid else false
      */
-    public static boolean validateURL(String dockerUrl) throws AzureException {
+    public static boolean validateURL(String azureUrl) throws AzureException {
         URI uri = null;
         
         try {
-            uri = URI.create(dockerUrl);
+            uri = URI.create(azureUrl);
         } catch (IllegalArgumentException e) {
-            LOGGER.error("Error while validating docker url :: " , e);
+            LOGGER.error("Error while validating azure url :: " , e);
             throw new AzureException(String.format("%s ,%s",
-                    String.format(ExceptionConstants.INVALID_AZURE_URL, dockerUrl), e.getMessage()));
+                    String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl), e.getMessage()));
 
         }
 
         return (uri != null)
-                && checkPort(uri.getPort(), dockerUrl)
+                && checkPort(uri.getPort(), azureUrl)
                 && checkProtocol(uri.getScheme()) ;
     }
     
-    private static boolean checkPort(int port, String dockerUrl) {
-        return ((port == -1 && dockerUrl.indexOf("-1") == -1) || port >= PORT_RANGE_START || port <= PORT_RANGE_END);
+    private static boolean checkPort(int port, String azureUrl) {
+        return ((port == -1 && azureUrl.indexOf("-1") == -1) || port >= PORT_RANGE_START || port <= PORT_RANGE_END);
     }
 
     private static boolean checkProtocol(String protocol) {

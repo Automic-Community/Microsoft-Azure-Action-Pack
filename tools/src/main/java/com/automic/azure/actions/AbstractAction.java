@@ -64,18 +64,13 @@ public abstract class AbstractAction {
 	 */
 	private int readTimeOut;
 
-	/**
-	 * Argument count as expected by an implementation of {@link AbstractAction}
-	 */
-	private int argsCount;
-	
 	
 	protected  Options actionOptions = AzureOptions.getAzureOptions();
 	
 	protected  Map<String, String> actionArgsMap = new HashMap<String, String>(10);
 
-	public AbstractAction(int argsCount) {
-		this.argsCount = argsCount;
+	public AbstractAction() {
+		
 	}
 
 	/**
@@ -95,8 +90,8 @@ public abstract class AbstractAction {
 	 * This method acts as template and decides how an action should proceed.It
 	 * starts with initializing compulsory Options followed by action Options Initializations
 	 * then logging of parameters ,then checking the number of
-	 * arguments,then initialize the variables like docker URL, read and
-	 * connection timeouts and filepath.Then it will call the REST API of docker
+	 * arguments,then initialize the variables like azure URL, read and
+	 * connection timeouts and filepath.Then it will call the REST API of azure
 	 * and gets the response which then validated and at last prepares the out
 	 * either in the form of xml or just a simple sysout.
 	 * 
@@ -111,7 +106,6 @@ public abstract class AbstractAction {
 			initializeCompulsoryOptions();
 			actionArgsMap = CommonUtil.getMapFromCmdLine(initializeOptions(),commandLineArgs);
 			logParameters(actionArgsMap);
-			checkNoOfargs(actionArgsMap.size());
 			initializeArguments(actionArgsMap);
 			validateInputs(actionArgsMap);
 			client = getClient();
@@ -155,20 +149,6 @@ public abstract class AbstractAction {
 
 	protected abstract void logParameters(Map<String, String> argumentMap);
 	
-	/**
-	 * Method to check no of arguments are sufficient or not. Throws an
-	 * exception if count is less than the argument expected.
-	 * 
-	 * @param count
-	 *            No of arguments
-	 * @throws AzureException
-	 */
-	private void checkNoOfargs(int count) throws AzureException {
-		if (count < argsCount) {
-			LOGGER.error(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-			throw new AzureException(ExceptionConstants.INSUFFICIENT_ARGUMENTS);
-		}
-	}
 
 	private void initializeArguments(Map<String, String> argumentMap) throws AzureException {
 		this.connectionTimeOut = Integer.parseInt(argumentMap.get(Constants.CONNECTION_TIMEOUT));
@@ -256,7 +236,7 @@ public abstract class AbstractAction {
 	
 
 	/**
-	 * Method to create an instance of {@link Client} using docker URL,
+	 * Method to create an instance of {@link Client} using azure URL,
 	 * certificate file path, connection timeout and read timeout.
 	 * 
 	 * @return an instance of {@link Client}
@@ -283,16 +263,16 @@ public abstract class AbstractAction {
 	}
 
 	/**
-	 * Method to build docker response from status code and message.
+	 * Method to build azure response from status code and message.
 	 * 
 	 * @param status
 	 *            Status code
 	 * @param message
 	 *            Status message
-	 * @return Docker response code
+	 * @return azure response code
 	 */
-	private String buildDockerResponse(int status, String message) {
-		StringBuilder responseBuilder = new StringBuilder("Docker Response: ");
+	private String buildAzureResponse(int status, String message) {
+		StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
 		responseBuilder.append("StatusCode: [");
 		responseBuilder.append(status).append("]");
 		if (Validator.checkNotEmpty(message)) {
@@ -311,7 +291,7 @@ public abstract class AbstractAction {
 	 */
 	private String getHttpErrorMsg(ClientResponse response) {
 		String msg = response.getEntity(String.class);
-		String errMsg = buildDockerResponse(response.getStatus(), msg);
+		String errMsg = buildAzureResponse(response.getStatus(), msg);
 		System.err.println(errMsg);
 		LOGGER.error(errMsg);
 		return msg;

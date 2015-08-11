@@ -1,7 +1,7 @@
 package com.automic.azure.constants;
 
 /**
- * Class contains all the constants used in Docker java application.
+ * Class contains all the constants used in Azure java application.
  * 
  */
 public final class Constants {   

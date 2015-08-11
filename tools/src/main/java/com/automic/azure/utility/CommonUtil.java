@@ -8,8 +8,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -26,7 +36,7 @@ import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 
 /**
- * Docker utility class
+ * Azure utility class
  * 
  */
 public final class CommonUtil {
@@ -287,6 +297,34 @@ public final class CommonUtil {
 			sb.append(" ");
 		}
 		return sb.toString();
+	}
+	
+	/**
+	 * Method to format an xml string and returns it. 
+	 * 
+	 * @param input xml as a string
+	 * @param indent indentation value. usually 2
+	 * @return Formated xml string
+	 * @throws AzureException
+	 */
+	public static String printFormattedXml(String input, int indent)
+			throws AzureException {
+		try {
+			Source xmlInput = new StreamSource(new StringReader(input));
+			StringWriter stringWriter = new StringWriter();
+			StreamResult xmlOutput = new StreamResult(stringWriter);
+			TransformerFactory transformerFactory = TransformerFactory
+					.newInstance();
+			transformerFactory.setAttribute("indent-number", indent);
+			Transformer transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.transform(xmlInput, xmlOutput);
+			return xmlOutput.getWriter().toString();
+		} catch (TransformerException e) {
+			
+			LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG);
+			throw new AzureException(ExceptionConstants.ACTION_MISSING, e);
+		}
 	}
 
 }

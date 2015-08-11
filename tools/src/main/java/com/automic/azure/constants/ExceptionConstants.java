@@ -40,6 +40,7 @@ public final class ExceptionConstants {
 	public static final String OPTION_VALUE_MISSING = "Value for option %s [%s]is missing";
 	public static final String INVALID_ARGS = "Improper Args, probable cause : %s";
 	public static final String ACTION_MISSING = "Action[-act] missing in the args";
+	public static final String INVALID_AZURE_CERTIFICATE_PWD = "Keystore was tampered with, or password was incorrect";
 
     private ExceptionConstants() {
     }

@@ -13,13 +13,13 @@ import com.sun.jersey.api.client.ClientHandlerException;
 
 
 /**
- * Main Class is the insertion point of docker interaction api when called from AE implementation. It delegates the
+ * Main Class is the insertion point of azure interaction api when called from AE implementation. It delegates the
  * parameters to appropriate action and returns a response code based on output of action.
  * 
  * Following response code are returned by java program 
- * 0 - Successful response from Docker API
- * 1 - An exception occurred/Error in response from Docker API
- * 2 - Connection timeout while calling Docker API
+ * 0 - Successful response from Azure API
+ * 1 - An exception occurred/Error in response from Azure API
+ * 2 - Connection timeout while calling Azure API
  * 
  */
 public final class AzureClient {
@@ -41,7 +41,7 @@ public final class AzureClient {
     }
 
     /**
-     * Main method which will start the execution of an action on docker. This method will call the DockerClientHelper
+     * Main method which will start the execution of an action on azure. This method will call the AzureClientHelper
      * class which will trigger the execution of specific action and then if action fails this main method will handle
      * the failed scenario and print the error message and system will exit with the respective response code.
      * 
@@ -79,7 +79,7 @@ public final class AzureClient {
     }
 
     /**
-     * Method that returns response code based on whether call to Docker API resulted in connection timeout or any other
+     * Method that returns response code based on whether call to Azure API resulted in connection timeout or any other
      * exception. A response code of 2 means connection timeout else for all other exceptions the response code is 1.
      * 
      * @param e

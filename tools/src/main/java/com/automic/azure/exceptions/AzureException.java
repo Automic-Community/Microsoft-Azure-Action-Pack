@@ -8,7 +8,7 @@ package com.automic.azure.exceptions;
  * either be 
  * <li>
  * <ul>Business exception for invalid inputs to Actions</ul>
- * <ul>Technical exception to denote errors while communicating with Docker API</ul>
+ * <ul>Technical exception to denote errors while communicating with Azure API</ul>
  * </li>
  * 
  */

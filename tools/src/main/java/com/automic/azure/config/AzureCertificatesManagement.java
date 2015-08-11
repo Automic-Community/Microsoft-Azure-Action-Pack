@@ -26,7 +26,7 @@ import com.automic.azure.exceptions.AzureException;
 
 
 /**
- * DockerCertificates holds certificates for connecting to an HTTPS-secured Docker instance with client/server
+ * Azure Certificates holds certificates for connecting to an HTTPS-secured Azure instance with client/server
  * authentication.
  */
 public class AzureCertificatesManagement {
@@ -40,12 +40,12 @@ public class AzureCertificatesManagement {
 			this.sslContext = setSSLSocketContext(keyStoreLoc,password);
 		} catch (UnrecoverableKeyException |KeyManagementException |KeyStoreException |NoSuchAlgorithmException | IOException e) {
 			LOGGER.error("Error during sslcontext creation ",e);
-			throw new AzureException(ExceptionConstants.GENERIC_ERROR_MSG,e);
+			throw new AzureException(ExceptionConstants.INVALID_AZURE_CERTIFICATE_PWD, e);
 		} 
     }
 
      
-    private static SSLContext setSSLSocketContext(String keyStoreName,
+	private static SSLContext setSSLSocketContext(String keyStoreName,
 			String password) throws UnrecoverableKeyException,
 			KeyStoreException, NoSuchAlgorithmException,
 			KeyManagementException, IOException {
@@ -62,6 +62,13 @@ public class AzureCertificatesManagement {
 	}
     
     
+    /**
+     * Method to generate a {@link KeyStore} from keystore file and password.
+     * @param keyStoreName
+     * @param password
+     * @return
+     * @throws IOException
+     */
     private static KeyStore getKeyStore(String keyStoreName, String password)
 			throws IOException {
 		KeyStore ks = null;
@@ -84,7 +91,7 @@ public class AzureCertificatesManagement {
 	}
    
     /**
-     * Method to get the instance of {@link SSLContext} for Docker connection
+     * Method to get the instance of {@link SSLContext} for Azure connection
      * @return
      */
     public SSLContext getSslContext() {

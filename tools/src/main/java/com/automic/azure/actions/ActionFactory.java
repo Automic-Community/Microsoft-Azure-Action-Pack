@@ -38,6 +38,9 @@ public final class ActionFactory {
 		case VERSION:
 			action = new GetSubscriptionInfoAction();
 			break;
+		case GET_SUBSCRIPTION_INFO:
+			action = new GetSubscriptionInfoAction();
+			break;
 		default:
 			String msg = "Invalid Action.. Please enter valid action "
 					+ Action.getActionNames();
