@@ -53,8 +53,7 @@ public final class Constants {
 	public static final String DEPLOYMENTS_PATH ="deployments";
 	public static final String ROLEINSTANCES_PATH = "roleinstances";
 	public static final String OPERATIONS_PATH = "Operations";
-	public static final String EMPTY = "";
-	public static final String STOPPED = "Stopped";
+	
 	
 
     private Constants() {

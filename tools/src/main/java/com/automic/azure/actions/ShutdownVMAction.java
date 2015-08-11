@@ -48,7 +48,7 @@ public class ShutdownVMAction extends AbstractAction {
     private String postShutdownAction;
 
     @Override
-    protected void logParameters(Map<String,String> args) {
+    protected void logParameters(Map<String,String> args) { 
 
         LOGGER.info("Input parameters -->");
         LOGGER.info("Connection Timeout = " + args.get("cto"));
@@ -74,12 +74,10 @@ public class ShutdownVMAction extends AbstractAction {
     
 	@Override
 	protected void initialize(Map<String, String> argumentMap) {
-
 		serviceName = argumentMap.get(SERVICE_LONG_OPT);
 		deploymentName = argumentMap.get(DEPLOYMENT_LONG_OPT);
 		roleName = argumentMap.get(ROLE_LONG_OPT);
 		postShutdownAction = argumentMap.get(POST_SHUTDOWN_LONG_OPT);
-		postShutdownAction = postShutdownAction == null || Constants.EMPTY.equals(postShutdownAction) ? Constants.STOPPED : postShutdownAction;
 	}
 
     @Override
@@ -96,6 +94,10 @@ public class ShutdownVMAction extends AbstractAction {
             LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
         } 
+        if (!Validator.checkNotEmpty(postShutdownAction)) {
+            LOGGER.error(ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
+            throw new AzureException(ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
+        }
     }
 
     @Override
@@ -103,7 +105,7 @@ public class ShutdownVMAction extends AbstractAction {
          ClientResponse response = null;     
          ShutdownVM sd = new ShutdownVM();
  		 sd.setOperationType(Constants.OPERATIONTYPE);
- 		 sd.setPostShutdownAction("Stopped");
+ 		 sd.setPostShutdownAction(postShutdownAction);
  		
          String url = Constants.AZURE_BASE_URL+"/%s/services/hostedservices/%s/deployments/%s/roleinstances/%s/Operations";
          url = String.format(url, subscriptionId, serviceName,deploymentName, roleName);
