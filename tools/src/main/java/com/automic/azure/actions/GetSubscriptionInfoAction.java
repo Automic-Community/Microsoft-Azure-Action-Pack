@@ -21,46 +21,45 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
-
 /**
  * @author sumitsamson
- *
+ * 
  */
 public class GetSubscriptionInfoAction extends AbstractAction {
 
 	private static final Logger LOGGER = LogManager.getLogger(GetSubscriptionInfoAction.class);
 
- 
-    private String filePath;
-    private final String FILE_LONG_OPT = "outputFile";
-    private final String FILE_DESC = "Output file location";
-	
+	private String filePath;
+	private final String FILE_LONG_OPT = "outputFile";
+	private final String FILE_DESC = "Output file location";
+	private String subscriptionId;
 
-	
-//	public GetSubscriptionInfoAction() {
-//		super(NO_OF_ARGS);
-//	}
-	
-	
 	@Override
-	protected Options initializeOptions() {	
-		 actionOptions.addOption(Option.builder(Constants.OUTPUT_FILE).required(true).hasArg().longOpt(FILE_LONG_OPT).desc(FILE_DESC).build());
+	protected Options initializeOptions() {
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
+		actionOptions.addOption(Option.builder(Constants.OUTPUT_FILE).required(true).hasArg().longOpt(FILE_LONG_OPT)
+				.desc(FILE_DESC).build());
 		return actionOptions;
 	}
-	
+
 	@Override
 	protected void logParameters(Map<String, String> argumentMap) {
 		LOGGER.info(argumentMap);
 
 	}
-	
+
 	@Override
 	protected void initialize(Map<String, String> argumentMap) {
-		filePath = argumentMap.get(Constants.OUTPUT_FILE);	
+		filePath = argumentMap.get(Constants.OUTPUT_FILE);
+		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
-	protected void validateInputs(Map<String, String> argumentMap) throws AzureException {		
+	protected void validateInputs() throws AzureException {
+		if (!Validator.checkNotEmpty(subscriptionId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		}
 		if (!Validator.checkFileFolderExists(filePath)) {
 			LOGGER.error(ExceptionConstants.INVALID_FILE);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, filePath));
@@ -69,23 +68,22 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
 	@Override
 	protected ClientResponse executeSpecific(Client client) throws AzureException {
-		
+
 		ClientResponse response = null;
 
-        WebResource webResource = client.resource(Constants.AZURE_BASE_URL).path(this.subscriptionId);
-        
+		WebResource webResource = client.resource(Constants.AZURE_BASE_URL).path(this.subscriptionId);
 
-        LOGGER.info("Calling url " + webResource.getURI());
+		LOGGER.info("Calling url " + webResource.getURI());
 
-        response = webResource.header(Constants.X_MS_VERSION,Constants.X_MS_VERSION_VALUE).accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+		response = webResource.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
+				.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
-        return response;
+		return response;
 	}
-	
+
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
 		CommonUtil.createFile(filePath, response.getEntity(String.class));
 	}
 
-	
 }

@@ -42,10 +42,6 @@ public abstract class AbstractAction {
 	private static final int BEGIN_HTTP_CODE = 200;
 	private static final int END_HTTP_CODE = 300;
 	
-	/**
-	 *subscription_id
-	 * */
-	protected String subscriptionId;
 
 	/**
 	 * keystore path
@@ -127,7 +123,6 @@ public abstract class AbstractAction {
 	private void initializeCompulsoryOptions(){
 		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().desc("Read timeout").build());
 		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
 		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
 		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
@@ -158,7 +153,6 @@ public abstract class AbstractAction {
 	private void initializeArguments(Map<String, String> argumentMap) throws AzureException {
 		this.connectionTimeOut = Integer.parseInt(argumentMap.get(Constants.CONNECTION_TIMEOUT));
 		this.readTimeOut = Integer.parseInt(argumentMap.get(Constants.READ_TIMEOUT));
-		this.subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 		this.keyStore = argumentMap.get(Constants.KEYSTORE_LOCATION);
 		this.password = argumentMap.get(Constants.PASSWORD);
 		

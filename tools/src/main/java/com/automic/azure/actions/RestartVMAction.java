@@ -5,10 +5,7 @@ package com.automic.azure.actions;
  */
 
 import static com.automic.azure.utility.CommonUtil.print;
-import static com.automic.azure.utility.CommonUtil.readFileFromPath;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +27,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Action class to export the existing container as zip/tar file.It creates the
- * zip/tar at the specified valid location. It will throw error if container id
- * does not exists or file path is invalid
+ * 
  */
 public class RestartVMAction extends AbstractAction {
 
@@ -45,9 +40,11 @@ public class RestartVMAction extends AbstractAction {
 	private static final String DEPLOYMENT_DESC = "Azure cloud deployment  name";
 	private static final String ROLE_OPT = "rolename";
 	private static final String ROLE_DESC = "Role name (VM name)";
+	private String subscriptionId;
 	private String serviceName;
 	private String deploymentName;
 	private String roleName;
+	
 
 	@Override
 	protected void logParameters(Map<String, String> args) {
@@ -67,7 +64,8 @@ public class RestartVMAction extends AbstractAction {
 
 	@Override
 	protected Options initializeOptions() {
-
+		
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
 				.hasArg().desc(SERVICE_DESC).build());
 		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT).required(true)
@@ -82,12 +80,16 @@ public class RestartVMAction extends AbstractAction {
 		serviceName = argumentMap.get(SERVICE_OPT);
 		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
 		roleName = argumentMap.get(ROLE_OPT);
+		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
-	protected void validateInputs()
-			throws AzureException {
+	protected void validateInputs() throws AzureException {
 
+		if (!Validator.checkNotEmpty(subscriptionId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		}
 		if (!Validator.checkNotEmpty(serviceName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
@@ -101,8 +103,7 @@ public class RestartVMAction extends AbstractAction {
 		if (!Validator.checkNotEmpty(roleName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
-		}
-
+		}		
 	}
 
 	@Override
@@ -115,7 +116,7 @@ public class RestartVMAction extends AbstractAction {
 				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
 				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
 				.path(Constants.OPERATIONS_PATH);
-		print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
+		LOGGER.info("Calling url " + webResource.getURI());
 		response = webResource
 				.entity(new RestartVM(), MediaType.APPLICATION_XML)
 				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)

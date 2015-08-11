@@ -21,7 +21,6 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 
 
@@ -40,7 +39,7 @@ public class AzureCertificatesManagement {
 			this.sslContext = setSSLSocketContext(keyStoreLoc,password);
 		} catch (UnrecoverableKeyException |KeyManagementException |KeyStoreException |NoSuchAlgorithmException | IOException e) {
 			LOGGER.error("Error during sslcontext creation ",e);
-			throw new AzureException(ExceptionConstants.GENERIC_ERROR_MSG,e);
+			throw new AzureException(e.getMessage());
 		} 
     }
 

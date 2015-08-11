@@ -5,11 +5,7 @@ package com.automic.azure.actions;
  */
 
 import static com.automic.azure.utility.CommonUtil.print;
-import static com.automic.azure.utility.CommonUtil.readFileFromPath;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -46,6 +42,7 @@ public class StartVMAction extends AbstractAction {
 	private static final String DEPLOYMENT_DESC = "Azure cloud deployment  name";
 	private static final String ROLE_OPT = "rolename";
 	private static final String ROLE_DESC = "Role name (VM name)";
+	private String subscriptionId;
 	private String serviceName;
 	private String deploymentName;
 	private String roleName;
@@ -68,7 +65,7 @@ public class StartVMAction extends AbstractAction {
 
 	@Override
 	protected Options initializeOptions() {
-
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
 				.hasArg().desc(SERVICE_DESC).build());
 		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT).required(true)
@@ -84,11 +81,15 @@ public class StartVMAction extends AbstractAction {
 		serviceName = argumentMap.get(SERVICE_OPT);
 		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
 		roleName = argumentMap.get(ROLE_OPT);
+		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
-	protected void validateInputs()
-			throws AzureException {
+	protected void validateInputs() throws AzureException {
+		if (!Validator.checkNotEmpty(subscriptionId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		}
 		if (!Validator.checkNotEmpty(serviceName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
@@ -107,15 +108,17 @@ public class StartVMAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client)
 			throws AzureException {
 		ClientResponse response = null;
+
 		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
 				.path(subscriptionId).path(Constants.SERVICES_PATH)
 				.path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
 				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
 				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
 				.path(Constants.OPERATIONS_PATH);
-		print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
+		LOGGER.info("Calling url " + webResource.getURI());
 		response = webResource.entity(new StartVm(), MediaType.APPLICATION_XML)
-				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
+
+		.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
 				.post(ClientResponse.class);
 
 		return response;

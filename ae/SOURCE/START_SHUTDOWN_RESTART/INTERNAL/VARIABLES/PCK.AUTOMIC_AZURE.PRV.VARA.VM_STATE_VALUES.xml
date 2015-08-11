@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PRV.VARA.HTTP_PARAMETERS" replacementmode="2">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PRV.VARA.VM_STATE_VALUES" replacementmode="2">
 <HEADER state="1">
-<Title>Configuring connection/read time-outs parameters</Title>
+<Title>VM state values</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType>STATIC</OH_SubType>
@@ -25,8 +25,10 @@
 </ATTR_VARA>
 <VARA state="1">
 <Variables>
-<row Name="CONNECTION_TIMEOUT" Value="30000" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="READ_TIMEOUT" Value="0" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="RESTART_VM" Value="" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="SHUTDOWN_DEALLOCATE_VM" Value="" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="SHUTDOWN_VM" Value="" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="START_VM" Value="" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">

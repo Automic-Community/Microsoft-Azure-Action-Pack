@@ -45,6 +45,7 @@ public class ShutdownVMAction extends AbstractAction {
 	private static final String POST_SHUTDOWN_OPT = "postshutdown";
 	private static final String POST_SHUTDOWN_DESC = "Optional. Specifies how the Virtual Machine should be shut down";
 
+	private String subscriptionId;
 	private String serviceName;
 	private String deploymentName;
 	private String roleName;
@@ -67,7 +68,7 @@ public class ShutdownVMAction extends AbstractAction {
 
 	@Override
 	protected Options initializeOptions() {
-
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
 				.hasArg().desc(SERVICE_DESC).build());
 		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT)
@@ -86,11 +87,16 @@ public class ShutdownVMAction extends AbstractAction {
 		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
 		roleName = argumentMap.get(ROLE_OPT);
 		postShutdownAction = argumentMap.get(POST_SHUTDOWN_OPT);
+		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
 	protected void validateInputs()
 			throws AzureException {
+		if (!Validator.checkNotEmpty(subscriptionId)) {
+			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		}
 		if (!Validator.checkNotEmpty(serviceName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
@@ -122,7 +128,7 @@ public class ShutdownVMAction extends AbstractAction {
 				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
 				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
 				.path(Constants.OPERATIONS_PATH);
-		print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
+		LOGGER.info("Calling url " + webResource.getURI());
 		response = webResource.entity(sd, MediaType.APPLICATION_XML)
 				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
 				.post(ClientResponse.class);
