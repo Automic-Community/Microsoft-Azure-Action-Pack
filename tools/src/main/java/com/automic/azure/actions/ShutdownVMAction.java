@@ -61,7 +61,7 @@ public class ShutdownVMAction extends AbstractAction {
         LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
         LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
         LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
-        LOGGER.info("Role name/ Vm Name = " + args.get(POST_SHUTDOWN_OPT));
+        LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
 
 	}
 
