@@ -24,9 +24,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Action class to export the existing container as zip/tar file.It creates the
- * zip/tar at the specified valid location. It will throw error if container id
- * does not exists or file path is invalid
+ * This class will shutsdown the specified Virtual Machine on Azure Cloud
  */
 public class ShutdownVMAction extends AbstractAction {
 
