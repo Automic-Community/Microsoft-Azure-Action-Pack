@@ -28,26 +28,28 @@ public final class Constants {
     public static final String X_MS_VERSION_VALUE = "2013-11-01";
     public static final String REQUEST_TOKENID_KEY = "x-ms-request-id";
     
-    public static final String HELP = "h";
+    public static final String HELP = "help";
 
-	public static final String PASSWORD = "pwd";
+	public static final String PASSWORD = "password";
 
-	public static final String KEYSTORE_LOCATION = "ksl";
+	public static final String KEYSTORE_LOCATION = "keystore";
 
-	public static final String SUBSCRIPTION_ID = "sid";
+	public static final String SUBSCRIPTION_ID = "subscriptionId";
 
-	public static final String CONNECTION_TIMEOUT = "cto";
+	public static final String CONNECTION_TIMEOUT = "connectiontimeout";
 
-	public static final String READ_TIMEOUT = "rto";
+	public static final String READ_TIMEOUT = "readtimeout";
 
-	public static final String ACTION = "act";
+	public static final String ACTION = "action";
 
 	public static final String OUTPUT_FILE = "ofl";
 	
 	public static final String SERVICE_NAME = "ser";
 	public static final String DEPLOYMENT_NAME = "dep";
 	public static final String ROLE_NAME = "rol";
-	public static final String OPERATIONTYPE="ShutdownRoleOperation";
+	public static final String OPERATIONTYPE_SHUTDOWN="ShutdownRoleOperation";
+	public static final String OPERATIONTYPE_RESTART="RestartRoleOperation";
+	public static final String OPERATIONTYPE_START="StartRoleOperation";
 	public static final String SERVICES_PATH = "services";
 	public static final String HOSTEDSERVICES_PATH ="hostedservices";
 	public static final String DEPLOYMENTS_PATH ="deployments";

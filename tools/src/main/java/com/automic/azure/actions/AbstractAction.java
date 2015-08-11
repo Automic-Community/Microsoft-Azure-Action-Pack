@@ -126,12 +126,12 @@ public abstract class AbstractAction {
 	}
 	
 	private void initializeCompulsoryOptions(){
-		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().longOpt("readtimeout").desc("Read timeout").build());
-		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().longOpt("connectiontimeout").desc("connection timeout").build());
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().longOpt("subscriptionId").desc("Subscription ID").build());
-		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().longOpt("keystore").desc("Keystore location").build());
-		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().longOpt("password").desc("Keystore password").build());
-		actionOptions.addOption(Option.builder(Constants.HELP).required(false).longOpt("help").desc("show help.").build());
+		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().desc("Read timeout").build());
+		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
+		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
+		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
+		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
 	}
 	
     	
