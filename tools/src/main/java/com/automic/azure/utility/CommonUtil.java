@@ -211,8 +211,7 @@ public final class CommonUtil {
 	 *            [] args
 	 * @return Map<String,String>
 	 */
-	public static Map<String, String> getMapFromCmdLine(Options options, String[] args)
-			throws AzureException {
+	public static Map<String, String> getMapFromCmdLine(Options options, String[] args) throws AzureException {
 		Map<String, String> argsMap = new HashMap<String, String>(10);
 		CommandLine cmd = getCommandLine(options, args);
 
@@ -230,7 +229,8 @@ public final class CommonUtil {
 	}
 
 	/**
-	 * Method provides the CommandLine object for the given Options and command line arguments
+	 * Method provides the CommandLine object for the given Options and command
+	 * line arguments
 	 * */
 	public static CommandLine getCommandLine(Options options, String[] args) throws AzureException {
 		CommandLineParser parser = new DefaultParser();
@@ -240,25 +240,25 @@ public final class CommonUtil {
 			cmd = parser.parse(options, args, true);
 
 		} catch (ParseException e) {
-			LOGGER.error("Recieved args "+logArgs(args));
+			LOGGER.error("Recieved args " + logArgs(args));
 			LOGGER.error("Error parsing the command line options", e);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()));
 		}
 		return cmd;
 	}
-	
-	
+
 	/**
-	 * Method extract the action name from the given command line arguments and Options
+	 * Method extract the action name from the given command line arguments and
+	 * Options
 	 * */
-	public static String getAction(Options options, String[] args) throws AzureException{
-		
+	public static String getAction(Options options, String[] args) throws AzureException {
+
 		CommandLine cmd = getCommandLine(options, args);
-		
-		if (cmd.hasOption(Constants.ACTION)){
-   		 String action = cmd.getOptionValue(Constants.ACTION).toUpperCase();
-   		 return action;
-		}else {
+
+		if (cmd.hasOption(Constants.ACTION)) {
+			String action = cmd.getOptionValue(Constants.ACTION).toUpperCase();
+			return action;
+		} else {
 			throw new AzureException(ExceptionConstants.ACTION_MISSING);
 		}
 	}
@@ -272,18 +272,18 @@ public final class CommonUtil {
 		System.exit(0);
 
 	}
-	
-	private static String logArgs(String args[]){
-		
-		StringBuilder sb = new  StringBuilder();
-		
-		for (int i=0;i<args.length;i=i+2){
-			
+
+	private static String logArgs(String args[]) {
+
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < args.length; i = i + 2) {
+
 			sb.append(args[i]);
 			sb.append("=");
-			if(!((i+1)>args.length-1)){
-				sb.append(args[i+1]);
-			}			
+			if (!((i + 1) > args.length - 1)) {
+				sb.append(args[i + 1]);
+			}
 			sb.append(" ");
 		}
 		return sb.toString();
