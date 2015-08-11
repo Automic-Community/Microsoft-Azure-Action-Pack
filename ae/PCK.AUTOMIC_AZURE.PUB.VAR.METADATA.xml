@@ -27,7 +27,7 @@
 <Variables>
 <row Name="Categories" Value="" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Company" Value="Automic Software GmbH" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Dependencies" Value="PCK.ITPA_SHARED ~&gt; 1.0.4" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="Dependencies" Value="PCK.ITPA_SHARED ~&gt; 1.0.0" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Description" Value="Provides integration with Azure" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Homepage" Value="" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="License" Value="Automic License" Value1="" Value2="" Value3="" Value4=""/>
