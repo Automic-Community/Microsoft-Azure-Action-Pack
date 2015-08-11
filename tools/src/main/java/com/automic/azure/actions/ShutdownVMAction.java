@@ -122,7 +122,7 @@ public class ShutdownVMAction extends AbstractAction {
 				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
 				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
 				.path(Constants.OPERATIONS_PATH);
-		print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
+		LOGGER.info("Calling url " + webResource.getURI());
 		response = webResource.entity(sd, MediaType.APPLICATION_XML)
 				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
 				.post(ClientResponse.class);

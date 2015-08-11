@@ -5,10 +5,7 @@ package com.automic.azure.actions;
  */
 
 import static com.automic.azure.utility.CommonUtil.print;
-import static com.automic.azure.utility.CommonUtil.readFileFromPath;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -104,7 +101,7 @@ public class RestartVMAction extends AbstractAction {
          ClientResponse response = null;        
          WebResource webResource = client.resource(Constants.AZURE_BASE_URL).path(subscriptionId).path(Constants.SERVICES_PATH).path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
  				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName).path(Constants.ROLEINSTANCES_PATH).path(roleName).path(Constants.OPERATIONS_PATH);
-         print("Calling url " + webResource.getURI(), LOGGER, StandardLevel.INFO);
+         LOGGER.info("Calling url " + webResource.getURI());
          response = webResource.entity(new RestartVM(), MediaType.APPLICATION_XML).header(Constants.X_MS_VERSION,Constants.X_MS_VERSION_VALUE).post(ClientResponse.class);
          return response;
     }    

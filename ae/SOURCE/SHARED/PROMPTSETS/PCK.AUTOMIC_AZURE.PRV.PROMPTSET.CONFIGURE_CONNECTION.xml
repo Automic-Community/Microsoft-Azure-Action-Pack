@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<PRPT name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS">
+<PRPT name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CONFIGURE_CONNECTION">
 <HEADER state="1">
-<Title>Enter information for Azure subscription</Title>
+<Title/>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>
@@ -11,7 +11,7 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Enter information for Azure subscription"><properties><entry name="text">Enter information for Azure subscription</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_SUBSCRIPTION_IDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Subscription ID" tooltip="ID of the subscription which will be used for this connection" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Enter information to configure a new Azure connection"><properties><entry name="text">Enter information to configure a new Azure connection</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_SUBSCRIPTION_IDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Subscription ID" tooltip="ID of the subscription which will be used for this connection" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -39,7 +39,7 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CERT_PATHs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Certificate location" tooltip="Path including certificate name Example: C:/certificates/mycertificate.jks" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CERT_PATHs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Certificate location" tooltip="Path including certificate name Example: C:/certificates/mycertificate.jsk" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -60,14 +60,14 @@
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Path including certificate name Example: C:/certificates/mycertificate.jks</entry>
+        <entry name="tooltip">Path including certificate name Example: C:/certificates/mycertificate.jsk</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CERT_PSWDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Certificate Password" tooltip="Password to your certificate" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CERT_PSWDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="1" text="Certificate Password" tooltip="Password to your certificate" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -87,7 +87,7 @@
         <entry name="required">1</entry>
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
-        <entry name="showaspassword">0</entry>
+        <entry name="showaspassword">1</entry>
         <entry name="tooltip">Password to your certificate</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>

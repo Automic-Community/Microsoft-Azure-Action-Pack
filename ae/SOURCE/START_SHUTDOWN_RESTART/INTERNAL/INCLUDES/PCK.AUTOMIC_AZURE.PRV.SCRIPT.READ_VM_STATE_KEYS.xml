@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.READ_URLS">
+<SCRI name="PCK.AUTOMIC_AZURE.PRV.SCRIPT.READ_VM_STATE_KEYS">
 <XHEADER state="1">
-<Title>Read VARA object having configurable urls</Title>
+<Title>Read VARA object having configurable VM state values</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -89,8 +89,8 @@
 :SET &HEADER# = ""
 :SET &RET# = PUT_PROCESS_LINE(&HND#, &HEADER#, ",")
 
-:PRINT "Read the key column of VARA.HPQC_URLS"
-:SET &SOURCE#=PREP_PROCESS_VAR(PCK.AUTOMIC_AZURE.PUB.VARA.CONN_SETTINGS)
+:PRINT "Read the key column of VARA.VM_STATE_VALUES"
+:SET &SOURCE#=PREP_PROCESS_VAR(PCK.AUTOMIC_AZURE.PRV.VARA.VM_STATE_VALUES)
 :PROCESS &SOURCE#
 :   SET &KEY# = GET_PROCESS_LINE(&SOURCE#,1)
 :   PRINT "&KEY#"
