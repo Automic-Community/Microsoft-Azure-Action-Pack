@@ -7,7 +7,7 @@ import com.automic.azure.constants.Constants;
 
 
 @XmlRootElement(name="StartRoleOperation ", namespace="http://schemas.microsoft.com/windowsazure") 
-public class StartVm {
+public class StartRequestModel {
 	
 	private String operationType = Constants.OPERATIONTYPE_START;
 	

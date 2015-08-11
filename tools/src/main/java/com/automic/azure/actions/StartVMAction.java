@@ -20,7 +20,7 @@ import org.apache.logging.log4j.spi.StandardLevel;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
-import com.automic.azure.modal.StartVm;
+import com.automic.azure.modal.StartRequestModel;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -49,7 +49,6 @@ public class StartVMAction extends AbstractAction {
 
 	@Override
 	protected void logParameters(Map<String, String> args) {
-
 		LOGGER.info("Input parameters -->");
 		LOGGER.info("Connection Timeout = "
 				+ args.get(Constants.CONNECTION_TIMEOUT));
@@ -60,12 +59,12 @@ public class StartVMAction extends AbstractAction {
 		LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
 		LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
 		LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
-
 	}
 
 	@Override
 	protected Options initializeOptions() {
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID)
+				.required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
 				.hasArg().desc(SERVICE_DESC).build());
 		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT).required(true)
@@ -77,7 +76,6 @@ public class StartVMAction extends AbstractAction {
 
 	@Override
 	protected void initialize(Map<String, String> argumentMap) {
-
 		serviceName = argumentMap.get(SERVICE_OPT);
 		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
 		roleName = argumentMap.get(ROLE_OPT);
@@ -108,7 +106,6 @@ public class StartVMAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client)
 			throws AzureException {
 		ClientResponse response = null;
-
 		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
 				.path(subscriptionId).path(Constants.SERVICES_PATH)
 				.path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
@@ -116,9 +113,9 @@ public class StartVMAction extends AbstractAction {
 				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
 				.path(Constants.OPERATIONS_PATH);
 		LOGGER.info("Calling url " + webResource.getURI());
-		response = webResource.entity(new StartVm(), MediaType.APPLICATION_XML)
-
-		.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
+		response = webResource
+				.entity(new StartRequestModel(), MediaType.APPLICATION_XML)
+				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
 				.post(ClientResponse.class);
 
 		return response;

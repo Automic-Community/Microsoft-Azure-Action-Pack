@@ -8,19 +8,16 @@ import static com.automic.azure.utility.CommonUtil.print;
 
 import java.util.List;
 import java.util.Map;
-
 import javax.ws.rs.core.MediaType;
-
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.StandardLevel;
-
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
-import com.automic.azure.modal.ShutdownVM;
+import com.automic.azure.modal.ShutdownRequestModel;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -55,24 +52,27 @@ public class ShutdownVMAction extends AbstractAction {
 	protected void logParameters(Map<String, String> args) {
 
 		LOGGER.info("Input parameters -->");
-        LOGGER.info("Connection Timeout = " + args.get(Constants.CONNECTION_TIMEOUT));
-        LOGGER.info("Read-timeout = " + args.get(Constants.READ_TIMEOUT));       
-        LOGGER.info("Certificate-path = " + args.get(Constants.KEYSTORE_LOCATION));
-        LOGGER.info("Certificate-path = " + args.get(Constants.SUBSCRIPTION_ID));
-        LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
-        LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
-        LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
-        LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
+		LOGGER.info("Connection Timeout = "
+				+ args.get(Constants.CONNECTION_TIMEOUT));
+		LOGGER.info("Read-timeout = " + args.get(Constants.READ_TIMEOUT));
+		LOGGER.info("Certificate-path = "
+				+ args.get(Constants.KEYSTORE_LOCATION));
+		LOGGER.info("Certificate-path = " + args.get(Constants.SUBSCRIPTION_ID));
+		LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
+		LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
+		LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
+		LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
 
 	}
 
 	@Override
 	protected Options initializeOptions() {
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID)
+				.required(true).hasArg().desc("Subscription ID").build());
 		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
 				.hasArg().desc(SERVICE_DESC).build());
-		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT)
-				.required(true).hasArg().desc(DEPLOYMENT_DESC).build());
+		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT).required(true)
+				.hasArg().desc(DEPLOYMENT_DESC).build());
 		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
 				.hasArg().desc(ROLE_DESC).build());
 		actionOptions.addOption(Option.builder(POST_SHUTDOWN_OPT)
@@ -91,8 +91,7 @@ public class ShutdownVMAction extends AbstractAction {
 	}
 
 	@Override
-	protected void validateInputs()
-			throws AzureException {
+	protected void validateInputs() throws AzureException {
 		if (!Validator.checkNotEmpty(subscriptionId)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
 			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
@@ -120,7 +119,7 @@ public class ShutdownVMAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client)
 			throws AzureException {
 		ClientResponse response = null;
-		ShutdownVM sd = new ShutdownVM();
+		ShutdownRequestModel sd = new ShutdownRequestModel();
 		sd.setPostShutdownAction(postShutdownAction);
 		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
 				.path(subscriptionId).path(Constants.SERVICES_PATH)
