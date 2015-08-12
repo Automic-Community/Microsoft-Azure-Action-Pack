@@ -8,7 +8,13 @@
 <OH_SubType/>
 </HEADER>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[Package Name: PCK.AUTOMIC_AZURE
+Package Description: This package contains the actions for AE integration with the Azure system. 
+
+  
+This package contains the following actions:
+* Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.GET_SUBSCRIPTION_INFO
+  Action Description: This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

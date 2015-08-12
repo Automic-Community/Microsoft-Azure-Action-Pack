@@ -8,8 +8,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Source;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -27,7 +36,7 @@ import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 
 /**
- * Docker utility class
+ * Azure utility class
  * 
  */
 public final class CommonUtil {
@@ -253,8 +262,8 @@ public final class CommonUtil {
 		CommandLine cmd = getCommandLine(options, args);
 
 		if (cmd.hasOption(Constants.ACTION)) {
-			String action = cmd.getOptionValue(Constants.ACTION).toUpperCase();
-			return action;
+			return cmd.getOptionValue(Constants.ACTION).toUpperCase();
+			
 		} else {
 			throw new AzureException(ExceptionConstants.ACTION_MISSING);
 		}
@@ -270,7 +279,7 @@ public final class CommonUtil {
 
 	}
 
-	private static String logArgs(String args[]) {
+	private static String logArgs(String[] args) {
 
 		StringBuilder sb = new StringBuilder();
 
@@ -286,6 +295,7 @@ public final class CommonUtil {
 		return sb.toString();
 	}
 	
+
 	 /**
      * Prints an Object as an error then terminate the line.
      * @param obj {@link Object}
@@ -307,4 +317,32 @@ public final class CommonUtil {
     	System.out.println(obj);    	
     }
      
+
+	/**
+	 * Method to format an xml string and returns it. 
+	 * 
+	 * @param input xml as a InputStream
+	 * @param indent indentation value. usually 2
+	 * @return Formated xml string
+	 * @throws AzureException
+	 */
+	public static void printFormattedXml(InputStream input, OutputStream out, int indent)
+			throws AzureException {
+		try {
+			Source xmlInput = new StreamSource(new InputStreamReader(input));
+			StreamResult xmlOutput = new StreamResult(out);
+			TransformerFactory transformerFactory = TransformerFactory
+					.newInstance();
+			transformerFactory.setAttribute("indent-number", indent);
+			Transformer transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.transform(xmlInput, xmlOutput);
+		} catch (TransformerException e) {
+			
+			LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG);
+			throw new AzureException(ExceptionConstants.ACTION_MISSING, e);
+		}
+	}
+
+
 }

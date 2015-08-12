@@ -49,11 +49,11 @@ public final class URLValidator {
     }
     
     private static boolean checkPort(int port, String azureUrl) {
-        return (port == -1 && azureUrl.indexOf("-1") == -1) || port >= PORT_RANGE_START || port <= PORT_RANGE_END;
+        return ((port == -1 && azureUrl.indexOf("-1") == -1) || port >= PORT_RANGE_START || port <= PORT_RANGE_END);
     }
 
     private static boolean checkProtocol(String protocol) {
-        return "http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol);
+        return ("http".equalsIgnoreCase(protocol) || "https".equalsIgnoreCase(protocol));
     }
 
 }

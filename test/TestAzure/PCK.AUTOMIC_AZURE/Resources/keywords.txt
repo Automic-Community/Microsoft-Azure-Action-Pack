@@ -1,0 +1,103 @@
+*** Settings ***
+Resource          variables.txt
+
+*** Keywords ***
+Connect AE
+    Action Connect    ${_AE_HOST}    ${_AE_PORT}    ${_AE_USER}    ${_AE_PASS}    ${_AE_TEMP_FOLD}
+
+Set Overwrite Agent
+    Run Keyword If    '${ENV}' == 'WIN'    Set Overwrite Agent WIN
+    Run Keyword If    '${ENV}' == 'UNIX'    Set Overwrite Agent UNIX
+    Run Keyword If    '${ENV}' == 'QTP'    Set Overwrite Agent QTP
+
+Set Overwrite Agent WIN
+    Action Set    &AGENT#    ${_PROMPTSET_AGENT_WIN}
+    Action Set    &LOGIN#    ${_PROMPTSET_LOGIN_WIN}
+
+Set Overwrite Agent UNIX
+    Action Set    &AGENT#    ${_PROMPTSET_AGENT_UNIX}
+    Action Set    &LOGIN#    ${_PROMPTSET_LOGIN_UNIX}
+
+Set Overwrite Agent QTP
+    Action Set    &AGENT#    ${_PROMPTSET_AGENT_QTP}
+    Action Set    &LOGIN#    ${_PROMPTSET_LOGIN_QTP}
+
+Action Report Should Contain
+    [Arguments]    ${text}
+    ${report} =    Action Get Report
+    Should Contain    ${report}    ${text}
+
+Action Report Should Be Found
+    ${report} =    Action Get Report
+    Should Not Be Empty    ${report}
+
+Action Report Should Not Be Found
+    ${report} =    Action Get Report
+    Should Be Empty    ${report}
+
+Action Return Code Should Be
+    [Arguments]    ${code}
+    ${returnCode}=    Action Get Variable    Return code
+    Should Be Equal    ${returnCode}    ${code}
+
+Action Return Code Should Not Equal
+    [Arguments]    ${code}
+    ${returnCode}=    Action Get Variable    Return code
+    Should Not Be Equal    ${returnCode}    ${code}
+
+Action Return Status Should Be
+    [Arguments]    ${status}
+    ${returnStatus}=    Action Get Variable    Status
+    Should Be Equal    ${returnStatus}    ${status}
+
+Action Object Variable File Path Should Be
+    [Arguments]    ${Variable_Name}    ${File_name}
+    ${File_path}=    Action Get Variable    ${Variable_Name}
+    Should End With    ${File_path}    ${File_name}
+    Set Global Variable    ${File_path}
+
+Action Object Variable Count Value Should Be
+    [Arguments]    ${Variable_Name}
+    ${Count_Value}=    Action Get Variable    ${Variable_Name}
+    Should Be True    ${Count_Value} >= 0
+
+Action Object Variable Should Be Found
+    [Arguments]    ${Object_Variable}
+    ${objectVariable}=    Action Get Variable    ${Object_Variable}
+    Should Not Be Empty    ${objectVariable}
+    Set Global Variable    ${objectVariable}
+
+Action Object Variable Should Not Be Found
+    [Arguments]    ${Object_Variable}
+    ${objectVariable}=    Action Get Variable    ${Object_Variable}
+    Should Be Empty    ${objectVariable}
+
+Assert Success
+    Action Report Should Be Found
+    Action Return Status Should Be    ${ENDED_OK}
+    Action Return Code Should Be    ${RETURN_CODE_SUCCESS}
+
+Assert Failure
+    Action Report Should Be Found
+    Action Return Status Should Be    ${ENDED_NOT_OK}
+    Action Return Code Should Be    ${RETURN_CODE_FAILURE}
+
+Assert Mandatory
+    Action Report Should Not Be Found
+
+Delete File
+    Action Create    ${_DELETE_FILE_ACTION}
+    Action Set    &UC4RB_DIR_FILE_RM_NAME#    ${File_path}
+    Action Set    &UC4RB_DIR_FILE_RM_FAIL#    Yes
+    Set Overwrite Agent
+    Action Execute
+
+Genarate String
+    ${Generated_Name}    Generate Random String    8    [LOWER]
+    Set Global Variable    ${Generated_Name}
+
+Configure Connection
+    [Arguments]    ${Subscription_ID}    ${Cert_Location}    ${Cert_Password}
+    Action Set    &UC4RB_AZR_SUBSCRIPTION_ID#    ${Subscription_ID}
+    Action Set    &UC4RB_AZR_CERT_PATH#    ${Cert_Location}
+    Action Set    &UC4RB_AZR_CERT_PSWD#    ${Cert_Password}
