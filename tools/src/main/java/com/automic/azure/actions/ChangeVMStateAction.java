@@ -57,25 +57,16 @@ public class ChangeVMStateAction extends AbstractAction {
 	private String vmState;
 
 	@Override
-	protected void logParameters(Map<String, String> args) {
-
-		LOGGER.info("Input parameters -->");
-		LOGGER.info("Connection Timeout = "
-				+ args.get(Constants.CONNECTION_TIMEOUT));
-		LOGGER.info("Read-timeout = " + args.get(Constants.READ_TIMEOUT));
-		LOGGER.info("Certificate-path = "
-				+ args.get(Constants.KEYSTORE_LOCATION));
-		LOGGER.info("Certificate-path = " + args.get(Constants.SUBSCRIPTION_ID));
-		LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
-		LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
-		LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
-		LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
-		LOGGER.info("Virtual machine state  = "
-				+ args.get(VM_STATE_OPT));
-
+	protected void addOptions() {
+		addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID", true);
+		addOption(SERVICE_OPT, true, SERVICE_DESC, true);
+		addOption(DEPLOYMENT_OPT, true, DEPLOYMENT_DESC, true);
+		addOption(ROLE_OPT, true, ROLE_DESC, true);
+		addOption(POST_SHUTDOWN_OPT, false, POST_SHUTDOWN_DESC, true);
+		addOption(VM_STATE_OPT, true, VM_STATE_DESC, true);
 	}
-
-	@Override
+	
+	/*@Override
 	protected Options initializeOptions() {
 		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID)
 				.required(true).hasArg().desc("Subscription ID").build());
@@ -92,15 +83,16 @@ public class ChangeVMStateAction extends AbstractAction {
 
 		return actionOptions;
 	}
-
+*/
 	@Override
-	protected void initialize(Map<String, String> argumentMap) {
-		serviceName = argumentMap.get(SERVICE_OPT);
-		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
-		roleName = argumentMap.get(ROLE_OPT);
-		postShutdownAction = argumentMap.get(POST_SHUTDOWN_OPT);
-		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
-		vmState = argumentMap.get(VM_STATE_OPT);
+	protected void initialize() {		
+		
+		serviceName = getOptions().getOptionValue(SERVICE_OPT);
+		deploymentName = getOptions().getOptionValue(DEPLOYMENT_OPT);
+		roleName = getOptions().getOptionValue(ROLE_OPT);
+		postShutdownAction = getOptions().getOptionValue(POST_SHUTDOWN_OPT);
+		subscriptionId = getOptions().getOptionValue(Constants.SUBSCRIPTION_ID); 
+		vmState = getOptions().getOptionValue(VM_STATE_OPT);
 	}
 
 	@Override
@@ -138,14 +130,14 @@ public class ChangeVMStateAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client)
 			throws AzureException {
 		ClientResponse response = null;
-		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
+		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL)
 				.path(subscriptionId).path("services").path("hostedservices")
 				.path(serviceName).path("deployments").path(deploymentName)
 				.path("roleinstances").path(roleName).path("Operations");
 		LOGGER.info("Calling url " + webResource.getURI());
 		response = webResource
 				.entity(getRequestBody(vmState), MediaType.APPLICATION_XML)
-				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
+				.header(Constants.X_MS_VERSION, x_ms_version)
 				.post(ClientResponse.class);
 		return response;
 	}

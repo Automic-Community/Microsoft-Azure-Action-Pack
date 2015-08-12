@@ -3,12 +3,8 @@
  */
 package com.automic.azure.actions;
 
-import java.util.Map;
-
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -34,24 +30,12 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	private final String FILE_DESC = "Output file location";
 	private String subscriptionId;
 
-	@Override
-	protected Options initializeOptions() {
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
-		actionOptions.addOption(Option.builder(Constants.OUTPUT_FILE).required(true).hasArg().longOpt(FILE_LONG_OPT)
-				.desc(FILE_DESC).build());
-		return actionOptions;
-	}
+	
 
 	@Override
-	protected void logParameters(Map<String, String> argumentMap) {
-		LOGGER.info(argumentMap);
-
-	}
-
-	@Override
-	protected void initialize(Map<String, String> argumentMap) {
-		filePath = argumentMap.get(Constants.OUTPUT_FILE);
-		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
+	protected void initialize() {
+		filePath = getOptions().getOptionValue(Constants.OUTPUT_FILE);
+		subscriptionId = getOptions().getOptionValue(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
@@ -71,12 +55,12 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
 		ClientResponse response = null;
 
-		WebResource webResource = client.resource(Constants.AZURE_BASE_URL).path(this.subscriptionId);
+		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(this.subscriptionId);
 
 		LOGGER.info("Calling url " + webResource.getURI());
 
-		response = webResource.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
-				.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+		response = webResource.header(Constants.X_MS_VERSION, x_ms_version)
+				.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
 
 		return response;
 	}
@@ -84,6 +68,13 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
 		CommonUtil.createFile(filePath, response.getEntity(String.class));
+	}
+
+	@Override
+	protected void addOptions() {
+		addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID", true);
+		addOption(FILE_LONG_OPT, true, FILE_DESC, true);
+		
 	}
 
 }

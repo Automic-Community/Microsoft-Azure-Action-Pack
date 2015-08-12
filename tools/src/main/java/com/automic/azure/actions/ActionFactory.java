@@ -38,8 +38,8 @@ public final class ActionFactory {
 		case VERSION:
 			action = new GetSubscriptionInfoAction();
 			break;		
-		case VM_OPERATION:
-			action = new CustomVMOperationAction();
+		case VM_STATE:
+			action = new ChangeVMStateAction();
 			break;
 		default:
 			String msg = "Invalid Action.. Please enter valid action "

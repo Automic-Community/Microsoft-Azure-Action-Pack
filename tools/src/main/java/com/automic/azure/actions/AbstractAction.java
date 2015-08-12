@@ -5,9 +5,7 @@ package com.automic.azure.actions;
 
 import static com.automic.azure.utility.CommonUtil.print;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -35,7 +33,7 @@ import com.sun.jersey.api.client.ClientResponse;
  * parameters, prepare API response and exception handling.
  * 
  */
-public abstract class AbstractAction {
+public abstract class AbstractAction {	
 
 	private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
 
@@ -64,9 +62,29 @@ public abstract class AbstractAction {
 	 */
 	private int readTimeOut;
 	
+	/**
+	 * x-ms-Version
+	 * */
+    protected String x_ms_version;
+		
 	protected  Options actionOptions = AzureOptions.getAzureOptions();
 	
-	protected  Map<String, String> actionArgsMap = new HashMap<String, String>(10);
+	private  CommandLine cmd ;
+	
+	
+	
+	protected AbstractAction() {
+		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().desc("Read timeout").build());
+		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
+		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
+		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
+		actionOptions.addOption(Option.builder(Constants.X_MS_VERSION_OPT).required(true).hasArg().desc("x-ms-version").build());
+		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
+	}
+	
+	protected CommandLine getOptions() {
+		return cmd;
+	}
 	
 	/**
 	 * Method to trim parameters
@@ -78,6 +96,8 @@ public abstract class AbstractAction {
 			args[i] = args[i].trim();
 		}
 	}
+	
+	
 	
 	
 
@@ -97,11 +117,11 @@ public abstract class AbstractAction {
 	 */
 	public final void executeAction(String[] commandLineArgs) throws AzureException {
 		Client client = null;
-		try {
-			initializeCompulsoryOptions();
-			actionArgsMap = CommonUtil.getMapFromCmdLine(initializeOptions(),commandLineArgs);
-			logParameters(actionArgsMap);
-			initializeArguments(actionArgsMap);
+		try {	
+			addOptions();
+			cmd = CommonUtil.getCommandLine(actionOptions,commandLineArgs);
+			logParameters();
+			initializeArguments();
 			validateInputs();
 			client = getClient();
 			ClientResponse response = executeSpecific(client);
@@ -114,13 +134,7 @@ public abstract class AbstractAction {
 		}
 	}
 	
-	private void initializeCompulsoryOptions(){
-		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().desc("Read timeout").build());
-		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
-		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
-		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
-		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
-	}
+	
 	
     	
 	/**
@@ -128,7 +142,13 @@ public abstract class AbstractAction {
 	 * Following are the details needed to create an Option ,short-name e.g act ,isRequired ,have argument/arguments,long-option name
 	 * and description of Option
 	 **/
-	protected abstract  Options initializeOptions();
+	protected abstract void addOptions();
+	
+	public final void addOption(String optionName,boolean isRequired,String description,boolean hasArgs) {
+		actionOptions.addOption(Option.builder(optionName).required(isRequired).hasArg(hasArgs)
+				.desc(description).build());
+		
+	}
 	
 	
 	
@@ -141,17 +161,28 @@ public abstract class AbstractAction {
 		
 	}
 
-	protected abstract void logParameters(Map<String, String> argumentMap);
+	protected void logParameters(){
+		LOGGER.info("Input params ");
+		for(Option o:cmd.getOptions()){			
+			LOGGER.info(o.getDescription()+" = "+o.getValue());
+		}
+	};
 	
 
-	private void initializeArguments(Map<String, String> argumentMap) throws AzureException {
-		this.connectionTimeOut = Integer.parseInt(argumentMap.get(Constants.CONNECTION_TIMEOUT));
-		this.readTimeOut = Integer.parseInt(argumentMap.get(Constants.READ_TIMEOUT));
-		this.keyStore = argumentMap.get(Constants.KEYSTORE_LOCATION);
-		this.password = argumentMap.get(Constants.PASSWORD);
+	private void initializeArguments() throws AzureException {
+		try{
+		this.connectionTimeOut = Integer.parseInt(cmd.getOptionValue(Constants.CONNECTION_TIMEOUT));
+		this.readTimeOut = Integer.parseInt(cmd.getOptionValue(Constants.READ_TIMEOUT));
+		}catch(NumberFormatException e){
+			LOGGER.error("Error occured while fetching value for connection/read timeout",e);
+			throw new AzureException(String.format(ExceptionConstants.NUMBER_EXCEPTION,"connection/read"));
+		}
+		this.keyStore = cmd.getOptionValue(Constants.KEYSTORE_LOCATION);
+		this.password = cmd.getOptionValue(Constants.PASSWORD);
+		this.x_ms_version = cmd.getOptionValue(Constants.X_MS_VERSION_OPT);
 		
 		 validateGeneralInputs();
-	     initialize(argumentMap);
+	     initialize();
 
 	};
 	
@@ -177,9 +208,19 @@ public abstract class AbstractAction {
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
 		}
 		
+		if (this.password==null || this.password.isEmpty() ) {
+			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+			throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
+		}
+		
+		if (this.x_ms_version==null || this.x_ms_version.isEmpty() ) {
+			LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
+			throw new AzureException(ExceptionConstants.EMPTY_X_MS_VERSION);
+		}
+		
 	}
 
-	protected abstract void initialize(Map<String, String> argumentMap) ;
+	protected abstract void initialize() ;
 	/**
 	 * This method is used to validate the inputs to the action. Override this
 	 * method to validate action specific inputs
