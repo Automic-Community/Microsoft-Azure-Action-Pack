@@ -46,6 +46,7 @@ public final class ExceptionConstants {
     public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not left blank";
     public static final String EMPTY_ROLE_NAME = "Role name should not left blank";
     public static final String EMPTY_POSTSHUTDOWN_ACTION = "Post shutdown action should not left blank";
+    public static final String EMPTY_VM_OPERATION_ACTION = "VM operation should not left blank";
 	public static final String EMPTY_X_MS_VERSION = "x-ms-version cannot be empty";
 	public static final String NUMBER_EXCEPTION = "Value should be number for the following args [%s]";
 

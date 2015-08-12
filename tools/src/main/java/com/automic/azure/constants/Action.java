@@ -10,7 +10,7 @@ import com.automic.azure.actions.ActionFactory;
  */
 public enum Action {    
 
-	VERSION, START_VM, SHUTDOWN_VM, RESTART_VM;
+	VERSION, VM_STATE;
 	
     public static String getActionNames() {
         Action[] actions = Action.values();

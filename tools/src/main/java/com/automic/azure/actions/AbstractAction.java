@@ -78,7 +78,7 @@ public abstract class AbstractAction {
 		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
 		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
 		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
-		actionOptions.addOption(Option.builder(Constants.X_MS_VERSION).required(true).hasArg().desc("x-ms-version").build());
+		actionOptions.addOption(Option.builder(Constants.X_MS_VERSION_OPT).required(true).hasArg().desc("x-ms-version").build());
 		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
 	}
 	
@@ -117,7 +117,8 @@ public abstract class AbstractAction {
 	 */
 	public final void executeAction(String[] commandLineArgs) throws AzureException {
 		Client client = null;
-		try {			
+		try {	
+			addOptions();
 			cmd = CommonUtil.getCommandLine(actionOptions,commandLineArgs);
 			logParameters();
 			initializeArguments();
@@ -178,7 +179,7 @@ public abstract class AbstractAction {
 		}
 		this.keyStore = cmd.getOptionValue(Constants.KEYSTORE_LOCATION);
 		this.password = cmd.getOptionValue(Constants.PASSWORD);
-		this.x_ms_version = cmd.getOptionValue(Constants.X_MS_VERSION);
+		this.x_ms_version = cmd.getOptionValue(Constants.X_MS_VERSION_OPT);
 		
 		 validateGeneralInputs();
 	     initialize();

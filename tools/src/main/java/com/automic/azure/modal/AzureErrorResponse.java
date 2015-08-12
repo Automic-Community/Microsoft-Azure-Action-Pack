@@ -3,13 +3,13 @@ package com.automic.azure.modal;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name="Error", namespace="http://schemas.microsoft.com/windowsazure") 
+@XmlRootElement(name = "Error", namespace = "http://schemas.microsoft.com/windowsazure") 
 public class AzureErrorResponse {
 	
 	private String code;
 	private String message;
 	
-	@XmlElement(name="Code", namespace="http://schemas.microsoft.com/windowsazure")  
+	@XmlElement(name = "Code", namespace = "http://schemas.microsoft.com/windowsazure")  
 	public String getCode() {
 		return code;
 	}
@@ -17,7 +17,7 @@ public class AzureErrorResponse {
 		this.code = code;
 	}
 	
-	@XmlElement(name="Message", namespace="http://schemas.microsoft.com/windowsazure")
+	@XmlElement(name = "Message", namespace = "http://schemas.microsoft.com/windowsazure")
 	public String getMessage() {
 		return message;
 	}

@@ -37,15 +37,9 @@ public final class ActionFactory {
 		switch (enumAction) {
 		case VERSION:
 			action = new GetSubscriptionInfoAction();
-			break;
-		case START_VM:
-			action = new StartVMAction();
-			break;
-		case RESTART_VM:
-			action = new RestartVMAction();
-			break;
-		case SHUTDOWN_VM:
-			action = new ShutdownVMAction();
+			break;		
+		case VM_STATE:
+			action = new ChangeVMStateAction();
 			break;
 		default:
 			String msg = "Invalid Action.. Please enter valid action "
