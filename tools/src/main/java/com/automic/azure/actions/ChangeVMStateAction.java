@@ -7,12 +7,9 @@ package com.automic.azure.actions;
 import static com.automic.azure.utility.CommonUtil.print;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.StandardLevel;
@@ -66,24 +63,7 @@ public class ChangeVMStateAction extends AbstractAction {
 		addOption(VM_STATE_OPT, true, VM_STATE_DESC, true);
 	}
 	
-	/*@Override
-	protected Options initializeOptions() {
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID)
-				.required(true).hasArg().desc("Subscription ID").build());
-		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
-				.hasArg().desc(SERVICE_DESC).build());
-		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT).required(true)
-				.hasArg().desc(DEPLOYMENT_DESC).build());
-		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
-				.hasArg().desc(ROLE_DESC).build());
-		actionOptions.addOption(Option.builder(POST_SHUTDOWN_OPT)
-				.required(false).hasArg().desc(POST_SHUTDOWN_DESC).build());
-		actionOptions.addOption(Option.builder(VM_STATE_OPT).required(true)
-				.hasArg().desc(VM_STATE_DESC).build());
-
-		return actionOptions;
-	}
-*/
+	
 	@Override
 	protected void initialize() {		
 		
