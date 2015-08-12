@@ -95,11 +95,7 @@ public abstract class AbstractAction {
 		for (int i = 0; i < args.length; i++) {
 			args[i] = args[i].trim();
 		}
-	}
-	
-	
-	
-	
+	}	
 
 	/**
 	 * This method acts as template and decides how an action should proceed.It
@@ -132,10 +128,7 @@ public abstract class AbstractAction {
 				client.destroy();
 			}
 		}
-	}
-	
-	
-	
+	}	
     	
 	/**
 	 * This function initializes the options for a given action and add to the actionOptions variable.
@@ -148,9 +141,7 @@ public abstract class AbstractAction {
 		actionOptions.addOption(Option.builder(optionName).required(isRequired).hasArg(hasArgs)
 				.desc(description).build());
 		
-	}
-	
-	
+	}	
 	
 	/**
 	 * This function prints the help for a given action
@@ -166,7 +157,7 @@ public abstract class AbstractAction {
 		for(Option o:cmd.getOptions()){			
 			LOGGER.info(o.getDescription()+" = "+o.getValue());
 		}
-	};
+	}
 	
 
 	private void initializeArguments() throws AzureException {
@@ -184,7 +175,7 @@ public abstract class AbstractAction {
 		 validateGeneralInputs();
 	     initialize();
 
-	};
+	}
 	
 	/**
 	 * Method to validate Input parameters
