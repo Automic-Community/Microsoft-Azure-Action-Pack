@@ -59,11 +59,11 @@ public class ShutdownVMAction extends AbstractAction {
 
 	@Override
 	protected void initialize() {
-		serviceName = cmd.getOptionValue(SERVICE_OPT);
-		deploymentName = cmd.getOptionValue(DEPLOYMENT_OPT);
-		roleName = cmd.getOptionValue(ROLE_OPT);
-		postShutdownAction = cmd.getOptionValue(POST_SHUTDOWN_OPT);
-		subscriptionId = cmd.getOptionValue(Constants.SUBSCRIPTION_ID);
+		serviceName = getOptions().getOptionValue(SERVICE_OPT);
+		deploymentName = getOptions().getOptionValue(DEPLOYMENT_OPT);
+		roleName = getOptions().getOptionValue(ROLE_OPT);
+		postShutdownAction = getOptions().getOptionValue(POST_SHUTDOWN_OPT);
+		subscriptionId = getOptions().getOptionValue(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override

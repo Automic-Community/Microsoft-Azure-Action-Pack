@@ -34,8 +34,8 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
 	@Override
 	protected void initialize() {
-		filePath = cmd.getOptionValue(Constants.OUTPUT_FILE);
-		subscriptionId = cmd.getOptionValue(Constants.SUBSCRIPTION_ID);
+		filePath = getOptions().getOptionValue(Constants.OUTPUT_FILE);
+		subscriptionId = getOptions().getOptionValue(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override

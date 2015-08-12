@@ -69,7 +69,7 @@ public abstract class AbstractAction {
 		
 	protected  Options actionOptions = AzureOptions.getAzureOptions();
 	
-	protected  CommandLine cmd ;
+	private  CommandLine cmd ;
 	
 	
 	
@@ -82,7 +82,7 @@ public abstract class AbstractAction {
 		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
 	}
 	
-	protected CommandLine getCmd() {
+	protected CommandLine getOptions() {
 		return cmd;
 	}
 	
