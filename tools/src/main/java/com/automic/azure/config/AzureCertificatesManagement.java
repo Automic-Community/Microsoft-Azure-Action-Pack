@@ -38,17 +38,17 @@ public class AzureCertificatesManagement {
     AzureCertificatesManagement(String keyStoreLoc ,String password) throws AzureException{
     	try {
 			this.sslContext = setSSLSocketContext(keyStoreLoc,password);
-		} catch (UnrecoverableKeyException |KeyManagementException |KeyStoreException |NoSuchAlgorithmException | IOException e) {
+		} catch (UnrecoverableKeyException |KeyManagementException |KeyStoreException |NoSuchAlgorithmException | IOException | CertificateException e) {
 			LOGGER.error("Error during sslcontext creation ",e);
 			throw new AzureException(ExceptionConstants.INVALID_AZURE_CERTIFICATE_PWD, e);
-		} 
+		}
     }
 
      
 	private static SSLContext setSSLSocketContext(String keyStoreName,
 			String password) throws UnrecoverableKeyException,
 			KeyStoreException, NoSuchAlgorithmException,
-			KeyManagementException, IOException {
+			KeyManagementException, IOException, CertificateException {
 		KeyStore ks = getKeyStore(keyStoreName, password);
 		KeyManagerFactory keyManagerFactory = KeyManagerFactory
 				.getInstance("SunX509");
@@ -68,9 +68,12 @@ public class AzureCertificatesManagement {
      * @param password
      * @return
      * @throws IOException
+     * @throws KeyStoreException 
+     * @throws CertificateException 
+     * @throws NoSuchAlgorithmException 
      */
     private static KeyStore getKeyStore(String keyStoreName, String password)
-			throws IOException {
+			throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException {
 		KeyStore ks = null;
 		FileInputStream fis = null;
 		try {
@@ -80,9 +83,7 @@ public class AzureCertificatesManagement {
 			ks.load(fis, passwordArray);
 			fis.close();
 
-		} catch (KeyStoreException |NoSuchAlgorithmException | CertificateException e) {
-			
-		} finally {
+		}finally {
 			if (fis != null) {
 				fis.close();
 			}

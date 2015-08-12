@@ -27,21 +27,23 @@ public final class Constants {
     
     public static final String X_MS_VERSION_VALUE = "2012-03-01";
     
-    public static final String HELP = "h";
+    public static final String HELP = "help";
 
-	public static final String PASSWORD = "pwd";
+	public static final String PASSWORD = "password";
+	
+	public static final String OPTION_X_MS_VERSION = "xmsversion";
 
-	public static final String KEYSTORE_LOCATION = "ksl";
+	public static final String KEYSTORE_LOCATION = "keystore";
 
-	public static final String SUBSCRIPTION_ID = "sid";
+	public static final String SUBSCRIPTION_ID = "subscriptionid";
 
-	public static final String CONNECTION_TIMEOUT = "cto";
+	public static final String CONNECTION_TIMEOUT = "connectiontimeout";
 
-	public static final String READ_TIMEOUT = "rto";
+	public static final String READ_TIMEOUT = "readtimeout";
 
-	public static final String ACTION = "act";
+	public static final String ACTION = "action";
 
-	public static final String OUTPUT_FILE = "ofl";
+	public static final String OUTPUT_FILE = "outputfile";
 
     private Constants() {
     }

@@ -8,7 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
+import java.io.OutputStream;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -302,24 +302,22 @@ public final class CommonUtil {
 	/**
 	 * Method to format an xml string and returns it. 
 	 * 
-	 * @param input xml as a string
+	 * @param input xml as a InputStream
 	 * @param indent indentation value. usually 2
 	 * @return Formated xml string
 	 * @throws AzureException
 	 */
-	public static String printFormattedXml(String input, int indent)
+	public static void printFormattedXml(InputStream input, OutputStream out, int indent)
 			throws AzureException {
 		try {
-			Source xmlInput = new StreamSource(new StringReader(input));
-			StringWriter stringWriter = new StringWriter();
-			StreamResult xmlOutput = new StreamResult(stringWriter);
+			Source xmlInput = new StreamSource(new InputStreamReader(input));
+			StreamResult xmlOutput = new StreamResult(out);
 			TransformerFactory transformerFactory = TransformerFactory
 					.newInstance();
 			transformerFactory.setAttribute("indent-number", indent);
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			transformer.transform(xmlInput, xmlOutput);
-			return xmlOutput.getWriter().toString();
 		} catch (TransformerException e) {
 			
 			LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG);

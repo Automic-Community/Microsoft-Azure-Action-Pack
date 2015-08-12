@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <JOBI name="PCK.AUTOMIC_AZURE.PRV.INCLUDE.ECHO_ON_OFF">
 <HEADER state="1">
-<Title>echo enable/disable swtich statement</Title>
+<Title>Echo enable/disable swtich statement</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>

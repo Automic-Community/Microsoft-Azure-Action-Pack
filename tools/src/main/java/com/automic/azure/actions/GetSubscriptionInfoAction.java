@@ -3,6 +3,7 @@
  */
 package com.automic.azure.actions;
 
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -79,8 +80,8 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 		LOGGER.info("Calling url " + webResource.getURI());
 
 		response = webResource
-				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
-				.accept(MediaType.APPLICATION_JSON).get(ClientResponse.class);
+				.header(Constants.X_MS_VERSION, this.xmsVersion)
+				.accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
 
 		return response;
 	}
@@ -88,19 +89,11 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
 		InputStream inputStream = response.getEntityInputStream();
-		String line = null;
-		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		
-		try {
-			while(( line= reader.readLine()) != null){
-				System.out.println("Subscription Detail:");
-				System.out.println(CommonUtil.printFormattedXml(line, 2));
-			}
-		} catch (IOException e) {
-			LOGGER.error(ExceptionConstants.UNABLE_TO_READ_INPUTSTREAM);
-			// wrap exception in Azure exception
-			throw new AzureException(ExceptionConstants.UNABLE_TO_READ_INPUTSTREAM, e);
-		}
+		System.out.println("Subscription details");
+		// write formatted xml to System console
+		CommonUtil.printFormattedXml(inputStream, System.out, 2);
+		
 	}
 
 }

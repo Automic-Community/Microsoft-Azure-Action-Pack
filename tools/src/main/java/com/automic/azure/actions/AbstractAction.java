@@ -63,6 +63,11 @@ public abstract class AbstractAction {
 	 * Read timeout in milliseconds
 	 */
 	private int readTimeOut;
+	
+	/**
+	 * 
+	 */
+	protected String xmsVersion;
 
 	
 	protected  Options actionOptions = AzureOptions.getAzureOptions();
@@ -120,12 +125,13 @@ public abstract class AbstractAction {
 	}
 	
 	private void initializeCompulsoryOptions(){
-		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().longOpt("readtimeout").desc("Read timeout").build());
-		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().longOpt("connectiontimeout").desc("connection timeout").build());
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().longOpt("subscriptionId").desc("Subscription ID").build());
-		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().longOpt("keystore").desc("Keystore location").build());
-		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().longOpt("password").desc("Keystore password").build());
-		actionOptions.addOption(Option.builder(Constants.HELP).required(false).longOpt("help").desc("show help.").build());
+		actionOptions.addOption(Option.builder(Constants.READ_TIMEOUT).required(true).hasArg().desc("Read timeout").build());
+		actionOptions.addOption(Option.builder(Constants.CONNECTION_TIMEOUT).required(true).hasArg().desc("connection timeout").build());
+		actionOptions.addOption(Option.builder(Constants.KEYSTORE_LOCATION).required(true).hasArg().desc("Keystore location").build());
+		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("subscription id").build());
+		actionOptions.addOption(Option.builder(Constants.PASSWORD).required(true).hasArg().desc("Keystore password").build());
+		actionOptions.addOption(Option.builder(Constants.OPTION_X_MS_VERSION).required(true).hasArg().desc("xms version").build());
+		actionOptions.addOption(Option.builder(Constants.HELP).required(false).desc("show help.").build());
 	}
 	
     	
@@ -156,7 +162,7 @@ public abstract class AbstractAction {
 		this.subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
 		this.keyStore = argumentMap.get(Constants.KEYSTORE_LOCATION);
 		this.password = argumentMap.get(Constants.PASSWORD);
-		
+		this.xmsVersion = argumentMap.get(Constants.OPTION_X_MS_VERSION);
 		 validateGeneralInputs();
 	     initialize(argumentMap);
 
@@ -179,21 +185,13 @@ public abstract class AbstractAction {
 			throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
 		}
 		
-		/*if (this.subscriptionId.isEmpty()) {
-			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-		}*/
 		
 		if (!Validator.checkFileExistsAndIsFile(this.keyStore)) {
 			LOGGER.error(ExceptionConstants.INVALID_FILE);
 			throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
 		}
 		
-		/*if (this.password.isEmpty()) {
-			LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-			throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-		}*/
-
+		
 	}
 
 	protected abstract void initialize(Map<String, String> argumentMap) ;
@@ -215,14 +213,7 @@ public abstract class AbstractAction {
 	 */
 	protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
 
-	/**
-	 * Method to generate Error Message based on error code
-	 * 
-	 * @param errorCode
-	 *            error code
-	 * @return Error message that describes error code
-	 *//*
-	protected abstract String getErrorMessage(int errorCode);*/
+	
 
 	/**
 	 * Method to prepare output based on Response of an HTTP request to client.
