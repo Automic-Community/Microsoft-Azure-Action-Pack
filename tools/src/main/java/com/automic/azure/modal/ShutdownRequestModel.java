@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.automic.azure.constants.Constants;
 
 @XmlRootElement(name="ShutdownRoleOperation ", namespace="http://schemas.microsoft.com/windowsazure") 
-public class ShutdownVM {
+public class ShutdownRequestModel {
 	
 	private String operationType = Constants.OPERATIONTYPE_SHUTDOWN;
 	private String postShutdownAction;

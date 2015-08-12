@@ -1,9 +1,5 @@
 package com.automic.azure.actions;
 
-/**
- * 
- */
-
 import static com.automic.azure.utility.CommonUtil.print;
 
 import java.util.List;
@@ -24,7 +20,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * 
+ * This class will restarts the specified Virtual Machine on Azure Cloud
  */
 public class RestartVMAction extends AbstractAction {
 
@@ -38,10 +34,9 @@ public class RestartVMAction extends AbstractAction {
 	private static final String ROLE_OPT = "rolename";
 	private static final String ROLE_DESC = "Role name (VM name)";
 	private String subscriptionId;
-	private String serviceName;
 	private String deploymentName;
+	private String serviceName;
 	private String roleName;
-	
 
 	@Override
 	protected void addOptions() {
@@ -50,6 +45,7 @@ public class RestartVMAction extends AbstractAction {
 		addOption(SERVICE_OPT, true, SERVICE_DESC, true);
 		addOption(DEPLOYMENT_OPT, true, DEPLOYMENT_DESC, true);
 		addOption(ROLE_OPT, true, ROLE_DESC, true);
+
 	}
 
 	@Override
@@ -62,7 +58,6 @@ public class RestartVMAction extends AbstractAction {
 
 	@Override
 	protected void validateInputs() throws AzureException {
-
 		if (!Validator.checkNotEmpty(subscriptionId)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
 			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
@@ -71,16 +66,14 @@ public class RestartVMAction extends AbstractAction {
 			LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
 		}
-
 		if (!Validator.checkNotEmpty(deploymentName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
 		}
-
 		if (!Validator.checkNotEmpty(roleName)) {
 			LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
-		}		
+		}
 	}
 
 	@Override
@@ -97,6 +90,7 @@ public class RestartVMAction extends AbstractAction {
 		response = webResource
 				.entity(new RestartResquestModel(), MediaType.APPLICATION_XML)
 				.header(Constants.X_MS_VERSION, x_ms_version)
+
 				.post(ClientResponse.class);
 		return response;
 	}

@@ -6,10 +6,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.automic.azure.constants.Constants;
 
 
-@XmlRootElement(name="StartRoleOperation ", namespace="http://schemas.microsoft.com/windowsazure") 
-public class StartVm {
+@XmlRootElement(name="RestartRoleOperation ", namespace="http://schemas.microsoft.com/windowsazure") 
+public class RestartRequestModel {
 	
-	private String operationType = Constants.OPERATIONTYPE_START;
+	private String operationType = Constants.OPERATIONTYPE_RESTART;
 	
 	@XmlElement(name="OperationType", namespace="http://schemas.microsoft.com/windowsazure") 
 	public String getOperationType() {

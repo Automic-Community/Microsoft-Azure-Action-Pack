@@ -17,16 +17,14 @@ import org.apache.logging.log4j.spi.StandardLevel;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
-import com.automic.azure.modal.ShutdownVM;
+import com.automic.azure.modal.ShutdownRequestModel;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Action class to export the existing container as zip/tar file.It creates the
- * zip/tar at the specified valid location. It will throw error if container id
- * does not exists or file path is invalid
+ * This class will shutsdown the specified Virtual Machine on Azure Cloud
  */
 public class ShutdownVMAction extends AbstractAction {
 
@@ -48,6 +46,7 @@ public class ShutdownVMAction extends AbstractAction {
 	private String postShutdownAction;
 
 
+
 	@Override
 	protected void addOptions() {
 		addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID", true);
@@ -55,6 +54,7 @@ public class ShutdownVMAction extends AbstractAction {
 		addOption(DEPLOYMENT_OPT, true, DEPLOYMENT_DESC, true);
 		addOption(ROLE_OPT, true, ROLE_DESC, true);
 		addOption(POST_SHUTDOWN_OPT, true, POST_SHUTDOWN_DESC, true);
+
 	}
 
 	@Override
@@ -93,7 +93,7 @@ public class ShutdownVMAction extends AbstractAction {
 	@Override
 	protected ClientResponse executeSpecific(Client client) throws AzureException {
 		ClientResponse response = null;
-		ShutdownVM sd = new ShutdownVM();
+		ShutdownRequestModel sd = new ShutdownRequestModel();
 		sd.setPostShutdownAction(postShutdownAction);
 		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId)
 				.path(Constants.SERVICES_PATH).path(Constants.HOSTEDSERVICES_PATH).path(serviceName)

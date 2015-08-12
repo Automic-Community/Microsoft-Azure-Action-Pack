@@ -17,16 +17,14 @@ import org.apache.logging.log4j.spi.StandardLevel;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
-import com.automic.azure.modal.StartVm;
+import com.automic.azure.modal.StartRequestModel;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Action class to export the existing container as zip/tar file.It creates the
- * zip/tar at the specified valid location. It will throw error if container id
- * does not exists or file path is invalid
+ * This class will starts the specified Virtual Machine on Azure Cloud
  */
 public class StartVMAction extends AbstractAction {
 
@@ -46,6 +44,7 @@ public class StartVMAction extends AbstractAction {
 
 	
 	@Override
+
 	protected void addOptions() {
 		addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID", true);
 		addOption(SERVICE_OPT, true, SERVICE_DESC, true);
@@ -87,6 +86,7 @@ public class StartVMAction extends AbstractAction {
 			throws AzureException {
 		ClientResponse response = null;
 
+
 		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL)
 				.path(subscriptionId).path(Constants.SERVICES_PATH)
 				.path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
@@ -94,8 +94,8 @@ public class StartVMAction extends AbstractAction {
 				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
 				.path(Constants.OPERATIONS_PATH);
 		LOGGER.info("Calling url " + webResource.getURI());
-		response = webResource.entity(new StartVm(), MediaType.APPLICATION_XML)
 
+		response = webResource.entity(new StartRequestModel(), MediaType.APPLICATION_XML)
 		.header(Constants.X_MS_VERSION, x_ms_version)
 				.post(ClientResponse.class);
 
