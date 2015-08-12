@@ -7,12 +7,9 @@ package com.automic.azure.actions;
 import static com.automic.azure.utility.CommonUtil.print;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
 
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.StandardLevel;
@@ -33,8 +30,7 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class ShutdownVMAction extends AbstractAction {
 
-	private static final Logger LOGGER = LogManager
-			.getLogger(ShutdownVMAction.class);
+	private static final Logger LOGGER = LogManager.getLogger(ShutdownVMAction.class);
 
 	private static final String SERVICE_OPT = "servicename";
 	private static final String SERVICE_DESC = "Azure cloud service name";
@@ -51,48 +47,27 @@ public class ShutdownVMAction extends AbstractAction {
 	private String roleName;
 	private String postShutdownAction;
 
+
 	@Override
-	protected void logParameters(Map<String, String> args) {
-
-		LOGGER.info("Input parameters -->");
-        LOGGER.info("Connection Timeout = " + args.get(Constants.CONNECTION_TIMEOUT));
-        LOGGER.info("Read-timeout = " + args.get(Constants.READ_TIMEOUT));       
-        LOGGER.info("Certificate-path = " + args.get(Constants.KEYSTORE_LOCATION));
-        LOGGER.info("Certificate-path = " + args.get(Constants.SUBSCRIPTION_ID));
-        LOGGER.info("Cloud service name  = " + args.get(SERVICE_OPT));
-        LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
-        LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
-        LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
-
+	protected void addOptions() {
+		addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID", true);
+		addOption(SERVICE_OPT, true, SERVICE_DESC, true);
+		addOption(DEPLOYMENT_OPT, true, DEPLOYMENT_DESC, true);
+		addOption(ROLE_OPT, true, ROLE_DESC, true);
+		addOption(POST_SHUTDOWN_OPT, true, POST_SHUTDOWN_DESC, true);
 	}
 
 	@Override
-	protected Options initializeOptions() {
-		actionOptions.addOption(Option.builder(Constants.SUBSCRIPTION_ID).required(true).hasArg().desc("Subscription ID").build());
-		actionOptions.addOption(Option.builder(SERVICE_OPT).required(true)
-				.hasArg().desc(SERVICE_DESC).build());
-		actionOptions.addOption(Option.builder(DEPLOYMENT_OPT)
-				.required(true).hasArg().desc(DEPLOYMENT_DESC).build());
-		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
-				.hasArg().desc(ROLE_DESC).build());
-		actionOptions.addOption(Option.builder(POST_SHUTDOWN_OPT)
-				.required(true).hasArg().desc(POST_SHUTDOWN_DESC).build());
-
-		return actionOptions;
+	protected void initialize() {
+		serviceName = cmd.getOptionValue(SERVICE_OPT);
+		deploymentName = cmd.getOptionValue(DEPLOYMENT_OPT);
+		roleName = cmd.getOptionValue(ROLE_OPT);
+		postShutdownAction = cmd.getOptionValue(POST_SHUTDOWN_OPT);
+		subscriptionId = cmd.getOptionValue(Constants.SUBSCRIPTION_ID);
 	}
 
 	@Override
-	protected void initialize(Map<String, String> argumentMap) {
-		serviceName = argumentMap.get(SERVICE_OPT);
-		deploymentName = argumentMap.get(DEPLOYMENT_OPT);
-		roleName = argumentMap.get(ROLE_OPT);
-		postShutdownAction = argumentMap.get(POST_SHUTDOWN_OPT);
-		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
-	}
-
-	@Override
-	protected void validateInputs()
-			throws AzureException {
+	protected void validateInputs() throws AzureException {
 		if (!Validator.checkNotEmpty(subscriptionId)) {
 			LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
 			throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
@@ -111,26 +86,21 @@ public class ShutdownVMAction extends AbstractAction {
 		}
 		if (!Validator.checkNotEmpty(postShutdownAction)) {
 			LOGGER.error(ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
-			throw new AzureException(
-					ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
+			throw new AzureException(ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
 		}
 	}
 
 	@Override
-	protected ClientResponse executeSpecific(Client client)
-			throws AzureException {
+	protected ClientResponse executeSpecific(Client client) throws AzureException {
 		ClientResponse response = null;
 		ShutdownVM sd = new ShutdownVM();
 		sd.setPostShutdownAction(postShutdownAction);
-		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
-				.path(subscriptionId).path(Constants.SERVICES_PATH)
-				.path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
-				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
-				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
-				.path(Constants.OPERATIONS_PATH);
+		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId)
+				.path(Constants.SERVICES_PATH).path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
+				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName).path(Constants.ROLEINSTANCES_PATH)
+				.path(roleName).path(Constants.OPERATIONS_PATH);
 		LOGGER.info("Calling url " + webResource.getURI());
-		response = webResource.entity(sd, MediaType.APPLICATION_XML)
-				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
+		response = webResource.entity(sd, MediaType.APPLICATION_XML).header(Constants.X_MS_VERSION, x_ms_version)
 				.post(ClientResponse.class);
 		return response;
 	}
@@ -142,10 +112,8 @@ public class ShutdownVMAction extends AbstractAction {
 	 */
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
-		List<String> tokenid = response.getHeaders().get(
-				Constants.REQUEST_TOKENID_KEY);
-		print("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0), LOGGER,
-				StandardLevel.INFO);
+		List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
+		print("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0), LOGGER, StandardLevel.INFO);
 
 	}
 }

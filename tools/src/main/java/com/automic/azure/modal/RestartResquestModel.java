@@ -7,7 +7,7 @@ import com.automic.azure.constants.Constants;
 
 
 @XmlRootElement(name="RestartRoleOperation ", namespace="http://schemas.microsoft.com/windowsazure") 
-public class RestartVM {
+public class RestartResquestModel {
 	
 	private String operationType = Constants.OPERATIONTYPE_RESTART;
 	

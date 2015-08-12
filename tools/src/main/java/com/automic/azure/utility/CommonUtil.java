@@ -8,13 +8,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -222,11 +217,7 @@ public final class CommonUtil {
 		CommandLine cmd = getCommandLine(options, args);
 
 		for (Option option : cmd.getOptions()) {
-			String value = option.getValue().trim();
-			if (option.hasArg() && option.isRequired() && value.isEmpty()) {
-				throw new AzureException(String.format(ExceptionConstants.OPTION_VALUE_MISSING, option.getOpt(),
-						option.getDescription()));
-			}
+			String value = option.getValue();
 			argsMap.put(option.getOpt(), value);
 		}
 

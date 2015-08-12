@@ -21,11 +21,10 @@ public final class Constants {
      */
     public static final int IO_BUFFER_SIZE = 4 * 1024;
     
-    public static final String AZURE_BASE_URL = "https://management.core.windows.net";
+    public static final String AZURE_MGMT_URL = "https://management.core.windows.net";
     
-    public static final String X_MS_VERSION = "x-ms-version";
+    public static final String X_MS_VERSION = "x-ms-version";    
     
-    public static final String X_MS_VERSION_VALUE = "2013-11-01";
     public static final String REQUEST_TOKENID_KEY = "x-ms-request-id";
     
     public static final String HELP = "help";
