@@ -8,28 +8,35 @@ import static com.automic.azure.utility.CommonUtil.print;
 
 import java.util.List;
 import java.util.Map;
+
 import javax.ws.rs.core.MediaType;
+
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.StandardLevel;
+
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
+import com.automic.azure.modal.RestartRequestModel;
 import com.automic.azure.modal.ShutdownRequestModel;
+import com.automic.azure.modal.StartRequestModel;
 import com.automic.azure.utility.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * This class will shutsdown the specified Virtual Machine on Azure Cloud
+ * This class will Start, Restart, Shutdown the specified Virtual Machine on
+ * Azure Cloud
+ * @author  Anurag Upadhyay
  */
-public class ShutdownVMAction extends AbstractAction {
+public class ChangeVMStateAction extends AbstractAction {
 
 	private static final Logger LOGGER = LogManager
-			.getLogger(ShutdownVMAction.class);
+			.getLogger(ChangeVMStateAction.class);
 
 	private static final String SERVICE_OPT = "servicename";
 	private static final String SERVICE_DESC = "Azure cloud service name";
@@ -39,12 +46,15 @@ public class ShutdownVMAction extends AbstractAction {
 	private static final String ROLE_DESC = "Role name (VM name)";
 	private static final String POST_SHUTDOWN_OPT = "postshutdown";
 	private static final String POST_SHUTDOWN_DESC = "Optional. Specifies how the Virtual Machine should be shut down";
+	private static final String VM_STATE_OPT = "vmoperation";
+	private static final String VM_STATE_DESC = "Specifies the Virtual Machine operations like start, shutdown, restart";
 
 	private String subscriptionId;
 	private String serviceName;
 	private String deploymentName;
 	private String roleName;
 	private String postShutdownAction;
+	private String vmState;
 
 	@Override
 	protected void logParameters(Map<String, String> args) {
@@ -60,6 +70,8 @@ public class ShutdownVMAction extends AbstractAction {
 		LOGGER.info("Deployment name = " + args.get(DEPLOYMENT_OPT));
 		LOGGER.info("Role name/ Vm Name = " + args.get(ROLE_OPT));
 		LOGGER.info("Post shutdown option = " + args.get(POST_SHUTDOWN_OPT));
+		LOGGER.info("Virtual machine state  = "
+				+ args.get(VM_STATE_OPT));
 
 	}
 
@@ -74,7 +86,9 @@ public class ShutdownVMAction extends AbstractAction {
 		actionOptions.addOption(Option.builder(ROLE_OPT).required(true)
 				.hasArg().desc(ROLE_DESC).build());
 		actionOptions.addOption(Option.builder(POST_SHUTDOWN_OPT)
-				.required(true).hasArg().desc(POST_SHUTDOWN_DESC).build());
+				.required(false).hasArg().desc(POST_SHUTDOWN_DESC).build());
+		actionOptions.addOption(Option.builder(VM_STATE_OPT).required(true)
+				.hasArg().desc(VM_STATE_DESC).build());
 
 		return actionOptions;
 	}
@@ -86,6 +100,7 @@ public class ShutdownVMAction extends AbstractAction {
 		roleName = argumentMap.get(ROLE_OPT);
 		postShutdownAction = argumentMap.get(POST_SHUTDOWN_OPT);
 		subscriptionId = argumentMap.get(Constants.SUBSCRIPTION_ID);
+		vmState = argumentMap.get(VM_STATE_OPT);
 	}
 
 	@Override
@@ -106,10 +121,16 @@ public class ShutdownVMAction extends AbstractAction {
 			LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
 			throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
 		}
-		if (!Validator.checkNotEmpty(postShutdownAction)) {
+		if ("SHUTDOWN".equals(vmState.toUpperCase())
+				&& !Validator.checkNotEmpty(postShutdownAction)) {
 			LOGGER.error(ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
 			throw new AzureException(
 					ExceptionConstants.EMPTY_POSTSHUTDOWN_ACTION);
+		}
+		if (!Validator.checkNotEmpty(vmState)) {
+			LOGGER.error(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
+			throw new AzureException(
+					ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
 		}
 	}
 
@@ -117,19 +138,39 @@ public class ShutdownVMAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client)
 			throws AzureException {
 		ClientResponse response = null;
-		ShutdownRequestModel sd = new ShutdownRequestModel();
-		sd.setPostShutdownAction(postShutdownAction);
 		WebResource webResource = client.resource(Constants.AZURE_BASE_URL)
-				.path(subscriptionId).path(Constants.SERVICES_PATH)
-				.path(Constants.HOSTEDSERVICES_PATH).path(serviceName)
-				.path(Constants.DEPLOYMENTS_PATH).path(deploymentName)
-				.path(Constants.ROLEINSTANCES_PATH).path(roleName)
-				.path(Constants.OPERATIONS_PATH);
+				.path(subscriptionId).path("services").path("hostedservices")
+				.path(serviceName).path("deployments").path(deploymentName)
+				.path("roleinstances").path(roleName).path("Operations");
 		LOGGER.info("Calling url " + webResource.getURI());
-		response = webResource.entity(sd, MediaType.APPLICATION_XML)
+		response = webResource
+				.entity(getRequestBody(vmState), MediaType.APPLICATION_XML)
 				.header(Constants.X_MS_VERSION, Constants.X_MS_VERSION_VALUE)
 				.post(ClientResponse.class);
 		return response;
+	}
+
+	/**
+	 * This method return the request body object
+	 * @param operation
+	 * @return Object
+	 */
+	private Object getRequestBody(String vmState) {
+		Object obj = null;
+		switch (vmState.toUpperCase()) {
+		case "START":
+			obj = new StartRequestModel();
+			break;
+		case "SHUTDOWN":
+			obj = new ShutdownRequestModel(postShutdownAction);		
+			break;
+		case "RESTART":
+			obj = new RestartRequestModel();
+			break;
+		default:
+			LOGGER.error(" No rquested operation found for [Start, Shutdown, Restart] virtual machine");
+		}
+		return obj;
 	}
 
 	/**

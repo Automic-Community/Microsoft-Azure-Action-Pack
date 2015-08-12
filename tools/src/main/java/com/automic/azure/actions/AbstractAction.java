@@ -63,12 +63,6 @@ public abstract class AbstractAction {
 	 * Read timeout in milliseconds
 	 */
 	private int readTimeOut;
-
-	/**
-	 * Argument count as expected by an implementation of {@link AbstractAction}
-	 */
-	private int argsCount;
-	
 	
 	protected  Options actionOptions = AzureOptions.getAzureOptions();
 	
