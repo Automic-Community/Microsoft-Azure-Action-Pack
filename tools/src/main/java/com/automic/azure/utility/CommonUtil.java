@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -266,8 +265,8 @@ public final class CommonUtil {
 		CommandLine cmd = getCommandLine(options, args);
 
 		if (cmd.hasOption(Constants.ACTION)) {
-			String action = cmd.getOptionValue(Constants.ACTION).toUpperCase();
-			return action;
+			return cmd.getOptionValue(Constants.ACTION).toUpperCase();
+			
 		} else {
 			throw new AzureException(ExceptionConstants.ACTION_MISSING);
 		}
@@ -283,7 +282,7 @@ public final class CommonUtil {
 
 	}
 
-	private static String logArgs(String args[]) {
+	private static String logArgs(String[] args) {
 
 		StringBuilder sb = new StringBuilder();
 

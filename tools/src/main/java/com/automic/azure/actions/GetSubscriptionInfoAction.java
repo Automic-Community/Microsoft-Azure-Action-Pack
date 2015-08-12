@@ -3,11 +3,7 @@
  */
 package com.automic.azure.actions;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Map;
 
 import javax.ws.rs.core.MediaType;
@@ -17,7 +13,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
-import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exceptions.AzureException;
 import com.automic.azure.utility.CommonUtil;
 import com.sun.jersey.api.client.Client;
