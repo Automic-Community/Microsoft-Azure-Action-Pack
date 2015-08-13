@@ -1,9 +1,5 @@
 package com.automic.azure.utility;
 
-import java.io.BufferedOutputStream;
-import java.io.PrintStream;
-
-import com.automic.azure.constants.Constants;
 import com.automic.azure.exceptions.AzureException;
 
 /**
@@ -43,8 +39,8 @@ public final class ConsoleWriter {
    * @param bytes
    * @throws AzureException
    */
-  public static void writeln(byte[] bytes) {
-    write(bytes, 0, bytes.length);
+  public static void writeln(String content) {
+    write(content.getBytes());
     newLine();
   }
 

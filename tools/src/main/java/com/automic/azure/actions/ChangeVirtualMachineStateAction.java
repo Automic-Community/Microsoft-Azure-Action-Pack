@@ -110,7 +110,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
     case "START":
       obj = new StartRequestModel();
       break;
-    case "STOPPEDDEALLOCATED ":
+    case "STOPPEDDEALLOCATED":
     case "STOPPED":
       obj = new ShutdownRequestModel(vmState);
       break;

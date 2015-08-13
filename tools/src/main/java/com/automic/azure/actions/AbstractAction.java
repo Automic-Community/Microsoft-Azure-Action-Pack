@@ -14,10 +14,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.StandardLevel;
 
+import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.exceptions.AzureException;
 import com.automic.azure.modal.AzureErrorResponse;
 import com.automic.azure.utility.CommonUtil;
@@ -76,13 +76,13 @@ public abstract class AbstractAction {
     addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
     addOption(Constants.PASSWORD, true, "Keystore password");
     addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
-    addOption(Constants.HELP, false, "show help.");   
+    addOption(Constants.HELP, false, "show help.");
   }
 
   protected String getOptionValue(String arg) {
     return cmd.getOptionValue(arg);
   }
-  
+
   /**
    * Method to trim parameters
    * 
