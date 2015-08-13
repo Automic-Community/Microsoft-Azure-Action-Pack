@@ -5,14 +5,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.automic.azure.constants.Constants;
 
-@XmlRootElement(name = "RestartRoleOperation ", namespace = "http://schemas.microsoft.com/windowsazure")
+
+@XmlRootElement(name = "RestartRoleOperation ", namespace = "http://schemas.microsoft.com/windowsazure") 
 public class RestartRequestModel {
-
-  private String operationType = Constants.OPERATIONTYPE_RESTART;
-
-  @XmlElement(name = "OperationType", namespace = "http://schemas.microsoft.com/windowsazure")
-  public String getOperationType() {
-    return operationType;
-  }
+	
+	private String operationType = Constants.OPERATIONTYPE_RESTART;
+	
+	@XmlElement(name = "OperationType", namespace = "http://schemas.microsoft.com/windowsazure") 
+	public String getOperationType() {
+		return operationType;
+	}	
+	
 
 }
