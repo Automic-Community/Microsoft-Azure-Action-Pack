@@ -98,6 +98,7 @@
 </PRE_SCRIPT>
 <SCRIPT mode="1" state="1">
 <MSCRI><![CDATA[:INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.ECHO_ON_OFF
+:INC PCK.ITPA_SHARED.PUB.INCLUDE.ATTACH
 
 !-------------------------------------Logging input parameters-------------------------------------------------------------------------------------------------
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.HEADER.PARAM_VALIDATION
