@@ -9,6 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.StandardLevel;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
@@ -36,12 +37,12 @@ public class GetSubscriptionInfoAction extends AbstractAction {
   private String subscriptionId;
   
   public GetSubscriptionInfoAction() {
-    addOption("subscriptionId", true, "Subscription ID");
+    addOption("subscriptionid", true, "Subscription ID");
   } 
 
   @Override
   protected void initialize() {
-    subscriptionId = getOptionValue("subscriptionId");
+    subscriptionId = getOptionValue("subscriptionid");
   }
 
   @Override
@@ -77,10 +78,10 @@ public class GetSubscriptionInfoAction extends AbstractAction {
   protected void prepareOutput(ClientResponse response) throws AzureException {
     InputStream inputStream = response.getEntityInputStream();
 
-    System.out.println("Subscription details");
+    CommonUtil.print("Subscription details:\n", LOGGER, StandardLevel.INFO);
+    
     // write formatted xml to System console
     CommonUtil.printFormattedXml(inputStream, System.out, 2);
-
   }
 
 }
