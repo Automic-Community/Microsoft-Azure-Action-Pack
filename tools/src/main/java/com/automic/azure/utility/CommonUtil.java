@@ -305,7 +305,7 @@ public final class CommonUtil {
       } else {
         logError(str, log);
       }
-      ConsoleWriter.write(str);
+      ConsoleWriter.writeln(str);
     }
   }
 
