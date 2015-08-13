@@ -14,10 +14,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.spi.StandardLevel;
 
-import com.automic.azure.cli.AzureOptions;
+
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
+import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.exceptions.AzureException;
 import com.automic.azure.modal.AzureErrorResponse;
 import com.automic.azure.utility.CommonUtil;
@@ -110,7 +111,10 @@ public abstract class AbstractAction {
   public final void executeAction(String[] commandLineArgs) throws AzureException {
     Client client = null;
     try {
+      
+      trim(commandLineArgs);
       cmd = CommonUtil.getCommandLine(actionOptions, commandLineArgs);
+      
       logParameters();
       initializeArguments();
       validateInputs();
@@ -147,20 +151,16 @@ public abstract class AbstractAction {
 
   private void logParameters() {
     LOGGER.info("Input params ");
-    for (Option o : cmd.getOptions()) {
-      LOGGER.info(o.getDescription() + " = " + o.getValue());
+    for (Option o : cmd.getOptions()) { 
+      if(!Constants.PASSWORD.equals(o.getOpt())){
+        LOGGER.info( o.getDescription()+"["+o.getOpt()+"]" + " = " + o.getValue());
+      }      
     }
   }
 
   private void initializeArguments() throws AzureException {
-    try {
-      this.connectionTimeOut = Integer.parseInt(cmd.getOptionValue(Constants.CONNECTION_TIMEOUT));
-      this.readTimeOut = Integer.parseInt(cmd.getOptionValue(Constants.READ_TIMEOUT));
-    } catch (NumberFormatException e) {
-      LOGGER.error("Error occured while fetching value for connection/read timeout", e);
-      throw new AzureException(
-          String.format(ExceptionConstants.NUMBER_EXCEPTION, "connection/read"));
-    }
+      this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(cmd.getOptionValue(Constants.CONNECTION_TIMEOUT));
+      this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(cmd.getOptionValue(Constants.READ_TIMEOUT));
     this.keyStore = cmd.getOptionValue(Constants.KEYSTORE_LOCATION);
     this.password = cmd.getOptionValue(Constants.PASSWORD);
     this.x_ms_version = cmd.getOptionValue(Constants.X_MS_VERSION_OPT);

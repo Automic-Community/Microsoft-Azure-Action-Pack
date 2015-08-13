@@ -43,7 +43,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
   public ChangeVirtualMachineStateAction() {
     addOption("subscriptionid", true, "Subscription ID");
     addOption("servicename", true, "Azure cloud service name");
-    addOption("deploymentname", true, "Azure cloud deployment  name");
+    addOption("deploymentname", true, "Azure cloud deployment name");
     addOption("vmname", true, "Virtual machine name");
     addOption("vmstate", true,
         "Specifies the Virtual Machine operations like start, shutdown, restart");
@@ -82,7 +82,12 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
       throw new AzureException(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
     }
   }
-
+  
+  /**
+   * Method to make a call to Azure Management API. To get subscription information we make a GET
+   * call to https://management.core.windows.net/<subscription-id>
+   * 
+   */
   @Override
   protected ClientResponse executeSpecific(Client client) throws AzureException {
     ClientResponse response = null;
