@@ -9,11 +9,7 @@
 </HEADER>
 <STORE>
 <resourceList>
-<<<<<<< HEAD
-<row checksum="161687E0AA1857C35B6103EAFF0BB99AE6CEFD231EC6D7E47BDE68583B48956F" fileType="BINARY" filename="azure-tool.jar" hw="*" id="AZURE-ALL-ALL-ALL" name="AZURE" platform="*" resname="PCK.AUTOMIC_AZURE.PRV.STORE-AZURE-ALL-ALL-ALL" size="3277203" sw="*" type="3" version="1.0.0"/>
-=======
 <row checksum="07B3C96ECCC89795907379D0AA49A63F3C0F308BB6DDD6C32977E8D49D745A65" fileType="BINARY" filename="azure-tool.jar" hw="*" id="AZURE-ALL-ALL-ALL" name="AZURE" platform="*" resname="PCK.AUTOMIC_AZURE.PRV.STORE-AZURE-ALL-ALL-ALL" size="3264057" sw="*" type="3" version="1.0.0"/>
->>>>>>> feature/PCK_AZURE-7-azure-connection
 </resourceList>
 </STORE>
 <DOCU_Docu state="1" type="text">

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PRV.VARA.PACKAGE_PARAMETERS" replacementmode="2">
+<VARA OVD_VRName="FREI" data_type="EXEC" name="PCK.AUTOMIC_AZURE.PUB.VARA.READ_URLS" replacementmode="2">
 <HEADER state="1">
-<Title>Stores parameters for PCK.AUTOMIC_AZURE</Title>
+<Title>Invoke Read url script</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
-<OH_SubType>STATIC</OH_SubType>
+<OH_SubType>EXEC</OH_SubType>
 </HEADER>
 <ATTR_VARA state="1">
 <Type>C|Text</Type>
-<lblSource>Static</lblSource>
-<source>STATIC</source>
+<lblSource>Variable object EXEC</lblSource>
+<source>EXEC</source>
 <VRName>FREI|Freely selected</VRName>
 <NotFoundErr>0</NotFoundErr>
 <NotFoundDef>1</NotFoundDef>
@@ -24,11 +24,11 @@
 <sortDirection>0</sortDirection>
 </ATTR_VARA>
 <VARA state="1">
-<Variables>
-<row Name="CONNECTION_TIMEOUT" Value="30000" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="READ_TIMEOUT" Value="60000" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="X_MS_VERSION" Value="2015-04-01" Value1="" Value2="" Value3="" Value4=""/>
-</Variables>
+<EXEC>
+<ExecObject>PCK.AUTOMIC_AZURE.PUB.SCRIPT.READ_URLS</ExecObject>
+<VaraResult>&amp;OUTPUT_KEYS#</VaraResult>
+<Parameters/>
+</EXEC>
 </VARA>
 <DOCU_Docu state="1" type="text">
 <DOC/>
