@@ -311,6 +311,7 @@ will release all the resources acquired by the Virtual machine.This action will 
 
 = Behavior =
 * If VM is already stopped and Shutdown command is perform again then action will not fail.It will return the token id.
+* If VM is already stopped and Shutdown and Deallocate command is executed then the action will not fail.It will return the token id.
 
 =Return Value=
 The response will contain the token id which can be further used to query the status of the action.
