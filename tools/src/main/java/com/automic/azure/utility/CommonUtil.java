@@ -330,31 +330,34 @@ public final class CommonUtil {
 
   }
 
-  /**
-   * Method to format an xml string and returns it.
-   * 
-   * @param input
-   *          xml as a InputStream
-   * @param indent
-   *          indentation value. usually 2
-   * @return Formated xml string
-   * @throws AzureException
-   */
-  public static void printFormattedXml(InputStream input, OutputStream out, int indent)
-      throws AzureException {
-    try {
-      Source xmlInput = new StreamSource(new InputStreamReader(input));
-      StreamResult xmlOutput = new StreamResult(out);
-      TransformerFactory transformerFactory = TransformerFactory.newInstance();
-      transformerFactory.setAttribute("indent-number", indent);
-      Transformer transformer = transformerFactory.newTransformer();
-      transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-      transformer.transform(xmlInput, xmlOutput);
-    } catch (TransformerException e) {
+	/**
+	 * Method to format a stream of unformatted xml and write it to an output
+	 * stream.
+	 * 
+	 * @param input
+	 *            xml as a InputStream
+	 * @param out
+	 *            Stream to write formatted xml to
+	 * @param indent
+	 *            indentation value. usually 2
+	 * @throws AzureException
+	 */
+	public static void printFormattedXml(InputStream input, OutputStream out,
+			int indent) throws AzureException {
+		try {
+			Source xmlInput = new StreamSource(new InputStreamReader(input));
+			StreamResult xmlOutput = new StreamResult(out);
+			TransformerFactory transformerFactory = TransformerFactory
+					.newInstance();
+			transformerFactory.setAttribute("indent-number", indent);
+			Transformer transformer = transformerFactory.newTransformer();
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.transform(xmlInput, xmlOutput);
+		} catch (TransformerException e) {
 
-      LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG);
-      throw new AzureException(ExceptionConstants.ACTION_MISSING, e);
-    }
-  }
+			LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, e);
+			throw new AzureException(ExceptionConstants.GENERIC_ERROR_MSG, e);
+		}
+	}
 
 }
