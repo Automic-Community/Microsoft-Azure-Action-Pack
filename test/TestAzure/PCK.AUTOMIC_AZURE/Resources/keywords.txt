@@ -99,5 +99,5 @@ Genarate String
 Configure Connection
     [Arguments]    ${Subscription_ID}    ${Cert_Location}    ${Cert_Password}
     Action Set    &UC4RB_AZR_SUBSCRIPTION_ID#    ${Subscription_ID}
-    Action Set    &UC4RB_AZR_CERT_PATH#    ${Cert_Location}
-    Action Set    &UC4RB_AZR_CERT_PSWD#    ${Cert_Password}
+    Action Set    &UC4RB_AZR_KEYSTORE_PATH#    ${Cert_Location}
+    Action Set    &UC4RB_AZR_KEYSTORE_PSWD#    ${Cert_Password}

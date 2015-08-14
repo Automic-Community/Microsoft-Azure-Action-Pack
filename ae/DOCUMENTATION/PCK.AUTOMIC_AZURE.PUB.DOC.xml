@@ -14,7 +14,11 @@ Package Description: This package contains the actions for AE integration with t
   
 This package contains the following actions:
 * Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.GET_SUBSCRIPTION_INFO
-  Action Description: This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription.]]></DOC>
+  Action Description: This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription.
+
+* Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE
+ Action description :This action is used to change the virtual machine status (start ,restart ,shutdown and shutdown & deallocate).Difference between shutdown and shutdown deallocate is that latter
+will release all the resources acquired by the Virtual machine.This action will return request id which can be further used to query the status of the action.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>
