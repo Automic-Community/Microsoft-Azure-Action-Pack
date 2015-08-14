@@ -26,6 +26,14 @@ public class ByteWriter {
         bos = new BufferedOutputStream(output, Constants.IO_BUFFER_SIZE);
     }
 
+    
+    /**
+     * Method to get associated output stream.
+     */
+    public OutputStream getStream() {
+        return bos;
+    }
+    
     /**
      * Method to write bytes to Stream
      * 

@@ -36,6 +36,5 @@ public final class AzureClientHelper {
         LOGGER.info("Execution starts for action [" + action + "]...");
         AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
         useraction.executeAction(args);
-    }   
-
+    }
 }

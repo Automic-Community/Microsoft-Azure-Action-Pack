@@ -37,7 +37,7 @@ public class AzureCertificatesManagement {
             this.sslContext = setSSLSocketContext(keyStoreLoc, password);
         } catch (UnrecoverableKeyException | KeyManagementException | KeyStoreException | NoSuchAlgorithmException
                 | IOException e) {
-            LOGGER.error("Error during sslcontext creation ", e);
+            LOGGER.error(e);
             throw new AzureException(e.getMessage());
         }
     }
@@ -62,7 +62,7 @@ public class AzureCertificatesManagement {
             ks.load(fis, passwordArray);
             fis.close();
         } catch (KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
-            LOGGER.error("Exception in lodading KeyStore " + e);
+            LOGGER.error(e);
             throw new AzureException(e.getMessage());
         }
         return ks;

@@ -80,9 +80,8 @@ public class GetSubscriptionInfoAction extends AbstractAction {
         InputStream inputStream = response.getEntityInputStream();
 
         ConsoleWriter.writeln("Subscription details:");
-        ConsoleWriter.flush();
         // write formatted xml to System console
-        CommonUtil.printFormattedXml(inputStream, System.out, 2);
+        CommonUtil.printFormattedXml(inputStream, ConsoleWriter.getStream(), 2);
     }
 
 }

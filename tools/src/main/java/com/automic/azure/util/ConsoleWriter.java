@@ -1,5 +1,7 @@
 package com.automic.azure.util;
 
+import java.io.OutputStream;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,11 +44,19 @@ public final class ConsoleWriter {
 
     /**
      * Method to write an Object to console and followed by newline.
-     * @param content 
+     * 
+     * @param content
      */
     public static void writeln(Object content) {
         write(content);
         newLine();
+    }
+
+    /**
+     * Method to get associated output stream.
+     */
+    public static OutputStream getStream() {
+        return WRITER.getStream();
     }
 
     /**

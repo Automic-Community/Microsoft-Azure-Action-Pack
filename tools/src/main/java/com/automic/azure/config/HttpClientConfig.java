@@ -17,9 +17,7 @@ public final class HttpClientConfig {
     }
 
     public static Client getClient(String keyStore, String password, int connectionTimeOut, int readTimeOut)
-            throws AzureException {
-        Client client;
-
+            throws AzureException {        
         ClientConfig config = new DefaultClientConfig();
 
         config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
@@ -30,9 +28,7 @@ public final class HttpClientConfig {
         HTTPSProperties props = new HTTPSProperties(acm.hostnameVerifier(), acm.getSslContext());
         config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);
 
-        client = Client.create(config);
-
-        return client;
+        return Client.create(config);
     }
 
 }

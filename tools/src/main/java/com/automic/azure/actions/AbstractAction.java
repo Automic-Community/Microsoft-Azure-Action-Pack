@@ -69,10 +69,10 @@ public abstract class AbstractAction {
         Client client = null;
         try {            
             cli = new AzureCli(actionOptions, commandLineArgs);
-            logParameters();
+            cli.log(Arrays.asList(new String[] { Constants.PASSWORD }));
             initializeArguments();
             validateInputs();
-            client = getClient();
+            client = HttpClientConfig.getClient(this.keyStore, this.password, connectionTimeOut, readTimeOut);
             ClientResponse response = executeSpecific(client);
             validateResponse(response);
             prepareOutput(response);
@@ -92,16 +92,12 @@ public abstract class AbstractAction {
         actionOptions.addOption(optionName, isRequired, description);
     }
 
-    private void logParameters() {
-        cli.log(Arrays.asList(new String[] { Constants.PASSWORD }));
-    }
-
     private void initializeArguments() throws AzureException {
-        this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(cli.getOptionValue(Constants.CONNECTION_TIMEOUT));
-        this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(cli.getOptionValue(Constants.READ_TIMEOUT));
-        this.keyStore = cli.getOptionValue(Constants.KEYSTORE_LOCATION);
-        this.password = cli.getOptionValue(Constants.PASSWORD);
-        this.restapiVersion = cli.getOptionValue(Constants.X_MS_VERSION_OPT);
+        this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
+        this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
+        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
+        this.password = getOptionValue(Constants.PASSWORD);
+        this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
 
         validateGeneralInputs();
         initialize();
@@ -123,7 +119,7 @@ public abstract class AbstractAction {
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
-        if (!Validator.checkFileExistsAndIsFile(this.keyStore)) {
+        if (!Validator.checkFileExists(this.keyStore)) {
             LOGGER.error(ExceptionConstants.INVALID_FILE);
             throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
         }
@@ -168,17 +164,6 @@ public abstract class AbstractAction {
     protected abstract void prepareOutput(ClientResponse response) throws AzureException;
 
     /**
-     * Method to create an instance of {@link Client} using Azure URL, certificate file path, connection timeout and
-     * read timeout.
-     * 
-     * @return an instance of {@link Client}
-     * @throws AzureException
-     */
-    private Client getClient() throws AzureException {
-        return HttpClientConfig.getClient(this.keyStore, this.password, connectionTimeOut, readTimeOut);
-    }
-
-    /**
      * Method to validate response from a HTTP client Request. If response is not in range of 2XX, it 
      * throws {@link AzureException} else prints response on console.
      * 
@@ -188,41 +173,15 @@ public abstract class AbstractAction {
     private void validateResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            throw new AzureException(getHttpErrorMsg(response));
+            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
+            StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
+            responseBuilder.append("Error Code: [");
+            responseBuilder.append(error.getCode()).append("]");
+            if (Validator.checkNotEmpty(error.getMessage())) {
+                responseBuilder.append(" Message: ").append(error.getMessage());
+            }
+            throw new AzureException(responseBuilder.toString());
         }
     }
-
-    /**
-     * Method to build Azure response from status code and message.
-     * 
-     * @param status
-     *            Status code
-     * @param message
-     *            Status message
-     * @return Azure response code
-     */
-    private String buildAzureResponse(String status, String message) {
-        StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
-        responseBuilder.append("ErrorCode: [");
-        responseBuilder.append(status).append("]");
-        if (Validator.checkNotEmpty(message)) {
-            responseBuilder.append(" Message: ").append(message);
-        }
-        return responseBuilder.toString();
-    }
-
-    /**
-     * Method to get HTTP error message from an intance of {@link ClientResponse}
-     * 
-     * @param response
-     *            an instance of {@link ClientResponse}
-     * @return a String of error message
-     * @throws AzureException
-     */
-    private String getHttpErrorMsg(ClientResponse response) throws AzureException {
-        AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
-        String errMsg = buildAzureResponse(error.getCode(), error.getMessage());
-        return errMsg;
-    }
-
+    
 }

@@ -105,9 +105,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
      */
 
     private Object getRequestBody(String vmState) throws AzureException {
-
         Object obj = null;
-
         switch (vmState.toUpperCase()) {
             case "START":
                 obj = new StartRequestModel();

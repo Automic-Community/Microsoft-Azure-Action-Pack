@@ -9,7 +9,7 @@ public final class ExceptionConstants {
     // General Errors
     public static final String INVALID_ACTION = "Action cannot be empty or null. ";
     public static final String INSUFFICIENT_ARGUMENTS = "Insufficient number of arguments.";
-    public static final String GENERIC_ERROR_MSG = "System Error occured.";
+    public static final String GENERIC_ERROR_MSG = "System Error occured. Possible reason [%s]";
 
     // URL/Http Errors
     public static final String INVALID_AZURE_URL = "Invalid azure url [%s]";
