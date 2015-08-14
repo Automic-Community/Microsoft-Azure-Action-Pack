@@ -5,7 +5,7 @@
 	</Properties>
 	<Appenders>
 		<RollingFile name="RollingFile" fileName="${log-path}/azure.log"
-			filePattern="${log-path}/docker-%d{dd-MMM-yyyy}-%i.log">
+			filePattern="${log-path}/azure-%d{dd-MMM-yyyy}-%i.log">
 			<PatternLayout>
 				<pattern>%d{dd-MMM-yyyy HH:mm:ss} - %-5p %c{1}[%M]: %m%n</pattern>
 			</PatternLayout>

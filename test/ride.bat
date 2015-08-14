@@ -7,4 +7,4 @@ set CLASSPATH="%~dp0\lib\itpa-keywords-1.0.jar;%CLASSPATH%"
 
 echo %CLASSPATH%
 
-ride.py <Run Target>
+ride.py .\TestAZURE
