@@ -136,7 +136,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
   @Override
   protected void prepareOutput(ClientResponse response) throws AzureException {
     List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
-    print("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0), LOGGER, StandardLevel.INFO);
+    print("Azure Response: StatusCode: ["+response.getStatus()+"]"+"\nUC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0), LOGGER, StandardLevel.INFO);
 
   }
 }
