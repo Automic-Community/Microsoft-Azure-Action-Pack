@@ -27,7 +27,7 @@ public final class Constants {
   public static final String HELP = "help";
   public static final String PASSWORD = "password";
   public static final String KEYSTORE_LOCATION = "keystore";
-  //public static final String SUBSCRIPTION_ID = "subscriptionId";
+  public static final String SUBSCRIPTION_ID = "subscriptionid";
   public static final String OPTION_X_MS_VERSION = "xmsversion";
   public static final String CONNECTION_TIMEOUT = "connectiontimeout";
   public static final String READ_TIMEOUT = "readtimeout";
