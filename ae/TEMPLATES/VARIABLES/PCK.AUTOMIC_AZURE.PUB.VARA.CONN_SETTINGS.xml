@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PUB.VARA.CONN_SETTINGS" replacementmode="2">
+<HEADER state="1">
+<Title>Configurable base url and port for Azure</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType>STATIC</OH_SubType>
+</HEADER>
+<ATTR_VARA state="1">
+<Type>C|Text</Type>
+<lblSource>Static</lblSource>
+<source>STATIC</source>
+<VRName>FREI|Freely selected</VRName>
+<NotFoundErr>0</NotFoundErr>
+<NotFoundDef>1</NotFoundDef>
+<ShareN>0</ShareN>
+<ShareL>0</ShareL>
+<ShareR>0</ShareR>
+<MaxValue_C>1024</MaxValue_C>
+<CheckMax_C>0</CheckMax_C>
+<uppercase>0</uppercase>
+<sortColumn>0</sortColumn>
+<sortDirection>0</sortDirection>
+</ATTR_VARA>
+<VARA state="1">
+<Variables>
+<row Name="azure_conn4" Value="39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92" Value1="C:\Users\vivekmalhotra\WindowsAzureKeyStore.jks" Value2="vivek1988" Value3="" Value4=""/>
+<row Name="azure_sub3" Value="39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92" Value1="C:\Users\vivekmalhotra\WindowsAzureKeyStore.jks" Value2="vivek1988" Value3="" Value4=""/>
+<row Name="azure_subscripvivek" Value="39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92" Value1="C:\Users\vivekmalhotra\WindowsAzureKeyStore.jks" Value2="vivek1988" Value3="" Value4=""/>
+<row Name="DEV_ENVIRONMENT" Value="http://localhost:2375" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="dsadasda" Value="39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92" Value1="dsdasdd" Value2="--10FED6C50BF3917983" Value3="" Value4=""/>
+</Variables>
+</VARA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</VARA>
+</uc-export>
