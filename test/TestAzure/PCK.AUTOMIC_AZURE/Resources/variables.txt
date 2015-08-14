@@ -7,3 +7,9 @@ ${Subscription_ID}    39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92
 ${Cert_Path}      ${EXECDIR}\\azure.jks
 ${Cert_Password}    test123
 ${Invalid_Cert}    ${EXECDIR}\\Corruptedazure.jks
+${VM_Name}        CAC-TEST
+${Cloud_Service_Name}    CAC-TEST
+${Deployment_Name}    CAC-TEST
+${Invalid_VM_Name}    abcd
+${Invalid_Cloud_Service_Name}    abcd
+${Invalid_Deployment_Name}    abcd
