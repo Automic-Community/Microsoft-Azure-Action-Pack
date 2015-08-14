@@ -64,16 +64,8 @@
 
 	</dependencies>
 	
-	<!-- One-Jar is in the googlecode repository -->
-	<pluginRepositories>
-		<pluginRepository>
-			<id>onejar-maven-plugin.googlecode.com</id>
-			<url>http://onejar-maven-plugin.googlecode.com/svn/mavenrepo</url>
-		</pluginRepository>
-	</pluginRepositories>
-
 	<build>
-		<!-- <finalName>azuretool</finalName>
+		 <finalName>azuretool</finalName> 
 		<plugins>
 
 			<plugin>
@@ -97,8 +89,7 @@
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 						<manifestEntries>
-							<Implementation-Version>${project.version}
-								${maven.build.timestamp}</Implementation-Version>
+							<Implementation-Version>${project.version} ${maven.build.timestamp}</Implementation-Version>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -129,10 +120,8 @@
 						</goals>
 						<configuration>
 							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>com.automic.azure.client.AzureClient</mainClass>
 								</transformer>
 							</transformers>
@@ -141,51 +130,6 @@
 				</executions>
 			</plugin>
 
-		</plugins> -->
-		<!--  -->
-		<!-- <finalName>${project.artifactId}</finalName> -->
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-
-				<configuration>
-					<finalName>${project.artifactId}</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-
-					<archive>
-						<manifest>
-							<mainClass>com.automic.azure.client.AzureClient</mainClass>
-						</manifest>
-					</archive>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
-				</configuration>
-
-				<executions>
-					<execution>
-						<id>make-executable-jar</id>
-						<phase>package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-
-
 		</plugins>
-
 	</build>
-
 </project>
