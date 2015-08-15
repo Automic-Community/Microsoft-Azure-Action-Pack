@@ -103,8 +103,8 @@ public final class CommonUtil {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(xmlInput, xmlOutput);
         } catch (TransformerException e) {
-            LOGGER.error(e);
-            throw new AzureException(String.format(ExceptionConstants.GENERIC_ERROR_MSG, e.getMessage()));
+            LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG,e);
+            throw new AzureException(ExceptionConstants.GENERIC_ERROR_MSG + e.getMessage());
         }
     }
 

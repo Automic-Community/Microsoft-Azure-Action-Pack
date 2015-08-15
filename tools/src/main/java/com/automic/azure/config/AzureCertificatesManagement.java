@@ -21,6 +21,7 @@ import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 
 /**
@@ -37,8 +38,8 @@ public class AzureCertificatesManagement {
             this.sslContext = setSSLSocketContext(keyStoreLoc, password);
         } catch (UnrecoverableKeyException | KeyManagementException | KeyStoreException | NoSuchAlgorithmException
                 | IOException e) {
-            LOGGER.error(e);
-            throw new AzureException(e.getMessage());
+            LOGGER.error(ExceptionConstants.SSLCONTEXT_ERROR, e);
+            throw new AzureException(ExceptionConstants.SSLCONTEXT_ERROR + e.getMessage());
         }
     }
 
@@ -62,8 +63,8 @@ public class AzureCertificatesManagement {
             ks.load(fis, passwordArray);
             fis.close();
         } catch (KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
-            LOGGER.error(e);
-            throw new AzureException(e.getMessage());
+            LOGGER.error(ExceptionConstants.INVALID_KEYSTORE, e);
+            throw new AzureException(ExceptionConstants.INVALID_KEYSTORE + e.getMessage());
         }
         return ks;
     }

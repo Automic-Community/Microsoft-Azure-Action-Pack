@@ -9,7 +9,7 @@ import com.automic.azure.exception.AzureException;
 
 /**
  * This class writes content to standard console
- * 
+ *
  * @author anuragupadhyay
  *
  */
@@ -23,7 +23,7 @@ public final class ConsoleWriter {
 
     /**
      * Method to write object to console
-     * 
+     *
      * @param content
      */
     public static void write(Object content) {
@@ -31,7 +31,7 @@ public final class ConsoleWriter {
         try {
             WRITER.write(temp);
         } catch (AzureException ae) {
-            LOGGER.error(ae);
+            LOGGER.error(ae.getMessage());
         }
     }
 
@@ -44,7 +44,7 @@ public final class ConsoleWriter {
 
     /**
      * Method to write an Object to console and followed by newline.
-     * 
+     *
      * @param content
      */
     public static void writeln(Object content) {
@@ -66,7 +66,7 @@ public final class ConsoleWriter {
         try {
             WRITER.flush();
         } catch (AzureException ae) {
-            LOGGER.error(ae);
+            LOGGER.error(ae.getMessage());
         }
     }
 

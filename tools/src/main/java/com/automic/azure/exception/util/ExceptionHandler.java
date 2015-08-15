@@ -3,6 +3,7 @@ package com.automic.azure.exception.util;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
@@ -30,7 +31,7 @@ public class ExceptionHandler {
         if (ex instanceof AzureException) {
             errorMsg = ex.getMessage();
         } else {
-            LOGGER.error(ex);
+            LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, ex);
             if (ex instanceof ClientHandlerException) {
                 Throwable th = ex.getCause();
                 if (th instanceof java.net.SocketTimeoutException) {

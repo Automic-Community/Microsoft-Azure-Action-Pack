@@ -43,7 +43,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
         addOption("servicename", true, "Azure cloud service name");
         addOption("deploymentname", true, "Azure cloud deployment name");
         addOption("vmname", true, "Virtual machine name");
-        addOption("vmstate", true, "Specifies the Virtual Machine operations like start, shutdown, restart");
+        addOption("vmstate", true, "Virtual Machine Command(Start|Stopped|StoppedDeallocated|Restart)");
     }
 
     @Override
@@ -118,7 +118,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
                 obj = new RestartRequestModel();
                 break;
             default:
-                throw new AzureException(String.format(ExceptionConstants.INVALID_VMSTATE_ACTION, vmState,
+                throw new AzureException(String.format(ExceptionConstants.INVALID_VMSTATE_COMMAND, vmState,
                         "Start|Stopped|StoppedDeallocated|Restart"));
         }
         return obj;

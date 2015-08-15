@@ -9,7 +9,7 @@ public final class ExceptionConstants {
     // General Errors
     public static final String INVALID_ACTION = "Action cannot be empty or null. ";
     public static final String INSUFFICIENT_ARGUMENTS = "Insufficient number of arguments.";
-    public static final String GENERIC_ERROR_MSG = "System Error occured. Possible reason [%s]";
+    public static final String GENERIC_ERROR_MSG = "System Error occured.";
 
     // URL/Http Errors
     public static final String INVALID_AZURE_URL = "Invalid azure url [%s]";
@@ -17,6 +17,9 @@ public final class ExceptionConstants {
     public static final String INVALID_CONNECTION_TIMEOUT = "Connection timeout should be positive value";
     public static final String INVALID_READ_TIMEOUT = "Read timeout should be positive value";
     public static final String INVALID_LIMIT_PARAMETER = "Invalid value [%s]. Limit should be positive value";
+    
+    public static final String INVALID_KEYSTORE = "Invalid KeyStore.";
+    public static final String SSLCONTEXT_ERROR = "Unable to build secured context.";
 
     public static final String INVALID_FILE = " File [%s] is invalid. Possibly file does not exist ";
     public static final String INVALID_DIRECTORY = " Directory [%s] is invalid ";
@@ -47,8 +50,8 @@ public final class ExceptionConstants {
     public static final String EMPTY_X_MS_VERSION = "x-ms-version cannot be empty";
     public static final String NUMBER_EXCEPTION = "Value should be number for the following args [%s]";
     public static final String INVALID_AZURE_CERTIFICATE_PWD = "Keystore was tampered with, or password was incorrect";
-    public static final String INVALID_VMSTATE_ACTION = "Invalid action [%s] requested for changing VM state. "
-            + "Possible action [%s]";
+    public static final String INVALID_VMSTATE_COMMAND = "Invalid command [%s] requested for changing VM state. "
+            + "Possible commands [%s]";
 
     private ExceptionConstants() {
     }
