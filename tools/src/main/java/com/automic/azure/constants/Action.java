@@ -9,7 +9,7 @@ import com.automic.azure.actions.ActionFactory;
  */
 public enum Action {
 
-    VERSION, GET_SUBSCRIPTION_INFO, VM_STATE;
+    VERSION, GET_SUBSCRIPTION_INFO, VM_STATE,DELETE_VM;
 
     public static String getActionNames() {
         Action[] actions = Action.values();
