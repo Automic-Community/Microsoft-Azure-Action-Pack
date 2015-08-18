@@ -2,6 +2,9 @@ package com.automic.azure.model;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+/**
+ * An POJO java class which maps to XML structure which is required to handle the operation response.
+ */
 
 @XmlRootElement(name = "Operation", namespace = "http://schemas.microsoft.com/windowsazure")
 public final class AzureRequestStatusModel {

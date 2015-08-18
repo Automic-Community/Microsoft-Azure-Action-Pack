@@ -62,7 +62,7 @@ public class CheckRequestStatusAction extends AbstractAction {
 
   /**
    * Method to make a call to Azure Management API. To get subscription information we make a GET
-   * call to https://management.core.windows.net/<subscription-id>
+   * https://management.core.windows.net/<subscription-id>/operations/<request-id>
    * 
    */
   @Override
