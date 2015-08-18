@@ -76,7 +76,7 @@ public class CheckRequestStatusAction extends AbstractAction {
   }
 
   /**
-   * {@inheritDoc ExecStartAction#prepareOutput(ClientResponse)} it will print request token id.
+   * This method will print request status.
    * 
    */
   @Override
