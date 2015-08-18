@@ -40,7 +40,7 @@ public final class ActionFactory {
 			action = new GetSubscriptionInfoAction();
 			break;
 		case DELETE_VM:
-			action = new DeleteVirtualMachineAction();
+			action = new DeleteDeploymentAction();
 			break;
 		default:
 			String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();

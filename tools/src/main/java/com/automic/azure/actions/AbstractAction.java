@@ -173,14 +173,9 @@ public abstract class AbstractAction {
     private void validateResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {        	
-            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
-            StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
-            responseBuilder.append("Error Code: [");
-            responseBuilder.append(error.getCode()).append("]");
-            if (Validator.checkNotEmpty(error.getMessage())) {
-                responseBuilder.append(" Message: ").append(error.getMessage());
-            }
-            throw new AzureException(responseBuilder.toString());
+            AzureErrorResponse azureErrorResponse = response.getEntity(AzureErrorResponse.class);
+           LOGGER.error(azureErrorResponse);
+            throw new AzureException(azureErrorResponse.toString());
         }
     }
     

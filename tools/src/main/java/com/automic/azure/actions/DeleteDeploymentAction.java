@@ -24,30 +24,27 @@ import com.sun.jersey.api.client.WebResource;
  * @author sumitsamson
  *
  */
-public class DeleteVirtualMachineAction extends AbstractAction {
+public class DeleteDeploymentAction extends AbstractAction {
 
-	 private static final Logger LOGGER = LogManager.getLogger(DeleteVirtualMachineAction.class);
+	 private static final Logger LOGGER = LogManager.getLogger(DeleteDeploymentAction.class);
 
 	    private String subscriptionId;
 	    private String serviceName;
 	    private String deploymentName;
-	    private String vmName;	  
 	    private boolean deleteMedia;
 	    
 	    
-	    public DeleteVirtualMachineAction() {
+	    public DeleteDeploymentAction() {
 	    	addOption("subscriptionid", true, "Subscription ID");
 	        addOption("servicename", true, "Azure cloud service name");
-	        addOption("deploymentname", true, "Azure cloud deployment name");
-	        addOption("vmname", true, "Virtual machine name");
-	        addOption("deleteMedia", true, "Delete the media[operating system disk, attached data disks & the source blobs]");
+	        addOption("deploymentname", true, "Azure cloud deployment name");	       
+	        addOption("deleteMedia", true, "Delete the media(operating system disk, attached data disks & the source blobs)");
 	    }
 	    
 	@Override
 	protected void initialize() {        
         serviceName = getOptionValue("servicename");
         deploymentName = getOptionValue("deploymentname");
-        vmName = getOptionValue("vmname");
         subscriptionId = getOptionValue("subscriptionid");
         deleteMedia = CommonUtil.convert2Bool(getOptionValue("deleteMedia"));
 
@@ -68,11 +65,7 @@ public class DeleteVirtualMachineAction extends AbstractAction {
 	            LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
 	            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
 	        }
-	        if (!Validator.checkNotEmpty(vmName)) {
-	            LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
-	            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
-	        }
-	        
+	       	        
 	}
 
 	
@@ -80,8 +73,8 @@ public class DeleteVirtualMachineAction extends AbstractAction {
 	protected ClientResponse executeSpecific(Client client) throws AzureException {
 		 ClientResponse response = null;
 	        WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
-	                .path("hostedservices").path(serviceName).path("deployments").path(deploymentName)
-	                .path("roles").path(vmName);
+	                .path("hostedservices").path(serviceName).path("deployments").path(deploymentName);
+	               
 	        if (deleteMedia) {
 	        	webResource = webResource.queryParam("comp", "media");
 	        }
