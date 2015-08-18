@@ -37,8 +37,8 @@ public final class ActionFactory {
             case GET_SUBSCRIPTION_INFO:
                 action = new GetSubscriptionInfoAction();
                 break;
-            case CHECK_REQ_STATUS:
-                action = new CheckRequestStatus();
+            case CHECK_REQUEST_STATUS:
+                action = new CheckRequestStatusAction();
                 break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();

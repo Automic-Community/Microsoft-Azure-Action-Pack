@@ -47,14 +47,4 @@ public final class AzureRequestStatusModel {
     this.error = error;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
-  @Override
-  public String toString() {
-    return (requestStatus != null ? "UC4RB_AZR_REQ_STATUS ::=" + requestStatus + "\n" : "")
-            + (error != null ? "UC4RB_AZR_REQ_STATUS_ERROR ::=" + error.getCode()+ "\n" : "")
-            + (error != null ? "UC4RB_AZR_REQ_STATUS_ERRMSG ::=" + error.getMessage() : "");       
-  }
-
 }
