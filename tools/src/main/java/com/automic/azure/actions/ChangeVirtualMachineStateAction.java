@@ -125,7 +125,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
     }
 
     /**
-     * {@inheritDoc ExecStartAction#prepareOutput(ClientResponse)} it will print request Status.
+     * {@inheritDoc ExecStartAction#prepareOutput(ClientResponse)} it will print request token id.
      * 
      */
     @Override
