@@ -33,9 +33,7 @@ public class CheckRequestStatusAction extends AbstractAction {
   private String requestTokenId;
 
   /**
-   * Initializes a newly created {@code String} object so that it represents
-   * an empty character sequence.  Note that use of this constructor is
-   * unnecessary since Strings are immutable.
+   * Initializes a newly created {@code CheckRequestStatusAction} object.
    */
   public CheckRequestStatusAction() {
     addOption("subscriptionid", true, "Subscription ID");
