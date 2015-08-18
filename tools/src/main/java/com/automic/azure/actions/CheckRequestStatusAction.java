@@ -19,7 +19,9 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * This class will Start, Restart, Shutdown the specified Virtual Machine on Azure Cloud
+ * This class will get the status of the specified operation. After calling an asynchronous
+ * operation, you can call CheckRequestStatusAction to determine whether the operation has
+ * succeeded, failed, or is still in progress.
  * 
  * @author Anurag Upadhyay
  */
@@ -30,6 +32,11 @@ public class CheckRequestStatusAction extends AbstractAction {
   private String subscriptionId;
   private String requestTokenId;
 
+  /**
+   * Initializes a newly created {@code String} object so that it represents
+   * an empty character sequence.  Note that use of this constructor is
+   * unnecessary since Strings are immutable.
+   */
   public CheckRequestStatusAction() {
     addOption("subscriptionid", true, "Subscription ID");
     addOption("requestid", true,
