@@ -101,3 +101,17 @@ Configure Connection
     Action Set    &UC4RB_AZR_SUBSCRIPTION_ID#    ${Subscription_ID}
     Action Set    &UC4RB_AZR_KEYSTORE_PATH#    ${Cert_Location}
     Action Set    &UC4RB_AZR_KEYSTORE_PSWD#    ${Cert_Password}
+
+Change VM State
+    [Arguments]    ${_CHANGE_VM_STATE_ACTION}    ${Subscription_ID}    ${Certificate_Path}    ${Certificate_Password}    ${Name_VM}    ${Name_Cloud_Service}
+    ...    ${Name_Deployment}    ${Command}
+    Action Create    ${_CHANGE_VM_STATE_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Cert_Path}    ${Cert_Password}
+    Action Set    &UC4RB_AZR_VM_NAME#    ${VM_Name}
+    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Cloud_Service_Name}
+    Action Set    &UC4RB_AZR_DEPLOYMENT#    ${Deployment_Name}
+    Action Set    &UC4RB_AZR_COMMAND#    ${Command}
+    Set Overwrite Agent
+    Action Execute
+    ${Generated_ID}=    Action Get Variable    &UC4RB_AZR_REQUEST_ID#
+    Set Global Variable    ${Generated_ID}
