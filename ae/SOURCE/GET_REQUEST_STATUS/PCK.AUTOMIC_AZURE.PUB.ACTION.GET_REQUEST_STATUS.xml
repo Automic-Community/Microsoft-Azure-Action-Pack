@@ -62,10 +62,10 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO">
-<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
+<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -126,10 +126,10 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO">
-<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
+<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -176,10 +176,10 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO">
-<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
+<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -251,9 +251,9 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" prptmode="1"/>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.API_REQUEST_INFO" prptmode="1"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -283,7 +283,40 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_AZURE.PUB.ACTION.GET_REQUEST_STATUS
+
+= General description =
+This action is used to fetch the status of a previously submitted Azure REST API request based on the request id provided by user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if user provides an invalid request id which does not exist in Azure system.
+
+= Inputs =
+* Subscription ID: ID of the subscription which will be used for this connection 
+* Keystore location: Path including Keystore file name Example: C:\certs\mykeystore.jks 
+* Keystore Password: Password to your Keystore
+* Request ID: Specify ID of an Azure REST API request provided in its response. Example 905e45fdb6e10127a17f7fabc86f6640
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+
+= Behavior =
+(see general description)
+
+=Return Value=
+AE variable UC4RB_AZR_REQUEST_STATUS published with status of Azure REST API request.
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\azure.log under agent installation directory.
+
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
