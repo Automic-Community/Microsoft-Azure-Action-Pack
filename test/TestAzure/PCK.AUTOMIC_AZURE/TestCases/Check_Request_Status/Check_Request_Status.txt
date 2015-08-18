@@ -13,7 +13,7 @@ Resource          ../../Resources/actions.txt
 Asserting Valid Request ID
                       OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ValidID
 
-Assering s Invalid Request ID
+Asserting s Invalid Request ID
                       NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       b2ekof439dksksi9
 
 Asserting Mandatory Field
