@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.GET_REQUEST_STATUS">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS">
 <XHEADER state="1">
-<Title>Check status of an Azure REST API request</Title>
+<Title>Check status of an Azure request</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -284,16 +284,16 @@
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
-PCK.AUTOMIC_AZURE.PUB.ACTION.GET_REQUEST_STATUS
+PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS
 
 = General description =
-This action is used to fetch the status of a previously submitted Azure REST API request based on the request id provided by user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if user provides an invalid request id which does not exist in Azure system.
+This action is used to fetch the status of a previously submitted Azure request based on the request id provided by user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if user provides an invalid request id which does not exist in Azure system.
 
 = Inputs =
 * Subscription ID: ID of the subscription which will be used for this connection 
 * Keystore location: Path including Keystore file name Example: C:\certs\mykeystore.jks 
 * Keystore Password: Password to your Keystore
-* Request ID: Specify ID of an Azure REST API request provided in its response. Example 905e45fdb6e10127a17f7fabc86f6640
+* Request ID: Specify ID of the Azure Request generated in previous action response. Example 905e45fdb6e10127a17f7fabc86f6640
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 
@@ -301,7 +301,7 @@ This action is used to fetch the status of a previously submitted Azure REST API
 (see general description)
 
 =Return Value=
-AE variable UC4RB_AZR_REQUEST_STATUS published with status of Azure REST API request.
+The value of AE variable UC4RB_AZR_REQUEST_STATUS will be either Succeeded, InProgress or Failed.
 
 = Outputs =
 * Return code is 0 in case of success.
