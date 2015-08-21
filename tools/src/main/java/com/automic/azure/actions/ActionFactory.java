@@ -40,6 +40,9 @@ public final class ActionFactory {
             case CHECK_REQUEST_STATUS:
                 action = new CheckRequestStatusAction();
                 break;
+            case CREATE_VM:
+                action = new CreateVirtualMachineAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

@@ -92,5 +92,13 @@ public final class Validator {
     public static boolean isValidText(String pattern, String text) {
         return Pattern.matches(pattern, text);
     }
+    /**
+     * Method to check if file represented by a string literal exists or not
+     * @param filePath
+     * @return true or false
+     */
+    public static boolean checkFileExistsAndIsFile(String filePath) {
+        return (checkFileExists(filePath) && new File(filePath).isFile());
+    }
 
 }
