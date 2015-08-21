@@ -9,37 +9,40 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK                                        SubscriptionID        CertificatePath    CertificatePassword    VMName                CloudServiceName                 DeploymentName                Command
-Starting a VM         OK                                            ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
+*** Test Cases ***    OK_NOK    SubscriptionID        CertificatePath    CertificatePassword    VMName                CloudServiceName                 DeploymentName                Command
+Starting a VM         OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
 
-Restarting a VM       [Tags]                                        main_scenarios
-                      OK                                            ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            RESTART_VM
+Restarting a VM       [Tags]    main_scenarios
+                      OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            RESTART_VM
 
-Stopping a VM         OK                                            ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
+Stopping a VM         OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
 
 Stopping an Already Stopped VM
-                      OK                                            ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
+                      OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
 
 Stopping and Deallocating a VM
-                      OK                                            ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_DEALLOCATE_VM
-                      #Assertion with Invalid VM Name
-                      NOK                                           ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${Invalid_VM_Name}    ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
-                      #Assertion with Invalid Cloud Service Name
-                      NOK                                           ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Invalid_Cloud_Service_Name}    ${Deployment_Name}            START_VM
-                      #Assertion with Invalid Deployement Name
-                      NOK                                           ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Invalid_Deployment_Name}    START_VM
+                      OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_DEALLOCATE_VM
+
+Assertion with Invalid VM Name
+                      NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${Invalid_VM_Name}    ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
+
+Assertion with Invalid Cloud Service Name
+                      NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Invalid_Cloud_Service_Name}    ${Deployment_Name}            START_VM
+
+Assertion with Invalid Deployement Name
+                      NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Invalid_Deployment_Name}    START_VM
 
 Assert VM Name as a mandatory field for Azure Connection
-                      OTHER                                         ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${Empty}              ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
+                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${Empty}              ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
 
 Assert Cloud Service Name as a mandatory field for Azure Connection
-                      OTHER                                         ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Empty}                         ${Deployment_Name}            START_VM
+                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Empty}                         ${Deployment_Name}            START_VM
 
 Assert Certificate Password as a mandatory field for Azure Connection
-                      OTHER                                         ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Empty}                      START_VM
+                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Empty}                      START_VM
 
 Assert Command Field as a mandatory field for Azure Connection
-                      OTHER                                         ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            ${Empty}
+                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            ${Empty}
 
 *** Keywords ***
 Startup

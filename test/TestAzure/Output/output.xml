@@ -1,0 +1,1688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.8.6 (Jython 2.5.3 on java1.8.0_45)" generated="20150821 11:35:40.045">
+<suite source="E:\Robot Automation scripts\AZURE-Test\TestAZURE" name="TestAZURE" id="s1">
+<suite source="E:\Robot Automation scripts\AZURE-Test\TestAZURE\PCK.AUTOMIC_AZURE" name="PCK.AUTOMIC AZURE" id="s1-s1">
+<suite source="E:\Robot Automation scripts\AZURE-Test\TestAZURE\PCK.AUTOMIC_AZURE\TestCases" name="TestCases" id="s1-s1-s1">
+<suite source="E:\Robot Automation scripts\AZURE-Test\TestAZURE\PCK.AUTOMIC_AZURE\TestCases\Check_Request_Status" name="Check Request Status" id="s1-s1-s1-s1">
+<suite source="E:\Robot Automation scripts\AZURE-Test\TestAZURE\PCK.AUTOMIC_AZURE\TestCases\Check_Request_Status\Check_Request_Status.txt" name="Check Request Status" id="s1-s1-s1-s1-s1">
+<kw type="setup" name="Startup">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.637">Arguments: [  ]</msg>
+<kw type="kw" name="BuiltIn.Log">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>*******Start Test "CHECK REQUEST STATUS"*******</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.645">Arguments: [ u'*******Start Test "CHECK REQUEST STATUS"*******' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.647">*******Start Test "CHECK REQUEST STATUS"*******</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.650">Return: None</msg>
+<status endtime="20150821 11:35:41.650" starttime="20150821 11:35:41.642" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Log">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>*******Connect to AE*******</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.657">Arguments: [ u'*******Connect to AE*******' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.660">*******Connect to AE*******</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.662">Return: None</msg>
+<status endtime="20150821 11:35:41.662" starttime="20150821 11:35:41.655" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Connect AE">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.672">Arguments: [  ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Connect">
+<doc></doc>
+<arguments>
+<arg>${_AE_HOST}</arg>
+<arg>${_AE_PORT}</arg>
+<arg>${_AE_USER}</arg>
+<arg>${_AE_PASS}</arg>
+<arg>${_AE_TEMP_FOLD}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.680">Arguments: [ u'localhost' | u'2217' | u'3/USER/TEST_01' | u'test' | u'TEST_AZURE_PCK' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.687">Connect to AE, host = localhost, user = 3/USER/TEST_01</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.710">SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.710">Return: None</msg>
+<status endtime="20150821 11:35:41.710" starttime="20150821 11:35:41.675" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:41.712">Return: None</msg>
+<status endtime="20150821 11:35:41.712" starttime="20150821 11:35:41.665" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:41.715">Return: None</msg>
+<status endtime="20150821 11:35:41.715" starttime="20150821 11:35:41.632" status="PASS"></status>
+</kw>
+<test name="Asserting Valid Request ID" id="s1-s1-s1-s1-s1-t1">
+<kw type="kw" name="Check Request Status Template">
+<doc>This test retrieves the status of the azure request id.</doc>
+<arguments>
+<arg>OK</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>ValidID</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.765">Arguments: [ ${OK_NOK}=u'OK' | ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Certificate_Path}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Certificate_Password}=u'test123' | ${Request_ID}=u'ValidID' ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Change VM State</arg>
+<arg>${_CHANGE_VM_STATE_ACTION}</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>${VM_Name}</arg>
+<arg>${Cloud_Service_Name}</arg>
+<arg>${Deployment_Name}</arg>
+<arg>SHUTDOWN_DEALLOCATE_VM</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.770">Arguments: [ u"'OK' == 'OK'" | u'Change VM State' | u'${_CHANGE_VM_STATE_ACTION}' | u'${Subscription_ID}' | u'${Cert_Path}' | u'${Cert_Password}' | u'${VM_Name}' | u'${Cloud_Service_Name}' | u'${Deployment_Name}' | u'SHUTDOWN_DEALLOCATE_VM' ]</msg>
+<kw type="kw" name="keywords.Change VM State">
+<doc></doc>
+<arguments>
+<arg>${_CHANGE_VM_STATE_ACTION}</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>${VM_Name}</arg>
+<arg>${Cloud_Service_Name}</arg>
+<arg>${Deployment_Name}</arg>
+<arg>SHUTDOWN_DEALLOCATE_VM</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.780">Arguments: [ ${_CHANGE_VM_STATE_ACTION}=u'PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE' | ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Certificate_Path}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Certificate_Password}=u'test123' | ${Name_VM}=u'CAC-TEST' | ${Name_Cloud_Service}=u'CAC-TEST' | ${Name_Deployment}=u'CAC-TEST' | ${Command}=u'SHUTDOWN_DEALLOCATE_VM' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Create">
+<doc></doc>
+<arguments>
+<arg>${_CHANGE_VM_STATE_ACTION}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.787">Arguments: [ u'PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.790">Create action PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.792">Return: None</msg>
+<status endtime="20150821 11:35:41.792" starttime="20150821 11:35:41.782" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Configure Connection">
+<doc></doc>
+<arguments>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.802">Arguments: [ ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Cert_Location}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Cert_Password}=u'test123' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_SUBSCRIPTION_ID#</arg>
+<arg>${Subscription_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.810">Arguments: [ u'&amp;UC4RB_AZR_SUBSCRIPTION_ID#' | u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.815">Set prompt set: &amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.815">Return: None</msg>
+<status endtime="20150821 11:35:41.815" starttime="20150821 11:35:41.802" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PATH#</arg>
+<arg>${Cert_Location}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.820">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PATH#' | u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.825">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.825">Return: None</msg>
+<status endtime="20150821 11:35:41.825" starttime="20150821 11:35:41.817" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PSWD#</arg>
+<arg>${Cert_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.832">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PSWD#' | u'test123' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.837">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.840">Return: None</msg>
+<status endtime="20150821 11:35:41.840" starttime="20150821 11:35:41.827" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:41.845">Return: None</msg>
+<status endtime="20150821 11:35:41.845" starttime="20150821 11:35:41.797" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_VM_NAME#</arg>
+<arg>${VM_Name}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.852">Arguments: [ u'&amp;UC4RB_AZR_VM_NAME#' | u'CAC-TEST' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.860">Set prompt set: &amp;UC4RB_AZR_VM_NAME# = CAC-TEST</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.862">Return: None</msg>
+<status endtime="20150821 11:35:41.862" starttime="20150821 11:35:41.850" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_CLOUD_SERVICE#</arg>
+<arg>${Cloud_Service_Name}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.870">Arguments: [ u'&amp;UC4RB_AZR_CLOUD_SERVICE#' | u'CAC-TEST' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.875">Set prompt set: &amp;UC4RB_AZR_CLOUD_SERVICE# = CAC-TEST</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.875">Return: None</msg>
+<status endtime="20150821 11:35:41.875" starttime="20150821 11:35:41.865" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_DEPLOYMENT#</arg>
+<arg>${Deployment_Name}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.882">Arguments: [ u'&amp;UC4RB_AZR_DEPLOYMENT#' | u'CAC-TEST' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.887">Set prompt set: &amp;UC4RB_AZR_DEPLOYMENT# = CAC-TEST</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.890">Return: None</msg>
+<status endtime="20150821 11:35:41.890" starttime="20150821 11:35:41.880" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_COMMAND#</arg>
+<arg>${Command}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.895">Arguments: [ u'&amp;UC4RB_AZR_COMMAND#' | u'SHUTDOWN_DEALLOCATE_VM' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.900">Set prompt set: &amp;UC4RB_AZR_COMMAND# = SHUTDOWN_DEALLOCATE_VM</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.902">Return: None</msg>
+<status endtime="20150821 11:35:41.900" starttime="20150821 11:35:41.892" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Set Overwrite Agent">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.907">Arguments: [  ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'WIN'</arg>
+<arg>Set Overwrite Agent WIN</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.912">Arguments: [ u"'WIN' == 'WIN'" | u'Set Overwrite Agent WIN' ]</msg>
+<kw type="kw" name="keywords.Set Overwrite Agent WIN">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.922">Arguments: [  ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;AGENT#</arg>
+<arg>${_PROMPTSET_AGENT_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.927">Arguments: [ u'&amp;AGENT#' | u'Ankit3593' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.932">Set prompt set: &amp;AGENT# = Ankit3593</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.935">Return: None</msg>
+<status endtime="20150821 11:35:41.935" starttime="20150821 11:35:41.925" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;LOGIN#</arg>
+<arg>${_PROMPTSET_LOGIN_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.937">Arguments: [ u'&amp;LOGIN#' | u'LOGIN.NEW.1' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.947">Set prompt set: &amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.947">Return: None</msg>
+<status endtime="20150821 11:35:41.947" starttime="20150821 11:35:41.937" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:41.957">Return: None</msg>
+<status endtime="20150821 11:35:41.957" starttime="20150821 11:35:41.915" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:41.957">Return: None</msg>
+<status endtime="20150821 11:35:41.957" starttime="20150821 11:35:41.910" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'UNIX'</arg>
+<arg>Set Overwrite Agent UNIX</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.962">Arguments: [ u"'WIN' == 'UNIX'" | u'Set Overwrite Agent UNIX' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.965">Return: None</msg>
+<status endtime="20150821 11:35:41.965" starttime="20150821 11:35:41.960" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'QTP'</arg>
+<arg>Set Overwrite Agent QTP</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.970">Arguments: [ u"'WIN' == 'QTP'" | u'Set Overwrite Agent QTP' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:35:41.972">Return: None</msg>
+<status endtime="20150821 11:35:41.972" starttime="20150821 11:35:41.967" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:41.975">Return: None</msg>
+<status endtime="20150821 11:35:41.975" starttime="20150821 11:35:41.902" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Execute">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:41.977">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:41.997">Execute action PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE1440137141792665897969850577393</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:42.002">Create wrapper workflow which include testing action...</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:42.755">Assign all required parameters...</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:43.095">Execute workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:35:43.165">Waiting for workflow running, runId = 1017407, timeout = 300</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:48.209">... 1 waiting, 0 ended, 0 running backup, 0 rollback, 0</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:53.311">... 0 waiting, 0 ended, 1 running backup, 0 rollback, 0</msg>
+<msg level="INFO" timestamp="20150821 11:35:53.426">Deactivate task, runId = 1017407</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:53.469">RunId = 1017407</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:53.474">Execute done</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.476">Export results of 1017407...</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:54.654">Report = 20150821/113543.592 - U02001096 Job '1017409' uses client-wide resource '3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\itpa-tool.jar'.
+20150821/113543.600 - U02001094 Job '1017409' requested client-wide ressource '3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE'.
+20150821/113543.710 - U02001096 Job '1017409' uses client-wide resource '3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\azuretool.jar'.
+
+c:\&gt;C:\Automic\UC4\Agents\windows\ankit3593\bin\UCXJWX6m.exe JNR=0001017409 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" 
+Program 'UC4 Job Messenger' version '11.1.0+build.890' started
+UCMDJP: *********************************************************************
+UCMDJP: ** JOB 0001017409 (ProcID:0000007996) START AT 21.08.2015/11:35:43 **
+UCMDJP: **                                    UTC TIME 21.08.2015/06:05:43 **
+UCMDJP: *********************************************************************
+Connected with agent 'ANKIT3593'
+Program 'UC4 Job Messenger' version '11.1.0+build.890' terminated normally
+""
+""
+"********************************"
+"** PARAMETER VALIDATION START **"
+"********************************"
+""
+"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"
+"PARAM: Certificate location = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks"
+"PARAM: Certificate Password = test123"
+"PARAM: VM Name = CAC-TEST"
+"PARAM: Cloud Service Name = CAC-TEST"
+"PARAM: Deployment Name = CAC-TEST"
+"PARAM: Command = SHUTDOWN_DEALLOCATE_VM"
+""
+""
+"********************************"
+"**      EXECUTION START       **"
+"********************************"
+""
+UC4RB_AZR_REQUEST_ID  ::=936ecdd0c8140b94bcd4730e0a31c94a
+"INFO: ******** CHANGE_VM_STATE ACTION EXECUTED SUCCESSFULLY ********"
+Program 'UC4 Job Messenger' version '11.1.0+build.890' started
+UCMDJP: *********************************************************************
+UCMDJP: ** JOB 0001017409 (ProcID:0000007996) ENDED AT 21.08.2015/11:35:48 **
+UCMDJP: **                                    UTC TIME 21.08.2015/06:05:48 **
+UCMDJP: ** --------------------------------------------------------------- **
+UCMDJP: **                                    USED:      0.000 CPU         **
+UCMDJP: *********************************************************************
+Connected with agent 'ANKIT3593'
+Program 'UC4 Job Messenger' version '11.1.0+build.890' terminated normally
+</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.661">Variables: </msg>
+<msg level="INFO" timestamp="20150821 11:35:54.661">&amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.666">System time = 0,02</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.669">End = 2015-08-21T06:05:48</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.674">Status = ENDED_OK - ended normally</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.679">Event ID = 1017409</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.679">&amp;UC4RB_AZR_VM_NAME# = CAC-TEST</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.681">Consumption = 1</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.689">Status text = Job ended</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.716">Post proc. = 2015-08-21T06:05:48</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.721">Start = 2015-08-21T06:05:43</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.726">Runtime =    0:00:05</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.734">RunID = 1017409</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.739">CPU time = 0,04</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.744">Title = Change VM state (Start ,Stop ,Restart)</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.746">User time = 0,02</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.749">&amp;UC4RB_AZR_REQUEST_ID# = 936ecdd0c8140b94bcd4730e0a31c94a</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.754">Login = (NAGARRO\ankittaneja)</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.759">User = USER/TEST_01</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.761">Enable Rollback = No</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.764">Activation = 2015-08-21T06:05:43</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.769">Job Status = ENDED_OK - ended normally</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.771">&amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.776">&amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.779">&amp;UC4RB_AZR_CLOUD_SERVICE# = CAC-TEST</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.781">Object name = PCK.AUTOMIC_AZURE.PRV.JOB.CHANGE_VM_STATE@GENERIC</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.784">Activator = 1017408</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.786">&amp;UC4RB_AGENT_OS# = WINDOWS</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.794">Start type = JOBP</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.796">&amp;UC4RB_AZR_DEPLOYMENT# = CAC-TEST</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.799">&amp;AGENT# = Ankit3593</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.801">Parent = 1017408</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.806">Process ID = 7996</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.811">Return code = 0</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.816">Version = 1</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.819">Express = Deactivated</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.826">&amp;UC4RB_AZR_COMMAND# = SHUTDOWN_DEALLOCATE_VM</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.829">&amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.834">Queue = CLIENT_QUEUE</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.841">Host = ANKIT3593</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:54.844">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.846">Deactivate task, runId = 1017407</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.864">Export result done</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.866">Clean up workflow 1017407...</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.871">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.876">Deactivate task, runId = 1017407</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.896">Clean up workflow done</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.899">Return: None</msg>
+<status endtime="20150821 11:35:54.899" starttime="20150821 11:35:41.977" status="PASS"></status>
+</kw>
+<kw type="kw" name="${Generated_ID} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.904">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_ID#' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.909">Get action variable: &amp;UC4RB_AZR_REQUEST_ID#</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.911">Return: u'936ecdd0c8140b94bcd4730e0a31c94a'</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.914">${Generated_ID} = 936ecdd0c8140b94bcd4730e0a31c94a</msg>
+<status endtime="20150821 11:35:54.911" starttime="20150821 11:35:54.901" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Set Global Variable">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${Generated_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.916">Arguments: [ u'${Generated_ID}' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.919">${Generated_ID} = 936ecdd0c8140b94bcd4730e0a31c94a</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.921">Return: None</msg>
+<status endtime="20150821 11:35:54.921" starttime="20150821 11:35:54.914" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:54.926">Return: None</msg>
+<status endtime="20150821 11:35:54.926" starttime="20150821 11:35:41.775" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:54.931">Return: None</msg>
+<status endtime="20150821 11:35:54.931" starttime="20150821 11:35:41.767" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Create">
+<doc></doc>
+<arguments>
+<arg>${_CHECK_REQUEST_STATUS_ACION}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.939">Arguments: [ u'PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.944">Create action PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.946">Return: None</msg>
+<status endtime="20150821 11:35:54.946" starttime="20150821 11:35:54.934" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Configure Connection">
+<doc></doc>
+<arguments>
+<arg>${Subscription_ID}</arg>
+<arg>${Certificate_Path}</arg>
+<arg>${Certificate_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.954">Arguments: [ ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Cert_Location}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Cert_Password}=u'test123' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_SUBSCRIPTION_ID#</arg>
+<arg>${Subscription_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.959">Arguments: [ u'&amp;UC4RB_AZR_SUBSCRIPTION_ID#' | u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.964">Set prompt set: &amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.964">Return: None</msg>
+<status endtime="20150821 11:35:54.964" starttime="20150821 11:35:54.956" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PATH#</arg>
+<arg>${Cert_Location}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.969">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PATH#' | u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.974">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.976">Return: None</msg>
+<status endtime="20150821 11:35:54.976" starttime="20150821 11:35:54.966" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PSWD#</arg>
+<arg>${Cert_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.979">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PSWD#' | u'test123' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:54.984">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="TRACE" timestamp="20150821 11:35:54.986">Return: None</msg>
+<status endtime="20150821 11:35:54.986" starttime="20150821 11:35:54.979" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:54.991">Return: None</msg>
+<status endtime="20150821 11:35:54.991" starttime="20150821 11:35:54.949" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${Request_ID}' == 'ValidID'</arg>
+<arg>Action Set</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Generated_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:54.999">Arguments: [ u"'ValidID' == 'ValidID'" | u'Action Set' | u'&amp;UC4RB_AZR_REQUEST_ID#' | u'${Generated_ID}' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Generated_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.011">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_ID#' | u'936ecdd0c8140b94bcd4730e0a31c94a' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:55.014">Set prompt set: &amp;UC4RB_AZR_REQUEST_ID# = 936ecdd0c8140b94bcd4730e0a31c94a</msg>
+<msg level="TRACE" timestamp="20150821 11:35:55.014">Return: None</msg>
+<status endtime="20150821 11:35:55.014" starttime="20150821 11:35:55.004" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:55.019">Return: None</msg>
+<status endtime="20150821 11:35:55.016" starttime="20150821 11:35:54.996" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${Request_ID}' != 'ValidID'</arg>
+<arg>Action Set</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Request_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.021">Arguments: [ u"'ValidID' != 'ValidID'" | u'Action Set' | u'&amp;UC4RB_AZR_REQUEST_ID#' | u'${Request_ID}' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:35:55.026">Return: None</msg>
+<status endtime="20150821 11:35:55.026" starttime="20150821 11:35:55.021" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Set Overwrite Agent">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.029">Arguments: [  ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'WIN'</arg>
+<arg>Set Overwrite Agent WIN</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.031">Arguments: [ u"'WIN' == 'WIN'" | u'Set Overwrite Agent WIN' ]</msg>
+<kw type="kw" name="keywords.Set Overwrite Agent WIN">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.039">Arguments: [  ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;AGENT#</arg>
+<arg>${_PROMPTSET_AGENT_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.044">Arguments: [ u'&amp;AGENT#' | u'Ankit3593' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:55.046">Set prompt set: &amp;AGENT# = Ankit3593</msg>
+<msg level="TRACE" timestamp="20150821 11:35:55.046">Return: None</msg>
+<status endtime="20150821 11:35:55.046" starttime="20150821 11:35:55.041" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;LOGIN#</arg>
+<arg>${_PROMPTSET_LOGIN_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.049">Arguments: [ u'&amp;LOGIN#' | u'LOGIN.NEW.1' ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:55.051">Set prompt set: &amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="TRACE" timestamp="20150821 11:35:55.054">Return: None</msg>
+<status endtime="20150821 11:35:55.054" starttime="20150821 11:35:55.049" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:55.056">Return: None</msg>
+<status endtime="20150821 11:35:55.054" starttime="20150821 11:35:55.034" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:55.056">Return: None</msg>
+<status endtime="20150821 11:35:55.056" starttime="20150821 11:35:55.031" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'UNIX'</arg>
+<arg>Set Overwrite Agent UNIX</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.061">Arguments: [ u"'WIN' == 'UNIX'" | u'Set Overwrite Agent UNIX' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:35:55.061">Return: None</msg>
+<status endtime="20150821 11:35:55.061" starttime="20150821 11:35:55.059" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'QTP'</arg>
+<arg>Set Overwrite Agent QTP</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.064">Arguments: [ u"'WIN' == 'QTP'" | u'Set Overwrite Agent QTP' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:35:55.066">Return: None</msg>
+<status endtime="20150821 11:35:55.066" starttime="20150821 11:35:55.064" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:35:55.071">Return: None</msg>
+<status endtime="20150821 11:35:55.071" starttime="20150821 11:35:55.029" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Execute">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:35:55.076">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:35:55.079">Execute action PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS14401371549467697551922339077170</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:55.084">Create wrapper workflow which include testing action...</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:55.529">Assign all required parameters...</msg>
+<msg level="DEBUG" timestamp="20150821 11:35:55.864">Execute workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:35:55.949">Waiting for workflow running, runId = 1017411, timeout = 300</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:01.031">... 1 waiting, 0 ended, 0 running backup, 0 rollback, 0</msg>
+<msg level="INFO" timestamp="20150821 11:36:01.125">Deactivate task, runId = 1017411</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:01.141">RunId = 1017411</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:01.141">Execute done</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.152">Export results of 1017411...</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:02.308">Report = 20150821/113556.344 - U02001096 Job '1017413' uses client-wide resource '3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\itpa-tool.jar'.
+20150821/113556.346 - U02001096 Job '1017413' uses client-wide resource '3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\azuretool.jar'.
+
+c:\&gt;C:\Automic\UC4\Agents\windows\ankit3593\bin\UCXJWX6m.exe JNR=0001017413 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" 
+Program 'UC4 Job Messenger' version '11.1.0+build.890' started
+UCMDJP: *********************************************************************
+UCMDJP: ** JOB 0001017413 (ProcID:0000008256) START AT 21.08.2015/11:35:56 **
+UCMDJP: **                                    UTC TIME 21.08.2015/06:05:56 **
+UCMDJP: *********************************************************************
+Connected with agent 'ANKIT3593'
+Program 'UC4 Job Messenger' version '11.1.0+build.890' terminated normally
+""
+""
+"********************************"
+"** PARAMETER VALIDATION START **"
+"********************************"
+""
+"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"
+"PARAM: Keystore location = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks"
+"PARAM: Keystore Password = test123"
+"PARAM: Azure API Request ID = 936ecdd0c8140b94bcd4730e0a31c94a"
+""
+""
+"********************************"
+"**      EXECUTION START       **"
+"********************************"
+""
+UC4RB_AZR_REQUEST_STATUS ::= Succeeded
+"INFO: ******** CHECK REQUEST STATUS ACTION EXECUTED SUCCESSFULLY ********"
+Program 'UC4 Job Messenger' version '11.1.0+build.890' started
+UCMDJP: *********************************************************************
+UCMDJP: ** JOB 0001017413 (ProcID:0000008256) ENDED AT 21.08.2015/11:36:00 **
+UCMDJP: **                                    UTC TIME 21.08.2015/06:06:00 **
+UCMDJP: ** --------------------------------------------------------------- **
+UCMDJP: **                                    USED:      0.000 CPU         **
+UCMDJP: *********************************************************************
+Connected with agent 'ANKIT3593'
+Program 'UC4 Job Messenger' version '11.1.0+build.890' terminated normally
+</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.308">Variables: </msg>
+<msg level="INFO" timestamp="20150821 11:36:02.308">&amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.308">System time = 0,05</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.324">End = 2015-08-21T06:06:00</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.324">Status = ENDED_OK - ended normally</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.324">Event ID = 1017413</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.339">Consumption = 1</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.339">Status text = Job ended</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.339">Post proc. = 2015-08-21T06:06:00</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.370">Start = 2015-08-21T06:05:56</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.370">Runtime =    0:00:04</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.370">RunID = 1017413</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.370">CPU time = 0,05</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.370">Title = Check status of an Azure request</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.386">User time = 0,00</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.386">&amp;UC4RB_AZR_REQUEST_ID# = 936ecdd0c8140b94bcd4730e0a31c94a</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.386">Login = (NAGARRO\ankittaneja)</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.417">User = USER/TEST_01</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.417">Enable Rollback = No</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.417">Activation = 2015-08-21T06:05:56</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.417">Job Status = ENDED_OK - ended normally</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.417">&amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.417">&amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.433">Object name = PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.433">Activator = 1017412</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.433">&amp;UC4RB_AGENT_OS# = WINDOWS</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.433">Start type = JOBP</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.449">&amp;UC4RB_AZR_REQUEST_STATUS# =  Succeeded</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.449">&amp;AGENT# = Ankit3593</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.449">Parent = 1017412</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.449">Process ID = 8256</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.449">Return code = 0</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.464">Version = 1</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.464">Express = Deactivated</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.464">&amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.464">Queue = CLIENT_QUEUE</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.480">Host = ANKIT3593</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:02.480">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.480">Deactivate task, runId = 1017411</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.495">Export result done</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.495">Clean up workflow 1017411...</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.495">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.495">Deactivate task, runId = 1017411</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.527">Clean up workflow done</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.527">Return: None</msg>
+<status endtime="20150821 11:36:02.527" starttime="20150821 11:35:55.074" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Assert Success</arg>
+<arg>ELSE IF</arg>
+<arg>'${OK_NOK}' == 'NOK'</arg>
+<arg>Assert Failure</arg>
+<arg>ELSE</arg>
+<arg>Assert Mandatory</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.527">Arguments: [ u"'OK' == 'OK'" | u'Assert Success' | u'ELSE IF' | u"'${OK_NOK}' == 'NOK'" | u'Assert Failure' | u'ELSE' | u'Assert Mandatory' ]</msg>
+<kw type="kw" name="keywords.Assert Success">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.542">Arguments: [  ]</msg>
+<kw type="kw" name="keywords.Action Report Should Be Found">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.542">Arguments: [  ]</msg>
+<kw type="kw" name="${report} = com.automic.robot.itpa.ItpaLibrary.Action Get Report">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.542">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.542">Load action last report, action = PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS14401371549467697551922339077170, runId = 1017411</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.558">Return: u'20150821/113556.344 - U02001096 Job \'1017413\' uses client-wide resource \'3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\itpa-tool.jar\'.\n20150821/113556.346 - U02001096 Job \'1017413\' uses client-wide resource \'3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\azuretool.jar\'.\n\nc:\\&gt;C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\bin\\UCXJWX6m.exe JNR=0001017413 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" \nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017413 (ProcID:0000008256) START AT 21.08.2015/11:35:56 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:05:56 **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n""\n""\n"********************************"\n"** PARAMETER VALIDATION START **"\n"********************************"\n""\n"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"\n"PARAM: Keystore location = E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks"\n"PARAM: Keystore Password = test123"\n"PARAM: Azure API Request ID = 936ecdd0c8140b94bcd4730e0a31c94a"\n""\n""\n"********************************"\n"**      EXECUTION START       **"\n"********************************"\n""\nUC4RB_AZR_REQUEST_STATUS ::= Succeeded\n"INFO: ******** CHECK REQUEST STATUS ACTION EXECUTED SUCCESSFULLY ********"\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017413 (ProcID:0000008256) ENDED AT 21.08.2015/11:36:00 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:06:00 **\nUCMDJP: ** --------------------------------------------------------------- **\nUCMDJP: **                                    USED:      0.000 CPU         **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n'</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.558">${report} = 20150821/113556.344 - U02001096 Job '1017413' uses client-wide resource '3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\itpa-tool.jar'.
+20150821/11...</msg>
+<status endtime="20150821 11:36:02.558" starttime="20150821 11:36:02.542" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Not Be Empty">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${report}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.558">Arguments: [ u'20150821/113556.344 - U02001096 Job \'1017413\' uses client-wide resource \'3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\itpa-tool.jar\'.\n20150821/113556.346 - U02001096 Job \'1017413\' uses client-wide resource \'3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\azuretool.jar\'.\n\nc:\\&gt;C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\bin\\UCXJWX6m.exe JNR=0001017413 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" \nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017413 (ProcID:0000008256) START AT 21.08.2015/11:35:56 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:05:56 **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n""\n""\n"********************************"\n"** PARAMETER VALIDATION START **"\n"********************************"\n""\n"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"\n"PARAM: Keystore location = E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks"\n"PARAM: Keystore Password = test123"\n"PARAM: Azure API Request ID = 936ecdd0c8140b94bcd4730e0a31c94a"\n""\n""\n"********************************"\n"**      EXECUTION START       **"\n"********************************"\n""\nUC4RB_AZR_REQUEST_STATUS ::= Succeeded\n"INFO: ******** CHECK REQUEST STATUS ACTION EXECUTED SUCCESSFULLY ********"\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017413 (ProcID:0000008256) ENDED AT 21.08.2015/11:36:00 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:06:00 **\nUCMDJP: ** --------------------------------------------------------------- **\nUCMDJP: **                                    USED:      0.000 CPU         **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.558">Length is 2234</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.558">Return: None</msg>
+<status endtime="20150821 11:36:02.558" starttime="20150821 11:36:02.558" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.558">Return: None</msg>
+<status endtime="20150821 11:36:02.558" starttime="20150821 11:36:02.542" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Action Return Status Should Be">
+<doc></doc>
+<arguments>
+<arg>${ENDED_OK}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.573">Arguments: [ ${status}=u'ENDED_OK - ended normally' ]</msg>
+<kw type="kw" name="${returnStatus} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>Status</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.573">Arguments: [ u'Status' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.573">Get action variable: Status</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.573">Return: u'ENDED_OK - ended normally'</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.573">${returnStatus} = ENDED_OK - ended normally</msg>
+<status endtime="20150821 11:36:02.573" starttime="20150821 11:36:02.573" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${returnStatus}</arg>
+<arg>${status}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.573">Arguments: [ u'ENDED_OK - ended normally' | u'ENDED_OK - ended normally' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.573">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.573">Return: None</msg>
+<status endtime="20150821 11:36:02.573" starttime="20150821 11:36:02.573" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.573">Return: None</msg>
+<status endtime="20150821 11:36:02.573" starttime="20150821 11:36:02.573" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Action Return Code Should Be">
+<doc></doc>
+<arguments>
+<arg>${RETURN_CODE_SUCCESS}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.589">Arguments: [ ${code}=u'0' ]</msg>
+<kw type="kw" name="${returnCode} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>Return code</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.589">Arguments: [ u'Return code' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.589">Get action variable: Return code</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.589">Return: u'0'</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.589">${returnCode} = 0</msg>
+<status endtime="20150821 11:36:02.589" starttime="20150821 11:36:02.589" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${returnCode}</arg>
+<arg>${code}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.589">Arguments: [ u'0' | u'0' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.589">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.589">Return: None</msg>
+<status endtime="20150821 11:36:02.589" starttime="20150821 11:36:02.589" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.589">Return: None</msg>
+<status endtime="20150821 11:36:02.589" starttime="20150821 11:36:02.589" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.605">Return: None</msg>
+<status endtime="20150821 11:36:02.605" starttime="20150821 11:36:02.542" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.605">Return: None</msg>
+<status endtime="20150821 11:36:02.605" starttime="20150821 11:36:02.527" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Action Object Variable Should Be Found</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+<arg>ELSE</arg>
+<arg>Action Object Variable Should Not Be Found</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.605">Arguments: [ u"'OK' == 'OK'" | u'Action Object Variable Should Be Found' | u'&amp;UC4RB_AZR_REQUEST_STATUS#' | u'ELSE' | u'Action Object Variable Should Not Be Found' | u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<kw type="kw" name="keywords.Action Object Variable Should Be Found">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.605">Arguments: [ ${Object_Variable}=u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<kw type="kw" name="${objectVariable} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>${Object_Variable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.605">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.620">Get action variable: &amp;UC4RB_AZR_REQUEST_STATUS#</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.620">Return: u' Succeeded'</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.620">${objectVariable} =  Succeeded</msg>
+<status endtime="20150821 11:36:02.620" starttime="20150821 11:36:02.605" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Not Be Empty">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${objectVariable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.620">Arguments: [ u' Succeeded' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.620">Length is 10</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.620">Return: None</msg>
+<status endtime="20150821 11:36:02.620" starttime="20150821 11:36:02.620" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Set Global Variable">
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<arguments>
+<arg>${objectVariable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.620">Arguments: [ u'${objectVariable}' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.620">${objectVariable} =  Succeeded</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.636">Return: None</msg>
+<status endtime="20150821 11:36:02.636" starttime="20150821 11:36:02.620" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.636">Return: None</msg>
+<status endtime="20150821 11:36:02.636" starttime="20150821 11:36:02.605" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.636">Return: None</msg>
+<status endtime="20150821 11:36:02.636" starttime="20150821 11:36:02.605" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.636">Return: None</msg>
+<status endtime="20150821 11:36:02.636" starttime="20150821 11:35:41.757" status="PASS"></status>
+</kw>
+<doc></doc>
+<tags>
+<tag>all</tag>
+</tags>
+<status critical="yes" endtime="20150821 11:36:02.636" starttime="20150821 11:35:41.717" status="PASS"></status>
+</test>
+<test name="Asserting s Invalid Request ID" id="s1-s1-s1-s1-s1-t2">
+<kw type="kw" name="Check Request Status Template">
+<doc>This test retrieves the status of the azure request id.</doc>
+<arguments>
+<arg>NOK</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>b2ekof439dksksi9</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.667">Arguments: [ ${OK_NOK}=u'NOK' | ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Certificate_Path}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Certificate_Password}=u'test123' | ${Request_ID}=u'b2ekof439dksksi9' ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Change VM State</arg>
+<arg>${_CHANGE_VM_STATE_ACTION}</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>${VM_Name}</arg>
+<arg>${Cloud_Service_Name}</arg>
+<arg>${Deployment_Name}</arg>
+<arg>SHUTDOWN_DEALLOCATE_VM</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.683">Arguments: [ u"'NOK' == 'OK'" | u'Change VM State' | u'${_CHANGE_VM_STATE_ACTION}' | u'${Subscription_ID}' | u'${Cert_Path}' | u'${Cert_Password}' | u'${VM_Name}' | u'${Cloud_Service_Name}' | u'${Deployment_Name}' | u'SHUTDOWN_DEALLOCATE_VM' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.683">Return: None</msg>
+<status endtime="20150821 11:36:02.683" starttime="20150821 11:36:02.667" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Create">
+<doc></doc>
+<arguments>
+<arg>${_CHECK_REQUEST_STATUS_ACION}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.683">Arguments: [ u'PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.683">Create action PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.683">Return: None</msg>
+<status endtime="20150821 11:36:02.683" starttime="20150821 11:36:02.683" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Configure Connection">
+<doc></doc>
+<arguments>
+<arg>${Subscription_ID}</arg>
+<arg>${Certificate_Path}</arg>
+<arg>${Certificate_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.683">Arguments: [ ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Cert_Location}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Cert_Password}=u'test123' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_SUBSCRIPTION_ID#</arg>
+<arg>${Subscription_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.698">Arguments: [ u'&amp;UC4RB_AZR_SUBSCRIPTION_ID#' | u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.698">Set prompt set: &amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.698">Return: None</msg>
+<status endtime="20150821 11:36:02.698" starttime="20150821 11:36:02.698" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PATH#</arg>
+<arg>${Cert_Location}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.698">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PATH#' | u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.714">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Return: None</msg>
+<status endtime="20150821 11:36:02.714" starttime="20150821 11:36:02.698" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PSWD#</arg>
+<arg>${Cert_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PSWD#' | u'test123' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.714">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Return: None</msg>
+<status endtime="20150821 11:36:02.714" starttime="20150821 11:36:02.714" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Return: None</msg>
+<status endtime="20150821 11:36:02.714" starttime="20150821 11:36:02.683" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${Request_ID}' == 'ValidID'</arg>
+<arg>Action Set</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Generated_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Arguments: [ u"'b2ekof439dksksi9' == 'ValidID'" | u'Action Set' | u'&amp;UC4RB_AZR_REQUEST_ID#' | u'${Generated_ID}' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Return: None</msg>
+<status endtime="20150821 11:36:02.714" starttime="20150821 11:36:02.714" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${Request_ID}' != 'ValidID'</arg>
+<arg>Action Set</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Request_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.714">Arguments: [ u"'b2ekof439dksksi9' != 'ValidID'" | u'Action Set' | u'&amp;UC4RB_AZR_REQUEST_ID#' | u'${Request_ID}' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Request_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.729">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_ID#' | u'b2ekof439dksksi9' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.729">Set prompt set: &amp;UC4RB_AZR_REQUEST_ID# = b2ekof439dksksi9</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.729">Return: None</msg>
+<status endtime="20150821 11:36:02.729" starttime="20150821 11:36:02.729" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.729">Return: None</msg>
+<status endtime="20150821 11:36:02.729" starttime="20150821 11:36:02.714" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Set Overwrite Agent">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.729">Arguments: [  ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'WIN'</arg>
+<arg>Set Overwrite Agent WIN</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.729">Arguments: [ u"'WIN' == 'WIN'" | u'Set Overwrite Agent WIN' ]</msg>
+<kw type="kw" name="keywords.Set Overwrite Agent WIN">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.745">Arguments: [  ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;AGENT#</arg>
+<arg>${_PROMPTSET_AGENT_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.745">Arguments: [ u'&amp;AGENT#' | u'Ankit3593' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.745">Set prompt set: &amp;AGENT# = Ankit3593</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.745">Return: None</msg>
+<status endtime="20150821 11:36:02.745" starttime="20150821 11:36:02.745" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;LOGIN#</arg>
+<arg>${_PROMPTSET_LOGIN_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.745">Arguments: [ u'&amp;LOGIN#' | u'LOGIN.NEW.1' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.761">Set prompt set: &amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.761">Return: None</msg>
+<status endtime="20150821 11:36:02.761" starttime="20150821 11:36:02.745" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.761">Return: None</msg>
+<status endtime="20150821 11:36:02.761" starttime="20150821 11:36:02.745" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.761">Return: None</msg>
+<status endtime="20150821 11:36:02.761" starttime="20150821 11:36:02.729" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'UNIX'</arg>
+<arg>Set Overwrite Agent UNIX</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.761">Arguments: [ u"'WIN' == 'UNIX'" | u'Set Overwrite Agent UNIX' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.761">Return: None</msg>
+<status endtime="20150821 11:36:02.761" starttime="20150821 11:36:02.761" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'QTP'</arg>
+<arg>Set Overwrite Agent QTP</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.761">Arguments: [ u"'WIN' == 'QTP'" | u'Set Overwrite Agent QTP' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:02.776">Return: None</msg>
+<status endtime="20150821 11:36:02.776" starttime="20150821 11:36:02.761" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:02.776">Return: None</msg>
+<status endtime="20150821 11:36:02.776" starttime="20150821 11:36:02.729" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Execute">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:02.776">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:02.776">Execute action PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS14401371626835086383123589397167</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:02.776">Create wrapper workflow which include testing action...</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:03.091">Assign all required parameters...</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:03.333">Execute workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:03.380">Waiting for workflow running, runId = 1017415, timeout = 300</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:08.412">... 1 waiting, 0 ended, 0 running backup, 0 rollback, 0</msg>
+<msg level="INFO" timestamp="20150821 11:36:08.506">Deactivate task, runId = 1017415</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:08.521">RunId = 1017415</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:08.537">Execute done</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.548">Export results of 1017415...</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:09.667">Report = 20150821/113603.727 - U02001096 Job '1017417' uses client-wide resource '3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\itpa-tool.jar'.
+20150821/113603.727 - U02001096 Job '1017417' uses client-wide resource '3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\azuretool.jar'.
+
+c:\&gt;C:\Automic\UC4\Agents\windows\ankit3593\bin\UCXJWX6m.exe JNR=0001017417 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" 
+Program 'UC4 Job Messenger' version '11.1.0+build.890' started
+UCMDJP: *********************************************************************
+UCMDJP: ** JOB 0001017417 (ProcID:0000003240) START AT 21.08.2015/11:36:03 **
+UCMDJP: **                                    UTC TIME 21.08.2015/06:06:03 **
+UCMDJP: *********************************************************************
+Connected with agent 'ANKIT3593'
+Program 'UC4 Job Messenger' version '11.1.0+build.890' terminated normally
+""
+""
+"********************************"
+"** PARAMETER VALIDATION START **"
+"********************************"
+""
+"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"
+"PARAM: Keystore location = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks"
+"PARAM: Keystore Password = test123"
+"PARAM: Azure API Request ID = b2ekof439dksksi9"
+""
+""
+"********************************"
+"**      EXECUTION START       **"
+"********************************"
+""
+ERROR | Azure Response: Error Code: [BadRequest] Message: The operation request ID was not found.
+ERROR | Please check the input parameters. For more details refer java logs
+"ERROR: ******** CHECK REQUEST STATUS ACTION FAILED ********"
+Program 'UC4 Job Messenger' version '11.1.0+build.890' started
+UCMDJP: *********************************************************************
+UCMDJP: ** JOB 0001017417 (ProcID:0000003240) ABEND AT 21.08.2015/11:36:07 **
+UCMDJP: **                                    UTC TIME 21.08.2015/06:06:07 **
+UCMDJP: ** --------------------------------------------------------------- **
+UCMDJP: **                                RET-CODE:          1             **
+UCMDJP: **                                    USED:      0.000 CPU         **
+UCMDJP: *********************************************************************
+Connected with agent 'ANKIT3593'
+Program 'UC4 Job Messenger' version '11.1.0+build.890' terminated normally
+</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.672">Variables: </msg>
+<msg level="INFO" timestamp="20150821 11:36:09.675">Object name = PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.677">Activation = 2015-08-21T06:06:03</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.680">Consumption = 1</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.682">User = USER/TEST_01</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.685">Title = Check status of an Azure request</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.687">RunID = 1017417</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.690">Runtime =    0:00:04</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.690">System time = 0,05</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.692">Version = 1</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.710">Parent = 1017416</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">&amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">Event ID = 1017417</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">Return code = 1</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">Express = Deactivated</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">Start = 2015-08-21T06:06:03</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">End = 2015-08-21T06:06:07</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.726">Status text = Job ended with retcode</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">&amp;UC4RB_AGENT_OS# = WINDOWS</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">Process ID = 3240</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">Enable Rollback = No</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">Status = ENDED_NOT_OK - aborted</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">CPU time = 0,05</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">Job Status = ENDED_NOT_OK - aborted</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">&amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">&amp;UC4RB_AZR_REQUEST_ID# = b2ekof439dksksi9</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.741">Login = (NAGARRO\ankittaneja)</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">Host = ANKIT3593</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">User time = 0,00</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">Activator = 1017416</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">Post proc. = 2015-08-21T06:06:07</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">&amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">&amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">&amp;AGENT# = Ankit3593</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.757">Queue = CLIENT_QUEUE</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.773">Start type = JOBP</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:09.773">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.773">Deactivate task, runId = 1017415</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.788">Export result done</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.788">Clean up workflow 1017415...</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.788">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.788">Deactivate task, runId = 1017415</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.804">Clean up workflow done</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.804">Return: None</msg>
+<status endtime="20150821 11:36:09.804" starttime="20150821 11:36:02.776" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Assert Success</arg>
+<arg>ELSE IF</arg>
+<arg>'${OK_NOK}' == 'NOK'</arg>
+<arg>Assert Failure</arg>
+<arg>ELSE</arg>
+<arg>Assert Mandatory</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.804">Arguments: [ u"'NOK' == 'OK'" | u'Assert Success' | u'ELSE IF' | u"'${OK_NOK}' == 'NOK'" | u'Assert Failure' | u'ELSE' | u'Assert Mandatory' ]</msg>
+<kw type="kw" name="keywords.Assert Failure">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.819">Arguments: [  ]</msg>
+<kw type="kw" name="keywords.Action Report Should Be Found">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.819">Arguments: [  ]</msg>
+<kw type="kw" name="${report} = com.automic.robot.itpa.ItpaLibrary.Action Get Report">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.819">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.819">Load action last report, action = PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS14401371626835086383123589397167, runId = 1017415</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.819">Return: u'20150821/113603.727 - U02001096 Job \'1017417\' uses client-wide resource \'3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\itpa-tool.jar\'.\n20150821/113603.727 - U02001096 Job \'1017417\' uses client-wide resource \'3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\azuretool.jar\'.\n\nc:\\&gt;C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\bin\\UCXJWX6m.exe JNR=0001017417 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" \nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017417 (ProcID:0000003240) START AT 21.08.2015/11:36:03 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:06:03 **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n""\n""\n"********************************"\n"** PARAMETER VALIDATION START **"\n"********************************"\n""\n"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"\n"PARAM: Keystore location = E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks"\n"PARAM: Keystore Password = test123"\n"PARAM: Azure API Request ID = b2ekof439dksksi9"\n""\n""\n"********************************"\n"**      EXECUTION START       **"\n"********************************"\n""\nERROR | Azure Response: Error Code: [BadRequest] Message: The operation request ID was not found.\nERROR | Please check the input parameters. For more details refer java logs\n"ERROR: ******** CHECK REQUEST STATUS ACTION FAILED ********"\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017417 (ProcID:0000003240) ABEND AT 21.08.2015/11:36:07 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:06:07 **\nUCMDJP: ** --------------------------------------------------------------- **\nUCMDJP: **                                RET-CODE:          1             **\nUCMDJP: **                                    USED:      0.000 CPU         **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n'</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.835">${report} = 20150821/113603.727 - U02001096 Job '1017417' uses client-wide resource '3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR' - 'C:\Automic\UC4\Agents\windows\ankit3593\Resources\0003\itpa-tool.jar'.
+20150821/11...</msg>
+<status endtime="20150821 11:36:09.819" starttime="20150821 11:36:09.819" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Not Be Empty">
+<doc>Verifies that the given item is not empty.</doc>
+<arguments>
+<arg>${report}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.835">Arguments: [ u'20150821/113603.727 - U02001096 Job \'1017417\' uses client-wide resource \'3:PCK.ITPA_SHARED.PRV.STORE/ITPATOOL.JAR\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\itpa-tool.jar\'.\n20150821/113603.727 - U02001096 Job \'1017417\' uses client-wide resource \'3:PCK.AUTOMIC_AZURE.PRV.STORE/AZURE\' - \'C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\Resources\\0003\\azuretool.jar\'.\n\nc:\\&gt;C:\\Automic\\UC4\\Agents\\windows\\ankit3593\\bin\\UCXJWX6m.exe JNR=0001017417 MNR=0003 PNR=2300 IPA=127.0.0.1 TYP=S TXT="        Job started" \nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017417 (ProcID:0000003240) START AT 21.08.2015/11:36:03 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:06:03 **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n""\n""\n"********************************"\n"** PARAMETER VALIDATION START **"\n"********************************"\n""\n"PARAM: Subscription ID = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92"\n"PARAM: Keystore location = E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks"\n"PARAM: Keystore Password = test123"\n"PARAM: Azure API Request ID = b2ekof439dksksi9"\n""\n""\n"********************************"\n"**      EXECUTION START       **"\n"********************************"\n""\nERROR | Azure Response: Error Code: [BadRequest] Message: The operation request ID was not found.\nERROR | Please check the input parameters. For more details refer java logs\n"ERROR: ******** CHECK REQUEST STATUS ACTION FAILED ********"\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' started\nUCMDJP: *********************************************************************\nUCMDJP: ** JOB 0001017417 (ProcID:0000003240) ABEND AT 21.08.2015/11:36:07 **\nUCMDJP: **                                    UTC TIME 21.08.2015/06:06:07 **\nUCMDJP: ** --------------------------------------------------------------- **\nUCMDJP: **                                RET-CODE:          1             **\nUCMDJP: **                                    USED:      0.000 CPU         **\nUCMDJP: *********************************************************************\nConnected with agent \'ANKIT3593\'\nProgram \'UC4 Job Messenger\' version \'11.1.0+build.890\' terminated normally\n' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.851">Length is 2417</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.851">Return: None</msg>
+<status endtime="20150821 11:36:09.851" starttime="20150821 11:36:09.835" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.851">Return: None</msg>
+<status endtime="20150821 11:36:09.851" starttime="20150821 11:36:09.819" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Action Return Status Should Be">
+<doc></doc>
+<arguments>
+<arg>${ENDED_NOT_OK}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.851">Arguments: [ ${status}=u'ENDED_NOT_OK - aborted' ]</msg>
+<kw type="kw" name="${returnStatus} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>Status</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.851">Arguments: [ u'Status' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.851">Get action variable: Status</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.851">Return: u'ENDED_NOT_OK - aborted'</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.851">${returnStatus} = ENDED_NOT_OK - aborted</msg>
+<status endtime="20150821 11:36:09.851" starttime="20150821 11:36:09.851" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${returnStatus}</arg>
+<arg>${status}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.851">Arguments: [ u'ENDED_NOT_OK - aborted' | u'ENDED_NOT_OK - aborted' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.866">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.866">Return: None</msg>
+<status endtime="20150821 11:36:09.866" starttime="20150821 11:36:09.851" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.866">Return: None</msg>
+<status endtime="20150821 11:36:09.866" starttime="20150821 11:36:09.851" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Action Return Code Should Be">
+<doc></doc>
+<arguments>
+<arg>${RETURN_CODE_FAILURE}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.866">Arguments: [ ${code}=u'1' ]</msg>
+<kw type="kw" name="${returnCode} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>Return code</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.866">Arguments: [ u'Return code' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.866">Get action variable: Return code</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.866">Return: u'1'</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.866">${returnCode} = 1</msg>
+<status endtime="20150821 11:36:09.866" starttime="20150821 11:36:09.866" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${returnCode}</arg>
+<arg>${code}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.866">Arguments: [ u'1' | u'1' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.866">Argument types are:
+&lt;type 'unicode'&gt;
+&lt;type 'unicode'&gt;</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Return: None</msg>
+<status endtime="20150821 11:36:09.866" starttime="20150821 11:36:09.866" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Return: None</msg>
+<status endtime="20150821 11:36:09.882" starttime="20150821 11:36:09.866" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Return: None</msg>
+<status endtime="20150821 11:36:09.882" starttime="20150821 11:36:09.819" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Return: None</msg>
+<status endtime="20150821 11:36:09.882" starttime="20150821 11:36:09.804" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Action Object Variable Should Be Found</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+<arg>ELSE</arg>
+<arg>Action Object Variable Should Not Be Found</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Arguments: [ u"'NOK' == 'OK'" | u'Action Object Variable Should Be Found' | u'&amp;UC4RB_AZR_REQUEST_STATUS#' | u'ELSE' | u'Action Object Variable Should Not Be Found' | u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<kw type="kw" name="keywords.Action Object Variable Should Not Be Found">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Arguments: [ ${Object_Variable}=u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<kw type="kw" name="${objectVariable} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>${Object_Variable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.882">Get action variable: &amp;UC4RB_AZR_REQUEST_STATUS#</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.882">Return: u''</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.882">${objectVariable} = </msg>
+<status endtime="20150821 11:36:09.882" starttime="20150821 11:36:09.882" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Empty">
+<doc>Verifies that the given item is empty.</doc>
+<arguments>
+<arg>${objectVariable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.897">Arguments: [ u'' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.897">Length is 0</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.897">Return: None</msg>
+<status endtime="20150821 11:36:09.897" starttime="20150821 11:36:09.897" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.897">Return: None</msg>
+<status endtime="20150821 11:36:09.897" starttime="20150821 11:36:09.882" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.897">Return: None</msg>
+<status endtime="20150821 11:36:09.897" starttime="20150821 11:36:09.882" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.897">Return: None</msg>
+<status endtime="20150821 11:36:09.897" starttime="20150821 11:36:02.667" status="PASS"></status>
+</kw>
+<doc></doc>
+<tags>
+<tag>all</tag>
+</tags>
+<status critical="yes" endtime="20150821 11:36:09.897" starttime="20150821 11:36:02.651" status="PASS"></status>
+</test>
+<test name="Asserting Mandatory Field" id="s1-s1-s1-s1-s1-t3">
+<kw type="kw" name="Check Request Status Template">
+<doc>This test retrieves the status of the azure request id.</doc>
+<arguments>
+<arg>OTHER</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.929">Arguments: [ ${OK_NOK}=u'OTHER' | ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Certificate_Path}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Certificate_Password}=u'test123' | ${Request_ID}='' ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Change VM State</arg>
+<arg>${_CHANGE_VM_STATE_ACTION}</arg>
+<arg>${Subscription_ID}</arg>
+<arg>${Cert_Path}</arg>
+<arg>${Cert_Password}</arg>
+<arg>${VM_Name}</arg>
+<arg>${Cloud_Service_Name}</arg>
+<arg>${Deployment_Name}</arg>
+<arg>SHUTDOWN_DEALLOCATE_VM</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.929">Arguments: [ u"'OTHER' == 'OK'" | u'Change VM State' | u'${_CHANGE_VM_STATE_ACTION}' | u'${Subscription_ID}' | u'${Cert_Path}' | u'${Cert_Password}' | u'${VM_Name}' | u'${Cloud_Service_Name}' | u'${Deployment_Name}' | u'SHUTDOWN_DEALLOCATE_VM' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.929">Return: None</msg>
+<status endtime="20150821 11:36:09.929" starttime="20150821 11:36:09.929" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Create">
+<doc></doc>
+<arguments>
+<arg>${_CHECK_REQUEST_STATUS_ACION}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.929">Arguments: [ u'PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.929">Create action PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.929">Return: None</msg>
+<status endtime="20150821 11:36:09.929" starttime="20150821 11:36:09.929" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Configure Connection">
+<doc></doc>
+<arguments>
+<arg>${Subscription_ID}</arg>
+<arg>${Certificate_Path}</arg>
+<arg>${Certificate_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.929">Arguments: [ ${Subscription_ID}=u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' | ${Cert_Location}=u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' | ${Cert_Password}=u'test123' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_SUBSCRIPTION_ID#</arg>
+<arg>${Subscription_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.944">Arguments: [ u'&amp;UC4RB_AZR_SUBSCRIPTION_ID#' | u'39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.944">Set prompt set: &amp;UC4RB_AZR_SUBSCRIPTION_ID# = 39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.944">Return: None</msg>
+<status endtime="20150821 11:36:09.944" starttime="20150821 11:36:09.929" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PATH#</arg>
+<arg>${Cert_Location}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.944">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PATH#' | u'E:\\Robot Automation scripts\\AZURE-Test\\TestAzure\\azure.jks' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.944">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PATH# = E:\Robot Automation scripts\AZURE-Test\TestAzure\azure.jks</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.944">Return: None</msg>
+<status endtime="20150821 11:36:09.944" starttime="20150821 11:36:09.944" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_KEYSTORE_PSWD#</arg>
+<arg>${Cert_Password}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.944">Arguments: [ u'&amp;UC4RB_AZR_KEYSTORE_PSWD#' | u'test123' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.960">Set prompt set: &amp;UC4RB_AZR_KEYSTORE_PSWD# = test123</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Return: None</msg>
+<status endtime="20150821 11:36:09.960" starttime="20150821 11:36:09.944" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Return: None</msg>
+<status endtime="20150821 11:36:09.960" starttime="20150821 11:36:09.929" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${Request_ID}' == 'ValidID'</arg>
+<arg>Action Set</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Generated_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Arguments: [ u"'' == 'ValidID'" | u'Action Set' | u'&amp;UC4RB_AZR_REQUEST_ID#' | u'${Generated_ID}' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Return: None</msg>
+<status endtime="20150821 11:36:09.960" starttime="20150821 11:36:09.960" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${Request_ID}' != 'ValidID'</arg>
+<arg>Action Set</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Request_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Arguments: [ u"'' != 'ValidID'" | u'Action Set' | u'&amp;UC4RB_AZR_REQUEST_ID#' | u'${Request_ID}' ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_ID#</arg>
+<arg>${Request_ID}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_ID#' | '' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.960">Set prompt set: &amp;UC4RB_AZR_REQUEST_ID# = </msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.960">Return: None</msg>
+<status endtime="20150821 11:36:09.960" starttime="20150821 11:36:09.960" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.975">Return: None</msg>
+<status endtime="20150821 11:36:09.975" starttime="20150821 11:36:09.960" status="PASS"></status>
+</kw>
+<kw type="kw" name="keywords.Set Overwrite Agent">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.975">Arguments: [  ]</msg>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'WIN'</arg>
+<arg>Set Overwrite Agent WIN</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.975">Arguments: [ u"'WIN' == 'WIN'" | u'Set Overwrite Agent WIN' ]</msg>
+<kw type="kw" name="keywords.Set Overwrite Agent WIN">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.975">Arguments: [  ]</msg>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;AGENT#</arg>
+<arg>${_PROMPTSET_AGENT_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.975">Arguments: [ u'&amp;AGENT#' | u'Ankit3593' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.978">Set prompt set: &amp;AGENT# = Ankit3593</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.978">Return: None</msg>
+<status endtime="20150821 11:36:09.978" starttime="20150821 11:36:09.975" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Set">
+<doc></doc>
+<arguments>
+<arg>&amp;LOGIN#</arg>
+<arg>${_PROMPTSET_LOGIN_WIN}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.978">Arguments: [ u'&amp;LOGIN#' | u'LOGIN.NEW.1' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:09.978">Set prompt set: &amp;LOGIN# = LOGIN.NEW.1</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.978">Return: None</msg>
+<status endtime="20150821 11:36:09.978" starttime="20150821 11:36:09.978" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.978">Return: None</msg>
+<status endtime="20150821 11:36:09.978" starttime="20150821 11:36:09.975" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.978">Return: None</msg>
+<status endtime="20150821 11:36:09.978" starttime="20150821 11:36:09.975" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'UNIX'</arg>
+<arg>Set Overwrite Agent UNIX</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.978">Arguments: [ u"'WIN' == 'UNIX'" | u'Set Overwrite Agent UNIX' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.980">Return: None</msg>
+<status endtime="20150821 11:36:09.980" starttime="20150821 11:36:09.978" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${ENV}' == 'QTP'</arg>
+<arg>Set Overwrite Agent QTP</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.983">Arguments: [ u"'WIN' == 'QTP'" | u'Set Overwrite Agent QTP' ]</msg>
+<msg level="TRACE" timestamp="20150821 11:36:09.985">Return: None</msg>
+<status endtime="20150821 11:36:09.985" starttime="20150821 11:36:09.983" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:09.988">Return: None</msg>
+<status endtime="20150821 11:36:09.988" starttime="20150821 11:36:09.975" status="PASS"></status>
+</kw>
+<kw type="kw" name="com.automic.robot.itpa.ItpaLibrary.Action Execute">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:09.988">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:10.003">Execute action PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS14401371699297306017117286076378</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:10.019">Create wrapper workflow which include testing action...</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:10.354">Assign all required parameters...</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:10.624">Execute workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:10.671">Waiting for workflow running, runId = 1017419, timeout = 300</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:15.727">... 1 waiting, 0 ended, 0 running backup, 0 rollback, 0</msg>
+<msg level="INFO" timestamp="20150821 11:36:15.790">Deactivate task, runId = 1017419</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:15.805">RunId = 1017419</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:15.805">Execute done</msg>
+<msg level="INFO" timestamp="20150821 11:36:16.810">Export results of 1017419...</msg>
+<msg level="WARN" timestamp="20150821 11:36:16.888">Report still empty, wait for 1 second.</msg>
+<msg level="WARN" timestamp="20150821 11:36:17.964">Report still empty, wait for 5 seconds.</msg>
+<msg level="WARN" timestamp="20150821 11:36:23.072">Report still empty, wait for 10 seconds.</msg>
+<msg level="DEBUG" timestamp="20150821 11:36:33.172">Report = </msg>
+<msg level="INFO" timestamp="20150821 11:36:33.172">Variables: </msg>
+<msg level="DEBUG" timestamp="20150821 11:36:33.172">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.172">Deactivate task, runId = 1017419</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.175">Export result done</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.175">Clean up workflow 1017419...</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.175">Deactivate workflow...</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.175">Deactivate task, runId = 1017419</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.228">Clean up workflow done</msg>
+<msg level="TRACE" timestamp="20150821 11:36:33.228">Return: None</msg>
+<status endtime="20150821 11:36:33.228" starttime="20150821 11:36:09.988" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Assert Success</arg>
+<arg>ELSE IF</arg>
+<arg>'${OK_NOK}' == 'NOK'</arg>
+<arg>Assert Failure</arg>
+<arg>ELSE</arg>
+<arg>Assert Mandatory</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.228">Arguments: [ u"'OTHER' == 'OK'" | u'Assert Success' | u'ELSE IF' | u"'${OK_NOK}' == 'NOK'" | u'Assert Failure' | u'ELSE' | u'Assert Mandatory' ]</msg>
+<kw type="kw" name="keywords.Assert Mandatory">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.228">Arguments: [  ]</msg>
+<kw type="kw" name="keywords.Action Report Should Not Be Found">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.228">Arguments: [  ]</msg>
+<kw type="kw" name="${report} = com.automic.robot.itpa.ItpaLibrary.Action Get Report">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.228">Arguments: [  ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.228">Load action last report, action = PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS14401371699297306017117286076378, runId = 1017419</msg>
+<msg level="TRACE" timestamp="20150821 11:36:33.228">Return: u''</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.228">${report} = </msg>
+<status endtime="20150821 11:36:33.228" starttime="20150821 11:36:33.228" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Empty">
+<doc>Verifies that the given item is empty.</doc>
+<arguments>
+<arg>${report}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Arguments: [ u'' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.244">Length is 0</msg>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Return: None</msg>
+<status endtime="20150821 11:36:33.244" starttime="20150821 11:36:33.244" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Return: None</msg>
+<status endtime="20150821 11:36:33.244" starttime="20150821 11:36:33.228" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Return: None</msg>
+<status endtime="20150821 11:36:33.244" starttime="20150821 11:36:33.228" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Return: None</msg>
+<status endtime="20150821 11:36:33.244" starttime="20150821 11:36:33.228" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Run Keyword If">
+<doc>Runs the given keyword with the given arguments, if `condition` is true.</doc>
+<arguments>
+<arg>'${OK_NOK}' == 'OK'</arg>
+<arg>Action Object Variable Should Be Found</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+<arg>ELSE</arg>
+<arg>Action Object Variable Should Not Be Found</arg>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Arguments: [ u"'OTHER' == 'OK'" | u'Action Object Variable Should Be Found' | u'&amp;UC4RB_AZR_REQUEST_STATUS#' | u'ELSE' | u'Action Object Variable Should Not Be Found' | u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<kw type="kw" name="keywords.Action Object Variable Should Not Be Found">
+<doc></doc>
+<arguments>
+<arg>&amp;UC4RB_AZR_REQUEST_STATUS#</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.244">Arguments: [ ${Object_Variable}=u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<kw type="kw" name="${objectVariable} = com.automic.robot.itpa.ItpaLibrary.Action Get Variable">
+<doc></doc>
+<arguments>
+<arg>${Object_Variable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.260">Arguments: [ u'&amp;UC4RB_AZR_REQUEST_STATUS#' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.260">Get action variable: &amp;UC4RB_AZR_REQUEST_STATUS#</msg>
+<msg level="TRACE" timestamp="20150821 11:36:33.260">Return: u''</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.260">${objectVariable} = </msg>
+<status endtime="20150821 11:36:33.260" starttime="20150821 11:36:33.260" status="PASS"></status>
+</kw>
+<kw type="kw" name="BuiltIn.Should Be Empty">
+<doc>Verifies that the given item is empty.</doc>
+<arguments>
+<arg>${objectVariable}</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.260">Arguments: [ u'' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.260">Length is 0</msg>
+<msg level="TRACE" timestamp="20150821 11:36:33.260">Return: None</msg>
+<status endtime="20150821 11:36:33.260" starttime="20150821 11:36:33.260" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.260">Return: None</msg>
+<status endtime="20150821 11:36:33.260" starttime="20150821 11:36:33.244" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.260">Return: None</msg>
+<status endtime="20150821 11:36:33.260" starttime="20150821 11:36:33.244" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.275">Return: None</msg>
+<status endtime="20150821 11:36:33.260" starttime="20150821 11:36:09.913" status="PASS"></status>
+</kw>
+<doc></doc>
+<tags>
+<tag>all</tag>
+</tags>
+<status critical="yes" endtime="20150821 11:36:33.275" starttime="20150821 11:36:09.897" status="PASS"></status>
+</test>
+<kw type="teardown" name="Teardown">
+<doc></doc>
+<arguments>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.291">Arguments: [  ]</msg>
+<kw type="kw" name="BuiltIn.Log">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>*******End Test "CHECK REQUEST STATUS"*******</arg>
+</arguments>
+<msg level="TRACE" timestamp="20150821 11:36:33.291">Arguments: [ u'*******End Test "CHECK REQUEST STATUS"*******' ]</msg>
+<msg level="INFO" timestamp="20150821 11:36:33.291">*******End Test "CHECK REQUEST STATUS"*******</msg>
+<msg level="TRACE" timestamp="20150821 11:36:33.291">Return: None</msg>
+<status endtime="20150821 11:36:33.291" starttime="20150821 11:36:33.291" status="PASS"></status>
+</kw>
+<msg level="TRACE" timestamp="20150821 11:36:33.291">Return: None</msg>
+<status endtime="20150821 11:36:33.291" starttime="20150821 11:36:33.291" status="PASS"></status>
+</kw>
+<doc></doc>
+<metadata>
+</metadata>
+<status endtime="20150821 11:36:33.291" starttime="20150821 11:35:40.772" status="PASS"></status>
+</suite>
+<doc></doc>
+<metadata>
+</metadata>
+<status endtime="20150821 11:36:33.306" starttime="20150821 11:35:40.582" status="PASS"></status>
+</suite>
+<doc></doc>
+<metadata>
+</metadata>
+<status endtime="20150821 11:36:33.322" starttime="20150821 11:35:40.545" status="PASS"></status>
+</suite>
+<doc></doc>
+<metadata>
+</metadata>
+<status endtime="20150821 11:36:33.338" starttime="20150821 11:35:40.502" status="PASS"></status>
+</suite>
+<doc></doc>
+<metadata>
+</metadata>
+<status endtime="20150821 11:36:33.353" starttime="20150821 11:35:40.127" status="PASS"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="3" fail="0" doc="" links="" combined="" info="">all</stat>
+</tag>
+<suite>
+<stat pass="3" fail="0" name="TestAZURE" id="s1">TestAZURE</stat>
+<stat pass="3" fail="0" name="PCK.AUTOMIC AZURE" id="s1-s1">TestAZURE.PCK.AUTOMIC AZURE</stat>
+<stat pass="3" fail="0" name="TestCases" id="s1-s1-s1">TestAZURE.PCK.AUTOMIC AZURE.TestCases</stat>
+<stat pass="3" fail="0" name="Check Request Status" id="s1-s1-s1-s1">TestAZURE.PCK.AUTOMIC AZURE.TestCases.Check Request Status</stat>
+<stat pass="3" fail="0" name="Check Request Status" id="s1-s1-s1-s1-s1">TestAZURE.PCK.AUTOMIC AZURE.TestCases.Check Request Status.Check Request Status</stat>
+</suite>
+</statistics>
+<errors>
+<msg level="ERROR" timestamp="20150821 11:35:41.607">Error in file 'E:\Robot Automation scripts\AZURE-Test\Env\default.txt': Setting variable '${_PROMPTSET_AGENT_UNIX}' failed: Variable '@{Promptset_Overwrite_Agent_UNIX}[0]' not found. Did you mean:
+    @{Promptset_Overwrite_Agent_WIN}</msg>
+<msg level="ERROR" timestamp="20150821 11:35:41.622">Error in file 'E:\Robot Automation scripts\AZURE-Test\Env\default.txt': Setting variable '${_PROMPTSET_LOGIN_UNIX}' failed: Variable '@{Promptset_Overwrite_Agent_UNIX}[1]' not found. Did you mean:
+    @{Promptset_Overwrite_Agent_WIN}</msg>
+<msg level="WARN" timestamp="20150821 11:36:16.888">Report still empty, wait for 1 second.</msg>
+<msg level="WARN" timestamp="20150821 11:36:17.964">Report still empty, wait for 5 seconds.</msg>
+<msg level="WARN" timestamp="20150821 11:36:23.072">Report still empty, wait for 10 seconds.</msg>
+</errors>
+</robot>
