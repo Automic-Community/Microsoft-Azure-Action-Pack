@@ -83,6 +83,7 @@ public class CheckRequestStatusAction extends AbstractAction {
         String status = "UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus();
         if (azReqstatus.getError() != null) {
             AzureErrorResponse azErrorResponse = azReqstatus.getError();
+            status += "\nHTTPStatusCode : " + azReqstatus.getHttpStatusCode();
             status += "\nError Code : " + azErrorResponse.getCode();
             status += "\nError Message : " + azErrorResponse.getMessage();
         }
