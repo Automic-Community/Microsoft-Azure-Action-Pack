@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_AZURE.PRV.JOB.GET_REQUEST_STATUS@GENERIC">
+<JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC">
 <XHEADER state="1">
 <Title>Check status of an Azure API request</Title>
 <ArchiveKey1/>
@@ -160,8 +160,8 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 
 
 ! Status messages
-:SET &UC4RB_LOGGING_INFO# = "******** GET REQUEST STATUS ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** GET REQUEST STATUS ACTION FAILED ********" 
+:SET &UC4RB_LOGGING_INFO# = "******** CHECK REQUEST STATUS ACTION EXECUTED SUCCESSFULLY ********"
+:SET &UC4RB_LOGGING_ERROR# = "******** CHECK REQUEST STATUS ACTION FAILED ********" 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 
