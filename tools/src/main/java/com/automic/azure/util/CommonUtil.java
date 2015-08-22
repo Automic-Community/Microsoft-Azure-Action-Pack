@@ -3,6 +3,10 @@ package com.automic.azure.util;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
 
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Source;
@@ -106,6 +110,20 @@ public final class CommonUtil {
             LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG,e);
             throw new AzureException(ExceptionConstants.GENERIC_ERROR_MSG + e.getMessage());
         }
+    }
+    
+    
+    /**
+     * Get UTC time for Storage Services in "EEE, dd MMM yyyy HH:mm:ss z" format
+     * @return Current date as a string
+     */
+    public static String getCurrentUTCDateForStorageService(){
+    	String RFC1123_PATTERN = "EEE, dd MMM yyyy HH:mm:ss z";
+    	
+		DateFormat rfc1123Format = new SimpleDateFormat(RFC1123_PATTERN);
+		rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
+		
+		return rfc1123Format.format(new Date());
     }
 
 }

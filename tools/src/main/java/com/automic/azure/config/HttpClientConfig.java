@@ -31,4 +31,20 @@ public final class HttpClientConfig {
         return Client.create(config);
     }
 
+    /**
+     * method to create an HTTP client for Storage Service
+     * @param connectionTimeOut
+     * @param readTimeOut
+     * @return
+     */
+	public static Client getStorageClient(int connectionTimeOut, int readTimeOut) {
+		// client config for Storage Service
+		ClientConfig config = new DefaultClientConfig();
+
+        config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
+        config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
+
+        return Client.create(config);
+	}
+
 }

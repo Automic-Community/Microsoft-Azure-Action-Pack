@@ -26,9 +26,9 @@ public final class ActionFactory {
      * @throws AzureException
      *             if no matching implementation could be found
      */
-    public static AbstractAction getAction(Action enumAction) throws AzureException {
+    public static IAzureAction getAction(Action enumAction) throws AzureException {
 
-        AbstractAction action = null;
+        IAzureAction action = null;
 
         switch (enumAction) {
             case VM_STATE:
@@ -39,6 +39,9 @@ public final class ActionFactory {
                 break;
             case CHECK_REQUEST_STATUS:
                 action = new CheckRequestStatusAction();
+                break;
+            case CREATE_STORAGE_CONTAINER:
+                action = new CreateStorageContainerAction();
                 break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();

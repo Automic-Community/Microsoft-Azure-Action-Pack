@@ -21,12 +21,12 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 
 /**
- * An abstract action which defines common flow of processes to interact with Azure API. Provides default implementation
+ * An abstract action which defines common flow of processes to interact with Azure Storage API. Provides default implementation
  * to initialize arguments, validate parameters, prepare API response and exception handling.
  */
-public abstract class AbstractAction implements IAzureAction {
+public abstract class AbstractStorageAction implements IAzureAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(AbstractStorageAction.class);
 
     private static final int BEGIN_HTTP_CODE = 200;
     private static final int END_HTTP_CODE = 300;
@@ -40,12 +40,10 @@ public abstract class AbstractAction implements IAzureAction {
     private final AzureOptions actionOptions;
     private AzureCli cli;
 
-    public AbstractAction() {
+    public AbstractStorageAction() {
         actionOptions = new AzureOptions();
         addOption(Constants.READ_TIMEOUT, true, "Read timeout");
         addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
-        addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
-        addOption(Constants.PASSWORD, true, "Keystore password");
         addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
     }
 
@@ -73,7 +71,7 @@ public abstract class AbstractAction implements IAzureAction {
             cli.log(Arrays.asList(new String[] { Constants.PASSWORD }));
             initializeArguments();
             validateInputs();
-            client = HttpClientConfig.getClient(this.keyStore, this.password, connectionTimeOut, readTimeOut);
+            client = HttpClientConfig.getStorageClient(connectionTimeOut, readTimeOut);
             ClientResponse response = executeSpecific(client);
             validateResponse(response);
             prepareOutput(response);
