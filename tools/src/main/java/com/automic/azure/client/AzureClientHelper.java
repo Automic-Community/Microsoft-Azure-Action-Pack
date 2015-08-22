@@ -5,8 +5,6 @@ package com.automic.azure.client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import com.automic.azure.actions.AbstractAction;
 import com.automic.azure.actions.ActionFactory;
 import com.automic.azure.actions.IAzureAction;
 import com.automic.azure.cli.AzureCli;

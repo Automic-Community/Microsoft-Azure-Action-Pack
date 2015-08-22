@@ -20,11 +20,11 @@ import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.filter.LoggingFilter;
 
 /**
- * An abstract action which defines common flow of processes to interact with Azure Storage API. Provides default implementation
- * to initialize arguments, validate parameters, prepare API response and exception handling.
+ * An abstract action which defines common flow of processes to interact with
+ * Azure Storage API. Provides default implementation to initialize arguments,
+ * validate parameters, prepare API response and exception handling.
  */
 public abstract class AbstractStorageAction implements IAzureAction {
 
@@ -36,9 +36,10 @@ public abstract class AbstractStorageAction implements IAzureAction {
     private int connectionTimeOut;
     private int readTimeOut;
     private final AzureOptions actionOptions;
+    private AzureCli cli;
+    
     
     AzureStorageAccount storageAccount;
-    private AzureCli cli;
 
     public AbstractStorageAction() {
         actionOptions = new AzureOptions();

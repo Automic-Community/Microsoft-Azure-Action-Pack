@@ -1,7 +1,5 @@
 package com.automic.azure.constants;
 
-import com.automic.azure.actions.AbstractAction;
-import com.automic.azure.actions.ActionFactory;
 
 /**
  * Enum that defines constants which are placeholder for actions. When an
