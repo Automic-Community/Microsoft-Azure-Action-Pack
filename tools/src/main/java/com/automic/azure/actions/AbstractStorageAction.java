@@ -14,8 +14,8 @@ import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.model.AzureStorageAccount;
+import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -74,7 +74,7 @@ public abstract class AbstractStorageAction implements IAzureAction {
             initializeArguments();
             validateInputs();
             client = HttpClientConfig.getStorageClient(connectionTimeOut, readTimeOut);
-            client.addFilter(new LoggingFilter());
+            //client.addFilter(new LoggingFilter());
             ClientResponse response = executeSpecific(client);
             validateResponse(response);
             prepareOutput(response);
@@ -163,7 +163,7 @@ public abstract class AbstractStorageAction implements IAzureAction {
     private void validateResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
+        	AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
             StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
             responseBuilder.append("Error Code: [");
             responseBuilder.append(error.getCode()).append("]");
