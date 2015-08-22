@@ -6,8 +6,10 @@ package com.automic.azure.services;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -15,20 +17,15 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
-import com.automic.azure.actions.CreateStorageContainerAction;
-import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.StorageAuthenticationUtil;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.WebResource;
 
 /**
- * Class as a service to interact with Azure Storage Service
+ * Abstract Class as a service to interact with Azure Storage Service
  *
  */
-public class AzureStorageService {
+public abstract class AzureStorageService {
 
 	
 	private static final Logger LOGGER = LogManager.getLogger(AzureStorageService.class);
@@ -37,23 +34,31 @@ public class AzureStorageService {
 	/**
 	 * Storage account
 	 */
-	private AzureStorageAccount storageAccount;
+	protected AzureStorageAccount storageAccount;
+	
+	
+	protected String clientURIForSignature;
 
 	/**
 	 * Common Http headers Example Content-Length
 	 */
-	private Map<String, String> commonHttpHeaders;
+	protected Map<String, String> commonHttpHeaders;
+	
+	/**
+	 * 
+	 */
+	protected List<String> commonHttpHeaderKeys;
 
 	/**
 	 * storage Http Headers Example x-ms-version
 	 */
-	private TreeMap<String, String> storageHttpHeaders;
+	protected TreeMap<String, String> storageHttpHeaders;
 
 	/**
 	 * http query parameters Example timeout, restype
 	 * 
 	 */
-	private TreeMap<String, String> queryParameters;
+	protected TreeMap<String, String> queryParameters;
 
 	/**
 	 * 
@@ -63,6 +68,7 @@ public class AzureStorageService {
 	public AzureStorageService(AzureStorageAccount storageAccount,
 			Map<String, String> commonHeaders, boolean isServiceForTable) {
 		this.storageAccount = storageAccount;
+		this.clientURIForSignature = "/" + storageAccount.getAccountName();
 		
 		if(isServiceForTable){
 			commonHttpHeaders = AzureStorageService.initCommonHeadersMapForTable(commonHeaders);
@@ -70,12 +76,16 @@ public class AzureStorageService {
 			commonHttpHeaders = AzureStorageService.initCommonHeadersMap(commonHeaders);
 		}
 		
+		commonHttpHeaderKeys = AzureStorageService.initCommonHeaderKeys();
+		
 		storageHttpHeaders = new TreeMap<>();
 
 		queryParameters = new TreeMap<>();
 
 	}
 	
+	
+
 	public void addStorageHttpHeaders(String key, String value){
 		storageHttpHeaders.put(key, value);
 	}
@@ -91,7 +101,7 @@ public class AzureStorageService {
 	 * @param commonHeaders
 	 * @return
 	 */
-	public static Map<String, String> initCommonHeadersMap(
+	private static Map<String, String> initCommonHeadersMap(
 			Map<String, String> commonHeaders) {
 		Map<String, String> headerMap = new HashMap<>();
 		headerMap.put("VERB", commonHeaders.get("VERB"));
@@ -108,6 +118,25 @@ public class AzureStorageService {
 		headerMap.put("Range", commonHeaders.get("Range"));
 		return headerMap;
 
+	}
+	
+	// 
+	private static List<String> initCommonHeaderKeys() {
+		List<String> commonHeaderKeys = new ArrayList<>();
+		commonHeaderKeys.add("VERB");
+		commonHeaderKeys.add("Content-Encoding");
+		commonHeaderKeys.add("Content-Language");
+		commonHeaderKeys.add("Content-Length");
+		commonHeaderKeys.add("Content-MD5");
+		commonHeaderKeys.add("Content-Type");
+		commonHeaderKeys.add("Date");
+		commonHeaderKeys.add("If-Modified-Since");
+		commonHeaderKeys.add("If-Match");
+		commonHeaderKeys.add("If-None-Match");
+		commonHeaderKeys.add("If-Unmodified-Since");
+		commonHeaderKeys.add("Range");
+		
+		return commonHeaderKeys;
 	}
 	
 	
@@ -129,37 +158,10 @@ public class AzureStorageService {
 
 	}
 
-	/**
-	 * 
-	 * 
-	 * @param containerName
-	 * @param containerAccess
-	 * @param storageHttpClient
-	 * @return
-	 * @throws AzureException 
-	 */
-	public ClientResponse createContainer(String containerName, ContainerAccess containerAccess, Client storageHttpClient) throws AzureException {
-		//
-		WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
-		
-		// header for container access
-		storageHttpHeaders.put("x-ms-blob-public-access", containerAccess.getValue());
-		// calculate Authorization header
-		storageHttpHeaders.put("Autherization", createAuthorizationHeader());
-		
-		
-		// set storage headers
-		for(String headerKey : storageHttpHeaders.keySet()){
-			resource.queryParam(headerKey, storageHttpHeaders.get(headerKey));
-		}
-		
-		// call the create container service and return response 
-		return resource.put(ClientResponse.class, Strings.EMPTY);
-	}
-	
+
 	
 	// Method to create authorization header String
-	private String createAuthorizationHeader() throws AzureException{
+	protected String createAuthorizationHeader() throws AzureException{
 		
 		StringBuilder authorizationHeader = new StringBuilder();
 		authorizationHeader.append("SharedKey ");
@@ -176,27 +178,30 @@ public class AzureStorageService {
 	private byte[] createAuthorizationSignature() throws AzureException{
 		
 		StringBuilder authorizationSignature = new StringBuilder();
-		// TODO create Signature
+		// create Signature
 		authorizationSignature.append(createAuthorizationCommonSignature());
 		//authorizationSignature.append("\n");
 		authorizationSignature.append(createCannonicalHeaders());
 		//authorizationSignature.append("\n");
 		authorizationSignature.append(createCannonicalResource());
 		
+		LOGGER.info("generated Signature for request");
+		LOGGER.info(authorizationSignature);
 		// encode Signature with 
 		try {
 			return StorageAuthenticationUtil.generateHMACSHA256WithKey(authorizationSignature.toString(), this.storageAccount.getPrimaryAccessKey());
 		} catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
-			LOGGER.error("", e);
-			throw new AzureException("", e);
+			LOGGER.error("Error in Creating Authentication Signature for Storage Service", e);
+			throw new AzureException("Error in Creating Authentication Signature for Storage Service", e);
 		} 
 	}
 	
 	
+	// create common part of signature
 	private String createAuthorizationCommonSignature(){
 		StringBuilder commonSignature = new StringBuilder();
 		// common http headers
-		for(String headerKey : commonHttpHeaders.keySet()){
+		for(String headerKey : commonHttpHeaderKeys){
 			String value = commonHttpHeaders.get(headerKey);
 			commonSignature.append(value != null ? value : Strings.EMPTY);
 			commonSignature.append("\n");
@@ -220,7 +225,7 @@ public class AzureStorageService {
 	// create cannonical header
 	private String createCannonicalResource(){
 		StringBuilder cannonicalResource = new StringBuilder();
-		cannonicalResource.append("/" + storageAccount.getAccountName());
+		cannonicalResource.append(this.clientURIForSignature);
 		cannonicalResource.append("\n");
 		// storage query parameters
 		for(Iterator<String> iterator =  queryParameters.keySet().iterator() ; iterator.hasNext(); ) {
@@ -231,7 +236,6 @@ public class AzureStorageService {
 			}
 			
 		}
-		
 		return cannonicalResource.toString();
 	}
 	

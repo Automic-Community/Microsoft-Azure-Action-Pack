@@ -15,10 +15,12 @@ import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureErrorResponse;
+import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.filter.LoggingFilter;
 
 /**
  * An abstract action which defines common flow of processes to interact with Azure Storage API. Provides default implementation
@@ -30,14 +32,12 @@ public abstract class AbstractStorageAction implements IAzureAction {
 
     private static final int BEGIN_HTTP_CODE = 200;
     private static final int END_HTTP_CODE = 300;
-
     protected String restapiVersion;
-
-    private String keyStore;
-    private String password;
     private int connectionTimeOut;
     private int readTimeOut;
     private final AzureOptions actionOptions;
+    
+    AzureStorageAccount storageAccount;
     private AzureCli cli;
 
     public AbstractStorageAction() {
@@ -45,6 +45,8 @@ public abstract class AbstractStorageAction implements IAzureAction {
         addOption(Constants.READ_TIMEOUT, true, "Read timeout");
         addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
         addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
+        addOption("accountname", true, "Storage Account Name");
+		addOption("accesskey", true, "Primary Access Key");
     }
 
     protected String getOptionValue(String arg) {
@@ -72,6 +74,7 @@ public abstract class AbstractStorageAction implements IAzureAction {
             initializeArguments();
             validateInputs();
             client = HttpClientConfig.getStorageClient(connectionTimeOut, readTimeOut);
+            client.addFilter(new LoggingFilter());
             ClientResponse response = executeSpecific(client);
             validateResponse(response);
             prepareOutput(response);
@@ -94,10 +97,8 @@ public abstract class AbstractStorageAction implements IAzureAction {
     private void initializeArguments() throws AzureException {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
-        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
-        this.password = getOptionValue(Constants.PASSWORD);
         this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
-
+        this.storageAccount = new AzureStorageAccount(getOptionValue("accountname"), getOptionValue("accesskey"));
         validateGeneralInputs();
         initialize();
     }
@@ -116,16 +117,6 @@ public abstract class AbstractStorageAction implements IAzureAction {
         if (this.readTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
-        }
-
-        if (!Validator.checkFileExists(this.keyStore)) {
-            LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
-        }
-
-        if (!Validator.checkNotEmpty(password)) {
-            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
         }
 
         if (!Validator.checkNotEmpty(restapiVersion)) {

@@ -3,6 +3,9 @@
  */
 package com.automic.azure.actions;
 
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,8 +15,7 @@ import org.apache.logging.log4j.Logger;
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.model.AzureStorageAccount;
-import com.automic.azure.services.AzureStorageService;
+import com.automic.azure.services.StorageBlobService;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -31,7 +33,7 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	/**
 	 * Storage Service
 	 */
-	private AzureStorageService storageService;
+	private StorageBlobService storageService;
 	
 	/**
 	 * 
@@ -48,8 +50,6 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	 * 
 	 */
 	public CreateStorageContainerAction() {
-		addOption("accountname", true, "Storage Account Name");
-		addOption("accesskey", true, "Primary Access Key");
 		addOption("containername", true, "Storage Container Name");
 		addOption("containeraccess", true, "Access level of Storage Container");
 		
@@ -61,13 +61,13 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	@Override
 	protected void initialize() {
 		// storage acc from account name and access key
-		AzureStorageAccount storageAccount = new AzureStorageAccount(getOptionValue("accountname"), getOptionValue("accesskey"));
+		
 		Map<String , String> commonHeaders = new HashMap<>();
 		commonHeaders.put("VERB", "PUT");
 		commonHeaders.put("Content-Type", "text/plain");
-		this.storageService = new AzureStorageService(storageAccount, commonHeaders, false);
+		this.storageService = new StorageBlobService(storageAccount, commonHeaders, false);
 		// add storage HTTP headers
-		this.storageService.addStorageHttpHeaders("x-ms-version", getOptionValue("x-ms-version"));
+		this.storageService.addStorageHttpHeaders("x-ms-version", getOptionValue("xmsversion"));
 		this.storageService.addStorageHttpHeaders("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
 		
 		//add query parameters
@@ -116,6 +116,17 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
 		// TODO Auto-generated method stub
+		System.out.println("Response:" + response.getClientResponseStatus().getReasonPhrase());
+		//System.out.println("XML:"+ response.getEntity(String.class));
+
+		// write formatted xml to System console
+		try {
+			CommonUtil.copyData(new ByteArrayInputStream(response.getEntity(String.class).getBytes()),
+					new FileOutputStream("D://testResponse.xml"));
+		} catch (AzureException | FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

@@ -1,5 +1,6 @@
 package com.automic.azure.util;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -19,6 +20,7 @@ import javax.xml.transform.stream.StreamSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 
@@ -107,8 +109,9 @@ public final class CommonUtil {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(xmlInput, xmlOutput);
         } catch (TransformerException e) {
-            LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG,e);
-            throw new AzureException(ExceptionConstants.GENERIC_ERROR_MSG + e.getMessage());
+        	String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, input);
+			LOGGER.error(msg,e);
+            throw new AzureException(msg, e);
         }
     }
     
@@ -124,6 +127,40 @@ public final class CommonUtil {
 		rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		return rfc1123Format.format(new Date());
+    }
+    
+    
+    /**
+     * Method to copy contents of an {@link InputStream} to a {@link OutputStream}
+     * @param source {@link InputStream} to read from
+     * @param dest {@link OutputStream} to write to
+     * @throws AzureException
+     */
+    public static void copyData(InputStream source, OutputStream dest) throws AzureException {    	
+    	byte[] buffer = new byte[Constants.IO_BUFFER_SIZE];
+    	int length;
+    	try {
+			while ((length = source.read(buffer)) > 0) {
+				dest.write(buffer, 0, length);
+				dest.flush();
+			}
+			
+		} catch (IOException e) {
+			String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
+			LOGGER.error(msg,e);
+            throw new AzureException(msg, e);
+		}finally{
+			
+			try {
+				source.close();
+				dest.close();
+			} catch (IOException e) {
+				String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
+				LOGGER.error(msg,e);
+	            throw new AzureException(msg, e);
+			}
+			
+		}
     }
 
 }
