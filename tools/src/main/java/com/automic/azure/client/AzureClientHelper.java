@@ -5,8 +5,9 @@ package com.automic.azure.client;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import com.automic.azure.actions.AbstractAction;
 import com.automic.azure.actions.ActionFactory;
-import com.automic.azure.actions.IAzureAction;
 import com.automic.azure.cli.AzureCli;
 import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.constants.Action;
@@ -33,7 +34,7 @@ public final class AzureClientHelper {
     public static void executeAction(String[] args) throws AzureException {
         String action = new AzureCli(new AzureOptions(), args).getOptionValue(Constants.ACTION).toUpperCase();
         LOGGER.info("Execution starts for action [" + action + "]...");
-        IAzureAction useraction = ActionFactory.getAction(Action.valueOf(action));
+        AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));
         useraction.executeAction(args);
     }
 }

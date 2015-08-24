@@ -25,10 +25,10 @@ import com.automic.azure.util.StorageAuthenticationUtil;
  * Abstract Class as a service to interact with Azure Storage Service
  *
  */
-public abstract class AzureStorageService {
+public class AzureStorageAuthenticationService {
 
 	private static final Logger LOGGER = LogManager
-			.getLogger(AzureStorageService.class);
+			.getLogger(AzureStorageAuthenticationService.class);
 
 	/**
 	 * Storage account
@@ -63,25 +63,31 @@ public abstract class AzureStorageService {
 	 * @param storageAccount
 	 * @param commonHeaders
 	 */
-	public AzureStorageService(AzureStorageAccount storageAccount,
-			Map<String, String> commonHeaders, boolean isServiceForTable) {
+	public AzureStorageAuthenticationService(AzureStorageAccount storageAccount, boolean isServiceForTable) {
 		this.storageAccount = storageAccount;
 		this.clientURIForSignature = "/" + storageAccount.getAccountName();
 
 		if (isServiceForTable) {
-			commonHttpHeaders = AzureStorageService
-					.initCommonHeadersMapForTable(commonHeaders);
+			
+			commonHttpHeaderKeys = AzureStorageAuthenticationService
+					.initCommonHeaderKeysForTable();
 		} else {
-			commonHttpHeaders = AzureStorageService
-					.initCommonHeadersMap(commonHeaders);
+			
+			commonHttpHeaderKeys = AzureStorageAuthenticationService
+					.initCommonHeaderKeys();
+
 		}
 
-		commonHttpHeaderKeys = AzureStorageService.initCommonHeaderKeys();
-
+		commonHttpHeaders = new HashMap<>();
+		
 		storageHttpHeaders = new TreeMap<>();
 
 		queryParameters = new TreeMap<>();
 
+	}
+	
+	public void addCommonHttpHeaders(String key, String value) {
+		commonHttpHeaders.put(key, value);
 	}
 
 	public void addStorageHttpHeaders(String key, String value) {
@@ -91,35 +97,17 @@ public abstract class AzureStorageService {
 	public void addQueryParameter(String key, String value) {
 		queryParameters.put(key, value);
 	}
-
-	/**
-	 * initialize Commomn Headers Map for Blob, File service
-	 * 
-	 * @param commonHeaders
-	 * @return
-	 */
-	private static Map<String, String> initCommonHeadersMap(
-			Map<String, String> commonHeaders) {
-		Map<String, String> headerMap = new HashMap<>();
-		headerMap.put("VERB", commonHeaders.get("VERB"));
-		headerMap
-				.put("Content-Encoding", commonHeaders.get("Content-Encoding"));
-		headerMap
-				.put("Content-Language", commonHeaders.get("Content-Language"));
-		headerMap.put("Content-Length", commonHeaders.get("Content-Length"));
-		headerMap.put("Content-MD5", commonHeaders.get("Content-MD5"));
-		headerMap.put("Content-Type", commonHeaders.get("Content-Type"));
-		headerMap.put("Date", commonHeaders.get("Date"));
-		headerMap.put("If-Modified-Since",
-				commonHeaders.get("If-Modified-Since"));
-		headerMap.put("If-Match", commonHeaders.get("If-Match"));
-		headerMap.put("If-None-Match", commonHeaders.get("If-None-Match"));
-		headerMap.put("If-Unmodified-Since",
-				commonHeaders.get("If-Unmodified-Since"));
-		headerMap.put("Range", commonHeaders.get("Range"));
-		return headerMap;
-
+	
+	
+	public Map<String, String> getStorageHttpHeaders(){
+		return storageHttpHeaders;
 	}
+	
+	public Map<String, String> getQueryParameters(){
+		return queryParameters;
+	}
+
+
 
 	//
 	private static List<String> initCommonHeaderKeys() {
@@ -137,6 +125,17 @@ public abstract class AzureStorageService {
 		commonHeaderKeys.add("If-Unmodified-Since");
 		commonHeaderKeys.add("Range");
 
+		return commonHeaderKeys;
+	}
+	
+	//
+	private static List<String> initCommonHeaderKeysForTable() {
+		List<String> commonHeaderKeys = new ArrayList<>();
+		commonHeaderKeys.add("VERB");
+		commonHeaderKeys.add("Content-MD5");
+		commonHeaderKeys.add("Content-Type");
+		commonHeaderKeys.add("Date");
+		
 		return commonHeaderKeys;
 	}
 

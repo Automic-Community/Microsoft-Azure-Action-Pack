@@ -6,34 +6,41 @@ package com.automic.azure.actions;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.util.Strings;
 
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.services.StorageBlobService;
+import com.automic.azure.model.AzureStorageAccount;
+import com.automic.azure.services.AzureStorageAuthenticationService;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 /**
  * Action class to create a Container in Azure Storage
  *
  */
-public class CreateStorageContainerAction extends AbstractStorageAction {
+public class CreateStorageContainerAction extends AbstractAction {
 
 	
 	private static final Logger LOGGER = LogManager.getLogger(CreateStorageContainerAction.class);
 	
 	/**
-	 * Storage Service
+	 *  storage acc from account name and access key
 	 */
-	private StorageBlobService storageService;
+    AzureStorageAccount storageAccount;
+	
+	/**
+	 * Storage Authentication Service
+	 */
+	private AzureStorageAuthenticationService authenticationService;
 	
 	/**
 	 * 
@@ -50,6 +57,8 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	 * 
 	 */
 	public CreateStorageContainerAction() {
+		addOption("accountname", true, "Storage Account Name");
+		addOption("accesskey", true, "Primary Access Key");
 		addOption("containername", true, "Storage Container Name");
 		addOption("containeraccess", true, "Access level of Storage Container");
 		
@@ -61,21 +70,15 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	@Override
 	protected void initialize() {
 		// storage acc from account name and access key
-		
-		Map<String , String> commonHeaders = new HashMap<>();
-		commonHeaders.put("VERB", "PUT");
-		commonHeaders.put("Content-Type", "text/plain");
-		this.storageService = new StorageBlobService(storageAccount, commonHeaders, false);
-		// add storage HTTP headers
-		this.storageService.addStorageHttpHeaders("x-ms-version", getOptionValue("xmsversion"));
-		this.storageService.addStorageHttpHeaders("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-		
-		//add query parameters
-		this.storageService.addQueryParameter("restype", "container");
+		this.storageAccount =  new AzureStorageAccount(getOptionValue("accountname"), getOptionValue("accesskey"));
 		// container Name
 		this.containerName = getOptionValue("containername");
 		// access level of container
 		this.containerAccess = ContainerAccess.valueOf(getOptionValue("containeraccess"));
+		// authentication service
+		this.authenticationService = new AzureStorageAuthenticationService(storageAccount, false);
+		
+		
 		
 	}
 
@@ -84,19 +87,29 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	 */
 	@Override
 	protected void validateInputs() throws AzureException {
-		// validate storage name and container name
-		if (!Validator.checkNotEmpty(getOptionValue("accountname"))) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+		
+		// validate storage name 
+		if (!Validator.checkNotEmpty(storageAccount.getAccountName())) {
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
         }
+		
+		// validate storage access key
+		if (!Validator.checkNotEmpty(storageAccount.getPrimaryAccessKey())) {
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
+        }
+		
+		// validate storage container name
         if (!Validator.checkNotEmpty(this.containerName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
         }
         
+        // validate storage container access
         if (!Validator.checkNotNull(this.containerAccess)) {
-            LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
         }
 	}
 
@@ -104,10 +117,44 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	 * @see com.automic.azure.actions.AbstractAction#executeSpecific(com.sun.jersey.api.client.Client)
 	 */
 	@Override
-	protected ClientResponse executeSpecific(Client client)
+	protected ClientResponse executeSpecific(Client storageHttpClient)
 			throws AzureException {
 		
-		return storageService.createContainer(this.containerName, this.containerAccess, client);
+		//
+		WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
+		
+		this.authenticationService.addCommonHttpHeaders("VERB", "PUT");
+		this.authenticationService.addCommonHttpHeaders("Content-Type", "text/plain");
+		// header for container access
+		this.authenticationService.addStorageHttpHeaders("x-ms-blob-public-access", containerAccess.getValue());
+		// add storage HTTP headers
+		this.authenticationService.addStorageHttpHeaders("x-ms-version", getOptionValue("xmsversion"));
+		this.authenticationService.addStorageHttpHeaders("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
+		//add query parameters
+		this.authenticationService.addQueryParameter("restype", "container");
+		// update URI
+		//clientURIForSignature = clientURIForSignature + "/" + containerName;
+		// calculate Authorization header
+		//storageHttpHeaders.put("Authorization", this.authenticationService.createAuthorizationHeader());
+		
+		// set query parameters
+		Map<String, String> queryParameters = this.authenticationService.getQueryParameters();
+		for(String headerKey : queryParameters.keySet()){
+			resource = resource.queryParam(headerKey, queryParameters.get(headerKey));
+		}
+		
+		WebResource.Builder builder = resource.getRequestBuilder();
+		// set storage headers
+		Map<String, String> storageHttpHeaders = this.authenticationService.getStorageHttpHeaders();
+		for(String headerKey : storageHttpHeaders.keySet()){
+			builder = builder.header(headerKey, storageHttpHeaders.get(headerKey));
+		}
+		
+		
+		
+		// call the create container service and return response 
+		return builder.put(ClientResponse.class, Strings.EMPTY);
+		
 	}
 
 	/* (non-Javadoc)

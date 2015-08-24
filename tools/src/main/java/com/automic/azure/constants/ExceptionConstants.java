@@ -53,6 +53,11 @@ public final class ExceptionConstants {
     public static final String INVALID_VMSTATE_COMMAND = "Invalid command [%s] requested for changing VM state. "
             + "Possible commands [%s]";
     public static final String EMPTY_REQUEST_TOKEN_ID = "Request token id should not left blank";
+    
+    public static final String EMPTY_STORAGE_ACC_NAME = "Storage account name should not be blank";
+    public static final String EMPTY_STORAGE_ACCESS_KEY = "Storage account access key should not left blank";
+    public static final String EMPTY_STORAGE_CONTAINER_NAME = "Storage container name should not be blank";
+    public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
 
     private ExceptionConstants() {
     }

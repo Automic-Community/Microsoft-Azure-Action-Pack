@@ -24,7 +24,7 @@ import com.sun.jersey.api.client.ClientResponse;
  * An abstract action which defines common flow of processes to interact with Azure API. Provides default implementation
  * to initialize arguments, validate parameters, prepare API response and exception handling.
  */
-public abstract class AbstractAction implements IAzureAction {
+public abstract class AbstractAction {
 
     private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
 
@@ -65,7 +65,6 @@ public abstract class AbstractAction implements IAzureAction {
      * @throws AzureException
      *             exception while executing an action
      */
-    @Override
     public final void executeAction(String[] commandLineArgs) throws AzureException {
         Client client = null;
         try {            

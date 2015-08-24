@@ -26,9 +26,9 @@ public final class ActionFactory {
      * @throws AzureException
      *             if no matching implementation could be found
      */
-    public static IAzureAction getAction(Action enumAction) throws AzureException {
+    public static AbstractAction getAction(Action enumAction) throws AzureException {
 
-        IAzureAction action = null;
+    	AbstractAction action = null;
 
         switch (enumAction) {
             case VM_STATE:
