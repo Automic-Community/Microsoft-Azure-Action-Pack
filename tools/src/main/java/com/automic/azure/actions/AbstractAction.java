@@ -44,8 +44,6 @@ public abstract class AbstractAction {
         actionOptions = new AzureOptions();
         addOption(Constants.READ_TIMEOUT, true, "Read timeout");
         addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
-        //addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
-        //addOption(Constants.PASSWORD, true, "Keystore password");
         addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
     }
 
@@ -95,8 +93,6 @@ public abstract class AbstractAction {
     private void initializeArguments() throws AzureException {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
-        //this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
-        //this.password = getOptionValue(Constants.PASSWORD);
         this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
 
         validateGeneralInputs();
@@ -119,15 +115,6 @@ public abstract class AbstractAction {
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
-//        if (!Validator.checkFileExists(this.keyStore)) {
-//            LOGGER.error(ExceptionConstants.INVALID_FILE);
-//            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
-//        }
-//
-//        if (!Validator.checkNotEmpty(password)) {
-//            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-//            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-//        }
 
         if (!Validator.checkNotEmpty(restapiVersion)) {
             LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);

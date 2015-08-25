@@ -23,7 +23,7 @@ import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.StorageAuthenticationUtil;
 
 /**
- * Abstract Class as a service to interact with Azure Storage Service
+ * Class as a service to generate Authentication for Storage service 
  *
  */
 public class AzureStorageAuthenticationService {
@@ -36,6 +36,9 @@ public class AzureStorageAuthenticationService {
 	 */
 	private AzureStorageAccount storageAccount;
 
+	/**
+	 * URI for Canonical Resource part of signature
+	 */
 	private String clientURIForSignature;
 
 	/**
@@ -51,13 +54,13 @@ public class AzureStorageAuthenticationService {
 	/**
 	 * storage Http Headers Example x-ms-version
 	 */
-	private TreeMap<String, String> storageHttpHeaders;
+	private Map<String, String> storageHttpHeaders;
 
 	/**
 	 * http query parameters Example timeout, restype
 	 * 
 	 */
-	private TreeMap<String, String> queryParameters;
+	private Map<String, String> queryParameters;
 
 	/**
 	 * Initialize Authentication service
@@ -91,32 +94,59 @@ public class AzureStorageAuthenticationService {
 
 	}
 
+	/**
+	 * Set the URI for Canonical Resource part of signature
+	 * @param clientURIForSignature
+	 */
 	public void setURIforSignature(String clientURIForSignature) {
 		this.clientURIForSignature = clientURIForSignature;
 
 	}
 
+	/**
+	 * Add common HTTP headers
+	 * @param key
+	 * @param value
+	 */
 	public void addCommonHttpHeaders(String key, String value) {
 		commonHttpHeaders.put(key, value);
 	}
 
+	/**
+	 * Add Storage specific HTTP headers
+	 * @param key
+	 * @param value
+	 */
 	public void addStorageHttpHeaders(String key, String value) {
 		storageHttpHeaders.put(key, value);
 	}
 
+	/**
+	 *  Add Query parameters 
+	 * @param key
+	 * @param value
+	 */
 	public void addQueryParameter(String key, String value) {
 		queryParameters.put(key, value);
 	}
 
+	/**
+	 * Get Storage specific HTTP headers
+	 * @return
+	 */
 	public Map<String, String> getStorageHttpHeaders() {
 		return storageHttpHeaders;
 	}
 
+	/**
+	 * Get Query parameters 
+	 * @return
+	 */
 	public Map<String, String> getQueryParameters() {
 		return queryParameters;
 	}
 
-	//
+	// common header keys for Blob, File service
 	private static List<String> initCommonHeaderKeys() {
 		List<String> commonHeaderKeys = new ArrayList<>();
 		commonHeaderKeys.add("VERB");
@@ -135,7 +165,7 @@ public class AzureStorageAuthenticationService {
 		return commonHeaderKeys;
 	}
 
-	//
+	//common header keys for Table service
 	private static List<String> initCommonHeaderKeysForTable() {
 		List<String> commonHeaderKeys = new ArrayList<>();
 		commonHeaderKeys.add("VERB");
@@ -170,9 +200,9 @@ public class AzureStorageAuthenticationService {
 		StringBuilder authorizationSignature = new StringBuilder();
 		// create Signature
 		authorizationSignature.append(createAuthorizationCommonSignature());
-		// authorizationSignature.append("\n");
+		
 		authorizationSignature.append(createCannonicalHeaders());
-		// authorizationSignature.append("\n");
+		
 		authorizationSignature.append(createCannonicalResource());
 
 		LOGGER.info("generated Signature for request");
@@ -207,8 +237,8 @@ public class AzureStorageAuthenticationService {
 		StringBuilder cannonicalHeader = new StringBuilder();
 		// storage specific http headers
 		for (String headerKey : storageHttpHeaders.keySet()) {
-			cannonicalHeader.append(headerKey + ":"
-					+ storageHttpHeaders.get(headerKey));
+			cannonicalHeader.append(headerKey).append(":")
+			.append(storageHttpHeaders.get(headerKey));
 			cannonicalHeader.append("\n");
 		}
 		return cannonicalHeader.toString();
@@ -223,8 +253,8 @@ public class AzureStorageAuthenticationService {
 		for (Iterator<String> iterator = queryParameters.keySet().iterator(); iterator
 				.hasNext();) {
 			String headerKey = iterator.next();
-			cannonicalResource.append(headerKey + ":"
-					+ queryParameters.get(headerKey));
+			cannonicalResource.append(headerKey).append(":")
+					.append(queryParameters.get(headerKey));
 			if (iterator.hasNext()) {
 				cannonicalResource.append("\n");
 			}

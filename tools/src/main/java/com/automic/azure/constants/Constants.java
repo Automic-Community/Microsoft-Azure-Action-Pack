@@ -26,6 +26,8 @@ public final class Constants {
     public static final String OPERATIONTYPE_SHUTDOWN = "ShutdownRoleOperation";
     public static final String OPERATIONTYPE_RESTART = "RestartRoleOperation";
     public static final String OPERATIONTYPE_START = "StartRoleOperation";
+    
+    public static final String STORAGE_DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss z";
 
     private Constants() {
     }

@@ -115,12 +115,12 @@ public class CreateStorageContainerAction extends AbstractAction {
 					ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
 		}
 
-		// // validate storage container access
-		// if (!Validator.checkNotNull(this.containerAccess)) {
-		// LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
-		// throw new
-		// AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
-		// }
+		// validate storage container access
+		if (!Validator.checkNotNull(this.containerAccess)) {
+			LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
+			throw new AzureException(
+					ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
+		}
 	}
 
 	/**
@@ -184,12 +184,11 @@ public class CreateStorageContainerAction extends AbstractAction {
 
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
 	 * 
-	 * @see
-	 * com.automic.azure.actions.AbstractAction#prepareOutput(com.sun.jersey
-	 * .api.client.ClientResponse)
+	 * {@inheritDoc com.automic.azure.actions.AbstractAction#prepareOutput}
+	 * Method publishes the request id returned by the REST api
+	 * 
 	 */
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {

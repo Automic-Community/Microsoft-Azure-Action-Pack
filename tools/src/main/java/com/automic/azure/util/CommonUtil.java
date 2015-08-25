@@ -121,9 +121,8 @@ public final class CommonUtil {
      * @return Current date as a string
      */
     public static String getCurrentUTCDateForStorageService(){
-    	String RFC1123_PATTERN = "EEE, dd MMM yyyy HH:mm:ss z";
     	
-		DateFormat rfc1123Format = new SimpleDateFormat(RFC1123_PATTERN);
+		DateFormat rfc1123Format = new SimpleDateFormat(Constants.STORAGE_DATE_PATTERN);
 		rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
 		
 		return rfc1123Format.format(new Date());
