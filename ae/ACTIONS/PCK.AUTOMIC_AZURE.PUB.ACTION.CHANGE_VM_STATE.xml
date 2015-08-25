@@ -311,8 +311,8 @@ will release all the resources acquired by the Virtual machine.This action will 
 
 = Behavior =
 When we execute change virtual machine action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
-* If provided vm-name doesn?t exist on Azure cloud then action will not fail. It will return status code and ms request token id.
-* if provided deployment-name doesn?t exist on Azure cloud then action will be fail. It will return status code and message.
+* If provided vm-name doesn't exist on Azure cloud then action will not fail. It will return status code and ms request token id.
+* if provided deployment-name doesn't exist on Azure cloud then action will be fail. It will return status code and message.
 * If virtual machine is already Shutdown and Shutdown command is executed again then action will not fail. It will return status code and ms request token id.
 * If virtual machine is already Shutdown and Shutdown Deallocated command is executed then the action will not fail. It will return status code and ms request token id.
 * if virtual machine is Shutdown Deallocated and Shutdown command is executed then the action will be failed. It will return status code and message.
