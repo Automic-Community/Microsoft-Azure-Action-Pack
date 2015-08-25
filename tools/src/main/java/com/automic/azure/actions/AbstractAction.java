@@ -14,7 +14,7 @@ import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.model.AzureStorageErrorResponse;
+import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -26,13 +26,12 @@ import com.sun.jersey.api.client.ClientResponse;
  */
 public abstract class AbstractAction {
 
+    protected static final int BEGIN_HTTP_CODE = 200;
+    protected static final int END_HTTP_CODE = 300;
+
     private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
 
-    private static final int BEGIN_HTTP_CODE = 200;
-    private static final int END_HTTP_CODE = 300;
-
     protected String restapiVersion;
-
     protected String keyStore;
     protected String password;
     private int connectionTimeOut;
@@ -50,7 +49,7 @@ public abstract class AbstractAction {
     protected String getOptionValue(String arg) {
         return cli.getOptionValue(arg);
     }
-    
+
     /**
      * This method acts as template and decides how an action should proceed.It starts with initializing compulsory
      * Options followed by action Options Initializations then logging of parameters ,then checking the number of
@@ -65,7 +64,7 @@ public abstract class AbstractAction {
      */
     public final void executeAction(String[] commandLineArgs) throws AzureException {
         Client client = null;
-        try {            
+        try {
             cli = new AzureCli(actionOptions, commandLineArgs);
             cli.log(Arrays.asList(new String[] { Constants.PASSWORD }));
             initializeArguments();
@@ -108,13 +107,12 @@ public abstract class AbstractAction {
         if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
             throw new AzureException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
-        }        
+        }
 
         if (this.readTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
-
 
         if (!Validator.checkNotEmpty(restapiVersion)) {
             LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
@@ -151,16 +149,18 @@ public abstract class AbstractAction {
     protected abstract void prepareOutput(ClientResponse response) throws AzureException;
 
     /**
-     * Method to validate response from a HTTP client Request. If response is not in range of 2XX, it 
-     * throws {@link AzureException} else prints response on console.
+     * Method to validate response from a HTTP client Request. If response is not in range of 2XX, it throws
+     * {@link AzureException} else prints response on console. This Method maps the error response from REST api to
+     * {@link AzureErrorResponse}. If your error response xml format is different or differs in namespace
+     * "http://schemas.microsoft.com/windowsazure" then override this method.
      * 
      * @param response
      * @throws AzureException
      */
-    private void validateResponse(ClientResponse response) throws AzureException {
+    protected void validateResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-        	AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
+            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
             StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
             responseBuilder.append("Error Code: [");
             responseBuilder.append(error.getCode()).append("]");
@@ -170,5 +170,5 @@ public abstract class AbstractAction {
             throw new AzureException(responseBuilder.toString());
         }
     }
-    
+
 }

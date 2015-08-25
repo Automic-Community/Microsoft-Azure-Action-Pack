@@ -39,7 +39,7 @@ public class CheckRequestStatusAction extends AbstractAction {
         addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
         addOption(Constants.PASSWORD, true, "Keystore password");
         addOption("requestid", true, "A value that uniquely identifies a request made against the management service");
-        
+
     }
 
     @Override
@@ -94,12 +94,12 @@ public class CheckRequestStatusAction extends AbstractAction {
     @Override
     protected void prepareOutput(ClientResponse response) throws AzureException {
         AzureRequestStatusModel azReqstatus = response.getEntity(AzureRequestStatusModel.class);
-            ConsoleWriter.writeln("UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus());
-            ConsoleWriter.writeln("HTTPStatusCode : " + azReqstatus.getHttpStatusCode());
+        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus());
+        ConsoleWriter.writeln("HTTPStatusCode : " + azReqstatus.getHttpStatusCode());
         if (azReqstatus.getError() != null) {
-            AzureErrorResponse azErrorResponse = azReqstatus.getError();            
-                ConsoleWriter.writeln("Error Code : " + azErrorResponse.getCode());
-                ConsoleWriter.writeln("Error Message : " + azErrorResponse.getMessage());
+            AzureErrorResponse azErrorResponse = azReqstatus.getError();
+            ConsoleWriter.writeln("Error Code : " + azErrorResponse.getCode());
+            ConsoleWriter.writeln("Error Message : " + azErrorResponse.getMessage());
         }
     }
 

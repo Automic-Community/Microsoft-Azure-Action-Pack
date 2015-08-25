@@ -35,7 +35,7 @@ public final class CommonUtil {
     private static final String ONE = "1";
 
     private static final Logger LOGGER = LogManager.getLogger(CommonUtil.class);
-  
+
     private static final String RESPONSE_ERROR = "ERROR";
 
     private CommonUtil() {
@@ -109,57 +109,59 @@ public final class CommonUtil {
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(xmlInput, xmlOutput);
         } catch (TransformerException e) {
-        	String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, input);
-			LOGGER.error(msg,e);
+            String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, input);
+            LOGGER.error(msg, e);
             throw new AzureException(msg, e);
         }
     }
-    
-    
+
     /**
      * Get UTC time for Storage Services in "EEE, dd MMM yyyy HH:mm:ss z" format
+     * 
      * @return Current date as a string
      */
-    public static String getCurrentUTCDateForStorageService(){
-    	
-		DateFormat rfc1123Format = new SimpleDateFormat(Constants.STORAGE_DATE_PATTERN);
-		rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
-		
-		return rfc1123Format.format(new Date());
+    public static String getCurrentUTCDateForStorageService() {
+
+        DateFormat rfc1123Format = new SimpleDateFormat(Constants.STORAGE_DATE_PATTERN);
+        rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
+
+        return rfc1123Format.format(new Date());
     }
-    
-    
+
     /**
      * Method to copy contents of an {@link InputStream} to a {@link OutputStream}
-     * @param source {@link InputStream} to read from
-     * @param dest {@link OutputStream} to write to
+     * 
+     * @param source
+     *            {@link InputStream} to read from
+     * @param dest
+     *            {@link OutputStream} to write to
      * @throws AzureException
      */
-    public static void copyData(InputStream source, OutputStream dest) throws AzureException {    	
-    	byte[] buffer = new byte[Constants.IO_BUFFER_SIZE];
-    	int length;
-    	try {
-			while ((length = source.read(buffer)) > 0) {
-				dest.write(buffer, 0, length);
-				dest.flush();
-			}
-			
-		} catch (IOException e) {
-			String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
-			LOGGER.error(msg,e);
+    public static void copyData(InputStream source, OutputStream dest) throws AzureException {
+        byte[] buffer = new byte[Constants.IO_BUFFER_SIZE];
+        int length;
+        try {
+            while ((length = source.read(buffer)) > 0) {
+                dest.write(buffer, 0, length);
+                dest.flush();
+            }
+
+        } catch (IOException e) {
+            String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
+            LOGGER.error(msg, e);
             throw new AzureException(msg, e);
-		}finally{
-			
-			try {
-				source.close();
-				dest.close();
-			} catch (IOException e) {
-				String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
-				LOGGER.error(msg,e);
-	            throw new AzureException(msg, e);
-			}
-			
-		}
+        } finally {
+
+            try {
+                source.close();
+                dest.close();
+            } catch (IOException e) {
+                String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
+                LOGGER.error(msg, e);
+                throw new AzureException(msg, e);
+            }
+
+        }
     }
 
 }

@@ -58,7 +58,8 @@ public final class ExceptionConstants {
     public static final String EMPTY_STORAGE_ACCESS_KEY = "Storage account access key should not left blank";
     public static final String EMPTY_STORAGE_CONTAINER_NAME = "Storage container name should not be blank";
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
-    public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating Authentication Signature for Storage Service";
+    public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
+            + "Authentication Signature for Storage Service";
 
     private ExceptionConstants() {
     }

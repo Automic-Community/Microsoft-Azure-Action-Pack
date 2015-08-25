@@ -8,16 +8,16 @@ package com.automic.azure.constants;
  *
  */
 public enum ContainerAccess {
-	CONTAINER("container"), BLOB("blob"), PRIVATE("private");
-	
-	String value;
+    CONTAINER("container"), BLOB("blob"), PRIVATE("private");
 
-	private ContainerAccess(String value) {
-		this.value = value;
-	}
+    String value;
 
-	public String getValue() {
-		return this.value;
-	}
-	
+    private ContainerAccess(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return this.value;
+    }
+
 }

@@ -22,12 +22,12 @@ public final class HttpClientConfig {
 
         config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
         config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
-        
-        if(keyStore != null && password != null){
-        	AzureCertificatesManagement acm = new AzureCertificatesManagement(keyStore, password);
-        	
-        	HTTPSProperties props = new HTTPSProperties(acm.hostnameVerifier(), acm.getSslContext());
-        	config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);        	
+
+        if (keyStore != null && password != null) {
+            AzureCertificatesManagement acm = new AzureCertificatesManagement(keyStore, password);
+
+            HTTPSProperties props = new HTTPSProperties(acm.hostnameVerifier(), acm.getSslContext());
+            config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);
         }
 
         return Client.create(config);
