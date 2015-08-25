@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM_DEPLOYMENT">
 <XHEADER state="1">
-<Title>Create virtual machine</Title>
+<Title>Create new virtual machine deployment</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -53,10 +53,11 @@
 <result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
 <dynvalues>
 <dyntree>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
+<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE"/>
+<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -70,10 +71,10 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.CREATE_VM@WINDOWS" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.CREATE_VM_DEPLOYMENT@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
-<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="0" WElseH="1" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
+<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
 <preconditions>
 <PreCon>
 <conditions id="CONDITIONS"/>
@@ -83,7 +84,7 @@
 <pre BranchType="0" Lnr="1" PreLnr="1" When="ANY_OK" type="container"/>
 </predecessors>
 <runtime MrtCancel="0" MrtDays="0" MrtErt="0" MrtExecute="0" MrtExecuteObj="" MrtFix="0" MrtMethodDate="0" MrtMethodErt="0" MrtMethodFix="0" MrtMethodNone="1" MrtOn="1" MrtTZ="" MrtTime="00:00" SrtErt="0" SrtFix="0" SrtMethodErt="0" SrtMethodFix="0" SrtMethodNone="1"/>
-<result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
+<result ChkRExec="0" RElseHalt="1" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
 <dynvalues>
 <dyntree>
 <node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
@@ -100,10 +101,11 @@
 </node>
 <node content="1" id="PRPTS" name="PromptSets" parent="" pref="1" type="PROMPTSET"/>
 <node content="0" id="PPRPTS" name="Parent PromptSets" parent="" type="PPROMPTSET"/>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
+<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE"/>
+<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -117,57 +119,10 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="2" Lnr="3" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.CREATE_VM@UNIX" ParentAlias="" ParentObject="" Row="2" Text2="">
-<checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
-<after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
-<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="0" WElseH="1" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
-<preconditions>
-<PreCon>
-<conditions id="CONDITIONS"/>
-</PreCon>
-</preconditions>
-<predecessors>
-<pre BranchType="0" Lnr="1" PreLnr="1" When="ANY_OK" type="container"/>
-</predecessors>
-<runtime MrtCancel="0" MrtDays="0" MrtErt="0" MrtExecute="0" MrtExecuteObj="" MrtFix="0" MrtMethodDate="0" MrtMethodErt="0" MrtMethodFix="0" MrtMethodNone="1" MrtOn="1" MrtTZ="" MrtTime="00:00" SrtErt="0" SrtFix="0" SrtMethodErt="0" SrtMethodFix="0" SrtMethodNone="1"/>
-<result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
-<dynvalues>
-<dyntree>
-<node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
-<VALUE state="2">
-<Values/>
-<Mode>0</Mode>
-</VALUE>
-</node>
-<node content="1" id="PVALUE" name="Parent Variables" parent="" type="TASKVALUE">
-<VALUE state="2">
-<Values/>
-<Mode>0</Mode>
-</VALUE>
-</node>
-<node content="1" id="PRPTS" name="PromptSets" parent="" pref="1" type="PROMPTSET"/>
-<node content="0" id="PPRPTS" name="Parent PromptSets" parent="" type="PPROMPTSET"/>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM"/>
-</PRPTBOX>
-</PROMPTSET>
-</node>
-</dyntree>
-</dynvalues>
-<CIT/>
-<calendars CCTypeAll="0" CCTypeExt="0" CCTypeNone="0" CCTypeOne="1" CaleOn="0"/>
-<postconditions>
-<PostCon>
-<conditions id="CONDITIONS"/>
-</PostCon>
-</postconditions>
-</task>
-<task Alias="" BranchType="0" Col="3" Lnr="4" OType="&lt;END&gt;" Object="END" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="" BranchType="0" Col="3" Lnr="3" OType="&lt;END&gt;" Object="END" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="0" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
-<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="0" WElseH="0" WElseS="1" WElseX="0" WhenExecute="" WtimOn="0"/>
+<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
 <preconditions>
 <PreCon>
 <conditions id="CONDITIONS"/>
@@ -175,16 +130,16 @@
 </preconditions>
 <predecessors>
 <pre BranchType="0" Lnr="1" PreLnr="2" When="ANY_OK" type="container"/>
-<pre BranchType="0" Lnr="2" PreLnr="3" When="ANY_OK" type="container"/>
 </predecessors>
 <runtime MrtCancel="0" MrtDays="0" MrtErt="0" MrtExecute="0" MrtExecuteObj="" MrtFix="0" MrtMethodDate="0" MrtMethodErt="0" MrtMethodFix="0" MrtMethodNone="1" MrtOn="1" MrtTZ="" MrtTime="00:00" SrtErt="0" SrtFix="0" SrtMethodErt="0" SrtMethodFix="0" SrtMethodNone="1"/>
 <result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
 <dynvalues>
 <dyntree>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
+<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE"/>
+<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -206,7 +161,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>0</Ert>
+<Ert>9</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -243,15 +198,9 @@
 <Mode>0</Mode>
 </VALUE>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM" prptmode="1">
-<element altview="!PROMPTVALUE|OPSE_HasList|OPSE_AltView,OPUD_AltView|OPSE_AltView,OPUD_AltView" haslist="OPSE_HasList" msginsert="!NOP|" msgnr="!NOP|" promptname="OPSE_Name">
-<values>
-<value>!PROMPTVALUE|OPSE_HasList|OPSEA_Value,OPUDA_Value|OPSE_Value,OPUD_Value</value>
-</values>
-</element>
-</PRPTBOX>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" prptmode="1"/>
 </PROMPTSET>
 </node>
 </dyntree>

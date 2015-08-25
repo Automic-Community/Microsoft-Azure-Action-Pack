@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<JOBI name="PCK.AUTOMIC_AZURE.PRV.INCLUDE.PREP_VM_XML_CONFIG">
+<HEADER state="1">
+<Title>This will be used to prepare VM xml ConfigFile</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[:  SET &VARA_OBJ_CONFIG# = "PCK.AUTOMIC_AZURE.PUB.VARA.CREATE_VM_DEPLOYMENT_DESCRIPTOR"
+:  SET &UC4RB_AZR_CONFIG_XML# = GET_VAR(&VARA_OBJ_CONFIG#, "&UC4RB_AZR_CONFIG_XML_KEY#",1)
+:   PRINT &UC4RB_AZR_CONFIG_XML#
+
+
+ 
+:   IF &UC4RB_AZR_CONFIG_XML# GT 0
+!   Get to Root
+:   SET &ROOTHND# = XML_OPEN(STRING, &UC4RB_AZR_CONFIG_XML#)
+:   IF &ROOTHND# <> ""
+! ---------------   Getting array length ------------------------     
+:     SET &LEN# = LENGTH(&XML_NODES_KEY#[])
+:     SET &INDEX# = 1
+!      Get to Records
+:      WHILE &INDEX# LE &LEN# 
+:          IF &XML_NODES_KEY#[&INDEX#] NE ""
+:            SET &ELEMENT# = XML_SELECT_NODE(&ROOTHND#, &XML_NODES_KEY#[&INDEX#])
+!:            SET &TEXT# = XML_GET_NODE_TEXT(&ELEMENT#)
+!:           PRINT "Text of the element Before: &TEXT#" 
+:            SET &RET#     = XML_SET_NODE_TEXT(&ELEMENT#,&XML_NODE_VALUES#[&INDEX#])
+!:            SET &TEXT# = XML_GET_NODE_TEXT(&ELEMENT#)
+!:           PRINT "Text of the element after: &TEXT#"      
+:          ENDIF
+:         SET &INDEX# = &INDEX# + 1
+:      ENDWHILE          
+:   ENDIF         
+        
+! ----------------- Writing XML File------------------------------
+
+:  SET &RET1# = XML_BEAUTIFY(&ROOTHND#)
+:  SET &UC4RB_AZR_CONFIG_XML# = XML_TO_STRING(&ROOTHND#)
+:  SET &HND# = CREATE_PROCESS(NEW) 
+:  SET &RET# = PUT_PROCESS_LINE(&HND#, &UC4RB_AZR_CONFIG_XML#) 
+:  SET &RET# = WRITE_PROCESS(&HND#,&UC4RB_DKR_XML_FILE_PATH#,&AGENT#,&LOGIN#,OVERWRITE) 
+:  CLOSE_PROCESS &HND#
+:   XML_CLOSE
+:   ENDIF
+
+
+]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBI>
+</uc-export>
