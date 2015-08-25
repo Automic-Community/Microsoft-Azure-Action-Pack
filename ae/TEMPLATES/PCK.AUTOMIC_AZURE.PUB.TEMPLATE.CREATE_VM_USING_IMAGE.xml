@@ -56,7 +56,7 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -75,8 +75,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -123,7 +123,7 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -142,8 +142,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -190,7 +190,7 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -209,8 +209,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -254,6 +254,15 @@
 </node>
 <node content="1" id="PRPTS" name="PromptSets" parent="" pref="1" type="PROMPTSET"/>
 <node content="0" id="PPRPTS" name="Parent PromptSets" parent="" type="PPROMPTSET"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS">
+<UC4RB_AZR_KEYSTORE_PATHs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_KEYSTORE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS">&amp;UC4RB_AZR_KEYSTORE_PATH#</UC4RB_AZR_KEYSTORE_PATHs.00>
+<UC4RB_AZR_KEYSTORE_PSWDs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_KEYSTORE_PSWD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS">&amp;UC4RB_AZR_KEYSTORE_PSWD#</UC4RB_AZR_KEYSTORE_PSWDs.00>
+<UC4RB_AZR_SUBSCRIPTION_IDs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_SUBSCRIPTION_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS">&amp;UC4RB_AZR_SUBSCRIPTION_ID#</UC4RB_AZR_SUBSCRIPTION_IDs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_FROM_XML_CONFIG_FILE">
@@ -262,10 +271,18 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
+<node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
+<PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
+<AGENTs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">&amp;AGENT#</AGENTs.00>
+<LOGINs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">&amp;LOGIN#</LOGINs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -284,8 +301,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -348,7 +365,7 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -367,8 +384,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -439,7 +456,7 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -458,8 +475,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -492,7 +509,7 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">
-<UC4RB_AZR_HOSTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">Test_connection</UC4RB_AZR_HOSTs.00>
+<UC4RB_AZR_HOSTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_HOST#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG">&lt;select value&gt;</UC4RB_AZR_HOSTs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -511,8 +528,8 @@
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
-<AGENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</AGENTs.00>
-<LOGINs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">ANURAG4043</LOGINs.00>
+<AGENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="AGENT#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
+<LOGINs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="LOGIN#" promptsetname="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -573,9 +590,7 @@
 </node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" prptmode="1">
-<UC4RB_AZR_HOSTs.00 altview="0" haslist="0">Test_connection</UC4RB_AZR_HOSTs.00>
-</PRPTBOX>
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.CONNECTION_CONFIG" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_USING_IMAGE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_USING_IMAGE" parent="PRPTS" type="PROMPTSET">
@@ -592,10 +607,7 @@
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" ontop="1">
-<PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" prptmode="1">
-<AGENTs.00 altview="0" haslist="0">ANURAG4043</AGENTs.00>
-<LOGINs.00 altview="0" haslist="0">ANURAG4043</LOGINs.00>
-</PRPTBOX>
+<PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" prptmode="1"/>
 </PROMPTSET>
 </node>
 </dyntree>
