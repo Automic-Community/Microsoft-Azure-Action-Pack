@@ -1,0 +1,21 @@
+<Deployment xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>Virtual-Winows-Vm</Name>
+  <DeploymentSlot>Production</DeploymentSlot>
+  <Label>Test VM</Label>      
+  <RoleList>
+    <Role>
+      <RoleName>AT-VM</RoleName>
+      <RoleType>PersistentVMRole</RoleType>
+      <ConfigurationSets>
+        <ConfigurationSet i:type="WindowsProvisioningConfigurationSet">
+          <ConfigurationSetType>WindowsProvisioningConfiguration</ConfigurationSetType>
+          <ComputerName>AT-VM</ComputerName>                     
+          <AdminPassword>test123</AdminPassword> 
+          <AdminUsername>AT</AdminUsername>       
+        </ConfigurationSet> 
+       </ConfigurationSets> 
+	   
+      <RoleSize>ExtraSmall</RoleSize>
+    </Role>
+  </RoleList>
+</Deployment>

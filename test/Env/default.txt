@@ -3,11 +3,12 @@ Library           com.automic.robot.itpa.ItpaLibrary
 
 *** Variables ***
 #---- AE -------------------------
-@{AE}             UC4    localhost    2217    3/USER/TEST_01    test    # system, host, port, user, pass
+#@{AE}             UC4    localhost    2217    3/USER/TEST_01    test    # system, host, port, user, pass
+@{AE}            UC4    192.168.112.35    2217    4000/DEVELOP/AZURE    test    # system, host, port, user, pass
 #---- Promptset Overwrite Agent -------------------------------------------------------------------------
-@{Promptset_Overwrite_Agent_WIN}    Ankit3593    LOGIN.NEW.1
+#@{Promptset_Overwrite_Agent_WIN}    Ankit3593    LOGIN.NEW.1
 #@{Promptset_Overwrite_Agent_UNIX}    VAGRANT01    LOGIN.VAGRANT01
-#@{Promptset_Overwrite_Agent_WIN}    DEVAUT-CA4    LOGIN.AGENT
+@{Promptset_Overwrite_Agent_WIN}    DEVAUT-CA4    LOGIN.AGENT
 #---- GLOBAL CONTEXT VARIABLES --------------------------------------------------------------------------
 ${_AE_SYSTEM}     @{AE}[0]
 ${_AE_HOST}       @{AE}[1]

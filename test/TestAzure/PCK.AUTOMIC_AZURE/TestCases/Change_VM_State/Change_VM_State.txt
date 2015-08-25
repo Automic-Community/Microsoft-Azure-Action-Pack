@@ -1,6 +1,7 @@
 *** Settings ***
 Suite Setup       Startup
 Suite Teardown    Teardown
+Force Tags        change_vm_state
 Default Tags
 Test Template     Change VM State Template
 Library           com.automic.robot.itpa.ItpaLibrary
@@ -9,40 +10,40 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    SubscriptionID        CertificatePath    CertificatePassword    VMName                CloudServiceName                 DeploymentName                Command
-Starting a VM         OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
+*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        NameVM                NameCloudService                 NameDeployment                Command
+Starting a VM         OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
 
 Restarting a VM       [Tags]    main_scenarios
-                      OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            RESTART_VM
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            RESTART_VM
 
-Stopping a VM         OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
+Stopping a VM         OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
 
 Stopping an Already Stopped VM
-                      OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_VM
 
 Stopping and Deallocating a VM
-                      OK        ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_DEALLOCATE_VM
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            SHUTDOWN_DEALLOCATE_VM
 
 Assertion with Invalid VM Name
-                      NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${Invalid_VM_Name}    ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_VM_Name}    ${Cloud_Service_Name}            ${Deployment_Name}            RESTART_VM
 
 Assertion with Invalid Cloud Service Name
-                      NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Invalid_Cloud_Service_Name}    ${Deployment_Name}            START_VM
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Invalid_Cloud_Service_Name}    ${Deployment_Name}            START_VM
 
 Assertion with Invalid Deployement Name
-                      NOK       ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Invalid_Deployment_Name}    START_VM
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Invalid_Deployment_Name}    START_VM
 
-Assert VM Name as a mandatory field for Azure Connection
-                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${Empty}              ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
+Assert VM Name as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Empty}              ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
 
-Assert Cloud Service Name as a mandatory field for Azure Connection
-                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Empty}                         ${Deployment_Name}            START_VM
+Assert Cloud Service Name as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Empty}                         ${Deployment_Name}            START_VM
 
-Assert Certificate Password as a mandatory field for Azure Connection
-                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Empty}                      START_VM
+Assert Deployment Name as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Empty}                      START_VM
 
-Assert Command Field as a mandatory field for Azure Connection
-                      OTHER     ${Subscription_ID}    ${Cert_Path}       ${Cert_Password}       ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            ${Empty}
+Assert Command Field as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            ${Empty}
 
 *** Keywords ***
 Startup
@@ -51,19 +52,19 @@ Startup
     Connect AE
 
 Change VM State Template
-    [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Certificate_Path}    ${Certificate_Password}    ${Name_VM}    ${Name_Cloud_Service}
+    [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_VM}    ${Name_Cloud_Service}
     ...    ${Name_Deployment}    ${Command}
     [Documentation]    This test asserts change in state of the VM's.
     ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
-    ...    -${Certificate_Path}: This field specifies the path to the Azure certificate(.jks file).
-    ...    -${Certificate_Password}: This field specifies the password for Azure certificate.
+    ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
+    ...    -${Keystore_Password}: This field specifies the password for Keystore.
     ...    -${Name_VM}: This field specifies the name of the VM on which command is to be executed.
     ...    -${Name_Cloud_Service}: This field specifies the name of the Cloud Service in which VM is located.
     ...    -${Name_Deployment}: This field specifies the name of the Deployment in which VM is located.
     ...    -${Command}: This field specifies the command which is to be executed on VM's.
     Action Create    ${_CHANGE_VM_STATE_ACTION}
-    Configure Connection    ${Subscription_ID}    ${Certificate_Path}    ${Certificate_Password}
+    Configure Connection    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
     Action Set    &UC4RB_AZR_VM_NAME#    ${Name_VM}
     Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
     Action Set    &UC4RB_AZR_DEPLOYMENT#    ${Name_Deployment}
