@@ -38,11 +38,15 @@ public class GetSubscriptionInfoAction extends AbstractAction {
 
     public GetSubscriptionInfoAction() {
         addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID");
+        addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
+        addOption(Constants.PASSWORD, true, "Keystore password");
     }
 
     @Override
     protected void initialize() {
-        subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
+    	this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
+        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
+        this.password = getOptionValue(Constants.PASSWORD);
     }
 
     @Override
@@ -50,6 +54,15 @@ public class GetSubscriptionInfoAction extends AbstractAction {
         if (!Validator.checkNotEmpty(subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+        }
+        if (!Validator.checkFileExists(this.keyStore)) {
+            LOGGER.error(ExceptionConstants.INVALID_FILE);
+            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+        }
+
+        if (!Validator.checkNotEmpty(password)) {
+            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
         }
 
     }

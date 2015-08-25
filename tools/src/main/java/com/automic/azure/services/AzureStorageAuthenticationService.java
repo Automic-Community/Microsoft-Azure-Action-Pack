@@ -17,6 +17,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
+import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.StorageAuthenticationUtil;
@@ -33,59 +34,68 @@ public class AzureStorageAuthenticationService {
 	/**
 	 * Storage account
 	 */
-	protected AzureStorageAccount storageAccount;
+	private AzureStorageAccount storageAccount;
 
-	protected String clientURIForSignature;
+	private String clientURIForSignature;
 
 	/**
 	 * Common Http headers Example Content-Length
 	 */
-	protected Map<String, String> commonHttpHeaders;
+	private Map<String, String> commonHttpHeaders;
 
 	/**
 	 * 
 	 */
-	protected List<String> commonHttpHeaderKeys;
+	private List<String> commonHttpHeaderKeys;
 
 	/**
 	 * storage Http Headers Example x-ms-version
 	 */
-	protected TreeMap<String, String> storageHttpHeaders;
+	private TreeMap<String, String> storageHttpHeaders;
 
 	/**
 	 * http query parameters Example timeout, restype
 	 * 
 	 */
-	protected TreeMap<String, String> queryParameters;
+	private TreeMap<String, String> queryParameters;
 
 	/**
+	 * Initialize Authentication service
 	 * 
 	 * @param storageAccount
+	 * @param isServiceForTable
+	 *            true if Authenticating for Storage Table service
 	 * @param commonHeaders
 	 */
-	public AzureStorageAuthenticationService(AzureStorageAccount storageAccount, boolean isServiceForTable) {
+	public AzureStorageAuthenticationService(
+			AzureStorageAccount storageAccount, boolean isServiceForTable) {
 		this.storageAccount = storageAccount;
 		this.clientURIForSignature = "/" + storageAccount.getAccountName();
 
 		if (isServiceForTable) {
-			
+
 			commonHttpHeaderKeys = AzureStorageAuthenticationService
 					.initCommonHeaderKeysForTable();
 		} else {
-			
+
 			commonHttpHeaderKeys = AzureStorageAuthenticationService
 					.initCommonHeaderKeys();
 
 		}
 
 		commonHttpHeaders = new HashMap<>();
-		
+
 		storageHttpHeaders = new TreeMap<>();
 
 		queryParameters = new TreeMap<>();
 
 	}
-	
+
+	public void setURIforSignature(String clientURIForSignature) {
+		this.clientURIForSignature = clientURIForSignature;
+
+	}
+
 	public void addCommonHttpHeaders(String key, String value) {
 		commonHttpHeaders.put(key, value);
 	}
@@ -97,17 +107,14 @@ public class AzureStorageAuthenticationService {
 	public void addQueryParameter(String key, String value) {
 		queryParameters.put(key, value);
 	}
-	
-	
-	public Map<String, String> getStorageHttpHeaders(){
+
+	public Map<String, String> getStorageHttpHeaders() {
 		return storageHttpHeaders;
 	}
-	
-	public Map<String, String> getQueryParameters(){
+
+	public Map<String, String> getQueryParameters() {
 		return queryParameters;
 	}
-
-
 
 	//
 	private static List<String> initCommonHeaderKeys() {
@@ -127,7 +134,7 @@ public class AzureStorageAuthenticationService {
 
 		return commonHeaderKeys;
 	}
-	
+
 	//
 	private static List<String> initCommonHeaderKeysForTable() {
 		List<String> commonHeaderKeys = new ArrayList<>();
@@ -135,31 +142,17 @@ public class AzureStorageAuthenticationService {
 		commonHeaderKeys.add("Content-MD5");
 		commonHeaderKeys.add("Content-Type");
 		commonHeaderKeys.add("Date");
-		
+
 		return commonHeaderKeys;
 	}
 
 	/**
-	 * initialize Commomn Headers Map for Table service
+	 * Method to create authorization header String
 	 * 
-	 * @param commonHeaders
-	 * @return
+	 * @return Value for Authorization header
+	 * @throws AzureException
 	 */
-	public static Map<String, String> initCommonHeadersMapForTable(
-			Map<String, String> commonHeaders) {
-		Map<String, String> headerMap = new HashMap<>();
-		headerMap.put("VERB", commonHeaders.get("VERB"));
-
-		headerMap.put("Content-MD5", commonHeaders.get("Content-MD5"));
-		headerMap.put("Content-Type", commonHeaders.get("Content-Type"));
-		headerMap.put("Date", commonHeaders.get("Date"));
-
-		return headerMap;
-
-	}
-
-	// Method to create authorization header String
-	protected String createAuthorizationHeader() throws AzureException {
+	public String createAuthorizationHeader() throws AzureException {
 
 		StringBuilder authorizationHeader = new StringBuilder();
 		authorizationHeader.append("SharedKey ");
@@ -191,12 +184,9 @@ public class AzureStorageAuthenticationService {
 					this.storageAccount.getPrimaryAccessKey());
 		} catch (InvalidKeyException | UnsupportedEncodingException
 				| NoSuchAlgorithmException e) {
-			LOGGER.error(
-					"Error in Creating Authentication Signature for Storage Service",
-					e);
+			LOGGER.error(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
 			throw new AzureException(
-					"Error in Creating Authentication Signature for Storage Service",
-					e);
+					ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
 		}
 	}
 

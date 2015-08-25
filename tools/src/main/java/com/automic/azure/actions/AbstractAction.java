@@ -14,7 +14,7 @@ import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.model.AzureErrorResponse;
+import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -33,8 +33,8 @@ public abstract class AbstractAction {
 
     protected String restapiVersion;
 
-    private String keyStore;
-    private String password;
+    protected String keyStore;
+    protected String password;
     private int connectionTimeOut;
     private int readTimeOut;
     private final AzureOptions actionOptions;
@@ -44,8 +44,8 @@ public abstract class AbstractAction {
         actionOptions = new AzureOptions();
         addOption(Constants.READ_TIMEOUT, true, "Read timeout");
         addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
-        addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
-        addOption(Constants.PASSWORD, true, "Keystore password");
+        //addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
+        //addOption(Constants.PASSWORD, true, "Keystore password");
         addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
     }
 
@@ -95,8 +95,8 @@ public abstract class AbstractAction {
     private void initializeArguments() throws AzureException {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
-        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
-        this.password = getOptionValue(Constants.PASSWORD);
+        //this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
+        //this.password = getOptionValue(Constants.PASSWORD);
         this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
 
         validateGeneralInputs();
@@ -119,15 +119,15 @@ public abstract class AbstractAction {
             throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
-        if (!Validator.checkFileExists(this.keyStore)) {
-            LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
-        }
-
-        if (!Validator.checkNotEmpty(password)) {
-            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-        }
+//        if (!Validator.checkFileExists(this.keyStore)) {
+//            LOGGER.error(ExceptionConstants.INVALID_FILE);
+//            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+//        }
+//
+//        if (!Validator.checkNotEmpty(password)) {
+//            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+//            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
+//        }
 
         if (!Validator.checkNotEmpty(restapiVersion)) {
             LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
@@ -173,7 +173,7 @@ public abstract class AbstractAction {
     private void validateResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
+        	AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
             StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
             responseBuilder.append("Error Code: [");
             responseBuilder.append(error.getCode()).append("]");

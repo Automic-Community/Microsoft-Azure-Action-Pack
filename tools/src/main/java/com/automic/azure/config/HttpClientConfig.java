@@ -22,29 +22,16 @@ public final class HttpClientConfig {
 
         config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
         config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
-
-        AzureCertificatesManagement acm = new AzureCertificatesManagement(keyStore, password);
-
-        HTTPSProperties props = new HTTPSProperties(acm.hostnameVerifier(), acm.getSslContext());
-        config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);
+        
+        if(keyStore != null && password != null){
+        	AzureCertificatesManagement acm = new AzureCertificatesManagement(keyStore, password);
+        	
+        	HTTPSProperties props = new HTTPSProperties(acm.hostnameVerifier(), acm.getSslContext());
+        	config.getProperties().put(HTTPSProperties.PROPERTY_HTTPS_PROPERTIES, props);        	
+        }
 
         return Client.create(config);
     }
 
-    /**
-     * method to create an HTTP client for Storage Service
-     * @param connectionTimeOut
-     * @param readTimeOut
-     * @return
-     */
-	public static Client getStorageClient(int connectionTimeOut, int readTimeOut) {
-		// client config for Storage Service
-		ClientConfig config = new DefaultClientConfig();
-
-        config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
-        config.getProperties().put(ClientConfig.PROPERTY_READ_TIMEOUT, readTimeOut);
-
-        return Client.create(config);
-	}
 
 }

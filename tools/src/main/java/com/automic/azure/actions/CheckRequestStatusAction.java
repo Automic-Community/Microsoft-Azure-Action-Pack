@@ -35,15 +35,20 @@ public class CheckRequestStatusAction extends AbstractAction {
      * Initializes a newly created {@code CheckRequestStatusAction} object.
      */
     public CheckRequestStatusAction() {
-        addOption("subscriptionid", true, "Subscription ID");
+        addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID");
+        addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
+        addOption(Constants.PASSWORD, true, "Keystore password");
         addOption("requestid", true, "A value that uniquely identifies a request made against the management service");
+        
     }
 
     @Override
     protected void initialize() {
 
-        subscriptionId = getOptionValue("subscriptionid");
-        requestTokenId = getOptionValue("requestid");
+        this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
+        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
+        this.password = getOptionValue(Constants.PASSWORD);
+        this.requestTokenId = getOptionValue("requestid");
     }
 
     @Override
@@ -51,6 +56,15 @@ public class CheckRequestStatusAction extends AbstractAction {
         if (!Validator.checkNotEmpty(subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+        }
+        if (!Validator.checkFileExists(this.keyStore)) {
+            LOGGER.error(ExceptionConstants.INVALID_FILE);
+            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+        }
+
+        if (!Validator.checkNotEmpty(password)) {
+            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
         }
         if (!Validator.checkNotEmpty(requestTokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
