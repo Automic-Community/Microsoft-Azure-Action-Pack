@@ -59,7 +59,7 @@ public class CreateStorageContainerAction extends AbstractAction {
 		addOption("storage", true, "Storage Account Name");
 		addOption("accesskey", true, "Primary Access Key");
 		addOption("containername", true, "Storage Container Name");
-		addOption("containeraccess", false, "Access level of Storage Container");
+		addOption("containeraccess", true, "Access level of Storage Container");
 
 	}
 
@@ -142,7 +142,7 @@ public class CreateStorageContainerAction extends AbstractAction {
 		this.authenticationService.addCommonHttpHeaders("Content-Type",
 				"text/plain");
 		// header for container access
-		if (containerAccess != null) {
+		if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
 			this.authenticationService.addStorageHttpHeaders(
 					"x-ms-blob-public-access", containerAccess.getValue());
 		}

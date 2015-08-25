@@ -8,7 +8,7 @@ package com.automic.azure.constants;
  *
  */
 public enum ContainerAccess {
-	CONTAINER("container"), BLOB("blob");
+	CONTAINER("container"), BLOB("blob"), PRIVATE("private");
 	
 	String value; 
 	
