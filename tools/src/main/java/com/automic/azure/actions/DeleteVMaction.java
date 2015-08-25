@@ -73,18 +73,22 @@ public class DeleteVMaction extends AbstractAction {
 		}
 
 	}
-	 /**
-     * To delete the VM this method made a call to Azure Rest API
-     * https://management.core.windows.net/<subscription-id>/services/hostedservices/<cloudservice-name>/deployments/<deployment-name>
-     * /roles/<role-name>
-     * The URI parameter "comp=media" is optional and specifies that the operating system disk, attached data disks, and the source blobs 
-     * for the disks should also be deleted from storage.
-     */
+
+	/**
+	 * To delete the VM this method made a call to Azure Rest API
+	 * https://management
+	 * .core.windows.net/<subscription-id>/services/hostedservices
+	 * /<cloudservice-name>/deployments/<deployment-name> /roles/<role-name> The
+	 * URI parameter "comp=media" is optional and specifies that the operating
+	 * system disk, attached data disks, and the source blobs for the disks
+	 * should also be deleted from storage.
+	 */
 	@Override
 	protected ClientResponse executeSpecific(Client client) throws AzureException {
 		ClientResponse response = null;
 		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
-				.path("hostedservices").path(serviceName).path("deployments").path(deploymentName).path("roles").path(vmName);
+				.path("hostedservices").path(serviceName).path("deployments").path(deploymentName).path("roles")
+				.path(vmName);
 
 		if (deleteMedia) {
 			webResource = webResource.queryParam("comp", "media");
@@ -97,7 +101,8 @@ public class DeleteVMaction extends AbstractAction {
 	}
 
 	/**
-	 * This method will print the request id on console once all the valid input params are passed.
+	 * This method will print the request id on console once all the valid input
+	 * params are passed.
 	 **/
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
