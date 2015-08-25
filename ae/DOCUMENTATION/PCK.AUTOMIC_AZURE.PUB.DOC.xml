@@ -20,6 +20,9 @@ This package contains the following actions:
  Action description :This action is used to change the virtual machine status (start ,restart ,shutdown and shutdown & deallocate).Difference between shutdown and shutdown deallocate is that latter
 will release all the resources acquired by the Virtual machine.This action will return request id which can be further used to query the status of the action.
 
+* Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS
+Action description :This action is used to fetch the status of a previously submitted Azure request based on the request id provided by user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if user provides an invalid request id which does not exist in Azure system.
+
 *Action name :PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_VM
 Action description :This action is used to delete the given virtual machine in the cloud service.The action will return the request id which can be further queried to get the status of VM.
 Also if delete attached media is selected YES than it will delete the associated media (operating system disk.data disk and the source blobs) not the container.]]></DOC>
