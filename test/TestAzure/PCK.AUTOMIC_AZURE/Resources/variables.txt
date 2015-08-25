@@ -13,3 +13,5 @@ ${Deployment_Name}    CAC-TEST
 ${Invalid_VM_Name}    abcd
 ${Invalid_Cloud_Service_Name}    abcd
 ${Invalid_Deployment_Name}    abcd
+${VM_Name_Del}    VM1
+${VM_Name_Del2}    VM2

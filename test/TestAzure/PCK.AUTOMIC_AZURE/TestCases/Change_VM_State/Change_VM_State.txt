@@ -10,7 +10,7 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        VMName                CloudServiceName                 DeploymentName                Command
+*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        NameVM                NameCloudService                 NameDeployment                Command
 Starting a VM         OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            START_VM
 
 Restarting a VM       [Tags]    main_scenarios

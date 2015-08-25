@@ -10,31 +10,31 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        VMName                CloudServiceName                 DeploymentName                DeleteAttachedMedia
+*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        NameVM                NameCloudService                 NameDeployment                DeleteAttachedMedia
 Removing a VM Without Deleting Attached Media
                       [Tags]    main_scenarios
-                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            No
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name_Del}        ${Cloud_Service_Name}            ${Deployment_Name}            NO
 
 Removing a VM also Deleting Attached Media
-                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Deployment_Name}            Yes
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name_Del2}       ${Cloud_Service_Name}            ${Deployment_Name}            YES
 
 Assertion with Invalid VM Name
-                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_VM_Name}    ${Cloud_Service_Name}            ${Deployment_Name}            No
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_VM_Name}    ${Cloud_Service_Name}            ${Deployment_Name}            NO
 
 Assertion with Invalid Cloud Service Name
-                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Invalid_Cloud_Service_Name}    ${Deployment_Name}            No
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Invalid_Cloud_Service_Name}    ${Deployment_Name}            NO
 
 Assertion with Invalid Deployement Name
-                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Invalid_Deployment_Name}    No
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Invalid_Deployment_Name}    NO
 
 Assert VM Name as a mandatory field
-                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Empty}              ${Cloud_Service_Name}            ${Deployment_Name}            No
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${EMPTY}              ${Cloud_Service_Name}            ${Deployment_Name}            NO
 
 Assert Cloud Service Name as a mandatory field
-                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Empty}                         ${Deployment_Name}            No
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Empty}                         ${Deployment_Name}            NO
 
 Assert Deployment Name as a mandatory field
-                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Empty}                      No
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${VM_Name}            ${Cloud_Service_Name}            ${Empty}                      NO
 
 *** Keywords ***
 Startup
