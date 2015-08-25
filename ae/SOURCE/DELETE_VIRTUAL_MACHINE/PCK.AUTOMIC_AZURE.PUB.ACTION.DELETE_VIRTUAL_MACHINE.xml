@@ -26,7 +26,7 @@
 <DeactWhen/>
 <AutoDeactAlways>0</AutoDeactAlways>
 <DeactDelay>0</DeactDelay>
-<ActAtRun>0</ActAtRun>
+<ActAtRun>1</ActAtRun>
 <UC4Priority>0</UC4Priority>
 <MaxParallel2>0</MaxParallel2>
 <ReuseHG>1</ReuseHG>
@@ -62,14 +62,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_VM_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">NO</UC4RB_AZR_VM_MEDIAs.00>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">
+<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_VM_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">NO</UC4RB_AZR_VM_MEDIAs.00>
+<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -91,7 +91,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="DELETE_VIRTUAL_MACHINE" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.DELETE_VIRTUAL_MACHINE@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="DELETE_VIRTUAL_MACHINE" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.DELETE_VM@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -130,14 +130,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_VM_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">NO</UC4RB_AZR_VM_MEDIAs.00>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">
+<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_VM_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">NO</UC4RB_AZR_VM_MEDIAs.00>
+<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -184,14 +184,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
-<UC4RB_AZR_VM_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE">NO</UC4RB_AZR_VM_MEDIAs.00>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">
+<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
+<UC4RB_AZR_VM_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM">NO</UC4RB_AZR_VM_MEDIAs.00>
+<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -267,9 +267,9 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VIRTUAL_MACHINE" prptmode="1"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_VM" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -302,8 +302,8 @@
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_VIRTUAL_MACHINE
 = General description =
-This action is used to delete the given virtual machine in the cloud service.The aciton will fail if there is only one virtual machine in the deployment.
-
+This action is used to delete the given virtual machine in the cloud service.The action will return the request id which can be further queried to get the status of VM.
+Also if delete attached media is selected YES than it will delete the associated media (operating system disk.data disk and the source blobs) not the container.
 = Inputs =
 * Virtual Machine Name :Name of the virtual machine to be deleted
 * Cloud Service Name : Name of the Cloud Service in which VM is located
@@ -314,8 +314,8 @@ This action is used to delete the given virtual machine in the cloud service.The
 * keystore Password: Password for keystore
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
-
-= Behavior =
+= Behaviour=
+*The action will fail if someone tries to delete a virtual machine which is the only virtual machine in the deployment. 
 
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
@@ -323,14 +323,11 @@ The response will contain the request id which can be further used to query the 
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
-
 = Rollback =
 (none)
-
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
-
 = Example =
 (none)]]></DOC>
 </DOCU_Docu>

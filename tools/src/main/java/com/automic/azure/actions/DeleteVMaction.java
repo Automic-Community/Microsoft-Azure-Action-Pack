@@ -24,9 +24,9 @@ import com.sun.jersey.api.client.WebResource;
  * @author sumitsamson
  * 
  */
-public class DeleteDeploymentAction extends AbstractAction {
+public class DeleteVMaction extends AbstractAction {
 
-	private static final Logger LOGGER = LogManager.getLogger(DeleteDeploymentAction.class);
+	private static final Logger LOGGER = LogManager.getLogger(DeleteVMaction.class);
 
 	private String subscriptionId;
 	private String vmName;
@@ -34,12 +34,12 @@ public class DeleteDeploymentAction extends AbstractAction {
 	private String deploymentName;
 	private boolean deleteMedia;
 
-	public DeleteDeploymentAction() {
+	public DeleteVMaction() {
 		addOption("subscriptionid", true, "Subscription ID");
 		addOption("vmname", true, "Virtual machine name");
 		addOption("servicename", true, "Azure cloud service name");
 		addOption("deploymentname", true, "Azure cloud deployment name");
-		addOption("deleteMedia", true,
+		addOption("deletemedia", true,
 				"Delete the media(operating system disk, attached data disks & the source blobs)");
 	}
 
@@ -49,7 +49,7 @@ public class DeleteDeploymentAction extends AbstractAction {
 		serviceName = getOptionValue("servicename");
 		deploymentName = getOptionValue("deploymentname");
 		subscriptionId = getOptionValue("subscriptionid");
-		deleteMedia = CommonUtil.convert2Bool(getOptionValue("deleteMedia"));
+		deleteMedia = CommonUtil.convert2Bool(getOptionValue("deletemedia"));
 
 	}
 
@@ -73,7 +73,13 @@ public class DeleteDeploymentAction extends AbstractAction {
 		}
 
 	}
-
+	 /**
+     * To delete the VM this method made a call to Azure Rest API
+     * https://management.core.windows.net/<subscription-id>/services/hostedservices/<cloudservice-name>/deployments/<deployment-name>
+     * /roles/<role-name>
+     * The URI parameter "comp=media" is optional and specifies that the operating system disk, attached data disks, and the source blobs 
+     * for the disks should also be deleted from storage.
+     */
 	@Override
 	protected ClientResponse executeSpecific(Client client) throws AzureException {
 		ClientResponse response = null;
@@ -90,6 +96,9 @@ public class DeleteDeploymentAction extends AbstractAction {
 		return response;
 	}
 
+	/**
+	 * This method will print the request id on console once all the valid input params are passed.
+	 **/
 	@Override
 	protected void prepareOutput(ClientResponse response) throws AzureException {
 		List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
