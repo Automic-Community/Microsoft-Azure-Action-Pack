@@ -52,6 +52,7 @@ public final class ExceptionConstants {
     public static final String INVALID_AZURE_CERTIFICATE_PWD = "Keystore was tampered with, or password was incorrect";
     public static final String INVALID_VMSTATE_COMMAND = "Invalid command [%s] requested for changing VM state. "
             + "Possible commands [%s]";
+    public static final String EMPTY_REQUEST_TOKEN_ID = "Request token id should not left blank";
 
     private ExceptionConstants() {
     }

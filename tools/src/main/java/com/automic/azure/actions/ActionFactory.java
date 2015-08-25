@@ -39,6 +39,9 @@ public final class ActionFactory {
 		case GET_SUBSCRIPTION_INFO:
 			action = new GetSubscriptionInfoAction();
 			break;
+		case CHECK_REQUEST_STATUS:
+			action = new CheckRequestStatusAction();
+			break;
 		case DELETE_VM:
 			action = new DeleteVMaction();
 			break;
