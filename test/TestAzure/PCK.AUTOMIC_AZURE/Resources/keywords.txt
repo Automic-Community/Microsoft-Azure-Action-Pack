@@ -97,16 +97,16 @@ Genarate String
     Set Global Variable    ${Generated_Name}
 
 Configure Connection
-    [Arguments]    ${Subscription_ID}    ${Cert_Location}    ${Cert_Password}
+    [Arguments]    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
     Action Set    &UC4RB_AZR_SUBSCRIPTION_ID#    ${Subscription_ID}
-    Action Set    &UC4RB_AZR_KEYSTORE_PATH#    ${Cert_Location}
-    Action Set    &UC4RB_AZR_KEYSTORE_PSWD#    ${Cert_Password}
+    Action Set    &UC4RB_AZR_KEYSTORE_PATH#    ${Keystore_Path}
+    Action Set    &UC4RB_AZR_KEYSTORE_PSWD#    ${Keystore_Password}
 
 Change VM State
-    [Arguments]    ${_CHANGE_VM_STATE_ACTION}    ${Subscription_ID}    ${Certificate_Path}    ${Certificate_Password}    ${Name_VM}    ${Name_Cloud_Service}
+    [Arguments]    ${_CHANGE_VM_STATE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_VM}    ${Name_Cloud_Service}
     ...    ${Name_Deployment}    ${Command}
     Action Create    ${_CHANGE_VM_STATE_ACTION}
-    Configure Connection    ${Subscription_ID}    ${Cert_Path}    ${Cert_Password}
+    Configure Connection    ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}
     Action Set    &UC4RB_AZR_VM_NAME#    ${VM_Name}
     Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Cloud_Service_Name}
     Action Set    &UC4RB_AZR_DEPLOYMENT#    ${Deployment_Name}

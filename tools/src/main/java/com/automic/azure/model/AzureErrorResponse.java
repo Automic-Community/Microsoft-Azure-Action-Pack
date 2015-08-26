@@ -3,8 +3,6 @@ package com.automic.azure.model;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.automic.azure.util.Validator;
-
 /**
  * An POJO java class which maps to XML structure which is required to handle the error response.
  */
@@ -33,15 +31,25 @@ public class AzureErrorResponse {
         this.message = message;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
-        responseBuilder.append("Error Code: [");
-        responseBuilder.append(this.code).append("]");
-        if (Validator.checkNotEmpty(this.message)) {
-            responseBuilder.append(" Message: ").append(this.message);
-        }
-        return responseBuilder.toString();
-    }
+	
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Azure Error Response ");
+		if (code != null) {
+			builder.append("[code=");
+			builder.append(code);
+			builder.append("], ");
+		}
+		if (message != null) {
+			builder.append("[message=");
+			builder.append(message);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
+	
+	
 
 }

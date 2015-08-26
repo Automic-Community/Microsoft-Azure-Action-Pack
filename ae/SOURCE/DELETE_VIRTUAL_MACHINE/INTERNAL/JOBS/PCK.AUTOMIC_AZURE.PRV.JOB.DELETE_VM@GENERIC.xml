@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_AZURE.PRV.JOB.CHANGE_VM_STATE@GENERIC">
+<JOBS_GENERIC AttrType="GENERIC" name="PCK.AUTOMIC_AZURE.PRV.JOB.DELETE_VM@GENERIC">
 <XHEADER state="1">
-<Title>Change VM state (Start ,Stop ,Restart)</Title>
+<Title>Deleting Azure Virtual Machine</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -46,7 +46,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>2</Ert>
+<Ert>4</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -119,8 +119,8 @@
 :SET &UC4RB_LOGGING_PARAMETER# = "Deployment Name"
 :SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_DEPLOYMENT#"
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
-:SET &UC4RB_LOGGING_PARAMETER# = "Command"
-:SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_COMMAND#"
+:SET &UC4RB_LOGGING_PARAMETER# = "Delete Attached media"
+:SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_VM_MEDIA#"
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
 
 ! Load package parameters
@@ -128,25 +128,12 @@
 
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
 ! ! Action name
-:SET &UC4RB_AZR_ACTION_NAME# = "VM_STATE"
+:SET &UC4RB_AZR_ACTION_NAME# = "DELETE_VM"
 
 
 :DEFINE &UC4RB_AZR_VM_OPERATION# ,string
 
-!Check for action
-:SWITCH &UC4RB_AZR_COMMAND#
-:  CASE "SHUTDOWN_DEALLOCATE_VM"
-:    SET &UC4RB_AZR_VM_OPERATION# = "StoppedDeallocated"
 
-:  CASE "SHUTDOWN_VM"
-:    SET &UC4RB_AZR_VM_OPERATION# = "Stopped"
-
-:  CASE "START_VM"
-:    SET &UC4RB_AZR_VM_OPERATION# = "START"
-
-:  CASE "RESTART_VM"
-:    SET &UC4RB_AZR_VM_OPERATION# = "RESTART"
-:ENDSWITCH
 
 ! Define java options and values
 :DEFINE &UC4RB_AZR_OPTIONS#, string, 20
@@ -175,8 +162,8 @@
 : INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_AZR_DEPLOYMENT#"
 : SET &UC4RB_AZR_OPTIONS#[12] = "&UC4RB_AZR_OPTION_VALUE#"
 
-: SET &UC4RB_AZR_OPTIONS#[13] = "-vmstate"
-: INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_AZR_VM_OPERATION#"
+: SET &UC4RB_AZR_OPTIONS#[13] = "-deletemedia"
+: INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_AZR_VM_MEDIA#"
 : SET &UC4RB_AZR_OPTIONS#[14] = "&UC4RB_AZR_OPTION_VALUE#"
 
 
@@ -184,9 +171,8 @@
 : SET &UC4RB_ENCRYPTED_PASSWORD_TMP# = "&UC4RB_AZR_KEYSTORE_PSWD#"
 : INC PCK.ITPA_SHARED.PRV.INCLUDE.DECRYPT_PASSWORD 
 
-!Build java arguments
+
 :INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.BUILD_JAVA_ARGUMENTS
-:INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.BUILD_JAVA_ARGS_MANAGEMENT
 
 ! Setting execution environment
 :INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.SET_EXEC_ENVIRONMENT
@@ -202,8 +188,8 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 
 
 ! Status messages
-:SET &UC4RB_LOGGING_INFO# = "******** CHANGE_VM_STATE ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** CHANGE_VM_STATE ACTION FAILED ********" 
+:SET &UC4RB_LOGGING_INFO# = "******** DELETE_VIRTUAL_MACHINE ACTION EXECUTED SUCCESSFULLY ********"
+:SET &UC4RB_LOGGING_ERROR# = "******** DELETE_VIRTUAL_MACHINE ACTION FAILED ********" 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 
@@ -223,19 +209,19 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 :IF &STATUS#  = 0
 :SET &HND# = PREP_PROCESS_REPORT("JOBS",, "REP",,"COL=DELIMITER", 'DELIMITER=*::=*')
 :PROCESS &HND#
-:   SET &KEY# = GET_PROCESS_LINE(&HND#,1)
-   
+:   SET &KEY# = GET_PROCESS_LINE(&HND#,1)   
 :   SET &VALUE# = GET_PROCESS_LINE(&HND#,2)
-: IF &KEY# <> ""
-:   IF &VALUE# <> ""
-:      IF &KEY# = "UC4RB_AZR_REQUEST_ID"
+: IF &KEY# = "UC4RB_AZR_REQUEST_ID"
+:   IF &VALUE# <> ""      
 :        SET &UC4RB_AZR_REQUEST_ID# = "&VALUE#"
-:         PUBLISH &UC4RB_AZR_REQUEST_ID#,,"TOP"
-:      ENDIF
+:        PUBLISH &UC4RB_AZR_REQUEST_ID#,,"TOP"
+:        TERM_PROCESS
 :   ENDIF
 : ENDIF
 :ENDPROCESS
 :CLOSE_PROCESS &HND#
+:ELSE
+:  SET &UC4RB_AZR_REQUEST_ID# = ""
 :ENDIF]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
