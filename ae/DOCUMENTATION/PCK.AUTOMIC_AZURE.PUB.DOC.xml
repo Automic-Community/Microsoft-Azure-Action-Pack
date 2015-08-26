@@ -18,7 +18,14 @@ This package contains the following actions:
 
 * Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE
  Action description :This action is used to change the virtual machine status (start ,restart ,shutdown and shutdown & deallocate).Difference between shutdown and shutdown deallocate is that latter
-will release all the resources acquired by the Virtual machine.This action will return request id which can be further used to query the status of the action.]]></DOC>
+will release all the resources acquired by the Virtual machine.This action will return request id which can be further used to query the status of the action.
+
+* Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER
+Action description : This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type.
+The Action will fail when:
+* A container with the same name already exists in storage account
+* A container with the same name is being deleted at the same time 
+]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>
