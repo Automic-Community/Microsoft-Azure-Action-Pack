@@ -38,13 +38,13 @@ Assert Keystore Password as a mandatory field
 
 *** Keywords ***
 Startup
-    Log    *******Start Test "Configure Connection"*******
+    Log    *******Start Test "CONFIGURE CONNECTION"*******
     Log    *******Connect to AE*******
     Connect AE
 
 Configure Connection Template
     [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
-    [Documentation]    This teste validates connection between AE and Azure with a precondition for successful scenario that certificate corresponding to jks file should be uploaded to Azure portal.
+    [Documentation]    This test validates connection between AE and Azure with a precondition for successful scenario that certificate corresponding to jks file should be uploaded to Azure portal.
     ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
     ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
@@ -58,4 +58,4 @@ Configure Connection Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Report Should Contain    ${AZURE_SUBSCRIPTION_INFO}
 
 Teardown
-    Log    *******End Test "Configure Connection"*******
+    Log    *******End Test "CONFIGURE CONNECTION"*******
