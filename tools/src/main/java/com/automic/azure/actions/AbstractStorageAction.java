@@ -15,8 +15,8 @@ import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.services.AzureStorageAuthenticationService;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
-import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.config.ClientConfig;
 
 /**
  * Abstract class provides common functionalities to Azure Storage Service Actions
@@ -104,6 +104,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
 
         // validate action specific action
         validateActionSpecificInputs();
+        //initialize authentication service parameters
         prepareAuthenticationServiceParams();
     }
 
@@ -111,8 +112,8 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * Initializes the HttpClient without keystore and password
      */
     @Override
-    protected Client initHttpClient() throws AzureException {
-        return HttpClientConfig.getClient(this.connectionTimeOut, this.readTimeOut);
+    protected ClientConfig initHttpClient() throws AzureException {
+        return HttpClientConfig.getClientConfig(this.connectionTimeOut, this.readTimeOut);
     }
 
     /**
