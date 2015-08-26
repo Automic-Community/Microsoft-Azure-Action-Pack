@@ -11,7 +11,7 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide the storage account information"><properties><entry name="text">Provide the storage account information</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z]{3,24}" required="0" separator=";" showaspassword="0" text="Account Name" tooltip="Storage account names must be between 3 to 24 characters in length and use numbers and lower-case letters only.  Example mystorage123" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide the storage account information"><properties><entry name="text">Provide the storage account information</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z]{3,24}" required="0" separator=";" showaspassword="0" text="Account Name" tooltip="Storage account name length: 3 to 24 characters, numbers and lowercase letters only" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -32,7 +32,7 @@
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Storage account names must be between 3 to 24 characters in length and use numbers and lower-case letters only.  Example mystorage123</entry>
+        <entry name="tooltip">Storage account name length: 3 to 24 characters, numbers and lowercase letters only</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
