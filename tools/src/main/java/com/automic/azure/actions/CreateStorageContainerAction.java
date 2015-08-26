@@ -91,22 +91,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
 
         // get URL
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
-
-        this.authenticationService.addCommonHttpHeaders("VERB", "PUT");
-        this.authenticationService.addCommonHttpHeaders("Content-Type", "text/plain");
-        // header for container access
-        if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
-            this.authenticationService.addStorageHttpHeaders("x-ms-blob-public-access", containerAccess.getValue());
-        }
-        // add storage HTTP headers
-        this.authenticationService.addStorageHttpHeaders("x-ms-version", getOptionValue("xmsversion"));
-        this.authenticationService.addStorageHttpHeaders("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-        // add query parameters
-        this.authenticationService.addQueryParameter("restype", "container");
-        // update URI
-        String clientURIForSignature = "/" + this.storageAccount.getAccountName() + "/" + containerName;
-        this.authenticationService.setURIforSignature(clientURIForSignature);
-
+        
         // set query parameters
         Map<String, String> queryParameters = this.authenticationService.getQueryParameters();
         for (Entry<String, String> headerEntry : queryParameters.entrySet()) {
@@ -139,5 +124,25 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }
+
+	@Override
+	protected void prepareAuthenticationServiceParams() {
+		
+		    this.authenticationService.addCommonHttpHeaders("VERB", "PUT");
+	        this.authenticationService.addCommonHttpHeaders("Content-Type", "text/plain");
+	        // header for container access
+	        if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
+	            this.authenticationService.addStorageHttpHeaders("x-ms-blob-public-access", containerAccess.getValue());
+	        }
+	        // add storage HTTP headers
+	        this.authenticationService.addStorageHttpHeaders("x-ms-version", getOptionValue("xmsversion"));
+	        this.authenticationService.addStorageHttpHeaders("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
+	        // add query parameters
+	        this.authenticationService.addQueryParameter("restype", "container");
+	        // update URI
+	        String clientURIForSignature = "/" + this.storageAccount.getAccountName() + "/" + containerName;
+	        this.authenticationService.setURIforSignature(clientURIForSignature);
+		
+	}
 
 }

@@ -40,6 +40,9 @@ public final class ActionFactory {
             case CHECK_REQUEST_STATUS:
                 action = new CheckRequestStatusAction();
                 break;
+            case DELETE_VM:
+                action = new DeleteVMaction();
+                break;
             case CREATE_STORAGE_CONTAINER:
                 action = new CreateStorageContainerAction();
                 break;

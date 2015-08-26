@@ -6,7 +6,7 @@ package com.automic.azure.constants;
  */
 public enum Action {
 
-    VERSION, GET_SUBSCRIPTION_INFO, VM_STATE, CHECK_REQUEST_STATUS, CREATE_STORAGE_CONTAINER;
+    VERSION, GET_SUBSCRIPTION_INFO, VM_STATE, CHECK_REQUEST_STATUS, DELETE_VM ,CREATE_STORAGE_CONTAINER;
 
     public static String getActionNames() {
         Action[] actions = Action.values();
