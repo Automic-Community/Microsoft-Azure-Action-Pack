@@ -13,34 +13,34 @@ Resource          ../../Resources/actions.txt
 *** Test Cases ***    OK_NOK    AccountName                AccessKey                ContainerName        AccessType
 Asserting Creation of Blob with valid inputs
                       [Tags]    main_scenarios
-                      OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    Blob
+                      OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    BLOB
 
 Asserting Creation of Conatiner with valid inputs
-                      OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    Conatiner
+                      OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    CONTAINER
 
 Asserting Creation of Private Container with valid inputs
-                      OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    Private
+                      OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    PRIVATE
 
 Asserting Creation of Private Container with Empty Access Type
                       OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    ${EMPTY}
 
 Asserting Creation of Blob with Invalid Account Name
-                      NOK       ${Invalid_Name_Account}    ${Key_Access}            ${Name_Container}    Blob
+                      NOK       ${Invalid_Name_Account}    ${Key_Access}            ${Name_Container}    BLOB
 
 Asserting Creation of Blob with Invalid Access Key
-                      NOK       ${Name_Account}            ${Invalid_Key_Access}    ${Name_Container}    Blob
+                      NOK       ${Name_Account}            ${Invalid_Key_Access}    ${Name_Container}    BLOB
 
 Asserting Creation of Blob with Invalid Container Name
-                      NOK       ${Name_Account}            ${Key_Access}            ABC_1                Blob
+                      NOK       ${Name_Account}            ${Key_Access}            ABC_1                BLOB
 
 Assert Account Name as a mandatory field
-                      OTHER     ${EMPTY}                   ${Key_Access}            ${Name_Container}    Blob
+                      OTHER     ${EMPTY}                   ${Key_Access}            ${Name_Container}    BLOB
 
 Assert Access Key as a mandatory field
-                      OTHER     ${Name_Account}            ${EMPTY}                 ${Name_Container}    Blob
+                      OTHER     ${Name_Account}            ${EMPTY}                 ${Name_Container}    BLOB
 
 Assert Container Name as a mandatory field
-                      OTHER     ${Name_Account}            ${Key_Access}            ${EMPTY}             Blob
+                      OTHER     ${Name_Account}            ${Key_Access}            ${EMPTY}             BLOB
 
 *** Keywords ***
 Startup
