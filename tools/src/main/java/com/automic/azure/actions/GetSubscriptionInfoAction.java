@@ -27,7 +27,7 @@ import com.sun.jersey.api.client.WebResource;
  * </ul>
  *
  */
-public class GetSubscriptionInfoAction extends AbstractAction {
+public class GetSubscriptionInfoAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(GetSubscriptionInfoAction.class);
 
@@ -37,21 +37,19 @@ public class GetSubscriptionInfoAction extends AbstractAction {
     private String subscriptionId;
 
     public GetSubscriptionInfoAction() {
-        addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID");
-        addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
-        addOption(Constants.PASSWORD, true, "Keystore password");
+        super();
     }
 
     @Override
     protected void initialize() {
-    	this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
+        this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
         this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
         this.password = getOptionValue(Constants.PASSWORD);
     }
 
     @Override
     protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(subscriptionId)) {
+        if (!Validator.checkNotEmpty(this.subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
         }
@@ -60,7 +58,7 @@ public class GetSubscriptionInfoAction extends AbstractAction {
             throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
         }
 
-        if (!Validator.checkNotEmpty(password)) {
+        if (!Validator.checkNotEmpty(this.password)) {
             LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
             throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
         }

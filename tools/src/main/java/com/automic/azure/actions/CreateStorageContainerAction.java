@@ -5,6 +5,7 @@ package com.automic.azure.actions;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +16,6 @@ import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
-import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.services.AzureStorageAuthenticationService;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
@@ -28,19 +28,9 @@ import com.sun.jersey.api.client.WebResource;
  * Action class to create a Container in Azure Storage
  *
  */
-public class CreateStorageContainerAction extends AbstractAction {
+public class CreateStorageContainerAction extends AbstractStorageAction {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateStorageContainerAction.class);
-
-    /**
-     * storage acc from account name and access key
-     */
-    private AzureStorageAccount storageAccount;
-
-    /**
-     * Storage Authentication Service
-     */
-    private AzureStorageAuthenticationService authenticationService;
 
     /**
      * Storage container name
@@ -56,8 +46,6 @@ public class CreateStorageContainerAction extends AbstractAction {
 	 * 
 	 */
     public CreateStorageContainerAction() {
-        addOption("storage", true, "Storage Account Name");
-        addOption("accesskey", true, "Primary Access Key");
         addOption("containername", true, "Storage Container Name");
         addOption("containeraccess", true, "Access level of Storage Container");
 
@@ -146,8 +134,8 @@ public class CreateStorageContainerAction extends AbstractAction {
 
         // set query parameters
         Map<String, String> queryParameters = this.authenticationService.getQueryParameters();
-        for (String headerKey : queryParameters.keySet()) {
-            resource = resource.queryParam(headerKey, queryParameters.get(headerKey));
+        for (Entry<String, String> headerEntry : queryParameters.entrySet()) {
+            resource = resource.queryParam(headerEntry.getKey(), headerEntry.getValue());
         }
 
         WebResource.Builder builder = resource.getRequestBuilder();
@@ -155,8 +143,8 @@ public class CreateStorageContainerAction extends AbstractAction {
         Map<String, String> storageHttpHeaders = this.authenticationService.getStorageHttpHeaders();
         // calculate Authorization header
         storageHttpHeaders.put("Authorization", this.authenticationService.createAuthorizationHeader());
-        for (String headerKey : storageHttpHeaders.keySet()) {
-            builder = builder.header(headerKey, storageHttpHeaders.get(headerKey));
+        for (Entry<String, String> headerEntry : storageHttpHeaders.entrySet()) {
+            builder = builder.header(headerEntry.getKey(), headerEntry.getValue());
         }
 
         LOGGER.info("Calling URL:" + resource.getURI());
@@ -176,26 +164,5 @@ public class CreateStorageContainerAction extends AbstractAction {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }
-
-    /**
-     * Method overrides validateResponse of {@link AbstractAction} as Error response is of a different namespace than
-     * the one returned in abstract class
-     */
-    @Override
-    protected void validateResponse(ClientResponse response) throws AzureException {
-        LOGGER.info("Response code for action " + response.getStatus());
-        if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
-            StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
-            responseBuilder.append("Error Code: [");
-            responseBuilder.append(error.getCode()).append("]");
-            if (Validator.checkNotEmpty(error.getMessage())) {
-                responseBuilder.append(" Message: ").append(error.getMessage());
-            }
-            throw new AzureException(responseBuilder.toString());
-        }
-    }
-    
-    
 
 }

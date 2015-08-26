@@ -191,13 +191,19 @@ public class AzureStorageAuthenticationService {
         authorizationHeader.append(this.storageAccount.getAccountName());
         authorizationHeader.append(":");
         // signature
-        authorizationHeader.append(new String(createAuthorizationSignature()));
+        try {
+            authorizationHeader.append(new String(createAuthorizationSignature(), "UTF-8"));
+        } catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
+            LOGGER.error(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
+            throw new AzureException(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
+        }
         return authorizationHeader.toString();
     }
 
     // Method to create authorization Signature and encode with HMACSHA256
     // algorithm
-    private byte[] createAuthorizationSignature() throws AzureException {
+    private byte[] createAuthorizationSignature() throws InvalidKeyException,
+            UnsupportedEncodingException, NoSuchAlgorithmException {
 
         StringBuilder authorizationSignature = new StringBuilder();
         // create Signature
@@ -210,13 +216,9 @@ public class AzureStorageAuthenticationService {
         LOGGER.info("generated Signature for request");
         LOGGER.info(authorizationSignature);
         // encode Signature with
-        try {
-            return StorageAuthenticationUtil.generateHMACSHA256WithKey(authorizationSignature.toString(),
-                    this.storageAccount.getPrimaryAccessKey());
-        } catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
-            LOGGER.error(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
-            throw new AzureException(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
-        }
+        return StorageAuthenticationUtil.generateHMACSHA256WithKey(authorizationSignature.toString(),
+                this.storageAccount.getPrimaryAccessKey());
+
     }
 
     // create common part of signature

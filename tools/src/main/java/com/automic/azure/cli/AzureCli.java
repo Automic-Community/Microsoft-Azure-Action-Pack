@@ -32,7 +32,7 @@ public class AzureCli {
         } catch (ParseException e) {
             LOGGER.error("Error parsing the command line options", e);
             printHelp(options.getOptions());
-            throw new AzureException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()));
+            throw new AzureException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()), e);
         }
     }
     

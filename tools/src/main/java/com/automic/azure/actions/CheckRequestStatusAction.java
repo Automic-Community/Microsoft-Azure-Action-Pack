@@ -22,9 +22,8 @@ import com.sun.jersey.api.client.WebResource;
  * This class will get the status of the specified operation. After calling an asynchronous operation, you can call
  * CheckRequestStatusAction to determine whether the operation has succeeded, failed, or is still in progress.
  * 
- * @author Anurag Upadhyay
  */
-public class CheckRequestStatusAction extends AbstractAction {
+public class CheckRequestStatusAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(CheckRequestStatusAction.class);
 
@@ -35,9 +34,6 @@ public class CheckRequestStatusAction extends AbstractAction {
      * Initializes a newly created {@code CheckRequestStatusAction} object.
      */
     public CheckRequestStatusAction() {
-        addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID");
-        addOption(Constants.KEYSTORE_LOCATION, true, "Keystore location");
-        addOption(Constants.PASSWORD, true, "Keystore password");
         addOption("requestid", true, "A value that uniquely identifies a request made against the management service");
 
     }
@@ -53,7 +49,7 @@ public class CheckRequestStatusAction extends AbstractAction {
 
     @Override
     protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(subscriptionId)) {
+        if (!Validator.checkNotEmpty(this.subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
         }
@@ -62,11 +58,11 @@ public class CheckRequestStatusAction extends AbstractAction {
             throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
         }
 
-        if (!Validator.checkNotEmpty(password)) {
+        if (!Validator.checkNotEmpty(this.password)) {
             LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
             throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
         }
-        if (!Validator.checkNotEmpty(requestTokenId)) {
+        if (!Validator.checkNotEmpty(this.requestTokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
             throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
         }

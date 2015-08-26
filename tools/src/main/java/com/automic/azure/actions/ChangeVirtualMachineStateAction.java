@@ -26,20 +26,18 @@ import com.sun.jersey.api.client.WebResource;
 /**
  * This class will Start, Restart, Shutdown the specified Virtual Machine on Azure Cloud
  * 
- * @author Anurag Upadhyay
+ *
  */
-public class ChangeVirtualMachineStateAction extends AbstractAction {
+public class ChangeVirtualMachineStateAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(ChangeVirtualMachineStateAction.class);
 
-    private String subscriptionId;
     private String serviceName;
     private String deploymentName;
     private String vmName;
     private String vmState;
 
     public ChangeVirtualMachineStateAction() {
-        addOption("subscriptionid", true, "Subscription ID");
         addOption("servicename", true, "Azure cloud service name");
         addOption("deploymentname", true, "Azure cloud deployment name");
         addOption("vmname", true, "Virtual machine name");
@@ -58,19 +56,28 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
 
     @Override
     protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(subscriptionId)) {
+        if (!Validator.checkNotEmpty(this.subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
         }
-        if (!Validator.checkNotEmpty(serviceName)) {
+        if (!Validator.checkFileExists(this.keyStore)) {
+            LOGGER.error(ExceptionConstants.INVALID_FILE);
+            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+        }
+
+        if (!Validator.checkNotEmpty(this.password)) {
+            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
+        }
+        if (!Validator.checkNotEmpty(this.serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
         }
-        if (!Validator.checkNotEmpty(deploymentName)) {
+        if (!Validator.checkNotEmpty(this.deploymentName)) {
             LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
         }
-        if (!Validator.checkNotEmpty(vmName)) {
+        if (!Validator.checkNotEmpty(this.vmName)) {
             LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
         }

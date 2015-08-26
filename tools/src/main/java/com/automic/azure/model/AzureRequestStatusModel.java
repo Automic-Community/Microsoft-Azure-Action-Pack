@@ -3,11 +3,13 @@ package com.automic.azure.model;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.automic.azure.constants.Constants;
+
 /**
  * An POJO java class which maps to XML structure which is required to handle the operation response.
  */
 
-@XmlRootElement(name = "Operation", namespace = "http://schemas.microsoft.com/windowsazure")
+@XmlRootElement(name = "Operation", namespace = Constants.AZURE_ERROR_NAMESPACE)
 public final class AzureRequestStatusModel {
 
     private String requestTokenId;
@@ -15,7 +17,7 @@ public final class AzureRequestStatusModel {
     private String httpStatusCode;
     private AzureErrorResponse error;
 
-    @XmlElement(name = "ID", namespace = "http://schemas.microsoft.com/windowsazure")
+    @XmlElement(name = "ID", namespace = Constants.AZURE_ERROR_NAMESPACE)
     public String getRequestTokenId() {
         return requestTokenId;
     }
@@ -24,7 +26,7 @@ public final class AzureRequestStatusModel {
         this.requestTokenId = requestTokenId;
     }
 
-    @XmlElement(name = "Status", namespace = "http://schemas.microsoft.com/windowsazure")
+    @XmlElement(name = "Status", namespace = Constants.AZURE_ERROR_NAMESPACE)
     public String getRequestStatus() {
         return requestStatus;
     }
@@ -33,7 +35,7 @@ public final class AzureRequestStatusModel {
         this.requestStatus = requestStatus;
     }
 
-    @XmlElement(name = "HttpStatusCode", namespace = "http://schemas.microsoft.com/windowsazure")
+    @XmlElement(name = "HttpStatusCode", namespace = Constants.AZURE_ERROR_NAMESPACE)
     public String getHttpStatusCode() {
         return httpStatusCode;
     }
@@ -42,7 +44,7 @@ public final class AzureRequestStatusModel {
         this.httpStatusCode = httpStatusCode;
     }
 
-    @XmlElement(name = "Error", namespace = "http://schemas.microsoft.com/windowsazure")
+    @XmlElement(name = "Error", namespace = Constants.AZURE_ERROR_NAMESPACE)
     public AzureErrorResponse getError() {
         return error;
     }

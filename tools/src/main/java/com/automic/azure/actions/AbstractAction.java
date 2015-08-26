@@ -10,11 +10,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.cli.AzureCli;
 import com.automic.azure.cli.AzureOptions;
-import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -32,10 +30,9 @@ public abstract class AbstractAction {
     private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
 
     protected String restapiVersion;
-    protected String keyStore;
-    protected String password;
-    private int connectionTimeOut;
-    private int readTimeOut;
+    
+    protected int connectionTimeOut;
+    protected int readTimeOut;
     private final AzureOptions actionOptions;
     private AzureCli cli;
 
@@ -69,7 +66,7 @@ public abstract class AbstractAction {
             cli.log(Arrays.asList(new String[] { Constants.PASSWORD }));
             initializeArguments();
             validateInputs();
-            client = HttpClientConfig.getClient(this.keyStore, this.password, connectionTimeOut, readTimeOut);
+            client = initHttpClient();
             ClientResponse response = executeSpecific(client);
             validateResponse(response);
             prepareOutput(response);
@@ -128,6 +125,13 @@ public abstract class AbstractAction {
      * @throws AzureException
      */
     protected abstract void validateInputs() throws AzureException;
+    
+    
+    /**
+     * Method to initialize Http client 
+     * @return
+     */
+    protected abstract Client initHttpClient() throws AzureException;
 
     /**
      * Method to write action specific logic.
@@ -157,18 +161,6 @@ public abstract class AbstractAction {
      * @param response
      * @throws AzureException
      */
-    protected void validateResponse(ClientResponse response) throws AzureException {
-        LOGGER.info("Response code for action " + response.getStatus());
-        if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
-            StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
-            responseBuilder.append("Error Code: [");
-            responseBuilder.append(error.getCode()).append("]");
-            if (Validator.checkNotEmpty(error.getMessage())) {
-                responseBuilder.append(" Message: ").append(error.getMessage());
-            }
-            throw new AzureException(responseBuilder.toString());
-        }
-    }
+    protected abstract void validateResponse(ClientResponse response) throws AzureException ;
 
 }
