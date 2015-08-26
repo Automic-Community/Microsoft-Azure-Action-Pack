@@ -80,13 +80,14 @@ public class CheckRequestStatusAction extends AbstractAction {
     @Override
     protected void prepareOutput(ClientResponse response) throws AzureException {
         AzureRequestStatusModel azReqstatus = response.getEntity(AzureRequestStatusModel.class);
-        String status = "UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus();
+        LOGGER.info("Azure response "+azReqstatus);
+            ConsoleWriter.writeln("UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus());
+            ConsoleWriter.writeln("HTTPStatusCode : " + azReqstatus.getHttpStatusCode());
         if (azReqstatus.getError() != null) {
-            AzureErrorResponse azErrorResponse = azReqstatus.getError();
-            status += "\nError Code : " + azErrorResponse.getCode();
-            status += "\nError Message : " + azErrorResponse.getMessage();
+            AzureErrorResponse azErrorResponse = azReqstatus.getError();            
+                ConsoleWriter.writeln("Error Code : " + azErrorResponse.getCode());
+                ConsoleWriter.writeln("Error Message : " + azErrorResponse.getMessage());
         }
-        ConsoleWriter.writeln(status);
     }
 
 }

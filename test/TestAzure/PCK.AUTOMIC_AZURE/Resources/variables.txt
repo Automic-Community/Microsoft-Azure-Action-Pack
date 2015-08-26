@@ -15,5 +15,8 @@ ${Invalid_Cloud_Service_Name}    abcd
 ${Invalid_Deployment_Name}    abcd
 ${VM_Name_Del}    VM1
 ${VM_Name_Del2}    VM2
+<<<<<<< HEAD
 ${Create_VM_FilePath}    ${EXECDIR}\\create_vm.xml
 ${Invalid_Create_VM_FilePath}    ${EXECDIR}\\invalid_create_vm.xml
+=======
+>>>>>>> develop
