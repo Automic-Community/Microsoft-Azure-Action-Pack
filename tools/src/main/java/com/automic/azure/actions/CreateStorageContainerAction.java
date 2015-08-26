@@ -122,7 +122,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
     @Override
     protected void prepareOutput(ClientResponse response) throws AzureException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
-        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
+        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID ::=" + tokenid.get(0));
     }
 
 	@Override

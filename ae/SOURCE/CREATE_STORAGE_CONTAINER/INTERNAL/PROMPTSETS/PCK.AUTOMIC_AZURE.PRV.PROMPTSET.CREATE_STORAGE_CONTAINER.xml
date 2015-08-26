@@ -39,7 +39,7 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><combo alt="1" dynamic="0" enabled="1" fill="b" filter="0" focus="0" id="UC4RB_AZR_CONTAINER_ACCESSs.00" nl="1" strict="1" text="Access Type" tooltip="By default, the container is PRIVATE and can be accessed only by the account owner. To allow public read access to the blobs in the container, but not the container properties and metadata, use the &quot;BLOB&quot; option. To allow full public read access for the container and blobs, use the &quot;CONTAINER&quot; option." vtype="i"><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command owner="_self" owneraction="setsource" ownerparam="src|_dialog@src"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptcombolist" target="_self" targetaction="setlist" wait="0"/>
+    </text><combo alt="1" dynamic="0" enabled="1" fill="b" filter="0" focus="0" id="UC4RB_AZR_CONTAINER_ACCESSs.00" nl="1" strict="1" text="Access Type" tooltip="Select the access type for the storage container" vtype="i"><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command owner="_self" owneraction="setsource" ownerparam="src|_dialog@src"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptcombolist" target="_self" targetaction="setlist" wait="0"/>
          
          
          
@@ -53,7 +53,7 @@
         <entry name="dynamic">0</entry>
         <entry name="enabled">0</entry>
         <entry name="focus">0</entry>
-        <entry name="tooltip">By default, the container is PRIVATE and can be accessed only by the account owner. To allow public read access to the blobs in the container, but not the container properties and metadata, use the &quot;BLOB&quot; option. To allow full public read access for the container and blobs, use the &quot;CONTAINER&quot; option.</entry>
+        <entry name="tooltip">Select the access type for the storage container</entry>
         <entry name="modifiable">1</entry>
         <entry name="onchangereset"/>
         <entry name="customfield"/>
