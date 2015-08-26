@@ -27,9 +27,9 @@ import com.sun.jersey.api.client.WebResource;
  * 
  * @author Anurag Upadhyay
  */
-public class CreateVirtualMachineAction extends AbstractAction {
+public class CreateVirtualMachineDeploymentAction extends AbstractAction {
 
-    private static final Logger LOGGER = LogManager.getLogger(CreateVirtualMachineAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(CreateVirtualMachineDeploymentAction.class);
 
     private String subscriptionId;
     private String serviceName;
@@ -38,7 +38,7 @@ public class CreateVirtualMachineAction extends AbstractAction {
     /**
      * Initializes a newly created {@code CreateVirtualMachineAction} object.
      */
-    public CreateVirtualMachineAction() {
+    public CreateVirtualMachineDeploymentAction() {
         addOption("subscriptionid", true, "Subscription ID");
         addOption("servicename", true, "Azure cloud service name");
         addOption("configfilepath", true, "Xml configration file path");
@@ -62,9 +62,10 @@ public class CreateVirtualMachineAction extends AbstractAction {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
         }
-        if (!Validator.checkFileExistsAndIsFile(configFilePath)) {
-            LOGGER.error(String.format(ExceptionConstants.INVALID_FILE, configFilePath));
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, configFilePath));
+        if (!Validator.checkFileExists(configFilePath)) {
+            String errMsg = String.format(ExceptionConstants.INVALID_FILE, configFilePath);
+            LOGGER.error(errMsg);
+            throw new AzureException(errMsg);
         }
     }
 

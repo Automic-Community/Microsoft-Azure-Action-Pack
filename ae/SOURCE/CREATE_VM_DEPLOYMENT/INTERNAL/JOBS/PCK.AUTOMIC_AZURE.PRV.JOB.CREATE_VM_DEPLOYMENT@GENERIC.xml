@@ -123,7 +123,7 @@
 
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
 ! ! Action name
-:SET &UC4RB_AZR_ACTION_NAME# = "CREATE_VM"
+:SET &UC4RB_AZR_ACTION_NAME# = "CREATE_VM_DEPLOYMENT"
 
 ! Define java options and values
 :DEFINE &UC4RB_AZR_OPTIONS#, string, 20
@@ -173,8 +173,8 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 
 
 ! Status messages
-:SET &UC4RB_LOGGING_INFO# = "******** CREATE_VM ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** CREATE_VM ACTION FAILED ********" 
+:SET &UC4RB_LOGGING_INFO#  = "******** CREATE_VM_DEPLOYMENT ACTION EXECUTED SUCCESSFULLY ********"
+:SET &UC4RB_LOGGING_ERROR# = "******** CREATE_VM_DEPLOYMENT ACTION FAILED ********" 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 
