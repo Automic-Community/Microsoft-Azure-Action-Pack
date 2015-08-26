@@ -11,7 +11,7 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Enter Connection Details"><properties><entry name="text">Enter Connection Details</entry><entry name="modifiable">0</entry></properties><combo alt="1" dynamic="0" enabled="1" fill="b" filter="0" focus="0" id="UC4RB_AZR_HOSTs.00" nl="1" strict="1" text="Azure Connection Name" tooltip="Base Url of Azure" vtype="i"><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command owner="_self" owneraction="setsource" ownerparam="src|_dialog@src"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptcombolist" target="_self" targetaction="setlist" wait="0"/>
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide Connection Details"><properties><entry name="text">Provide Connection Details</entry><entry name="modifiable">0</entry></properties><combo alt="1" dynamic="0" enabled="1" fill="b" filter="0" focus="0" id="UC4RB_AZR_HOSTs.00" nl="1" strict="1" text="Azure Connection Name" tooltip="Connection name" vtype="i"><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command owner="_self" owneraction="setsource" ownerparam="src|_dialog@src"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptcombolist" target="_self" targetaction="setlist" wait="0"/>
          
          
          
@@ -25,7 +25,7 @@
         <entry name="dynamic">0</entry>
         <entry name="enabled">0</entry>
         <entry name="focus">0</entry>
-        <entry name="tooltip">Base Url of Azure</entry>
+        <entry name="tooltip">Connection name</entry>
         <entry name="modifiable">1</entry>
         <entry name="onchangereset"/>
         <entry name="customfield"/>
@@ -35,7 +35,7 @@
     </combo></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_HOSTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_HOST#" ReadFromTable="OPSE">&lt;select value&gt;</UC4RB_AZR_HOSTs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_HOSTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_HOST#" ReadFromTable="OPSE">Select value</UC4RB_AZR_HOSTs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>

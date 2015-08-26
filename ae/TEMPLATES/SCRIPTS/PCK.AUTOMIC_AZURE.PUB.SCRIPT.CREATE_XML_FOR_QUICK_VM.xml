@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_QUICK_VM_XML_CONFIG_FILE">
+<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_XML_FOR_QUICK_VM">
 <XHEADER state="1">
-<Title>Create quick virtual machine Xml Configuration File</Title>
+<Title>Create xml configuration File for quick virtual machine</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -85,16 +85,16 @@
 <FInclSubDirs>0</FInclSubDirs>
 </ROLLBACK>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[:  DEFINE &UC4RB_AZR_CONFIG_XML_KEY#, string
-:  DEFINE &XML_NODES_KEY#, string, 10
-:  DEFINE &XML_NODE_VALUES#, string, 10
+<MSCRI><![CDATA[:   DEFINE &UC4RB_AZR_CONFIG_XML_KEY#, string
+:   DEFINE &XML_NODES_KEY#, string, 10
+:   DEFINE &XML_NODE_VALUES#, string, 10
  
-! ------------ Deployment name -------------------------------
+! ------------ Deployment name ---------------------------------
 :   SET &INDEX# = 1
 :   SET &XML_NODES_KEY#[&INDEX#]="Name"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT#
   
-! ------------ Deployment Slot  -------------------------------
+! ------------ Deployment Slot  --------------------------------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="DeploymentSlot"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT_SLOT#
@@ -104,15 +104,15 @@
 :   SET &XML_NODES_KEY#[&INDEX#]="Label"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT_LABEL#
 
-! ------------ VM Name  -------------------------------
+! ------------ VM Name  ----------------------------------------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="RoleList/Role/RoleName"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_NAME#
 
-! ------------ VM Type  -------------------------------
-:  DEFINE &USERNAME#, string
-:  DEFINE &PASSWORD#, string
-:  DEFINE &COMP_NAME#, string
+! ------------ VM Type  ----------------------------------------
+:   DEFINE &USERNAME#, string
+:   DEFINE &PASSWORD#, string
+:   DEFINE &COMP_NAME#, string
     
 : IF &UC4RB_AZR_VM_TYPE# EQ "Windows"
 :     SET &UC4RB_AZR_CONFIG_XML_KEY# ="quick_windows_vm"
@@ -124,31 +124,30 @@
 :          SET &UC4RB_AZR_CONFIG_XML_KEY# ="quick_linux_vm"
 :          SET &USERNAME# = "UserName"
 :          SET &PASSWORD# = "UserPassword"
-:           SET &COMP_NAME# = "HostName"
+:          SET &COMP_NAME# = "HostName"
 :     ENDIF
 : ENDIF
 
-
 :   SET &CONFIGURATIONSET_PATH# = "RoleList/Role/ConfigurationSets/ConfigurationSet/";
 
-! ------------ Configuration Sets : ConfigurationSet: ComputerName  -------------------------------
+! ------------ Configuration Sets : ConfigurationSet: ComputerName  ----------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="&CONFIGURATIONSET_PATH#&COMP_NAME#"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_COMP_NAME#
    
-! ------------ Configuration Sets : ConfigurationSet: Username  -------------------------------
+! ------------ Configuration Sets : ConfigurationSet: Username  ---------------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="&CONFIGURATIONSET_PATH#&USERNAME#"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_USERNAME#
   
-! ------------ Configuration Sets : ConfigurationSet: Password  -------------------------------
+! ------------ Configuration Sets : ConfigurationSet: Password  ----------------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="&CONFIGURATIONSET_PATH#&PASSWORD#"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_PASSWORD#
 
 :   SET &OSVIRTUALHARDDISK_PATH# = "RoleList/Role/OSVirtualHardDisk/";
  
-! ------------  OSVirtualHardDisk : DiskName  -------------------------------
+! ------------  OSVirtualHardDisk : DiskName  -----------------------------------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="&OSVIRTUALHARDDISK_PATH#DiskName"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_DISKNAME#
@@ -158,24 +157,23 @@
 :   SET &XML_NODES_KEY#[&INDEX#]="&OSVIRTUALHARDDISK_PATH#MediaLink"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_VHD#
 
-! ------------  OSVirtualHardDisk : SourceImageName  -------------------------------
+! ------------  OSVirtualHardDisk : SourceImageName  ----------------------------
 :   SET &INDEX# = &INDEX#+ 1
 :   SET &XML_NODES_KEY#[&INDEX#]="&OSVIRTUALHARDDISK_PATH#SourceImageName"
 :   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_SOURCE_IMAGE#
    
-!------------ Creating xml file path ------------------------------
-! Building output file path
-:  SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
-:  SET &UC4RB_DKR_FILENAME# = "createvmusingimage-&$TOP_PROCESSFLOW_RUNID#.xml" 
-:  SET &UC4RB_DKR_XML_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_DKR_FILENAME#)
-
+!------------ Creating xml file path ---------------------------------------------
+:   SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
+:   SET &UC4RB_AZR_FILENAME# = "create-quick-vm-&$TOP_PROCESSFLOW_RUNID#.xml" 
+:   SET &UC4RB_AZR_XML_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_AZR_FILENAME#)
 
 :INCLUDE PCK.AUTOMIC_AZURE.PRV.INCLUDE.PREP_VM_XML_CONFIG
-:  SET &UC4RB_AZR_FILE_PATH# = &UC4RB_DKR_XML_FILE_PATH# 
-:  SET &UC4RB_DIR_FILE_RM_NAME# = &UC4RB_DKR_XML_FILE_PATH#
+:   SET &UC4RB_AZR_FILE_PATH#    = &UC4RB_AZR_XML_FILE_PATH# 
+:   SET &UC4RB_DIR_FILE_RM_NAME# = &UC4RB_AZR_XML_FILE_PATH#
 
-:  PUBLISH &UC4RB_AZR_FILE_PATH# ,,"TOP"
-:  PUBLISH &UC4RB_DIR_FILE_RM_NAME# ,,"TOP"
+:   PUBLISH &UC4RB_AZR_FILE_PATH# ,,"TOP"
+:   PUBLISH &UC4RB_DIR_FILE_RM_NAME# ,,"TOP"
+
 ]]></MSCRI>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">

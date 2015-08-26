@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_VM_USING_IMAGE_XML_CONFIG_FILE">
+<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_XML_FOR_VM_USING_IMAGE">
 <XHEADER state="1">
-<Title>Create VM using image xml configuration file</Title>
+<Title>Create xml configuration file for VM using image</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -85,46 +85,43 @@
 <FInclSubDirs>0</FInclSubDirs>
 </ROLLBACK>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[:SET &UC4RB_AZR_CONFIG_XML_KEY# ="vm_using_captured_image"
-: DEFINE &XML_NODES_KEY#, string, 10
-: DEFINE &XML_NODE_VALUES#, string, 10
+<MSCRI><![CDATA[:  SET &UC4RB_AZR_CONFIG_XML_KEY# ="vm_using_captured_image"
+:  DEFINE &XML_NODES_KEY#, string, 10
+:  DEFINE &XML_NODE_VALUES#, string, 10
  
 ! ------------ Deployment name -------------------------------
-: SET &INDEX# = 1
-:   SET &XML_NODES_KEY#[&INDEX#]="Name"
-:   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT#
+:  SET &INDEX# = 1
+:  SET &XML_NODES_KEY#[&INDEX#]="Name"
+:  SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT#
   
 ! ------------ Deployment Slot  -------------------------------
-: SET &INDEX# = &INDEX#+ 1
-:   SET &XML_NODES_KEY#[&INDEX#]="DeploymentSlot"
-:   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT_SLOT#
+:  SET &INDEX# = &INDEX#+ 1
+:  SET &XML_NODES_KEY#[&INDEX#]="DeploymentSlot"
+:  SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT_SLOT#
 
-! ------------ Deployment Label  -------------------------------
-: SET &INDEX# = &INDEX#+ 1
-:   SET &XML_NODES_KEY#[&INDEX#]="Label"
-:   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT_LABEL#
+! ------------ Deployment Label  ------------------------------
+:  SET &INDEX# = &INDEX#+ 1
+:  SET &XML_NODES_KEY#[&INDEX#]="Label"
+:  SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_DEPLOYMENT_LABEL#
 
-! ------------ VM Name  -------------------------------
-: SET &INDEX# = &INDEX#+ 1
-:   SET &XML_NODES_KEY#[&INDEX#]="RoleList/Role/RoleName"
-:   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_NAME#
+! ------------ VM Name  ---------------------------------------
+:  SET &INDEX# = &INDEX#+ 1
+:  SET &XML_NODES_KEY#[&INDEX#]="RoleList/Role/RoleName"
+:  SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_NAME#
 
-! ------------ VM Image  -------------------------------
-: SET &INDEX# = &INDEX#+ 1
-:   SET &XML_NODES_KEY#[&INDEX#]="RoleList/Role/VMImageName"
-:   SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_IMAGE#
-! ------------- Include for agent later i have to remove this ----------------
+! ------------ VM Image  --------------------------------------
+:  SET &INDEX# = &INDEX#+ 1
+:  SET &XML_NODES_KEY#[&INDEX#]="RoleList/Role/VMImageName"
+:  SET &XML_NODE_VALUES#[&INDEX#]= &UC4RB_AZR_VM_IMAGE#
 
-!------------ Creating xml file path ------------------------------
-! Building output file path
-:SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
-:SET &UC4RB_DKR_FILENAME# = "createvmusingimage-&$TOP_PROCESSFLOW_RUNID#.xml" 
-:set &UC4RB_DKR_XML_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_DKR_FILENAME#)
-
+!------------ Creating xml file path --------------------------
+:  SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
+:  SET &UC4RB_AZR_FILENAME# = "create-vm-using-image-&$TOP_PROCESSFLOW_RUNID#.xml" 
+:  set &UC4RB_AZR_XML_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_AZR_FILENAME#)
 
 :INCLUDE PCK.AUTOMIC_AZURE.PRV.INCLUDE.PREP_VM_XML_CONFIG
-:  SET &UC4RB_AZR_FILE_PATH# = &UC4RB_DKR_XML_FILE_PATH#
-:  SET &UC4RB_DIR_FILE_RM_NAME# = &UC4RB_DKR_XML_FILE_PATH#
+:  SET &UC4RB_AZR_FILE_PATH# = &UC4RB_AZR_XML_FILE_PATH#
+:  SET &UC4RB_DIR_FILE_RM_NAME# = &UC4RB_AZR_XML_FILE_PATH#
 :  PUBLISH &UC4RB_AZR_FILE_PATH# ,,"TOP"
 :  PUBLISH &UC4RB_DIR_FILE_RM_NAME# ,,"TOP"]]></MSCRI>
 </SCRIPT>
