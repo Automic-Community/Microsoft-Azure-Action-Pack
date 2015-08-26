@@ -15,7 +15,7 @@ Asserting Creation of Blob with valid inputs
                       [Tags]    main_scenarios
                       OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    BLOB
 
-Asserting Creation of Conatiner with valid inputs
+Asserting Creation of Container with valid inputs
                       OK        ${Name_Account}            ${Key_Access}            ${Name_Container}    CONTAINER
 
 Asserting Creation of Private Container with valid inputs
