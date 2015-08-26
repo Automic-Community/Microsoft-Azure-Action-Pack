@@ -13,6 +13,7 @@ import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.services.AzureStorageAuthenticationService;
+import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -24,6 +25,12 @@ import com.sun.jersey.api.client.ClientResponse;
 public abstract class AbstractStorageAction extends AbstractAction {
 
     private static final Logger LOGGER = LogManager.getLogger(AbstractStorageAction.class);
+    
+    
+    protected String restapiVersion;
+    
+    protected int connectionTimeOut;
+    protected int readTimeOut;
 
     /**
      * storage acc from account name and access key
@@ -44,12 +51,47 @@ public abstract class AbstractStorageAction extends AbstractAction {
     public AbstractStorageAction(boolean isServiceForTable) {
         super();
         this.isServiceForTable = isServiceForTable;
+        addOption(Constants.READ_TIMEOUT, true, "Read timeout");
+        addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
+        addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
         addOption(Constants.STORAGE, true, "Storage Account Name");
         addOption(Constants.ACCESS_KEY, true, "Primary Access Key");
     }
 
     @Override
+    protected void initializeArguments() {
+    	
+    	this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
+ 	    this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
+ 	    this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
+        // storage acc from account name and access key
+        this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
+        // authentication service
+        this.authenticationService = new AzureStorageAuthenticationService(storageAccount, isServiceForTable);
+        // call to initialize action specific param
+        initializeActionSpecificArgs();
+
+    }
+    
+    @Override
     protected void validateInputs() throws AzureException {
+    	
+    	if (this.connectionTimeOut < 0) {
+            LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
+            throw new AzureException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
+        }
+
+        if (this.readTimeOut < 0) {
+            LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
+            throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
+        }
+
+        if (!Validator.checkNotEmpty(restapiVersion)) {
+            LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
+            throw new AzureException(ExceptionConstants.EMPTY_X_MS_VERSION);
+        }    	
+    	
+    	
         // validate storage name
         if (!Validator.checkNotEmpty(storageAccount.getAccountName())) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
@@ -64,20 +106,10 @@ public abstract class AbstractStorageAction extends AbstractAction {
 
         // validate action specific action
         validateActionSpecificInputs();
+        prepareAuthenticationServiceParams();
     }
 
     
-
-    @Override
-    protected void initialize() {
-        // storage acc from account name and access key
-        this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
-        // authentication service
-        this.authenticationService = new AzureStorageAuthenticationService(storageAccount, isServiceForTable);
-        // call to initialize action specific param
-        initializeActionSpecificArgs();
-
-    }
 
     /**
      * Initializes the HttpClient without keystore and password
@@ -111,5 +143,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * @throws AzureException
      */
     protected abstract void validateActionSpecificInputs() throws AzureException;
+    
+    protected abstract void prepareAuthenticationServiceParams();
 
 }
