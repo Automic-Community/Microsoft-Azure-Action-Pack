@@ -8,11 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
-import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
-import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -27,42 +25,23 @@ import com.sun.jersey.api.client.WebResource;
  * </ul>
  *
  */
-public class GetSubscriptionInfoAction extends AbstractManagementAction {
+public final class GetSubscriptionInfoAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(GetSubscriptionInfoAction.class);
 
-    /**
-     * Subscription Id of Azure account
-     */
-    private String subscriptionId;
-
+    
     public GetSubscriptionInfoAction() {
         super();
     }
 
     @Override
-    protected void initialize() {
-        this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
-        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
-        this.password = getOptionValue(Constants.PASSWORD);
+    protected void initializeActionSpecificArgs() {
+       
     }
 
     @Override
-    protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(this.subscriptionId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-        }
-        if (!Validator.checkFileExists(this.keyStore)) {
-            LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
-        }
-
-        if (!Validator.checkNotEmpty(this.password)) {
-            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-        }
-
+    protected void validateActionSpecificInputs() throws AzureException {
+        
     }
 
     /**

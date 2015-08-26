@@ -16,7 +16,6 @@ import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
-import com.automic.azure.services.AzureStorageAuthenticationService;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
 import com.automic.azure.util.Validator;
@@ -28,7 +27,7 @@ import com.sun.jersey.api.client.WebResource;
  * Action class to create a Container in Azure Storage
  *
  */
-public class CreateStorageContainerAction extends AbstractStorageAction {
+public final class CreateStorageContainerAction extends AbstractStorageAction {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateStorageContainerAction.class);
 
@@ -46,18 +45,15 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
 	 * 
 	 */
     public CreateStorageContainerAction() {
+        super(false);
         addOption("containername", true, "Storage Container Name");
-        addOption("containeraccess", true, "Access level of Storage Container");
+        addOption("containeraccess", true, "Access level of Storage Container. "
+                + "possible values PRIVATE, CONTAINER or BLOB");
 
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.automic.azure.actions.AbstractAction#initialize()
-     */
     @Override
-    protected void initialize() {
+    protected void initializeActionSpecificArgs() {
         // storage acc from account name and access key
         this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
         // container Name
@@ -67,30 +63,10 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
             this.containerAccess = ContainerAccess.valueOf(getOptionValue("containeraccess"));
         }
 
-        // authentication service
-        this.authenticationService = new AzureStorageAuthenticationService(storageAccount, false);
-
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.automic.azure.actions.AbstractAction#validateInputs()
-     */
     @Override
-    protected void validateInputs() throws AzureException {
-
-        // validate storage name
-        if (!Validator.checkNotEmpty(storageAccount.getAccountName())) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
-        }
-
-        // validate storage access key
-        if (!Validator.checkNotEmpty(storageAccount.getPrimaryAccessKey())) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
-        }
+    protected void validateActionSpecificInputs() throws AzureException {
 
         // validate storage container name
         if (!Validator.checkNotEmpty(this.containerName)) {
@@ -108,7 +84,6 @@ public class CreateStorageContainerAction extends AbstractStorageAction {
     /**
      * {@inheritDoc com.automic.azure.actions.AbstractAction#executeSpecific }. Method makes PUT request to
      * https://myaccount.blob.core.windows.net/mycontainer?restype=container
-     * 
      * 
      */
     @Override

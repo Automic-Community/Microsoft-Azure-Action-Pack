@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
+import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.util.Validator;
@@ -36,6 +37,18 @@ public abstract class AbstractManagementAction extends AbstractAction {
     }
 
     @Override
+    protected void initialize() {
+        this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
+        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
+        this.password = getOptionValue(Constants.PASSWORD);
+        // call to initialize action specific param
+        initializeActionSpecificArgs();
+    }
+
+    /**
+     * Initializes the HttpClient with sslcontext using keystore and password
+     */
+    @Override
     protected Client initHttpClient() throws AzureException {
         return HttpClientConfig.getClient(this.keyStore, this.password, connectionTimeOut, readTimeOut);
     }
@@ -45,14 +58,39 @@ public abstract class AbstractManagementAction extends AbstractAction {
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
             AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
-            StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
-            responseBuilder.append("Error Code: [");
-            responseBuilder.append(error.getCode()).append("]");
-            if (Validator.checkNotEmpty(error.getMessage())) {
-                responseBuilder.append(" Message: ").append(error.getMessage());
-            }
-            throw new AzureException(responseBuilder.toString());
+            throw new AzureException(error.toString());
         }
     }
+
+    @Override
+    protected void validateInputs() throws AzureException {
+        if (!Validator.checkNotEmpty(this.subscriptionId)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+        }
+        if (!Validator.checkFileExists(this.keyStore)) {
+            LOGGER.error(ExceptionConstants.INVALID_FILE);
+            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+        }
+
+        if (!Validator.checkNotEmpty(this.password)) {
+            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
+        }
+        // validate action specific action
+        validateActionSpecificInputs();
+    }
+
+    /**
+     * Method to initialize Action specific arguments
+     */
+    protected abstract void initializeActionSpecificArgs();
+
+    /**
+     * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
+     * 
+     * @throws AzureException
+     */
+    protected abstract void validateActionSpecificInputs() throws AzureException;
 
 }

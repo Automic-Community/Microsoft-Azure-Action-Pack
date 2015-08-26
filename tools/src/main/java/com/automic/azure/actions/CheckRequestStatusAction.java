@@ -23,11 +23,10 @@ import com.sun.jersey.api.client.WebResource;
  * CheckRequestStatusAction to determine whether the operation has succeeded, failed, or is still in progress.
  * 
  */
-public class CheckRequestStatusAction extends AbstractManagementAction {
+public final class CheckRequestStatusAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(CheckRequestStatusAction.class);
 
-    private String subscriptionId;
     private String requestTokenId;
 
     /**
@@ -39,29 +38,12 @@ public class CheckRequestStatusAction extends AbstractManagementAction {
     }
 
     @Override
-    protected void initialize() {
-
-        this.subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
-        this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
-        this.password = getOptionValue(Constants.PASSWORD);
+    protected void initializeActionSpecificArgs() {
         this.requestTokenId = getOptionValue("requestid");
     }
 
     @Override
-    protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(this.subscriptionId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-        }
-        if (!Validator.checkFileExists(this.keyStore)) {
-            LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
-        }
-
-        if (!Validator.checkNotEmpty(this.password)) {
-            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-        }
+    protected void validateActionSpecificInputs() throws AzureException {
         if (!Validator.checkNotEmpty(this.requestTokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
             throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);

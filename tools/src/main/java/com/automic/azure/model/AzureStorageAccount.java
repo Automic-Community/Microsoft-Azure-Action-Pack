@@ -8,6 +8,7 @@ package com.automic.azure.model;
 public class AzureStorageAccount {
 
     private static final String AZURE_STORAGE_HOST = "core.windows.net";
+    private static final String AZURE_HTTPS = "https://";
 
     /**
      * Storage account name
@@ -53,7 +54,7 @@ public class AzureStorageAccount {
      * @return
      */
     public String blobURL() {
-        return "https://" + accountName + ".blob." + AZURE_STORAGE_HOST;
+        return AZURE_HTTPS + accountName + ".blob." + AZURE_STORAGE_HOST;
     }
 
     /**
@@ -62,7 +63,7 @@ public class AzureStorageAccount {
      * @return
      */
     public String tableURL() {
-        return "https://" + accountName + ".table." + AZURE_STORAGE_HOST;
+        return AZURE_HTTPS + accountName + ".table." + AZURE_STORAGE_HOST;
     }
 
     /**
@@ -71,7 +72,7 @@ public class AzureStorageAccount {
      * @return
      */
     public String fileURL() {
-        return "https://" + accountName + ".file." + AZURE_STORAGE_HOST;
+        return AZURE_HTTPS + accountName + ".file." + AZURE_STORAGE_HOST;
     }
 
 }

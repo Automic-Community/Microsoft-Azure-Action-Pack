@@ -117,6 +117,9 @@ public abstract class AbstractAction {
         }
     }
 
+    /**
+     * Method to initialize parameters 
+     */
     protected abstract void initialize();
 
     /**

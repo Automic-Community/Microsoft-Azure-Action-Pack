@@ -28,7 +28,7 @@ import com.sun.jersey.api.client.WebResource;
  * 
  *
  */
-public class ChangeVirtualMachineStateAction extends AbstractManagementAction {
+public final class ChangeVirtualMachineStateAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(ChangeVirtualMachineStateAction.class);
 
@@ -45,30 +45,16 @@ public class ChangeVirtualMachineStateAction extends AbstractManagementAction {
     }
 
     @Override
-    protected void initialize() {
+    protected void initializeActionSpecificArgs() {
 
         serviceName = getOptionValue("servicename");
         deploymentName = getOptionValue("deploymentname");
         vmName = getOptionValue("vmname");
-        subscriptionId = getOptionValue("subscriptionid");
         vmState = getOptionValue("vmstate");
     }
 
     @Override
-    protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(this.subscriptionId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-        }
-        if (!Validator.checkFileExists(this.keyStore)) {
-            LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
-        }
-
-        if (!Validator.checkNotEmpty(this.password)) {
-            LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
-        }
+    protected void validateActionSpecificInputs() throws AzureException {
         if (!Validator.checkNotEmpty(this.serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
