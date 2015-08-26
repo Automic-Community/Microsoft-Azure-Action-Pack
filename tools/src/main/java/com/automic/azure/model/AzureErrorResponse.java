@@ -31,25 +31,21 @@ public class AzureErrorResponse {
         this.message = message;
     }
 
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Azure Error Response ");
-		if (code != null) {
-			builder.append("[code=");
-			builder.append(code);
-			builder.append("], ");
-		}
-		if (message != null) {
-			builder.append("[message=");
-			builder.append(message);
-		}
-		builder.append("]");
-		return builder.toString();
-	}
-
-	
-	
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Azure Error Response ");
+        if (code != null) {
+            builder.append("[code=");
+            builder.append(code);
+            builder.append("], ");
+        }
+        if (message != null) {
+            builder.append("[message=");
+            builder.append(message);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
 
 }

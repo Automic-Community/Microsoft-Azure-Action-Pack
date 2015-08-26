@@ -25,10 +25,9 @@ import com.sun.jersey.api.client.ClientResponse;
 public abstract class AbstractStorageAction extends AbstractAction {
 
     private static final Logger LOGGER = LogManager.getLogger(AbstractStorageAction.class);
-    
-    
+
     protected String restapiVersion;
-    
+
     protected int connectionTimeOut;
     protected int readTimeOut;
 
@@ -43,7 +42,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
     protected AzureStorageAuthenticationService authenticationService;
 
     private boolean isServiceForTable;
-    
+
     /**
      * @param b
      * 
@@ -60,10 +59,10 @@ public abstract class AbstractStorageAction extends AbstractAction {
 
     @Override
     protected void initializeArguments() {
-    	
-    	this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
- 	    this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
- 	    this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
+
+        this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
+        this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
+        this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
         // storage acc from account name and access key
         this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
         // authentication service
@@ -72,11 +71,11 @@ public abstract class AbstractStorageAction extends AbstractAction {
         initializeActionSpecificArgs();
 
     }
-    
+
     @Override
     protected void validateInputs() throws AzureException {
-    	
-    	if (this.connectionTimeOut < 0) {
+
+        if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
             throw new AzureException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
         }
@@ -89,9 +88,8 @@ public abstract class AbstractStorageAction extends AbstractAction {
         if (!Validator.checkNotEmpty(restapiVersion)) {
             LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
             throw new AzureException(ExceptionConstants.EMPTY_X_MS_VERSION);
-        }    	
-    	
-    	
+        }
+
         // validate storage name
         if (!Validator.checkNotEmpty(storageAccount.getAccountName())) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
@@ -108,8 +106,6 @@ public abstract class AbstractStorageAction extends AbstractAction {
         validateActionSpecificInputs();
         prepareAuthenticationServiceParams();
     }
-
-    
 
     /**
      * Initializes the HttpClient without keystore and password
@@ -143,7 +139,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * @throws AzureException
      */
     protected abstract void validateActionSpecificInputs() throws AzureException;
-    
+
     protected abstract void prepareAuthenticationServiceParams();
 
 }

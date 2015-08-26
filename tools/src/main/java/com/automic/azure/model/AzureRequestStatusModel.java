@@ -53,20 +53,19 @@ public final class AzureRequestStatusModel {
         this.error = error;
     }
 
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("AzureRequestStatusModel [requestTokenId=");
-		builder.append(requestTokenId);
-		builder.append(", requestStatus=");
-		builder.append(requestStatus);
-		builder.append(", httpStatusCode=");
-		builder.append(httpStatusCode);
-		builder.append(", error=");
-		builder.append(error);
-		builder.append("]");
-		return builder.toString();
-	}
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("AzureRequestStatusModel [requestTokenId=");
+        builder.append(requestTokenId);
+        builder.append(", requestStatus=");
+        builder.append(requestStatus);
+        builder.append(", httpStatusCode=");
+        builder.append(httpStatusCode);
+        builder.append(", error=");
+        builder.append(error);
+        builder.append("]");
+        return builder.toString();
+    }
 
 }
