@@ -293,7 +293,10 @@
 PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER
 
 = General description =
-This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type.
+This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type. User can choose from the following access types:
+* PRIVATE - By default, the container is PRIVATE and can be accessed only by the account owner.
+* CONTAINER - To allow full public read access for the container and blobs
+* BLOB - To allow public read access to the blobs in the container, but not the container properties and metadata.
 The Action will fail when:
 * A container with the same name already exists in storage account
 * A container with the same name is being deleted at the same time 
@@ -302,7 +305,7 @@ The Action will fail when:
 * Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
 * Access Key: Access key for this storage account 
 * Container name: Storage container name can only include numbers and lower-case characters. Example mycontainer123
-* Access Type: By default, the container is PRIVATE and can be accessed only by the account owner. To allow public read access to the blobs in the container, but not the container properties and metadata, use the "BLOB" option. To allow full public read access for the container and blobs, use the "CONTAINER" option.
+* Access Type: Select the access type for the storage container.
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 
@@ -323,8 +326,9 @@ The AE variable UC4RB_AZR_REQUEST_ID will contain a request id which could be us
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
+
 = Example =
-(none)]]></DOC>
+(none]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
