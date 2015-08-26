@@ -1,24 +1,24 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-  <Name>Virtual-Winows-Vm</Name>
+  <Name>TESTING</Name>
   <DeploymentSlot>Production</DeploymentSlot>
-  <Label>Test VM</Label>      
+  <Label>TestVM</Label>      
   <RoleList>
     <Role>
-      <RoleName>AT-VM</RoleName>
+      <RoleName>WinVMx</RoleName>
       <RoleType>PersistentVMRole</RoleType>
       <ConfigurationSets>
         <ConfigurationSet i:type="WindowsProvisioningConfigurationSet">
           <ConfigurationSetType>WindowsProvisioningConfiguration</ConfigurationSetType>
-          <ComputerName>AT-VM</ComputerName>                     
-          <AdminPassword>test123</AdminPassword> 
-          <AdminUsername>AT</AdminUsername>       
+          <ComputerName>TestVM</ComputerName>                     
+          <AdminPassword>Test@123</AdminPassword> 
+          <AdminUsername>Administrator1</AdminUsername>       
         </ConfigurationSet> 
        </ConfigurationSets> 
 	   <OSVirtualHardDisk>
         <HostCaching>ReadWrite</HostCaching>
         <DiskLabel>Windows Server</DiskLabel>
-        <DiskName>stk_disk_5</DiskName>
-        <MediaLink>https://cactest.blob.core.windows.net/AT-VM/AT-VM.vhd</MediaLink>
+        <DiskName>stk_disk_6</DiskName>
+        <MediaLink>https://anurag.blob.core.windows.net/anuragteplatetest/tempateQuick_VM.vhd</MediaLink>
         <SourceImageName>3a50f22b388a4ff7ab41029918570fa6__Windows-Server-2012-Essentials-20140327-enus</SourceImageName>
       </OSVirtualHardDisk>
       <RoleSize>ExtraSmall</RoleSize>
