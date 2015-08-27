@@ -286,7 +286,42 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+ PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM_DEPLOYMENT
+= General description =
+The Create Virtual Machine Deployment Action creates a deployment and then creates a Virtual Machine in the deployment based on the provided xml configuration file and service name. If action executed successfully, it will return request status id that will be used to check status of executed action.
+
+= Inputs =
+* Cloud service name    : Name of the cloud service in which virtual machine is created 
+* VM Configuration File : Xml file name with full path which contains virtual machine configuration set
+* Subscription ID   	: ID of the subscription which will be used for this connection
+* Keystore location	: Path for keystore
+* keystore Password	: Password for keystore
+* Overwrite Agent	: Overwrites the default agent
+* Overwrite Login	: Overwrites the default login
+
+= Behavior =
+When we execute change Create Virtual Machine Deployment action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
+* If provided cloud service name doesn?t exist on Azure cloud then action will be fail. It will return status code and message.
+* If provided VM Configuration File is invalid xml then action will be fail. It will return status code and message.
+* Provided cloud service name and VM Configuration File is valid then action will be execute successfully. It will return ms request token id.
+=Return Value=
+The response will contain the request id which can be further used to query the status of the action.
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\azure.log under agent installation directory.
+
+= Example =
+(none)
+]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>

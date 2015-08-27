@@ -8,35 +8,23 @@
 <OH_SubType/>
 </HEADER>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[:    SET &VARA_OBJ_CONFIG# = "PCK.AUTOMIC_AZURE.PUB.VARA.CREATE_VM_DEPLOYMENT_DESCRIPTOR"
-:    SET &UC4RB_AZR_CONFIG_XML# = GET_VAR(&VARA_OBJ_CONFIG#, "&UC4RB_AZR_CONFIG_XML_KEY#",1)
- 
-:   IF &UC4RB_AZR_CONFIG_XML# GT 0
-!   Get to Root
-:     SET &ROOTHND# = XML_OPEN(STRING, &UC4RB_AZR_CONFIG_XML#)
-:     IF &ROOTHND# <> ""
-! ---------------   Getting array length ------------------------     
-:         SET &LEN# = LENGTH(&XML_NODES_KEY#[])
-:         SET &INDEX# = 1
-!         Get to Records
-:          WHILE &INDEX# LE &LEN# 
-:            IF &XML_NODES_KEY#[&INDEX#] NE ""
-:              SET &ELEMENT# = XML_SELECT_NODE(&ROOTHND#, &XML_NODES_KEY#[&INDEX#])
-:              SET &RET#     = XML_SET_NODE_TEXT(&ELEMENT#,&XML_NODE_VALUES#[&INDEX#])
-:            ENDIF
-:           SET &INDEX# = &INDEX# + 1
-:         ENDWHILE          
-:   ENDIF         
-! ----------------- Writing XML File------------------------------
-:    SET &RET1# = XML_BEAUTIFY(&ROOTHND#)
-:    SET &UC4RB_AZR_CONFIG_XML# = XML_TO_STRING(&ROOTHND#)
+<MSCRI><![CDATA[
+! --------------- XML file path -----------------------------------------      
+:  SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
+:  SET &UC4RB_AZR_FILENAME# = "&UC4RB_AZR_FILENAME#-&$TOP_PROCESSFLOW_RUNID#.xml" 
+:  set &UC4RB_AZR_XML_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_AZR_FILENAME#)
+  
+! ----------------- Writing XML File-------------------------------------
 :    PRINT &UC4RB_AZR_CONFIG_XML#
 :    SET &HND# = CREATE_PROCESS(NEW) 
 :    SET &RET# = PUT_PROCESS_LINE(&HND#, &UC4RB_AZR_CONFIG_XML#) 
 :    SET &RET# = WRITE_PROCESS(&HND#,&UC4RB_AZR_XML_FILE_PATH#,&AGENT#,&LOGIN#,OVERWRITE) 
 :    CLOSE_PROCESS &HND#
-:   XML_CLOSE
-:   ENDIF
+:    IF &RET# > 0 
+:      PRINT "Error in writing file to path : &UC4RB_AZR_XML_FILE_PATH#"
+:    ENDIF 
+
+
 
 
 ]]></MSCRI>
