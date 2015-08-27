@@ -54,7 +54,7 @@ public abstract class AbstractAction {
         Client client = null;
         try {
             cli = new AzureCli(actionOptions, commandLineArgs);
-            cli.log(Arrays.asList(new String[] { Constants.PASSWORD }));
+            cli.log(Arrays.asList(new String[] { Constants.PASSWORD, Constants.ACCESS_KEY}));
             initializeArguments();
             validateInputs();
             client = Client.create(initHttpClient());
