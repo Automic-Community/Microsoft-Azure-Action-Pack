@@ -85,7 +85,7 @@
 <FInclSubDirs>0</FInclSubDirs>
 </ROLLBACK>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[!: set &UC4RB_AZR_REQUEST_STATUS# = "Failed"
+<MSCRI><![CDATA[
 : IF &UC4RB_AZR_REQUEST_STATUS# EQ "Failed"
 :   PRINT "Create virtual machine deployment failed"
 :   EXIT 1 

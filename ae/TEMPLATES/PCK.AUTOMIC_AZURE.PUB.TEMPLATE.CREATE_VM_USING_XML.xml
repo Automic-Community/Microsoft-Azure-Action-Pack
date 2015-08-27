@@ -237,7 +237,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="REQUEST_STATUS" BranchType="0" Col="4" Lnr="4" OType="JOBP" Object="PCK.AUTOMIC_AZURE.PUB.ACTION.GET_REQUEST_STATUS" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="CHECK_STATUS" BranchType="0" Col="4" Lnr="4" OType="JOBP" Object="PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -255,7 +255,9 @@
 <dyntree>
 <node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
 <VALUE state="2">
-<Values/>
+<Values>
+<row Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+</Values>
 <Mode>0</Mode>
 </VALUE>
 </node>
@@ -339,7 +341,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="5" Lnr="5" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.FINAL_STATUS_OF_SUBMITTED_TASK" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="FINAL_STATUS" BranchType="0" Col="5" Lnr="5" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.FINAL_STATUS_OF_SUBMITTED_TASK" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
