@@ -161,7 +161,7 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -accesskey $UC4_DECRYP
 
 ! Status messages
 :SET &UC4RB_LOGGING_INFO# = "******** CREATE STORAGE CONTAINER ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** CREATE STORAGE CONTAINER  ACTION FAILED ********" 
+:SET &UC4RB_LOGGING_ERROR# = "******** CREATE STORAGE CONTAINER ACTION FAILED ********" 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 

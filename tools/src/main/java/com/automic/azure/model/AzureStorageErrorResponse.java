@@ -14,6 +14,7 @@ public class AzureStorageErrorResponse {
 
     private String code;
     private String message;
+    private String authenticationErrorDetail;
 
     @XmlElement(name = "Code")
     public String getCode() {
@@ -33,6 +34,15 @@ public class AzureStorageErrorResponse {
         this.message = message;
     }
 
+    @XmlElement(name = "AuthenticationErrorDetail")
+    public String getAuthenticationErrorDetail() {
+        return authenticationErrorDetail;
+    }
+
+    public void setAuthenticationErrorDetail(String authenticationErrorDetail) {
+        this.authenticationErrorDetail = authenticationErrorDetail;
+    }
+
     @Override
     public String toString() {
         StringBuilder responseBuilder = new StringBuilder("Azure Response: ");
@@ -40,6 +50,9 @@ public class AzureStorageErrorResponse {
         responseBuilder.append(this.code).append("]");
         if (Validator.checkNotEmpty(this.message)) {
             responseBuilder.append(" Message: ").append(this.message);
+        }
+        if (Validator.checkNotEmpty(this.authenticationErrorDetail)) {
+            responseBuilder.append(" AuthenticationErrorDetail: ").append(this.authenticationErrorDetail);
         }
         return responseBuilder.toString();
     }
