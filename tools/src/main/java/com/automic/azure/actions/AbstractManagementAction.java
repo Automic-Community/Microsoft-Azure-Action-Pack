@@ -13,8 +13,8 @@ import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
-import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.config.ClientConfig;
 
 /**
  * Abstract class provides common functionalities to Azure Management Service Actions
@@ -104,8 +104,8 @@ public abstract class AbstractManagementAction extends AbstractAction {
      * Initializes the HttpClient with sslcontext using keystore and password
      */
     @Override
-    protected Client initHttpClient() throws AzureException {
-        return HttpClientConfig.getClient(this.keyStore, this.password, connectionTimeOut, readTimeOut);
+    protected ClientConfig initHttpClient() throws AzureException {
+        return HttpClientConfig.getClientConfig(this.keyStore, this.password, connectionTimeOut, readTimeOut);
     }
 
     @Override
