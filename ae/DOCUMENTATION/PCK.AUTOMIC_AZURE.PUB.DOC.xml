@@ -25,10 +25,7 @@ Action description : This action is used to delete the given virtual machine in 
 Also if delete attached media is selected YES than it will delete the associated media (operating system disk.data disk and the source blobs) not the container.
 
 * Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER
-Action description : This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type. User can choose from the following access types:
-* PRIVATE - By default, the container is PRIVATE and can be accessed only by the account owner.
-* CONTAINER - To allow full public read access for the container and blobs
-* BLOB - To allow public read access to the blobs in the container, but not the container properties and metadata.
+Action description : This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type.
 The Action will fail when:
 * A container with the same name already exists in storage account
 * A container with the same name is being deleted at the same time 
