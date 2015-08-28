@@ -7,7 +7,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -44,36 +45,11 @@ public class StorageAuthenticationFilter extends ClientFilter {
     private AzureStorageAccount storageAccount;
 
     /**
-     * URI for Canonical Resource part of signature
-     */
-    private String clientURIForSignature;
-
-    /**
-     * Common Http headers Example Content-Length
-     */
-    private Map<String, String> commonHttpHeaders;
-
-    /**
 	 * 
 	 */
-    private List<String> commonHttpHeaderKeys;
+    private List<String> commonHttpHeaderKeys = StorageAuthenticationFilter.initCommonHeaderKeys();
 
-    /**
-     * 
-     */
-    private List<String> storageHttpHeaderKeys;
-
-    /**
-     * storage Http Headers Example x-ms-version
-     */
-    private Map<String, String> storageHttpHeaders;
-
-    /**
-     * http query parameters Example timeout, restype
-     * 
-     */
-    private Map<String, String> queryParameters;
-
+    
     /**
      * Initialize Authentication service
      * 
@@ -82,24 +58,8 @@ public class StorageAuthenticationFilter extends ClientFilter {
      *            true if Authenticating for Storage Table service
      * @param commonHeaders
      */
-    public StorageAuthenticationFilter(AzureStorageAccount storageAccount, boolean isServiceForTable) {
+    public StorageAuthenticationFilter(AzureStorageAccount storageAccount) {
         this.storageAccount = storageAccount;
-        if (isServiceForTable) {
-
-            commonHttpHeaderKeys = StorageAuthenticationFilter.initCommonHeaderKeysForTable();
-        } else {
-
-            commonHttpHeaderKeys = StorageAuthenticationFilter.initCommonHeaderKeys();
-
-        }
-
-        storageHttpHeaderKeys = StorageAuthenticationFilter.initStorageHeaderKeysForTable();
-
-        commonHttpHeaders = new HashMap<>();
-
-        storageHttpHeaders = new TreeMap<>();
-
-        queryParameters = new TreeMap<>();
 
     }
 
@@ -108,18 +68,11 @@ public class StorageAuthenticationFilter extends ClientFilter {
      */
     @Override
     public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
-        // set common headers
-        setCommonHttpHeaders(request);
-        // set storage specific headers
-        setStorageHttpHeaders(request);
-        // set URI for signature
-        setURIforSignature(request);
-        // query param
-        setQueryParameter(request);
-        // create
+        
+        // create authorization header
         String authorizationHeaderValue = null;
         try {
-            authorizationHeaderValue = createAuthorizationHeader();
+            authorizationHeaderValue = createAuthorizationHeader(request);
         } catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
             // log and throw any exceptions
             LOGGER.error(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION);
@@ -130,63 +83,6 @@ public class StorageAuthenticationFilter extends ClientFilter {
         return getNext().handle(request);
     }
 
-    /**
-     * Set the URI for Canonical Resource part of signature
-     * 
-     * @param request
-     */
-    private void setURIforSignature(ClientRequest request) {
-        StringBuilder uriForSignature = new StringBuilder();
-        uriForSignature.append("/");
-        uriForSignature.append(storageAccount.getAccountName());
-        uriForSignature.append(request.getURI().getPath());
-        this.clientURIForSignature = uriForSignature.toString();
-
-    }
-
-    /**
-     * Add common HTTP headers
-     * 
-     * @param request
-     */
-    private void setCommonHttpHeaders(ClientRequest request) {
-        MultivaluedMap<String, Object> headers = request.getHeaders();
-        // parse over headers and get common http headers
-        for (Entry<String, List<Object>> entry : headers.entrySet()) {
-            if (commonHttpHeaderKeys.contains(entry.getKey())) {
-                commonHttpHeaders.put(entry.getKey(), entry.getValue().get(0).toString());
-            }
-        }
-        commonHttpHeaders.put("VERB", request.getMethod());
-    }
-
-    /**
-     * Add Storage specific HTTP headers
-     * 
-     * @param request
-     */
-    private void setStorageHttpHeaders(ClientRequest request) {
-        MultivaluedMap<String, Object> headers = request.getHeaders();
-        // parse over headers and get common http headers
-        for (Entry<String, List<Object>> entry : headers.entrySet()) {
-            if (storageHttpHeaderKeys.contains(entry.getKey())) {
-                storageHttpHeaders.put(entry.getKey(), entry.getValue().get(0).toString());
-            }
-        }
-    }
-
-    /**
-     * Add Query parameters
-     * 
-     * @param request
-     */
-    private void setQueryParameter(ClientRequest request) {
-        List<NameValuePair> queryParametersList = URLEncodedUtils.parse(request.getURI(), "UTF-8");
-        for (NameValuePair queryParameter : queryParametersList) {
-            queryParameters.put(queryParameter.getName(), queryParameter.getValue());
-        }
-
-    }
 
     // common header keys for Blob, File service
     private static List<String> initCommonHeaderKeys() {
@@ -207,29 +103,8 @@ public class StorageAuthenticationFilter extends ClientFilter {
         return commonHeaderKeys;
     }
 
-    // common header keys for Table service
-    private static List<String> initCommonHeaderKeysForTable() {
-        List<String> commonHeaderKeys = new ArrayList<>();
-        commonHeaderKeys.add("VERB");
-        commonHeaderKeys.add("Content-MD5");
-        commonHeaderKeys.add("Content-Type");
-        commonHeaderKeys.add("Date");
-
-        return commonHeaderKeys;
-    }
-
-    // Storage specific header keys for Table service
-    private static List<String> initStorageHeaderKeysForTable() {
-        List<String> storageHeaderKeys = new ArrayList<>();
-        storageHeaderKeys.add("x-ms-version");
-        storageHeaderKeys.add("x-ms-date");
-        storageHeaderKeys.add("x-ms-blob-public-access");
-
-        return storageHeaderKeys;
-    }
-
     /**
-     * Method to create authorization header String
+     * Method to create authorization header String 
      * 
      * @return Value for Authorization header
      * @throws NoSuchAlgorithmException
@@ -237,30 +112,30 @@ public class StorageAuthenticationFilter extends ClientFilter {
      * @throws InvalidKeyException
      * @throws AzureException
      */
-    private String createAuthorizationHeader() throws InvalidKeyException, UnsupportedEncodingException,
-            NoSuchAlgorithmException {
+    private String createAuthorizationHeader(ClientRequest request) throws InvalidKeyException,
+            UnsupportedEncodingException, NoSuchAlgorithmException {
 
         StringBuilder authorizationHeader = new StringBuilder();
         authorizationHeader.append("SharedKey ");
         authorizationHeader.append(this.storageAccount.getAccountName());
         authorizationHeader.append(":");
         // signature
-        authorizationHeader.append(new String(createAuthorizationSignature(), "UTF-8"));
+        authorizationHeader.append(new String(createAuthorizationSignature(request), "UTF-8"));
         return authorizationHeader.toString();
     }
 
     // Method to create authorization Signature and encode with HMACSHA256
     // algorithm
-    private byte[] createAuthorizationSignature() throws InvalidKeyException, UnsupportedEncodingException,
-            NoSuchAlgorithmException {
+    private byte[] createAuthorizationSignature(ClientRequest request) throws InvalidKeyException,
+            UnsupportedEncodingException, NoSuchAlgorithmException {
 
         StringBuilder authorizationSignature = new StringBuilder();
         // create Signature
-        authorizationSignature.append(createAuthorizationCommonSignature());
+        authorizationSignature.append(createAuthorizationCommonSignature(request));
 
-        authorizationSignature.append(createCannonicalHeaders());
+        authorizationSignature.append(createCannonicalHeaders(request));
 
-        authorizationSignature.append(createCannonicalResource());
+        authorizationSignature.append(createCannonicalResource(request));
 
         LOGGER.info("generated Signature for request");
         LOGGER.info(authorizationSignature);
@@ -271,43 +146,77 @@ public class StorageAuthenticationFilter extends ClientFilter {
     }
 
     // create common part of signature
-    private String createAuthorizationCommonSignature() {
+    private String createAuthorizationCommonSignature(ClientRequest request) {
         StringBuilder commonSignature = new StringBuilder();
+        MultivaluedMap<String, Object> headers = request.getHeaders();
+
         // common http headers
         for (String headerKey : commonHttpHeaderKeys) {
-            String value = commonHttpHeaders.get(headerKey);
-            commonSignature.append(value != null ? value : Strings.EMPTY);
-            commonSignature.append("\n");
+            if ("VERB".equals(headerKey)) {
+                commonSignature.append(request.getMethod());
+                commonSignature.append("\n");
+            } else {
+
+                Object value = headers.get(headerKey) != null ? headers.get(headerKey).get(0) : null;
+                commonSignature.append(value != null ? value : Strings.EMPTY);
+                commonSignature.append("\n");
+            }
         }
         return commonSignature.toString();
     }
 
     // create cannonical header
-    private String createCannonicalHeaders() {
+    private String createCannonicalHeaders(ClientRequest request) {
         StringBuilder cannonicalHeader = new StringBuilder();
+        Map<String, List<Object>> headers = new TreeMap<>(request.getHeaders());
         // storage specific http headers
-        for (String headerKey : storageHttpHeaders.keySet()) {
-            cannonicalHeader.append(headerKey).append(":").append(storageHttpHeaders.get(headerKey));
-            cannonicalHeader.append("\n");
+        for (Entry<String, List<Object>> headerEntry : headers.entrySet()) {
+            // if it is a storage header
+            if (headerEntry.getKey().startsWith("x-ms")) {
+                cannonicalHeader.append(headerEntry.getKey()).append(":").append(headerEntry.getValue().get(0));
+                cannonicalHeader.append("\n");
+            }
         }
         return cannonicalHeader.toString();
     }
 
-    // create cannonical header
-    private String createCannonicalResource() {
+    // create cannonical Resource
+    private String createCannonicalResource(ClientRequest request) {
         StringBuilder cannonicalResource = new StringBuilder();
-        cannonicalResource.append(this.clientURIForSignature);
+        // set URI in cannonical Resource
+        cannonicalResource.append(getURIforSignature(request));
         cannonicalResource.append("\n");
+        List<NameValuePair> queryParametersList = URLEncodedUtils.parse(request.getURI(), "UTF-8");
+        
+        // sort the query parameters in lexicological order
+        Collections.sort(queryParametersList, new Comparator<NameValuePair>() {
+
+            @Override
+            public int compare(NameValuePair o1, NameValuePair o2) {
+                // 
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        
         // storage query parameters
-        for (Iterator<String> iterator = queryParameters.keySet().iterator(); iterator.hasNext();) {
-            String headerKey = iterator.next();
-            cannonicalResource.append(headerKey).append(":").append(queryParameters.get(headerKey));
+        for (Iterator<NameValuePair> iterator = queryParametersList.iterator(); iterator.hasNext();) {
+            NameValuePair queryParam = iterator.next();
+            cannonicalResource.append(queryParam.getName()).append(":").append(queryParam.getValue());
             if (iterator.hasNext()) {
                 cannonicalResource.append("\n");
             }
 
         }
         return cannonicalResource.toString();
+    }
+
+    // Method to get the URI for Canonical Resource part of signature
+    private String getURIforSignature(ClientRequest request) {
+        StringBuilder uriForSignature = new StringBuilder();
+        uriForSignature.append("/");
+        uriForSignature.append(storageAccount.getAccountName());
+        uriForSignature.append(request.getURI().getPath());
+        return uriForSignature.toString();
     }
 
 }

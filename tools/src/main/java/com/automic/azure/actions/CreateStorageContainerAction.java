@@ -89,7 +89,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
     @Override
     protected ClientResponse executeSpecific(Client storageHttpClient) throws AzureException {
         // add authorisation filter to client
-        storageHttpClient.addFilter(new StorageAuthenticationFilter(storageAccount, false));
+        storageHttpClient.addFilter(new StorageAuthenticationFilter(storageAccount));
         // get URL
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
         // set query parameters and headers
