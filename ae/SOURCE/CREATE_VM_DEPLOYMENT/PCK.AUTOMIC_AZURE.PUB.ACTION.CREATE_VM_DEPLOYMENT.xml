@@ -301,8 +301,8 @@ The Create Virtual Machine Deployment Action creates a deployment and then creat
 * Overwrite Login	: Overwrites the default login
 
 = Behavior =
-When we execute change Create Virtual Machine Deployment action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
-* If provided cloud service name doesn?t exist on Azure cloud then action will be fail. It will return status code and message.
+When we execute change Create Virtual Machine Deployment action, Success response will be Microsoft (ms) request token id that will be use to track the status of executed action.
+* If provided cloud service name doesn't exist on Azure cloud then action will be fail. It will return status code and message.
 * If provided VM Configuration File is invalid xml then action will be fail. It will return status code and message.
 * Provided cloud service name and VM Configuration File is valid then action will be execute successfully. It will return ms request token id.
 =Return Value=
@@ -310,7 +310,7 @@ The response will contain the request id which can be further used to query the 
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
-* Return code is 2 in case of connection timed out !!
+* Return code is 2 in case of connection timed out!!
 
 = Rollback =
 (none)
