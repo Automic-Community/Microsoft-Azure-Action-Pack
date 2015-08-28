@@ -13,7 +13,7 @@ import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.httpfilters.StorageAuthenticationFilter;
+import com.automic.azure.filter.StorageAuthenticationFilter;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
