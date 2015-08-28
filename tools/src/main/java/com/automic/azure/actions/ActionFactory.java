@@ -14,7 +14,8 @@ import com.automic.azure.exception.AzureException;
  */
 public final class ActionFactory {
 
-	private static final Logger LOGGER = LogManager.getLogger(AbstractAction.class);
+	private static final Logger LOGGER = LogManager
+			.getLogger(AbstractAction.class);
 
 	private ActionFactory() {
 	}
@@ -28,7 +29,8 @@ public final class ActionFactory {
 	 * @throws AzureException
 	 *             if no matching implementation could be found
 	 */
-	public static AbstractAction getAction(Action enumAction) throws AzureException {
+	public static AbstractAction getAction(Action enumAction)
+			throws AzureException {
 
 		AbstractAction action = null;
 
@@ -45,8 +47,12 @@ public final class ActionFactory {
 		case DELETE_VM:
 			action = new DeleteVMaction();
 			break;
+		case CREATE_VM_DEPLOYMENT:
+			action = new CreateVirtualMachineDeploymentAction();
+			break;
 		default:
-			String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
+			String msg = "Invalid Action.. Please enter valid action "
+					+ Action.getActionNames();
 			LOGGER.error(msg);
 			throw new AzureException(msg);
 		}

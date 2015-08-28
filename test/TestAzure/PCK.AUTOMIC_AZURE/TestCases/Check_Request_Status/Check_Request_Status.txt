@@ -14,7 +14,11 @@ Resource          ../../Resources/actions.txt
 Asserting Valid Request ID
                       OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ValidID
 
+<<<<<<< HEAD
+Asserting Invalid Request ID
+=======
 Asserting s Invalid Request ID
+>>>>>>> develop
                       NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    b2ekof439dksksi9
 
 Asserting Request ID as Mandatory Field
