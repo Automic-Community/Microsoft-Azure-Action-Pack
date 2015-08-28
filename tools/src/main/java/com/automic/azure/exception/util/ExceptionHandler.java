@@ -24,6 +24,7 @@ public class ExceptionHandler {
     private static final String ERRORMSG = "Please check the input parameters. For more details refer java logs";
     private static final String CONNECTION_TIMEOUT = "Connection Timeout.";
     private static final String UNABLE_TO_CONNECT = "Unable to connect.";
+    private static final String UNABLE_TO_CONNECT_HOST = "Unable to connect to host: ";
 
     public static int handleException(Exception ex) {
         int responseCode = RESPONSE_NOT_OK;
@@ -39,6 +40,8 @@ public class ExceptionHandler {
                     responseCode = RESPONSE_CONNECT_TIMEOUT;
                 } else if (th instanceof java.net.ConnectException) {
                     errorMsg = UNABLE_TO_CONNECT;
+                } else if (th instanceof java.net.UnknownHostException) {
+                    errorMsg = UNABLE_TO_CONNECT_HOST + th.getMessage();
                 } else {
                     errorMsg = th.getMessage();
                 }
@@ -47,7 +50,7 @@ public class ExceptionHandler {
 
             }
         }
-        ConsoleWriter.writeln(CommonUtil.formatErrorMessage( (errorMsg == null) ? "System Error" : errorMsg) );
+        ConsoleWriter.writeln(CommonUtil.formatErrorMessage((errorMsg == null) ? "System Error" : errorMsg));
         ConsoleWriter.writeln(CommonUtil.formatErrorMessage(ERRORMSG));
         return responseCode;
     }
