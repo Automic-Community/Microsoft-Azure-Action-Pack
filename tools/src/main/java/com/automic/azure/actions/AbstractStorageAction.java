@@ -12,7 +12,6 @@ import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.model.AzureStorageErrorResponse;
-import com.automic.azure.services.AzureStorageAuthenticationService;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.ClientResponse;
@@ -37,19 +36,9 @@ public abstract class AbstractStorageAction extends AbstractAction {
     protected AzureStorageAccount storageAccount;
 
     /**
-     * Storage Authentication Service
+     * No-args constructor
      */
-    protected AzureStorageAuthenticationService authenticationService;
-
-    private boolean isServiceForTable;
-
-    /**
-     * @param b
-     * 
-     */
-    public AbstractStorageAction(boolean isServiceForTable) {
-        super();
-        this.isServiceForTable = isServiceForTable;
+    public AbstractStorageAction() {
         addOption(Constants.READ_TIMEOUT, true, "Read timeout");
         addOption(Constants.CONNECTION_TIMEOUT, true, "connection timeout");
         addOption(Constants.X_MS_VERSION_OPT, true, "x-ms-version");
@@ -65,8 +54,6 @@ public abstract class AbstractStorageAction extends AbstractAction {
         this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
         // storage acc from account name and access key
         this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
-        // authentication service
-        this.authenticationService = new AzureStorageAuthenticationService(storageAccount, isServiceForTable);
         // call to initialize action specific param
         initializeActionSpecificArgs();
 
@@ -104,8 +91,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
 
         // validate action specific action
         validateActionSpecificInputs();
-        //initialize authentication service parameters
-        prepareAuthenticationServiceParams();
+
     }
 
     /**
@@ -140,7 +126,5 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * @throws AzureException
      */
     protected abstract void validateActionSpecificInputs() throws AzureException;
-
-    protected abstract void prepareAuthenticationServiceParams();
 
 }

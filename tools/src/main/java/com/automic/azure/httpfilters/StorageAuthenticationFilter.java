@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.automic.azure.services;
+package com.automic.azure.httpfilters;
 
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
@@ -11,24 +11,32 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 
+import javax.ws.rs.core.MultivaluedMap;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.StorageAuthenticationUtil;
+import com.sun.jersey.api.client.ClientHandlerException;
+import com.sun.jersey.api.client.ClientRequest;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.filter.ClientFilter;
 
 /**
- * Class as a service to generate Authentication for Storage service
+ * Filter Class to generate Authentication header for Storage service
  *
  */
-public class AzureStorageAuthenticationService {
+public class StorageAuthenticationFilter extends ClientFilter {
 
-    private static final Logger LOGGER = LogManager.getLogger(AzureStorageAuthenticationService.class);
+    private static final Logger LOGGER = LogManager.getLogger(StorageAuthenticationFilter.class);
 
     /**
      * Storage account
@@ -51,6 +59,11 @@ public class AzureStorageAuthenticationService {
     private List<String> commonHttpHeaderKeys;
 
     /**
+     * 
+     */
+    private List<String> storageHttpHeaderKeys;
+
+    /**
      * storage Http Headers Example x-ms-version
      */
     private Map<String, String> storageHttpHeaders;
@@ -69,18 +82,18 @@ public class AzureStorageAuthenticationService {
      *            true if Authenticating for Storage Table service
      * @param commonHeaders
      */
-    public AzureStorageAuthenticationService(AzureStorageAccount storageAccount, boolean isServiceForTable) {
+    public StorageAuthenticationFilter(AzureStorageAccount storageAccount, boolean isServiceForTable) {
         this.storageAccount = storageAccount;
-        this.clientURIForSignature = "/" + storageAccount.getAccountName();
-
         if (isServiceForTable) {
 
-            commonHttpHeaderKeys = AzureStorageAuthenticationService.initCommonHeaderKeysForTable();
+            commonHttpHeaderKeys = StorageAuthenticationFilter.initCommonHeaderKeysForTable();
         } else {
 
-            commonHttpHeaderKeys = AzureStorageAuthenticationService.initCommonHeaderKeys();
+            commonHttpHeaderKeys = StorageAuthenticationFilter.initCommonHeaderKeys();
 
         }
+
+        storageHttpHeaderKeys = StorageAuthenticationFilter.initStorageHeaderKeysForTable();
 
         commonHttpHeaders = new HashMap<>();
 
@@ -91,61 +104,88 @@ public class AzureStorageAuthenticationService {
     }
 
     /**
+     * Method to intercept an Http call to storage service and calculate the Authentication header
+     */
+    @Override
+    public ClientResponse handle(ClientRequest request) throws ClientHandlerException {
+        // set common headers
+        setCommonHttpHeaders(request);
+        // set storage specific headers
+        setStorageHttpHeaders(request);
+        // set URI for signature
+        setURIforSignature(request);
+        // query param
+        setQueryParameter(request);
+        // create
+        String authorizationHeaderValue = null;
+        try {
+            authorizationHeaderValue = createAuthorizationHeader();
+        } catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
+            // log and throw any exceptions
+            LOGGER.error(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION);
+            throw new ClientHandlerException(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
+        }
+        request.getHeaders().putSingle("Authorization", authorizationHeaderValue);
+        // finally handling the request and returning the response
+        return getNext().handle(request);
+    }
+
+    /**
      * Set the URI for Canonical Resource part of signature
      * 
-     * @param clientURIForSignature
+     * @param request
      */
-    public void setURIforSignature(String clientURIForSignature) {
-        this.clientURIForSignature = clientURIForSignature;
+    private void setURIforSignature(ClientRequest request) {
+        StringBuilder uriForSignature = new StringBuilder();
+        uriForSignature.append("/");
+        uriForSignature.append(storageAccount.getAccountName());
+        uriForSignature.append(request.getURI().getPath());
+        this.clientURIForSignature = uriForSignature.toString();
 
     }
 
     /**
      * Add common HTTP headers
      * 
-     * @param key
-     * @param value
+     * @param request
      */
-    public void addCommonHttpHeaders(String key, String value) {
-        commonHttpHeaders.put(key, value);
+    private void setCommonHttpHeaders(ClientRequest request) {
+        MultivaluedMap<String, Object> headers = request.getHeaders();
+        // parse over headers and get common http headers
+        for (Entry<String, List<Object>> entry : headers.entrySet()) {
+            if (commonHttpHeaderKeys.contains(entry.getKey())) {
+                commonHttpHeaders.put(entry.getKey(), entry.getValue().get(0).toString());
+            }
+        }
+        commonHttpHeaders.put("VERB", request.getMethod());
     }
 
     /**
      * Add Storage specific HTTP headers
      * 
-     * @param key
-     * @param value
+     * @param request
      */
-    public void addStorageHttpHeaders(String key, String value) {
-        storageHttpHeaders.put(key, value);
+    private void setStorageHttpHeaders(ClientRequest request) {
+        MultivaluedMap<String, Object> headers = request.getHeaders();
+        // parse over headers and get common http headers
+        for (Entry<String, List<Object>> entry : headers.entrySet()) {
+            if (storageHttpHeaderKeys.contains(entry.getKey())) {
+                storageHttpHeaders.put(entry.getKey(), entry.getValue().get(0).toString());
+            }
+        }
     }
 
     /**
      * Add Query parameters
      * 
-     * @param key
-     * @param value
+     * @param request
      */
-    public void addQueryParameter(String key, String value) {
-        queryParameters.put(key, value);
-    }
+    private void setQueryParameter(ClientRequest request) {
+        List<NameValuePair> queryParametersList = URLEncodedUtils.parse(request.getURI(), "UTF-8");
+        for (NameValuePair queryParameter : queryParametersList) {
+            queryParameters.put(queryParameter.getName(), queryParameter.getValue());
+        }
 
-    /**
-     * Get Storage specific HTTP headers
-     * 
-     * @return
-     */
-    public Map<String, String> getStorageHttpHeaders() {
-        return storageHttpHeaders;
-    }
-
-    /**
-     * Get Query parameters
-     * 
-     * @return
-     */
-    public Map<String, String> getQueryParameters() {
-        return queryParameters;
     }
 
     // common header keys for Blob, File service
@@ -178,32 +218,41 @@ public class AzureStorageAuthenticationService {
         return commonHeaderKeys;
     }
 
+    // Storage specific header keys for Table service
+    private static List<String> initStorageHeaderKeysForTable() {
+        List<String> storageHeaderKeys = new ArrayList<>();
+        storageHeaderKeys.add("x-ms-version");
+        storageHeaderKeys.add("x-ms-date");
+        storageHeaderKeys.add("x-ms-blob-public-access");
+
+        return storageHeaderKeys;
+    }
+
     /**
      * Method to create authorization header String
      * 
      * @return Value for Authorization header
+     * @throws NoSuchAlgorithmException
+     * @throws UnsupportedEncodingException
+     * @throws InvalidKeyException
      * @throws AzureException
      */
-    public String createAuthorizationHeader() throws AzureException {
+    private String createAuthorizationHeader() throws InvalidKeyException, UnsupportedEncodingException,
+            NoSuchAlgorithmException {
 
         StringBuilder authorizationHeader = new StringBuilder();
         authorizationHeader.append("SharedKey ");
         authorizationHeader.append(this.storageAccount.getAccountName());
         authorizationHeader.append(":");
         // signature
-        try {
-            authorizationHeader.append(new String(createAuthorizationSignature(), "UTF-8"));
-        } catch (InvalidKeyException | UnsupportedEncodingException | NoSuchAlgorithmException e) {
-            LOGGER.error(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
-            throw new AzureException(ExceptionConstants.ERROR_STORAGE_AUTHENTICATION, e);
-        }
+        authorizationHeader.append(new String(createAuthorizationSignature(), "UTF-8"));
         return authorizationHeader.toString();
     }
 
     // Method to create authorization Signature and encode with HMACSHA256
     // algorithm
-    private byte[] createAuthorizationSignature() throws InvalidKeyException,
-            UnsupportedEncodingException, NoSuchAlgorithmException {
+    private byte[] createAuthorizationSignature() throws InvalidKeyException, UnsupportedEncodingException,
+            NoSuchAlgorithmException {
 
         StringBuilder authorizationSignature = new StringBuilder();
         // create Signature

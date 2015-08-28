@@ -4,8 +4,6 @@
 package com.automic.azure.actions;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +13,7 @@ import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
+import com.automic.azure.httpfilters.StorageAuthenticationFilter;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
@@ -45,11 +44,9 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
 	 * 
 	 */
     public CreateStorageContainerAction() {
-        super(false);
         addOption("containername", true, "Storage Container Name");
         addOption("containeraccess", true, "Access level of Storage Container. "
                 + "possible values PRIVATE, CONTAINER or BLOB");
-
     }
 
     @Override
@@ -88,28 +85,21 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
      */
     @Override
     protected ClientResponse executeSpecific(Client storageHttpClient) throws AzureException {
-
+        // add authorisation filter to client
+        storageHttpClient.addFilter(new StorageAuthenticationFilter(storageAccount, false));
         // get URL
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
-
-        // set query parameters
-        Map<String, String> queryParameters = this.authenticationService.getQueryParameters();
-        for (Entry<String, String> headerEntry : queryParameters.entrySet()) {
-            resource = resource.queryParam(headerEntry.getKey(), headerEntry.getValue());
+        // set query parameters and headers
+        WebResource.Builder builder = resource.queryParam("restype", "container")
+                .header("x-ms-version", this.restapiVersion)
+                .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
+        // header for container access
+        if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
+            builder = builder.header("x-ms-blob-public-access", containerAccess.getValue());
         }
-
-        WebResource.Builder builder = resource.getRequestBuilder();
-        // set storage headers
-        Map<String, String> storageHttpHeaders = this.authenticationService.getStorageHttpHeaders();
-        // calculate Authorization header
-        storageHttpHeaders.put("Authorization", this.authenticationService.createAuthorizationHeader());
-        for (Entry<String, String> headerEntry : storageHttpHeaders.entrySet()) {
-            builder = builder.header(headerEntry.getKey(), headerEntry.getValue());
-        }
-
         LOGGER.info("Calling URL:" + resource.getURI());
         // call the create container service and return response
-        return builder.put(ClientResponse.class, Strings.EMPTY);
+        return builder.entity(Strings.EMPTY, "text/plain").put(ClientResponse.class);
 
     }
 
@@ -125,24 +115,5 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID ::=" + tokenid.get(0));
     }
 
-    @Override
-    protected void prepareAuthenticationServiceParams() {
-
-        this.authenticationService.addCommonHttpHeaders("VERB", "PUT");
-        this.authenticationService.addCommonHttpHeaders("Content-Type", "text/plain");
-        // header for container access
-        if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
-            this.authenticationService.addStorageHttpHeaders("x-ms-blob-public-access", containerAccess.getValue());
-        }
-        // add storage HTTP headers
-        this.authenticationService.addStorageHttpHeaders("x-ms-version", getOptionValue("xmsversion"));
-        this.authenticationService.addStorageHttpHeaders("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-        // add query parameters
-        this.authenticationService.addQueryParameter("restype", "container");
-        // update URI
-        String clientURIForSignature = "/" + this.storageAccount.getAccountName() + "/" + containerName;
-        this.authenticationService.setURIforSignature(clientURIForSignature);
-
-    }
 
 }
