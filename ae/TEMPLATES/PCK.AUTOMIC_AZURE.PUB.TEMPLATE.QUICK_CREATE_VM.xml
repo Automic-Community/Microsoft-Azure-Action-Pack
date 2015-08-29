@@ -74,13 +74,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -158,13 +153,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -242,13 +232,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -351,13 +336,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -418,7 +398,7 @@
 <PROMPTSET name="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">
 <PRPTBOX promptset="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">
 <UC4RB_DIR_FILE_RM_FAILs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_RM_FAIL#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">YES</UC4RB_DIR_FILE_RM_FAILs.00>
-<UC4RB_DIR_FILE_RM_NAMEs.00 ReadFromTable="JPPV" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_RM_NAME#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">&amp;UC4RB_AZR_FILE_PATH#</UC4RB_DIR_FILE_RM_NAMEs.00>
+<UC4RB_DIR_FILE_RM_NAMEs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_RM_NAME#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">&amp;UC4RB_AZR_FILE_PATH#</UC4RB_DIR_FILE_RM_NAMEs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -451,13 +431,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -561,13 +536,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -660,13 +630,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
@@ -731,13 +696,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_COMP_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_COMP_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_LABELs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_LABEL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_VM_DISKNAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_DISKNAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
-<UC4RB_AZR_VM_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_PASSWORDs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_PASSWORD#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_SOURCE_IMAGEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_SOURCE_IMAGE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM"/>
 <UC4RB_AZR_VM_TYPEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_QUICK_VM">Windows</UC4RB_AZR_VM_TYPEs.00>
