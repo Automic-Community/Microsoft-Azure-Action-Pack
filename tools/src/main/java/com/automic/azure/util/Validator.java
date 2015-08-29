@@ -62,7 +62,7 @@ public final class Validator {
         }
         return ret;
     }
-    
+
     /**
      * Method to check if Parent Folder exists or not
      * 
@@ -79,7 +79,6 @@ public final class Validator {
         return ret;
     }
 
-
     /**
      * Method to check if a text matches the given pattern
      * 
@@ -92,5 +91,4 @@ public final class Validator {
     public static boolean isValidText(String pattern, String text) {
         return Pattern.matches(pattern, text);
     }
-
 }

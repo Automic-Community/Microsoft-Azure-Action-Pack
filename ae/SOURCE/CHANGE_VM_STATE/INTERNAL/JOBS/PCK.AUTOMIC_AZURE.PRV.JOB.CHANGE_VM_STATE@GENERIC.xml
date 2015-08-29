@@ -217,25 +217,8 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -password $UC4_DECRYPT
 </OUTPUTSCAN>
 <POST_SCRIPT mode="1" replacementmode="1" state="1">
 <OSCRI><![CDATA[! Publishing request token in case of success
-:SET &STATUS# = GET_UC_OBJECT_STATUS(,,"RETCODE")
-
-:IF &STATUS#  = 0
-:SET &HND# = PREP_PROCESS_REPORT("JOBS",, "REP",,"COL=DELIMITER", 'DELIMITER=*::=*')
-:PROCESS &HND#
-:   SET &KEY# = GET_PROCESS_LINE(&HND#,1)
-   
-:   SET &VALUE# = GET_PROCESS_LINE(&HND#,2)
-: IF &KEY# <> ""
-:   IF &VALUE# <> ""
-:      IF &KEY# = "UC4RB_AZR_REQUEST_ID"
-:        SET &UC4RB_AZR_REQUEST_ID# = "&VALUE#"
-:         PUBLISH &UC4RB_AZR_REQUEST_ID#,,"TOP"
-:      ENDIF
-:   ENDIF
-: ENDIF
-:ENDPROCESS
-:CLOSE_PROCESS &HND#
-:ENDIF]]></OSCRI>
+: INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.PUBLISH_REQUEST_ID
+]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC/>

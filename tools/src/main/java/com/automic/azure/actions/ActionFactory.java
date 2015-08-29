@@ -43,6 +43,9 @@ public final class ActionFactory {
             case DELETE_VM:
                 action = new DeleteVMaction();
                 break;
+            case CREATE_VM_DEPLOYMENT:
+                action = new CreateVirtualMachineDeploymentAction();
+                break;
             case CREATE_STORAGE_CONTAINER:
                 action = new CreateStorageContainerAction();
                 break;
