@@ -3,11 +3,10 @@
  */
 package com.automic.azure.actions;
 
-import java.util.Arrays;
+import java.util.List;
 
 import com.automic.azure.cli.AzureCli;
 import com.automic.azure.cli.AzureOptions;
-import com.automic.azure.constants.Constants;
 import com.automic.azure.exception.AzureException;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -22,22 +21,25 @@ public abstract class AbstractAction {
     protected static final int BEGIN_HTTP_CODE = 200;
     protected static final int END_HTTP_CODE = 300;
 
-    private final AzureOptions actionOptions;
+    private AzureOptions actionOptions;
     private AzureCli cli;
 
     public AbstractAction() {
         actionOptions = new AzureOptions();
     }
 
-    protected String getOptionValue(String arg) {
-        return cli.getOptionValue(arg);
+    /**
+     * This function initializes the options for a given action and add to the actionOptions variable. Following are the
+     * details needed to create an Option ,short-name e.g act ,isRequired ,have argument/arguments,long-option name and
+     * description of Option
+     **/
+    public final void addOption(String optionName, boolean isRequired, String description) {
+        actionOptions.addOption(optionName, isRequired, description);
     }
 
-    /**
-     * @return the cli
-     */
-    protected final AzureCli getCli() {
-        return cli;
+    
+    public final String getOptionValue(String arg) {
+        return cli.getOptionValue(arg);
     }
 
     /**
@@ -54,12 +56,14 @@ public abstract class AbstractAction {
         Client client = null;
         try {
             cli = new AzureCli(actionOptions, commandLineArgs);
-            cli.log(Arrays.asList(new String[] { Constants.PASSWORD, Constants.ACCESS_KEY}));
-            initializeArguments();
-            validateInputs();
-            client = Client.create(initHttpClient());
-            ClientResponse response = executeSpecific(client);
-            validateResponse(response);
+            cli.log(noLogging());
+            initialize();
+            validate();            
+            client = Client.create(getConfig());
+            ClientResponse response = execute(client);
+            if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
+                handleErrorResponse(response);
+            }
             prepareOutput(response);
         } finally {
             if (client != null) {
@@ -68,30 +72,23 @@ public abstract class AbstractAction {
         }
     }
 
-    /**
-     * This function initializes the options for a given action and add to the actionOptions variable. Following are the
-     * details needed to create an Option ,short-name e.g act ,isRequired ,have argument/arguments,long-option name and
-     * description of Option
-     **/
-    public final void addOption(String optionName, boolean isRequired, String description) {
-        actionOptions.addOption(optionName, isRequired, description);
-    }
-
-    protected abstract void initializeArguments() throws AzureException;
+    protected abstract List<String> noLogging();
+    
+    protected abstract void initialize() throws AzureException;
 
     /**
      * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
      * 
      * @throws AzureException
      */
-    protected abstract void validateInputs() throws AzureException;
+    protected abstract void validate() throws AzureException;
 
     /**
      * Method to get client configuration
      * 
      * @return
      */
-    protected abstract ClientConfig initHttpClient() throws AzureException;
+    protected abstract ClientConfig getConfig() throws AzureException;
 
     /**
      * Method to write action specific logic.
@@ -101,7 +98,7 @@ public abstract class AbstractAction {
      * @return an instance of {@link ClientResponse}
      * @throws AzureException
      */
-    protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
+    protected abstract ClientResponse execute(Client client) throws AzureException;
 
     /**
      * Method to prepare output based on Response of an HTTP request to client.
@@ -121,6 +118,6 @@ public abstract class AbstractAction {
      * @param response
      * @throws AzureException
      */
-    protected abstract void validateResponse(ClientResponse response) throws AzureException;
+    protected abstract void handleErrorResponse(ClientResponse response) throws AzureException;
 
 }

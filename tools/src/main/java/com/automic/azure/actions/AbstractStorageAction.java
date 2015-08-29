@@ -3,6 +3,9 @@
  */
 package com.automic.azure.actions;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,10 +13,12 @@ import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
+import com.automic.azure.filter.StorageAuthenticationFilter;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 
@@ -47,7 +52,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
     }
 
     @Override
-    protected void initializeArguments() {
+    protected void initialize() {
 
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
@@ -55,12 +60,16 @@ public abstract class AbstractStorageAction extends AbstractAction {
         // storage acc from account name and access key
         this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
         // call to initialize action specific param
-        initializeActionSpecificArgs();
-
+        initializeSpecific();
+    }
+    
+    @Override
+    protected List<String> noLogging() {
+        return Arrays.asList(new String[] { Constants.ACCESS_KEY } );
     }
 
     @Override
-    protected void validateInputs() throws AzureException {
+    protected void validate() throws AzureException {
 
         if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
@@ -93,7 +102,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
         }
 
         // validate action specific action
-        validateActionSpecificInputs();
+        validateSpecific();
 
     }
 
@@ -101,7 +110,7 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * Initializes the HttpClient without keystore and password
      */
     @Override
-    protected ClientConfig initHttpClient() throws AzureException {
+    protected ClientConfig getConfig() throws AzureException {
         return HttpClientConfig.getClientConfig(this.connectionTimeOut, this.readTimeOut);
     }
 
@@ -110,24 +119,30 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * the one returned in abstract class
      */
     @Override
-    protected void validateResponse(ClientResponse response) throws AzureException {
+    protected void handleErrorResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
-        if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
-            throw new AzureException(error.toString());
-        }
+        AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
+        throw new AzureException(error.toString());        
+    }
+    
+    @Override
+    protected ClientResponse execute(Client client) throws AzureException {
+        client.addFilter(new StorageAuthenticationFilter(storageAccount));   
+        return executeSpecific(client);
     }
 
     /**
      * Method to initialize Action specific arguments
      */
-    protected abstract void initializeActionSpecificArgs();
+    protected abstract void initializeSpecific();
 
     /**
      * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
      * 
      * @throws AzureException
      */
-    protected abstract void validateActionSpecificInputs() throws AzureException;
+    protected abstract void validateSpecific() throws AzureException;
+    
+    protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
 
 }

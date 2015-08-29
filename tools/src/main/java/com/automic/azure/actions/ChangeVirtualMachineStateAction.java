@@ -45,7 +45,7 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
     }
 
     @Override
-    protected void initializeActionSpecificArgs() {
+    protected void initializeSpecific() {
 
         serviceName = getOptionValue("servicename");
         deploymentName = getOptionValue("deploymentname");
@@ -54,7 +54,7 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
     }
 
     @Override
-    protected void validateActionSpecificInputs() throws AzureException {
+    protected void validateSpecific() throws AzureException {
         if (!Validator.checkNotEmpty(this.serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);

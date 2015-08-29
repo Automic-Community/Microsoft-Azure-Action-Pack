@@ -38,12 +38,12 @@ public final class CheckRequestStatusAction extends AbstractManagementAction {
     }
 
     @Override
-    protected void initializeActionSpecificArgs() {
+    protected void initializeSpecific() {
         this.requestTokenId = getOptionValue("requestid");
     }
 
     @Override
-    protected void validateActionSpecificInputs() throws AzureException {
+    protected void validateSpecific() throws AzureException {
         if (!Validator.checkNotEmpty(this.requestTokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
             throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);

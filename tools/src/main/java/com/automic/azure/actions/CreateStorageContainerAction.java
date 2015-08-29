@@ -13,8 +13,6 @@ import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
-import com.automic.azure.filter.StorageAuthenticationFilter;
-import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
 import com.automic.azure.util.Validator;
@@ -50,9 +48,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
     }
 
     @Override
-    protected void initializeActionSpecificArgs() {
-        // storage acc from account name and access key
-        this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
+    protected void initializeSpecific() {
         // container Name
         this.containerName = getOptionValue("containername");
         // access level of container
@@ -63,7 +59,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
     }
 
     @Override
-    protected void validateActionSpecificInputs() throws AzureException {
+    protected void validateSpecific() throws AzureException {
 
         // validate storage container name
         if (!Validator.checkNotEmpty(this.containerName)) {
@@ -88,8 +84,6 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
      */
     @Override
     protected ClientResponse executeSpecific(Client storageHttpClient) throws AzureException {
-        // add authorisation filter to client
-        storageHttpClient.addFilter(new StorageAuthenticationFilter(storageAccount));
         // get URL
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
         // set query parameters and headers

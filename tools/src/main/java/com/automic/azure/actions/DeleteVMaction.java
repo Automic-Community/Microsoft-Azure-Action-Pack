@@ -42,7 +42,7 @@ public class DeleteVMaction extends AbstractManagementAction {
     }
 
     @Override
-    protected void initializeActionSpecificArgs() {
+    protected void initializeSpecific() {
         vmName = getOptionValue("vmname");
         serviceName = getOptionValue("servicename");
         deploymentName = getOptionValue("deploymentname");
@@ -51,7 +51,7 @@ public class DeleteVMaction extends AbstractManagementAction {
     }
 
     @Override
-    protected void validateActionSpecificInputs() throws AzureException {
+    protected void validateSpecific() throws AzureException {
         if (!Validator.checkNotEmpty(vmName)) {
             LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);

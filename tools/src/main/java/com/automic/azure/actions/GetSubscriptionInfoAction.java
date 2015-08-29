@@ -35,12 +35,12 @@ public final class GetSubscriptionInfoAction extends AbstractManagementAction {
     }
 
     @Override
-    protected void initializeActionSpecificArgs() {
+    protected void initializeSpecific() {
        
     }
 
     @Override
-    protected void validateActionSpecificInputs() throws AzureException {
+    protected void validateSpecific() throws AzureException {
         
     }
 

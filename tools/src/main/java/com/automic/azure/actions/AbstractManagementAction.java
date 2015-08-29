@@ -3,6 +3,9 @@
  */
 package com.automic.azure.actions;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,6 +16,7 @@ import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 
@@ -49,7 +53,7 @@ public abstract class AbstractManagementAction extends AbstractAction {
      * Method to initialize parameters
      */
     @Override
-    protected void initializeArguments() {
+    protected void initialize() {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
         this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
@@ -57,7 +61,12 @@ public abstract class AbstractManagementAction extends AbstractAction {
         this.keyStore = getOptionValue(Constants.KEYSTORE_LOCATION);
         this.password = getOptionValue(Constants.PASSWORD);
         // call to initialize action specific param
-        initializeActionSpecificArgs();
+        initializeSpecific();
+    }
+    
+    @Override
+    protected List<String> noLogging() {
+        return Arrays.asList(new String[] { Constants.PASSWORD } );        
     }
 
     /**
@@ -66,7 +75,7 @@ public abstract class AbstractManagementAction extends AbstractAction {
      * @throws AzureException
      */
     @Override
-    protected void validateInputs() throws AzureException {
+    protected void validate() throws AzureException {
 
         if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
@@ -97,36 +106,41 @@ public abstract class AbstractManagementAction extends AbstractAction {
             throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
         }
         // validate action specific action
-        validateActionSpecificInputs();
+        validateSpecific();
     }
 
     /**
      * Initializes the HttpClient with sslcontext using keystore and password
      */
     @Override
-    protected ClientConfig initHttpClient() throws AzureException {
+    protected ClientConfig getConfig() throws AzureException {
         return HttpClientConfig.getClientConfig(this.keyStore, this.password, connectionTimeOut, readTimeOut);
+    }
+    
+    @Override
+    protected ClientResponse execute(Client client) throws AzureException {
+        return executeSpecific(client);
     }
 
     @Override
-    protected void validateResponse(ClientResponse response) throws AzureException {
+    protected void handleErrorResponse(ClientResponse response) throws AzureException {
         LOGGER.info("Response code for action " + response.getStatus());
-        if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-            AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
-            throw new AzureException(error.toString());
-        }
+        AzureErrorResponse error = response.getEntity(AzureErrorResponse.class);
+        throw new AzureException(error.toString());        
     }
 
     /**
      * Method to initialize Action specific arguments
      */
-    protected abstract void initializeActionSpecificArgs();
+    protected abstract void initializeSpecific();
 
     /**
      * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
      * 
      * @throws AzureException
      */
-    protected abstract void validateActionSpecificInputs() throws AzureException;
+    protected abstract void validateSpecific() throws AzureException;
+    
+    protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
 
 }
