@@ -29,19 +29,8 @@ public final class GetSubscriptionInfoAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(GetSubscriptionInfoAction.class);
 
-    
     public GetSubscriptionInfoAction() {
         super();
-    }
-
-    @Override
-    protected void initializeSpecific() {
-       
-    }
-
-    @Override
-    protected void validateSpecific() throws AzureException {
-        
     }
 
     /**
@@ -50,23 +39,15 @@ public final class GetSubscriptionInfoAction extends AbstractManagementAction {
      * 
      */
     @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
-
+    protected void executeSpecific(Client client) throws AzureException {
         WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(this.subscriptionId);
-
         LOGGER.info("Calling url " + webResource.getURI());
-
-        return webResource.header(Constants.X_MS_VERSION, restapiVersion).accept(MediaType.APPLICATION_XML)
-                .get(ClientResponse.class);
-
+        ClientResponse cr = webResource.header(Constants.X_MS_VERSION, restapiVersion)
+                .accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+        prepareOutput(cr);
     }
 
-    /**
-     * Method to print subscription details xml coming from response as a stream to standard console. This also prints
-     * the xml to Job report in AE.
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         InputStream inputStream = response.getEntityInputStream();
 
         ConsoleWriter.writeln("Subscription details:");

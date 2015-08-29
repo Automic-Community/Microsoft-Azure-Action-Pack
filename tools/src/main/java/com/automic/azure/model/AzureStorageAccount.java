@@ -16,7 +16,7 @@ public class AzureStorageAccount {
     private String accountName;
 
     /**
-     * primary access key to sign Singnature for Authentication
+     * primary access key to sign Signature for Authentication
      */
     private String primaryAccessKey;
 

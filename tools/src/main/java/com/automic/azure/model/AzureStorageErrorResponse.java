@@ -10,7 +10,7 @@ import com.automic.azure.util.Validator;
  */
 
 @XmlRootElement(name = "Error")
-public class AzureStorageErrorResponse {
+public class AzureStorageErrorResponse  implements ErrorResponse {
 
     private String code;
     private String message;

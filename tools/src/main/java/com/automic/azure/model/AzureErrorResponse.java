@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement(name = "Error", namespace = "http://schemas.microsoft.com/windowsazure")
-public class AzureErrorResponse {
+public class AzureErrorResponse implements ErrorResponse {
 
     private String code;
     private String message;

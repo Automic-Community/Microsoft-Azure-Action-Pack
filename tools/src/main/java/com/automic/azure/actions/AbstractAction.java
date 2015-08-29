@@ -8,18 +8,13 @@ import java.util.List;
 import com.automic.azure.cli.AzureCli;
 import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.exception.AzureException;
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.config.ClientConfig;
 
 /**
- * An abstract action which defines common flow of processes to interact with Azure API. Provides default implementation
- * to initialize arguments, validate parameters, prepare API response and exception handling.
+ * An abstract action which parses the command line parameters using apache cli and further calls the execute method.
+ * The implementation of execute method will be provided by the subclass of this class. This class also provides the
+ * method to retrieve the arguments which can be used inside execute method.
  */
 public abstract class AbstractAction {
-
-    protected static final int BEGIN_HTTP_CODE = 200;
-    protected static final int END_HTTP_CODE = 300;
 
     private AzureOptions actionOptions;
     private AzureCli cli;
@@ -29,95 +24,52 @@ public abstract class AbstractAction {
     }
 
     /**
-     * This function initializes the options for a given action and add to the actionOptions variable. Following are the
-     * details needed to create an Option ,short-name e.g act ,isRequired ,have argument/arguments,long-option name and
-     * description of Option
-     **/
+     * This method is used to add the argument.
+     * 
+     * @param optionName
+     *            argument key used to identify the argument.
+     * @param isRequired
+     *            true/false. True means argument is mandatory otherwise it is optional.
+     * @param description
+     *            represents argument description.
+     */
     public final void addOption(String optionName, boolean isRequired, String description) {
         actionOptions.addOption(optionName, isRequired, description);
     }
 
-    
+    /**
+     * This method is used to retrieve the value of specified argument.
+     * 
+     * @param arg
+     *            argument key for which you want to get the value.
+     * @return argument value for the specified argument key.
+     */
     public final String getOptionValue(String arg) {
         return cli.getOptionValue(arg);
     }
 
     /**
-     * This method acts as template and decides how an action should proceed.It starts with initializing compulsory
-     * Options followed by action Options Initializations then logging of parameters ,then checking the number of
-     * arguments,then initialize the variables like Azure URL, read and connection timeouts and filepath.Then it will
-     * call the REST API of Azure and gets the response which then validated and at last prepares the out either in the
-     * form of xml or just a simple sysout.
+     * This method initializes the arguments and calls the execute method.
      * 
      * @throws AzureException
      *             exception while executing an action
      */
     public final void executeAction(String[] commandLineArgs) throws AzureException {
-        Client client = null;
-        try {
-            cli = new AzureCli(actionOptions, commandLineArgs);
-            cli.log(noLogging());
-            initialize();
-            validate();            
-            client = Client.create(getConfig());
-            ClientResponse response = execute(client);
-            if (!(response.getStatus() >= BEGIN_HTTP_CODE && response.getStatus() < END_HTTP_CODE)) {
-                handleErrorResponse(response);
-            }
-            prepareOutput(response);
-        } finally {
-            if (client != null) {
-                client.destroy();
-            }
-        }
+        cli = new AzureCli(actionOptions, commandLineArgs);
+        cli.log(noLogging());
+        execute();
     }
 
+    /**
+     * Method to retrieve the argument keys that we don't need to log.
+     */
     protected abstract List<String> noLogging();
-    
-    protected abstract void initialize() throws AzureException;
 
     /**
-     * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
+     * Method to execute the action.
      * 
      * @throws AzureException
      */
-    protected abstract void validate() throws AzureException;
-
-    /**
-     * Method to get client configuration
-     * 
-     * @return
-     */
-    protected abstract ClientConfig getConfig() throws AzureException;
-
-    /**
-     * Method to write action specific logic.
-     * 
-     * @param client
-     *            an instance of {@link Client}
-     * @return an instance of {@link ClientResponse}
-     * @throws AzureException
-     */
-    protected abstract ClientResponse execute(Client client) throws AzureException;
-
-    /**
-     * Method to prepare output based on Response of an HTTP request to client.
-     * 
-     * @param response
-     *            an instance of {@link ClientResponse}
-     * @throws AzureException
-     */
-    protected abstract void prepareOutput(ClientResponse response) throws AzureException;
-
-    /**
-     * Method to validate response from a HTTP client Request. If response is not in range of 2XX, it throws
-     * {@link AzureException} else prints response on console. This Method maps the error response from REST api to
-     * {@link AzureErrorResponse}. If your error response xml format is different or differs in namespace
-     * "http://schemas.microsoft.com/windowsazure" then override this method.
-     * 
-     * @param response
-     * @throws AzureException
-     */
-    protected abstract void handleErrorResponse(ClientResponse response) throws AzureException;
+    protected abstract void execute() throws AzureException;
 
 }

@@ -34,20 +34,6 @@ public final class CheckRequestStatusAction extends AbstractManagementAction {
      */
     public CheckRequestStatusAction() {
         addOption("requestid", true, "A value that uniquely identifies a request made against the management service");
-
-    }
-
-    @Override
-    protected void initializeSpecific() {
-        this.requestTokenId = getOptionValue("requestid");
-    }
-
-    @Override
-    protected void validateSpecific() throws AzureException {
-        if (!Validator.checkNotEmpty(this.requestTokenId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
-        }
     }
 
     /**
@@ -56,21 +42,29 @@ public final class CheckRequestStatusAction extends AbstractManagementAction {
      * 
      */
     @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
+    public void executeSpecific(Client client) throws AzureException {
+        initialize();
+        validate();
         ClientResponse response = null;
         WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("operations")
                 .path(requestTokenId);
         LOGGER.info("Calling url " + webResource.getURI());
         response = webResource.header(Constants.X_MS_VERSION, restapiVersion).get(ClientResponse.class);
-        return response;
+        prepareOutput(response);
     }
 
-    /**
-     * This method will print request status.
-     * 
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void initialize() {
+        this.requestTokenId = getOptionValue("requestid");
+    }
+
+    private void validate() throws AzureException {
+        if (!Validator.checkNotEmpty(this.requestTokenId)) {
+            LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
+            throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
+        }
+    }
+
+    private void prepareOutput(ClientResponse response) throws AzureException {
         AzureRequestStatusModel azReqstatus = response.getEntity(AzureRequestStatusModel.class);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus());
         ConsoleWriter.writeln("HTTPStatusCode : " + azReqstatus.getHttpStatusCode());

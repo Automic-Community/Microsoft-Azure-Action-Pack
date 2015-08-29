@@ -38,29 +38,47 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
      */
     private ContainerAccess containerAccess;
 
-    /**
-	 * 
-	 */
     public CreateStorageContainerAction() {
         addOption("containername", true, "Storage Container Name");
         addOption("containeraccess", true, "Access level of Storage Container. "
                 + "possible values PRIVATE, CONTAINER or BLOB");
     }
 
+    
+    /**
+     * Method makes PUT request to
+     * https://myaccount.blob.core.windows.net/mycontainer?restype=container
+     * 
+     */
     @Override
-    protected void initializeSpecific() {
+    public void executeSpecific(Client storageHttpClient) throws AzureException {
+        initialize();
+        validate();
+        // get URL
+        WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
+        // set query parameters and headers
+        WebResource.Builder builder = resource.queryParam("restype", "container")
+                .header("x-ms-version", this.restapiVersion)
+                .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
+        // header for container access
+        if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
+            builder = builder.header("x-ms-blob-public-access", containerAccess.getValue());
+        }
+        LOGGER.info("Calling URL:" + resource.getURI());
+        // call the create container service and return response
+        prepareOutput(builder.entity(Strings.EMPTY, "text/plain").put(ClientResponse.class));
+    }
+
+    private void initialize() {
         // container Name
         this.containerName = getOptionValue("containername");
         // access level of container
         if (getOptionValue("containeraccess") != null) {
             this.containerAccess = ContainerAccess.valueOf(getOptionValue("containeraccess"));
         }
-
     }
 
-    @Override
-    protected void validateSpecific() throws AzureException {
-
+    private void validate() throws AzureException {
         // validate storage container name
         if (!Validator.checkNotEmpty(this.containerName)) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
@@ -77,40 +95,9 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
         }
     }
 
-    /**
-     * {@inheritDoc com.automic.azure.actions.AbstractAction#executeSpecific }. Method makes PUT request to
-     * https://myaccount.blob.core.windows.net/mycontainer?restype=container
-     * 
-     */
-    @Override
-    protected ClientResponse executeSpecific(Client storageHttpClient) throws AzureException {
-        // get URL
-        WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName);
-        // set query parameters and headers
-        WebResource.Builder builder = resource.queryParam("restype", "container")
-                .header("x-ms-version", this.restapiVersion)
-                .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-        // header for container access
-        if (containerAccess != null && !ContainerAccess.PRIVATE.equals(containerAccess)) {
-            builder = builder.header("x-ms-blob-public-access", containerAccess.getValue());
-        }
-        LOGGER.info("Calling URL:" + resource.getURI());
-        // call the create container service and return response
-        return builder.entity(Strings.EMPTY, "text/plain").put(ClientResponse.class);
-
-    }
-
-    /**
-     * 
-     * {@inheritDoc com.automic.azure.actions.AbstractAction#prepareOutput} Method publishes the request id returned by
-     * the REST api
-     * 
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID ::=" + tokenid.get(0));
     }
-
 
 }

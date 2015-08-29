@@ -13,13 +13,13 @@ import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
+import com.automic.azure.filter.GenericResponseFilter;
 import com.automic.azure.filter.StorageAuthenticationFilter;
 import com.automic.azure.model.AzureStorageAccount;
 import com.automic.azure.model.AzureStorageErrorResponse;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.config.ClientConfig;
 
 /**
@@ -31,14 +31,14 @@ public abstract class AbstractStorageAction extends AbstractAction {
     private static final Logger LOGGER = LogManager.getLogger(AbstractStorageAction.class);
 
     protected String restapiVersion;
-
-    protected int connectionTimeOut;
-    protected int readTimeOut;
-
     /**
      * storage acc from account name and access key
      */
     protected AzureStorageAccount storageAccount;
+
+    private int connectionTimeOut;
+    private int readTimeOut;
+
 
     /**
      * No-args constructor
@@ -52,25 +52,55 @@ public abstract class AbstractStorageAction extends AbstractAction {
     }
 
     @Override
-    protected void initialize() {
+    protected List<String> noLogging() {
+        return Arrays.asList(new String[] { Constants.ACCESS_KEY });
+    }
 
+    /**
+     * Retrieve the ClientConfig which can be used to create client
+     * @return ClientConfig Object
+     */
+    protected ClientConfig getConfig() throws AzureException {
+        return HttpClientConfig.getClientConfig(this.connectionTimeOut, this.readTimeOut);
+    }
+
+    /**
+     * Method to execute the action.
+     * 
+     * @throws AzureException
+     */
+    @Override
+    public final void execute() throws AzureException {
+        Client client = null;
+        try {
+            initialize();
+            validate();
+            client = Client.create(getConfig());
+            client.addFilter(new StorageAuthenticationFilter(storageAccount));
+            client.addFilter(new GenericResponseFilter(AzureStorageErrorResponse.class));
+            executeSpecific(client);
+        } finally {
+            if (client != null) {
+                client.destroy();
+            }
+        }
+    }
+    
+    /**
+     * Method to execute the action.
+     * @param client represents Jersey Client Object
+     * @throws AzureException
+     */
+    protected abstract void executeSpecific(Client client) throws AzureException;
+    
+    private void initialize() {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
         this.readTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.READ_TIMEOUT));
         this.restapiVersion = getOptionValue(Constants.X_MS_VERSION_OPT);
-        // storage acc from account name and access key
         this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
-        // call to initialize action specific param
-        initializeSpecific();
-    }
-    
-    @Override
-    protected List<String> noLogging() {
-        return Arrays.asList(new String[] { Constants.ACCESS_KEY } );
     }
 
-    @Override
-    protected void validate() throws AzureException {
-
+    private void validate() throws AzureException {
         if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
             throw new AzureException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
@@ -100,49 +130,6 @@ public abstract class AbstractStorageAction extends AbstractAction {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
         }
-
-        // validate action specific action
-        validateSpecific();
-
-    }
-
-    /**
-     * Initializes the HttpClient without keystore and password
-     */
-    @Override
-    protected ClientConfig getConfig() throws AzureException {
-        return HttpClientConfig.getClientConfig(this.connectionTimeOut, this.readTimeOut);
-    }
-
-    /**
-     * Method overrides validateResponse of {@link AbstractAction} as Error response is of a different namespace than
-     * the one returned in abstract class
-     */
-    @Override
-    protected void handleErrorResponse(ClientResponse response) throws AzureException {
-        LOGGER.info("Response code for action " + response.getStatus());
-        AzureStorageErrorResponse error = response.getEntity(AzureStorageErrorResponse.class);
-        throw new AzureException(error.toString());        
     }
     
-    @Override
-    protected ClientResponse execute(Client client) throws AzureException {
-        client.addFilter(new StorageAuthenticationFilter(storageAccount));   
-        return executeSpecific(client);
-    }
-
-    /**
-     * Method to initialize Action specific arguments
-     */
-    protected abstract void initializeSpecific();
-
-    /**
-     * This method is used to validate the inputs to the action. Override this method to validate action specific inputs
-     * 
-     * @throws AzureException
-     */
-    protected abstract void validateSpecific() throws AzureException;
-    
-    protected abstract ClientResponse executeSpecific(Client client) throws AzureException;
-
 }

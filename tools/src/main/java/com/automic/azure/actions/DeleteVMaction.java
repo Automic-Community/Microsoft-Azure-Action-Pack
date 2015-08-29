@@ -21,7 +21,7 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Action class to delete a Virtual Machine 
+ * Action class to delete a Virtual Machine
  * 
  */
 public class DeleteVMaction extends AbstractManagementAction {
@@ -41,32 +41,6 @@ public class DeleteVMaction extends AbstractManagementAction {
                 "Delete the media(operating system disk, attached data disks & the source blobs)");
     }
 
-    @Override
-    protected void initializeSpecific() {
-        vmName = getOptionValue("vmname");
-        serviceName = getOptionValue("servicename");
-        deploymentName = getOptionValue("deploymentname");
-        deleteMedia = CommonUtil.convert2Bool(getOptionValue("deletemedia"));
-
-    }
-
-    @Override
-    protected void validateSpecific() throws AzureException {
-        if (!Validator.checkNotEmpty(vmName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
-        }
-        if (!Validator.checkNotEmpty(serviceName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
-        }
-        if (!Validator.checkNotEmpty(deploymentName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
-        }
-
-    }
-
     /**
      * To delete the VM this method made a call to Azure Rest API https://management
      * .core.windows.net/<subscription-id>/services/hostedservices /<cloudservice-name>/deployments/<deployment-name>
@@ -74,7 +48,9 @@ public class DeleteVMaction extends AbstractManagementAction {
      * attached data disks, and the source blobs for the disks should also be deleted from storage.
      */
     @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
+    public void executeSpecific(Client client) throws AzureException {
+        initialize();
+        validate();
         ClientResponse response = null;
         WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
                 .path("hostedservices").path(serviceName).path("deployments").path(deploymentName).path("roles")
@@ -87,17 +63,34 @@ public class DeleteVMaction extends AbstractManagementAction {
         LOGGER.info("Calling url " + webResource.getURI());
         response = webResource.header(Constants.X_MS_VERSION, restapiVersion).accept(MediaType.APPLICATION_XML)
                 .delete(ClientResponse.class);
-        return response;
+        prepareOutput(response);
     }
 
-    /**
-     * This method will print the request id on console once all the valid input params are passed.
-     **/
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void initialize() {
+        vmName = getOptionValue("vmname");
+        serviceName = getOptionValue("servicename");
+        deploymentName = getOptionValue("deploymentname");
+        deleteMedia = CommonUtil.convert2Bool(getOptionValue("deletemedia"));
+    }
+
+    private void validate() throws AzureException {
+        if (!Validator.checkNotEmpty(vmName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
+        }
+        if (!Validator.checkNotEmpty(serviceName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
+        }
+        if (!Validator.checkNotEmpty(deploymentName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+        }
+    }
+
+    private void prepareOutput(ClientResponse response) {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
-
     }
 
 }

@@ -44,17 +44,33 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
         addOption("vmstate", true, "Virtual Machine Command(Start|Stopped|StoppedDeallocated|Restart)");
     }
 
+    /**
+     * Method to make a call to Azure Management API. To get subscription information we make a GET call to
+     * https://management.core.windows.net/<subscription-id>
+     * 
+     */
     @Override
-    protected void initializeSpecific() {
+    public void executeSpecific(Client client) throws AzureException {
+        initialize();
+        validate();
+        ClientResponse response = null;
+        WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
+                .path("hostedservices").path(serviceName).path("deployments").path(deploymentName)
+                .path("roleinstances").path(vmName).path("Operations");
+        LOGGER.info("Calling url " + webResource.getURI());
+        response = webResource.entity(getRequestBody(vmState), MediaType.APPLICATION_XML)
+                .header(Constants.X_MS_VERSION, restapiVersion).post(ClientResponse.class);
+        prepareOutput(response);
+    }
 
+    private void initialize() {
         serviceName = getOptionValue("servicename");
         deploymentName = getOptionValue("deploymentname");
         vmName = getOptionValue("vmname");
         vmState = getOptionValue("vmstate");
     }
 
-    @Override
-    protected void validateSpecific() throws AzureException {
+    private void validate() throws AzureException {
         if (!Validator.checkNotEmpty(this.serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
@@ -71,23 +87,6 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
             LOGGER.error(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
             throw new AzureException(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
         }
-    }
-
-    /**
-     * Method to make a call to Azure Management API. To get subscription information we make a GET call to
-     * https://management.core.windows.net/<subscription-id>
-     * 
-     */
-    @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
-        ClientResponse response = null;
-        WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
-                .path("hostedservices").path(serviceName).path("deployments").path(deploymentName)
-                .path("roleinstances").path(vmName).path("Operations");
-        LOGGER.info("Calling url " + webResource.getURI());
-        response = webResource.entity(getRequestBody(vmState), MediaType.APPLICATION_XML)
-                .header(Constants.X_MS_VERSION, restapiVersion).post(ClientResponse.class);
-        return response;
     }
 
     /**
@@ -117,12 +116,7 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
         return obj;
     }
 
-    /**
-     * {@inheritDoc ExecStartAction#prepareOutput(ClientResponse)} it will print request token id.
-     * 
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }
