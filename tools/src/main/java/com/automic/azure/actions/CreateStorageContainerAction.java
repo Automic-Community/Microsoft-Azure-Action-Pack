@@ -3,18 +3,14 @@
  */
 package com.automic.azure.actions;
 
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
-import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
-import com.automic.azure.util.ConsoleWriter;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -44,10 +40,8 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
                 + "possible values PRIVATE, CONTAINER or BLOB");
     }
 
-    
     /**
-     * Method makes PUT request to
-     * https://myaccount.blob.core.windows.net/mycontainer?restype=container
+     * Method makes PUT request to https://myaccount.blob.core.windows.net/mycontainer?restype=container
      * 
      */
     @Override
@@ -66,7 +60,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
         }
         LOGGER.info("Calling URL:" + resource.getURI());
         // call the create container service and return response
-        prepareOutput(builder.entity(Strings.EMPTY, "text/plain").put(ClientResponse.class));
+        builder.entity(Strings.EMPTY, "text/plain").put(ClientResponse.class);
     }
 
     private void initialize() {
@@ -93,11 +87,6 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
         }
-    }
-
-    private void prepareOutput(ClientResponse response) throws AzureException {
-        List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
-        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID ::=" + tokenid.get(0));
     }
 
 }

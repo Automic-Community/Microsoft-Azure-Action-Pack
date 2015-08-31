@@ -42,7 +42,7 @@ public class ExceptionHandler {
                     errorMsg = UNABLE_TO_CONNECT;
                 } else if (th instanceof java.net.UnknownHostException) {
                     errorMsg = UNABLE_TO_CONNECT_HOST + th.getMessage();
-                } else if (th != null){
+                } else if (th != null) {
                     errorMsg = th.getMessage();
                 } else {
                     errorMsg = ex.getMessage();

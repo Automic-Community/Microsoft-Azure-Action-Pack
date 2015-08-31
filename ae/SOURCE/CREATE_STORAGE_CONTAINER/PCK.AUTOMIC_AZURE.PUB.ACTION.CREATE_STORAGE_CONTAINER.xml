@@ -316,7 +316,7 @@ The Action will fail when:
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
-The job report will contain a request id which could be used to troubleshoot the request.
+When action fails the job report will contain a request id which could be used to troubleshoot the request.
 
 = Rollback =
 (none)

@@ -1,7 +1,6 @@
 package com.automic.azure.constants;
 
-import com.automic.azure.actions.AbstractAction;
-import com.automic.azure.actions.ActionFactory;
+
 
 /**
  * Enum that defines constants which are placeholder for actions. When an implementation of {@link AbstractAction} is
@@ -9,7 +8,8 @@ import com.automic.azure.actions.ActionFactory;
  */
 public enum Action {
 
-    VERSION, GET_SUBSCRIPTION_INFO, VM_STATE, CHECK_REQUEST_STATUS, DELETE_VM, CREATE_VM_DEPLOYMENT, CREATE_STORAGE_CONTAINER;
+    VERSION, GET_SUBSCRIPTION_INFO, VM_STATE, CHECK_REQUEST_STATUS, DELETE_VM, 
+    CREATE_VM_DEPLOYMENT, CREATE_STORAGE_CONTAINER;
 
     public static String getActionNames() {
         Action[] actions = Action.values();
