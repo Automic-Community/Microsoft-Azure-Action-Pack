@@ -15,8 +15,9 @@ ${Invalid_Cloud_Service_Name}    abcd
 ${Invalid_Deployment_Name}    abcd
 ${VM_Name_Del}    VM1
 ${VM_Name_Del2}    VM2
-<<<<<<< HEAD
 ${Create_VM_FilePath}    ${EXECDIR}\\create_vm.xml
 ${Invalid_Create_VM_FilePath}    ${EXECDIR}\\invalid_create_vm.xml
-=======
->>>>>>> develop
+${Name_Account}    cactest
+${Key_Access}     FTeaAJDf8Fx8bG008bgeIueUZMZOF4wpgX+fDjB4zleMm9r6bVR4aQRRsd3WHGeo5t4CyruXiKHR+g+bgW/Bgg==
+${Invalid_Name_Account}    ABCCDOC
+${Invalid_Key_Access}    FTeaAJDf8Fx8bG008bgeIueUZtestB4zleMm9r6bVR4aQRRsd3WHGeo5t4CyruXiKHR+g+bgW/Bgg==

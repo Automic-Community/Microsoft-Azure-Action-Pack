@@ -39,7 +39,7 @@ public class AzureCertificatesManagement {
         } catch (UnrecoverableKeyException | KeyManagementException | KeyStoreException | NoSuchAlgorithmException
                 | IOException e) {
             LOGGER.error(ExceptionConstants.SSLCONTEXT_ERROR, e);
-            throw new AzureException(ExceptionConstants.SSLCONTEXT_ERROR + e.getMessage());
+            throw new AzureException(ExceptionConstants.SSLCONTEXT_ERROR + e.getMessage(), e);
         }
     }
 
@@ -64,7 +64,7 @@ public class AzureCertificatesManagement {
             fis.close();
         } catch (KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
             LOGGER.error(ExceptionConstants.INVALID_KEYSTORE, e);
-            throw new AzureException(ExceptionConstants.INVALID_KEYSTORE + e.getMessage());
+            throw new AzureException(ExceptionConstants.INVALID_KEYSTORE, e);
         }
         return ks;
     }

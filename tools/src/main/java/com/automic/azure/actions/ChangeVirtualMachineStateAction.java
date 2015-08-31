@@ -26,58 +26,22 @@ import com.sun.jersey.api.client.WebResource;
 /**
  * This class will Start, Restart, Shutdown the specified Virtual Machine on Azure Cloud
  * 
- * @author Anurag Upadhyay
+ * 
  */
-public class ChangeVirtualMachineStateAction extends AbstractAction {
+public final class ChangeVirtualMachineStateAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(ChangeVirtualMachineStateAction.class);
 
-    private String subscriptionId;
     private String serviceName;
     private String deploymentName;
     private String vmName;
     private String vmState;
 
     public ChangeVirtualMachineStateAction() {
-        addOption("subscriptionid", true, "Subscription ID");
         addOption("servicename", true, "Azure cloud service name");
         addOption("deploymentname", true, "Azure cloud deployment name");
         addOption("vmname", true, "Virtual machine name");
         addOption("vmstate", true, "Virtual Machine Command(Start|Stopped|StoppedDeallocated|Restart)");
-    }
-
-    @Override
-    protected void initialize() {
-
-        serviceName = getOptionValue("servicename");
-        deploymentName = getOptionValue("deploymentname");
-        vmName = getOptionValue("vmname");
-        subscriptionId = getOptionValue("subscriptionid");
-        vmState = getOptionValue("vmstate");
-    }
-
-    @Override
-    protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(subscriptionId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-        }
-        if (!Validator.checkNotEmpty(serviceName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
-        }
-        if (!Validator.checkNotEmpty(deploymentName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
-        }
-        if (!Validator.checkNotEmpty(vmName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
-        }
-        if (!Validator.checkNotEmpty(vmState)) {
-            LOGGER.error(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
-            throw new AzureException(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
-        }
     }
 
     /**
@@ -86,7 +50,9 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
      * 
      */
     @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
+    public void executeSpecific(Client client) throws AzureException {
+        initialize();
+        validate();
         ClientResponse response = null;
         WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
                 .path("hostedservices").path(serviceName).path("deployments").path(deploymentName)
@@ -94,7 +60,33 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
         LOGGER.info("Calling url " + webResource.getURI());
         response = webResource.entity(getRequestBody(vmState), MediaType.APPLICATION_XML)
                 .header(Constants.X_MS_VERSION, restapiVersion).post(ClientResponse.class);
-        return response;
+        prepareOutput(response);
+    }
+
+    private void initialize() {
+        serviceName = getOptionValue("servicename");
+        deploymentName = getOptionValue("deploymentname");
+        vmName = getOptionValue("vmname");
+        vmState = getOptionValue("vmstate");
+    }
+
+    private void validate() throws AzureException {
+        if (!Validator.checkNotEmpty(this.serviceName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
+        }
+        if (!Validator.checkNotEmpty(this.deploymentName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+        }
+        if (!Validator.checkNotEmpty(this.vmName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
+        }
+        if (!Validator.checkNotEmpty(vmState)) {
+            LOGGER.error(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
+            throw new AzureException(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
+        }
     }
 
     /**
@@ -124,12 +116,7 @@ public class ChangeVirtualMachineStateAction extends AbstractAction {
         return obj;
     }
 
-    /**
-     * {@inheritDoc ExecStartAction#prepareOutput(ClientResponse)} it will print request token id.
-     * 
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }

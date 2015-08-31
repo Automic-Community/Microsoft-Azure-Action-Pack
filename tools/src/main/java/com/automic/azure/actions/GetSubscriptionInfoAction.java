@@ -8,11 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
-import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
-import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -27,31 +25,12 @@ import com.sun.jersey.api.client.WebResource;
  * </ul>
  *
  */
-public class GetSubscriptionInfoAction extends AbstractAction {
+public final class GetSubscriptionInfoAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(GetSubscriptionInfoAction.class);
 
-    /**
-     * Subscription Id of Azure account
-     */
-    private String subscriptionId;
-
     public GetSubscriptionInfoAction() {
-        addOption(Constants.SUBSCRIPTION_ID, true, "Subscription ID");
-    }
-
-    @Override
-    protected void initialize() {
-        subscriptionId = getOptionValue(Constants.SUBSCRIPTION_ID);
-    }
-
-    @Override
-    protected void validateInputs() throws AzureException {
-        if (!Validator.checkNotEmpty(subscriptionId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-        }
-
+        super();
     }
 
     /**
@@ -60,23 +39,15 @@ public class GetSubscriptionInfoAction extends AbstractAction {
      * 
      */
     @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
-
+    protected void executeSpecific(Client client) throws AzureException {
         WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(this.subscriptionId);
-
         LOGGER.info("Calling url " + webResource.getURI());
-
-        return webResource.header(Constants.X_MS_VERSION, restapiVersion).accept(MediaType.APPLICATION_XML)
-                .get(ClientResponse.class);
-
+        ClientResponse cr = webResource.header(Constants.X_MS_VERSION, restapiVersion)
+                .accept(MediaType.APPLICATION_XML).get(ClientResponse.class);
+        prepareOutput(cr);
     }
 
-    /**
-     * Method to print subscription details xml coming from response as a stream to standard console. This also prints
-     * the xml to Job report in AE.
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         InputStream inputStream = response.getEntityInputStream();
 
         ConsoleWriter.writeln("Subscription details:");

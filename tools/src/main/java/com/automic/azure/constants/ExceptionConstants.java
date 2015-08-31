@@ -17,7 +17,7 @@ public final class ExceptionConstants {
     public static final String INVALID_CONNECTION_TIMEOUT = "Connection timeout should be positive value";
     public static final String INVALID_READ_TIMEOUT = "Read timeout should be positive value";
     public static final String INVALID_LIMIT_PARAMETER = "Invalid value [%s]. Limit should be positive value";
-    
+
     public static final String INVALID_KEYSTORE = "Invalid KeyStore.";
     public static final String SSLCONTEXT_ERROR = "Unable to build secured context.";
 
@@ -53,6 +53,17 @@ public final class ExceptionConstants {
     public static final String INVALID_VMSTATE_COMMAND = "Invalid command [%s] requested for changing VM state. "
             + "Possible commands [%s]";
     public static final String EMPTY_REQUEST_TOKEN_ID = "Request token id should not left blank";
+
+    public static final String EMPTY_STORAGE_ACC_NAME = "Storage account name should not be blank";
+    public static final String INVALID_STORAGE_ACC_NAME = "Storage account name length: 3 to 24 characters, numbers "
+            + "and lowercase letters only. Must match [0-9a-z]{3,24}";
+    public static final String EMPTY_STORAGE_ACCESS_KEY = "Storage account access key should not left blank";
+    public static final String EMPTY_STORAGE_CONTAINER_NAME = "Storage container name should not be blank";
+    public static final String INVALID_STORAGE_CONTAINER_NAME = "Storage container name can only include numbers "
+            + "and lower-case characters and must match [0-9a-z]+";
+    public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
+    public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
+            + "Authentication Signature for Storage Service";
 
     private ExceptionConstants() {
     }

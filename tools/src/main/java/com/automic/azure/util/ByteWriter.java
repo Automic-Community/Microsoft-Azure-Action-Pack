@@ -14,26 +14,25 @@ import com.automic.azure.exception.AzureException;
 /**
  * 
  * Utility class to write bytes to a Stream
- *
+ * 
  */
 public class ByteWriter {
 
     private static final Logger LOGGER = LogManager.getLogger(ByteWriter.class);
-    
-    private BufferedOutputStream bos = null;    
+
+    private BufferedOutputStream bos = null;
 
     public ByteWriter(OutputStream output) {
         bos = new BufferedOutputStream(output, Constants.IO_BUFFER_SIZE);
     }
 
-    
     /**
      * Method to get associated output stream.
      */
     public OutputStream getStream() {
         return bos;
     }
-    
+
     /**
      * Method to write bytes to Stream
      * 

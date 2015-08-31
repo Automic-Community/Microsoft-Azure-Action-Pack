@@ -36,7 +36,7 @@ public final class URLValidator {
         } catch (IllegalArgumentException e) {
             LOGGER.error("Error while validating azure url :: ", e);
             throw new AzureException(String.format("%s ,%s",
-                    String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl), e.getMessage()));
+                    String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl), e.getMessage()), e);
 
         }
 

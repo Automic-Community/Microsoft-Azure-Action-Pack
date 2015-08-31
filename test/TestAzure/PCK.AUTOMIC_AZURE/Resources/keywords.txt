@@ -115,3 +115,8 @@ Change VM State
     Action Execute
     ${Generated_ID}=    Action Get Variable    &UC4RB_AZR_REQUEST_ID#
     Set Global Variable    ${Generated_ID}
+
+Storage Account Info
+    [Arguments]    ${Account_Name}    ${Access_Key}
+    Action Set    &UC4RB_AZR_STORAGE_ACCOUNT_NAME#    ${Account_Name}
+    Action Set    &UC4RB_AZR_STORAGE_ACCESS_KEY#    ${Access_Key}

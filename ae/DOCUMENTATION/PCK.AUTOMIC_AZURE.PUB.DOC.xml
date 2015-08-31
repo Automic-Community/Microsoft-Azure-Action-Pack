@@ -23,12 +23,18 @@ will release all the resources acquired by the Virtual machine.This action will 
 * Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS
 Action description :This action is used to fetch the status of a previously submitted Azure request based on the request id provided by user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if user provides an invalid request id which does not exist in Azure system.
 
-*Action name :PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_VM
+* Action name :PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_VM
 Action description :This action is used to delete the given virtual machine in the cloud service.The action will return the request id which can be further queried to get the status of VM.
 Also if delete attached media is selected YES than it will delete the associated media (operating system disk.data disk and the source blobs) not the container.
 
-Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM_DEPLOYMENT
-Action description :The Create Virtual Machine Deployment Action creates a deployment and then creates a Virtual Machine in the deployment based on the provided xml configuration file and service name. If action executed successfully, it will return request status id that will be used to check status of executed action.]]></DOC>
+* Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM_DEPLOYMENT
+Action description :The Create Virtual Machine Deployment Action creates a deployment and then creates a Virtual Machine in the deployment based on the provided xml configuration file and service name. If action executed successfully, it will return request status id that will be used to check status of executed action.
+
+* Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER
+Action description : This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type.
+The Action will fail when:
+* A container with the same name already exists in storage account
+* A container with the same name is being deleted at the same time ]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

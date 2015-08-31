@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 
 @XmlRootElement(name = "Error", namespace = "http://schemas.microsoft.com/windowsazure")
-public class AzureErrorResponse {
+public class AzureErrorResponse implements ErrorResponse {
 
     private String code;
     private String message;
@@ -31,25 +31,21 @@ public class AzureErrorResponse {
         this.message = message;
     }
 
-	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Azure Error Response ");
-		if (code != null) {
-			builder.append("[code=");
-			builder.append(code);
-			builder.append("], ");
-		}
-		if (message != null) {
-			builder.append("[message=");
-			builder.append(message);
-		}
-		builder.append("]");
-		return builder.toString();
-	}
-
-	
-	
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Azure Error Response ");
+        if (code != null) {
+            builder.append("[code=");
+            builder.append(code);
+            builder.append("], ");
+        }
+        if (message != null) {
+            builder.append("[message=");
+            builder.append(message);
+        }
+        builder.append("]");
+        return builder.toString();
+    }
 
 }

@@ -27,7 +27,7 @@ import com.sun.jersey.api.client.WebResource;
  * 
  * @author Anurag Upadhyay
  */
-public class CreateVirtualMachineDeploymentAction extends AbstractAction {
+public class CreateVirtualMachineDeploymentAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(CreateVirtualMachineDeploymentAction.class);
 
@@ -44,16 +44,32 @@ public class CreateVirtualMachineDeploymentAction extends AbstractAction {
         addOption("configfilepath", true, "Xml configration file path");
     }
 
+    /**
+     * Method to make a call to Azure Management API. To create Virtual machine deployment we make a post request to
+     * https://management.core.windows.net/<subscription-id>/services/hostedservices/<cloudservice-name>/deployments
+     * 
+     */
     @Override
-    protected void initialize() {
+    public void executeSpecific(Client client) throws AzureException {
+        initialize();
+        validate();
+        ClientResponse response = null;
+        WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
+                .path("hostedservices").path(serviceName).path("deployments");
+        LOGGER.info("Calling url " + webResource.getURI());
+        response = webResource.entity(new File(configFilePath), MediaType.APPLICATION_XML)
+                .header(Constants.X_MS_VERSION, restapiVersion).post(ClientResponse.class);
 
+        prepareOutput(response);
+    }
+
+    private void initialize() {
         subscriptionId = getOptionValue("subscriptionid");
         serviceName = getOptionValue("servicename");
         configFilePath = getOptionValue("configfilepath");
     }
 
-    @Override
-    protected void validateInputs() throws AzureException {
+    private void validate() throws AzureException {
         if (!Validator.checkNotEmpty(subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
@@ -69,29 +85,7 @@ public class CreateVirtualMachineDeploymentAction extends AbstractAction {
         }
     }
 
-    /**
-     * Method to make a call to Azure Management API. To create Virtual machine deployment we make a post request to
-     * https://management.core.windows.net/<subscription-id>/services/hostedservices/<cloudservice-name>/deployments
-     * 
-     */
-    @Override
-    protected ClientResponse executeSpecific(Client client) throws AzureException {
-        ClientResponse response = null;
-        WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
-                .path("hostedservices").path(serviceName).path("deployments");
-        LOGGER.info("Calling url " + webResource.getURI());
-        response = webResource.entity(new File(configFilePath), MediaType.APPLICATION_XML)
-                .header(Constants.X_MS_VERSION, restapiVersion).post(ClientResponse.class);
-        return response;
-    }
-
-    /**
-     * This method will print request status.
-     * 
-     * 
-     */
-    @Override
-    protected void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }

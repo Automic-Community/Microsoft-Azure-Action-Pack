@@ -44,11 +44,7 @@ Startup
 
 Configure Connection Template
     [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
-<<<<<<< HEAD
     [Documentation]    This test validates connection between AE and Azure with a precondition for successful scenario that certificate corresponding to jks file should be uploaded to Azure portal.
-=======
-    [Documentation]    This teste validates connection between AE and Azure with a precondition for successful scenario that certificate corresponding to jks file should be uploaded to Azure portal.
->>>>>>> develop
     ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
     ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).

@@ -19,6 +19,8 @@ public final class Constants {
     public static final String PASSWORD = "password";
     public static final String KEYSTORE_LOCATION = "keystore";
     public static final String SUBSCRIPTION_ID = "subscriptionid";
+    public static final String STORAGE = "storage";
+    public static final String ACCESS_KEY = "accesskey";
     public static final String OPTION_X_MS_VERSION = "xmsversion";
     public static final String CONNECTION_TIMEOUT = "connectiontimeout";
     public static final String READ_TIMEOUT = "readtimeout";
@@ -26,6 +28,9 @@ public final class Constants {
     public static final String OPERATIONTYPE_SHUTDOWN = "ShutdownRoleOperation";
     public static final String OPERATIONTYPE_RESTART = "RestartRoleOperation";
     public static final String OPERATIONTYPE_START = "StartRoleOperation";
+    public static final String AZURE_ERROR_NAMESPACE = "http://schemas.microsoft.com/windowsazure";
+    
+    public static final String STORAGE_DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss z";
 
     private Constants() {
     }
