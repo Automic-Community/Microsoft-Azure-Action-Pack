@@ -52,6 +52,7 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
 		if (!this.leaseId.isEmpty()) {
 			builder = builder.header("x-ms-lease-id", leaseId);
 		}
+		builder.delete();
 
 	}
 
