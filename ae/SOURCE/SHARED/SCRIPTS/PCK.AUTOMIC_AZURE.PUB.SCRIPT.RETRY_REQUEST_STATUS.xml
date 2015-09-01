@@ -19,7 +19,7 @@
 <ExtRepAll>0</ExtRepAll>
 <ExtRepNone>0</ExtRepNone>
 <IntAccount/>
-<ActAtRun>0</ActAtRun>
+<ActAtRun>1</ActAtRun>
 <UC4Priority>0</UC4Priority>
 <MaxParallel2>0</MaxParallel2>
 <MpElse1>1</MpElse1>
@@ -79,6 +79,11 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" prptmode="1"/>
 </PROMPTSET>
 </node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" prptmode="1"/>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" ontop="1">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" prptmode="1">
@@ -113,14 +118,14 @@
 :     SET &ERRNR# = SYS_LAST_ERR_NR() 
 :     SET &ERRINS#  = SYS_LAST_ERR_INS() 
 :     SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#) 
-:     print " Error while activating check request status object :&MESSAGE#"
-:     EXIT 1 
+:     print "Error while activating check request status object :&MESSAGE#"
+:     STOP NOMSG, 50, "Error while activating check request status object :&MESSAGE#"
 :   ELSE
 :     SET &TEMP# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_AZR_REQUEST_STATUS#)
 :     PRINT "Request Status = &TEMP#"
 :     IF &TEMP# NE "InProgress"  
 !        Satisfy the condition to quit from while loop as status is no more inprogress state.       
-:        SET  &COUNT# = &UC4RB_AZR_ATTEMPT_COUNT#
+:        SET  &COUNT# = &UC4RB_AZR_RETRY_COUNT#
 :     ENDIF
 :   ENDIF
 :  ENDWHILE 

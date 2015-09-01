@@ -19,7 +19,7 @@
 <ExtRepAll>0</ExtRepAll>
 <ExtRepNone>0</ExtRepNone>
 <IntAccount/>
-<ActAtRun>0</ActAtRun>
+<ActAtRun>1</ActAtRun>
 <UC4Priority>0</UC4Priority>
 <MaxParallel2>0</MaxParallel2>
 <MpElse1>1</MpElse1>
@@ -88,8 +88,7 @@
 </ROLLBACK>
 <SCRIPT mode="1" state="1">
 <MSCRI><![CDATA[: IF &UC4RB_AZR_REQUEST_STATUS# EQ "Failed"
-:   PRINT "Create virtual machine deployment failed"
-:   EXIT 1 
+:     STOP NOMSG, 50, "Error Request Status retrieved as Failed"
 : ENDIF
 ]]></MSCRI>
 </SCRIPT>
