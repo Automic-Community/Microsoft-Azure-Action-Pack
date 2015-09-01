@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.RETRY_REQUEST_STATUS">
 <XHEADER state="1">
-<Title>Check request status using script</Title>
+<Title>Retry Check request status</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -19,7 +19,7 @@
 <ExtRepAll>0</ExtRepAll>
 <ExtRepNone>0</ExtRepNone>
 <IntAccount/>
-<ActAtRun>1</ActAtRun>
+<ActAtRun>0</ActAtRun>
 <UC4Priority>0</UC4Priority>
 <MaxParallel2>0</MaxParallel2>
 <MpElse1>1</MpElse1>
@@ -70,9 +70,7 @@
 <dyntree>
 <node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
 <VALUE state="1">
-<Values>
-<row ERTUsage="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value="InProgress"/>
-</Values>
+<Values/>
 <Mode>0</Mode>
 </VALUE>
 </node>
@@ -83,7 +81,10 @@
 </node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" prptmode="1"/>
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" prptmode="1">
+<UC4RB_AZR_RETRY_COUNTs.00 altview="1" haslist="0"/>
+<UC4RB_AZR_RETRY_INTERVALs.00 altview="1" haslist="0"/>
+</PRPTBOX>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -102,33 +103,28 @@
 <FInclSubDirs>0</FInclSubDirs>
 </ROLLBACK>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[
-
-:  SET &COUNT# = 0
-:  WHILE &COUNT# LT &UC4RB_AZR_ATTEMPT_COUNT#
-:   WAIT &UC4RB_AZR_CHECK_INTERVAL#
+<MSCRI><![CDATA[:  SET &COUNT# = 0
+:  DEFINE &TEMP#, string
+:  WHILE &COUNT# LT &UC4RB_AZR_RETRY_COUNT#
+:   WAIT &UC4RB_AZR_RETRY_INTERVAL#
 :   SET &ACTOBJ# = ACTIVATE_UC_OBJECT(PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC,WAIT,,,,PASS_VALUES)
 :   SET  &COUNT# = &COUNT# +1
 :   IF &ACTOBJ# = "0"
 :     SET &ERRNR# = SYS_LAST_ERR_NR() 
 :     SET &ERRINS#  = SYS_LAST_ERR_INS() 
 :     SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#) 
-:     print " Error in execution of check request status object :&MESSAGE#"
+:     print " Error while activating check request status object :&MESSAGE#"
 :     EXIT 1 
 :   ELSE
-:     SET &VAR# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_AZR_REQUEST_STATUS#)
-:     SET &UC4RB_AZR_REQUEST_STATUS# = &VAR#
-:     PRINT "&&UC4RB_AZR_REQUEST_STATUS# = &VAR#"
-:     IF &UC4RB_AZR_REQUEST_STATUS# NE "InProgress"  
-:        SET  &COUNT# = &COUNT# + &UC4RB_AZR_ATTEMPT_COUNT#
+:     SET &TEMP# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_AZR_REQUEST_STATUS#)
+:     PRINT "Request Status = &TEMP#"
+:     IF &TEMP# NE "InProgress"  
+!        Satisfy the condition to quit from while loop as status is no more inprogress state.       
+:        SET  &COUNT# = &UC4RB_AZR_ATTEMPT_COUNT#
 :     ENDIF
 :   ENDIF
 :  ENDWHILE 
-:  PUBLISH &UC4RB_AZR_REQUEST_STATUS# ,,"TOP"
-
-
-
-
+:  PUBLISH &TEMP#,&UC4RB_AZR_REQUEST_STATUS#,"TOP"
 ]]></MSCRI>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
