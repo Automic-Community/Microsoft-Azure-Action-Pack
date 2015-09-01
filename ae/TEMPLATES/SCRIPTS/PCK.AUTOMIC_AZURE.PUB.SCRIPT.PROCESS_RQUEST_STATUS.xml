@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.FINAL_STATUS_OF_SUBMITTED_TASK">
+<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.PROCESS_RQUEST_STATUS">
 <XHEADER state="1">
-<Title>Check final status of submitted task</Title>
+<Title>Process the request status to check whether it is failed or not</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -70,7 +70,9 @@
 <dyntree>
 <node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
 <VALUE state="1">
-<Values/>
+<Values>
+<row ERTUsage="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+</Values>
 <Mode>0</Mode>
 </VALUE>
 </node>
@@ -85,10 +87,8 @@
 <FInclSubDirs>0</FInclSubDirs>
 </ROLLBACK>
 <SCRIPT mode="1" state="1">
-<MSCRI><![CDATA[
-: IF &UC4RB_AZR_REQUEST_STATUS# EQ "Failed"
-:   PRINT "Create virtual machine deployment failed"
-:   EXIT 1 
+<MSCRI><![CDATA[: IF &UC4RB_AZR_REQUEST_STATUS# EQ "Failed"
+:     STOP MSG, 50, "Error Request Status retrieved as Failed"
 : ENDIF
 ]]></MSCRI>
 </SCRIPT>
