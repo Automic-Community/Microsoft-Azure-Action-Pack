@@ -70,7 +70,9 @@
 <dyntree>
 <node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
 <VALUE state="1">
-<Values/>
+<Values>
+<row ERTUsage="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+</Values>
 <Mode>0</Mode>
 </VALUE>
 </node>
@@ -112,14 +114,15 @@
 :  DEFINE &TEMP#, string
 :  WHILE &COUNT# LT &UC4RB_AZR_RETRY_COUNT#
 :   WAIT &UC4RB_AZR_RETRY_INTERVAL#
-:   SET &ACTOBJ# = ACTIVATE_UC_OBJECT(PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC,WAIT,,,,PASS_VALUES)
 :   SET  &COUNT# = &COUNT# +1
+:   print "Retry Count &COUNT#"
+:   SET &ACTOBJ# = ACTIVATE_UC_OBJECT(PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC,WAIT,,,,PASS_VALUES)
 :   IF &ACTOBJ# = "0"
 :     SET &ERRNR# = SYS_LAST_ERR_NR() 
 :     SET &ERRINS#  = SYS_LAST_ERR_INS() 
 :     SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#) 
 :     print "Error while activating check request status object :&MESSAGE#"
-:     STOP NOMSG, 50, "Error while activating check request status object :&MESSAGE#"
+:     STOP MSG, 50, "Error while activating check request status object :&MESSAGE#"
 :   ELSE
 :     SET &TEMP# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_AZR_REQUEST_STATUS#)
 :     PRINT "Request Status = &TEMP#"

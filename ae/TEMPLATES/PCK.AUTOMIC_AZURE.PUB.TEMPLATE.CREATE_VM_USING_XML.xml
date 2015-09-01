@@ -279,7 +279,9 @@
 <dyntree>
 <node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
 <VALUE state="2">
-<Values/>
+<Values>
+<row Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+</Values>
 <Mode>0</Mode>
 </VALUE>
 </node>
