@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<PRPT name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<HEADER state="1">
+<Title>Enter information for request status</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<PROMPTDESIGNER state="1">
+<DESIGNER/>
+</PROMPTDESIGNER>
+<PROMPTSETXUI state="1">
+<XUIEDITOR><![CDATA[<dialog height="422" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide input to retry request status"><properties><entry name="text">Provide input to retry request status</entry><entry name="modifiable">0</entry></properties><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_ATTEMPT_COUNTs.00" max="500" min="1" nl="1" text="Retry Count" tooltip="Number of attempt to retry request status">
+      <properties>
+        <entry listparam="N" name="reference" reftype="STATIC">UC_DATATYPE_NUMERIC</entry>
+        <entry name="text">Retry Count</entry>
+        <entry name="min">1</entry>
+        <entry name="max">500</entry>
+        <entry name="quotes"/>
+        <entry name="id">UC4RB_AZR_ATTEMPT_COUNTs.00</entry>
+        <entry name="enabled">0</entry>
+        <entry name="focus">0</entry>
+        <entry name="tooltip">Number of attempt to retry request status</entry>
+        <entry name="modifiable">1</entry>
+        <entry name="customfield"/>
+      <entry name="initvalue">0</entry>
+         </properties>
+    </integer><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CHECK_INTERVALs.00" max="600" min="10" nl="1" text="Retry Interval (Second)" tooltip="Time stamp interval in second for retry request status recursively">
+      <properties>
+        <entry listparam="N" name="reference" reftype="STATIC">UC_DATATYPE_NUMERIC</entry>
+        <entry name="text">Retry Interval (Second)</entry>
+        <entry name="min">10</entry>
+        <entry name="max">600</entry>
+        <entry name="quotes"/>
+        <entry name="id">UC4RB_AZR_CHECK_INTERVALs.00</entry>
+        <entry name="enabled">0</entry>
+        <entry name="focus">0</entry>
+        <entry name="tooltip">Time stamp interval in second for retry request status recursively</entry>
+        <entry name="modifiable">1</entry>
+        <entry name="customfield"/>
+      <entry name="initvalue">0</entry>
+         </properties>
+    </integer></readpanel></dialog>]]></XUIEDITOR>
+</PROMPTSETXUI>
+<PROMPTSETDATA state="1">
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_ATTEMPT_COUNTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_ATTEMPT_COUNT#" ReadFromTable="OPSE">1</UC4RB_AZR_ATTEMPT_COUNTs.00><UC4RB_AZR_CHECK_INTERVALs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CHECK_INTERVAL#" ReadFromTable="OPSE">10</UC4RB_AZR_CHECK_INTERVALs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+</PROMPTSETDATA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</PRPT>
+</uc-export>

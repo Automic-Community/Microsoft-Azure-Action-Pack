@@ -68,6 +68,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">1</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">10</UC4RB_AZR_CHECK_INTERVALs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
@@ -128,6 +136,14 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_DEPLOYMENT"/>
 <UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_DEPLOYMENT"/>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">1</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">10</UC4RB_AZR_CHECK_INTERVALs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -219,6 +235,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">1</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">10</UC4RB_AZR_CHECK_INTERVALs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
@@ -237,7 +261,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="CHECK_STATUS" BranchType="0" Col="4" Lnr="4" OType="JOBP" Object="PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="REQUEST_STATUS" BranchType="0" Col="4" Lnr="4" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.RETRY_REQUEST_STATUS" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -256,7 +280,7 @@
 <node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
 <VALUE state="2">
 <Values>
-<row Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+<row Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value="InProgress"/>
 </Values>
 <Mode>0</Mode>
 </VALUE>
@@ -278,10 +302,12 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">
-<UC4RB_AZR_REQUEST_IDs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_REQUEST_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO">&amp;UC4RB_AZR_REQUEST_ID#</UC4RB_AZR_REQUEST_IDs.00>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">&amp;UC4RB_AZR_ATTEMPT_COUNT#</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">&amp;UC4RB_AZR_CHECK_INTERVAL#</UC4RB_AZR_CHECK_INTERVALs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00s.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL##" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">&amp;UC4RB_AZR_CHECK_INTERVAL#</UC4RB_AZR_CHECK_INTERVALs.00s.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -308,6 +334,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">1</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">10</UC4RB_AZR_CHECK_INTERVALs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
@@ -322,22 +356,7 @@
 <calendars CCTypeAll="0" CCTypeExt="0" CCTypeNone="0" CCTypeOne="1" CaleOn="0"/>
 <postconditions>
 <PostCon>
-<conditions id="CONDITIONS">
-<condition active="1" id="USER DEFINED" once="0" type="C" uiinfo="">
-<params>
-<param altview="0" name="XC_P01" type="V" value="&quot;&amp;UC4RB_AZR_REQUEST_STATUS#&quot;"/>
-<param altview="0" name="XC_P02" type="V" value="="/>
-<param altview="0" name="XC_P03" type="V" value="&quot;InProgress&quot;"/>
-</params>
-<when active="1" id="USER DEFINED" once="0" type="W" uiinfo="">
-<action active="1" id="RESTART TASK" once="0" type="A" uiinfo="">
-<params>
-<param altview="0" name="XC_P01" type="V" value="0"/>
-</params>
-</action>
-</when>
-</condition>
-</conditions>
+<conditions id="CONDITIONS"/>
 </PostCon>
 </postconditions>
 </task>
@@ -386,6 +405,14 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">1</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">10</UC4RB_AZR_CHECK_INTERVALs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
 <PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT">
@@ -414,7 +441,7 @@
 </PreCon>
 </preconditions>
 <predecessors>
-<pre BranchType="0" Lnr="1" PreLnr="5" When="" type="container"/>
+<pre BranchType="0" Lnr="1" PreLnr="5" When="ANY_OK" type="container"/>
 </predecessors>
 <runtime MrtCancel="0" MrtDays="0" MrtErt="0" MrtExecute="0" MrtExecuteObj="" MrtFix="0" MrtMethodDate="0" MrtMethodErt="0" MrtMethodFix="0" MrtMethodNone="1" MrtOn="1" MrtTZ="" MrtTime="00:00" SrtErt="0" SrtFix="0" SrtMethodErt="0" SrtMethodFix="0" SrtMethodNone="1"/>
 <result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
@@ -432,6 +459,14 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_DEPLOYMENT"/>
 <UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_VM_DEPLOYMENT"/>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">
+<UC4RB_AZR_ATTEMPT_COUNTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_ATTEMPT_COUNT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">1</UC4RB_AZR_ATTEMPT_COUNTs.00>
+<UC4RB_AZR_CHECK_INTERVALs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CHECK_INTERVAL#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS">10</UC4RB_AZR_CHECK_INTERVALs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -509,6 +544,11 @@
 <UC4RB_AZR_CLOUD_SERVICEs.00 altview="0" haslist="0"/>
 <UC4RB_AZR_FILE_PATHs.00 altview="0" haslist="0"/>
 </PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
