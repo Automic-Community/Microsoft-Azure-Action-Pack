@@ -293,7 +293,7 @@ This action is used to delete a Container in the Azure Storage account provided 
 = Inputs =
 * Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
 * Access Key: Access key for this storage account 
-* Container name: Name of the Storage Container to delete.
+* Container name: Name of the Storage Container to delete.Storage container name can only include numbers and lower-case characters. Example mycontainer123
 * Lease ID: Provide Lease ID if the container has an active lease
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login

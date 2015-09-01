@@ -11,8 +11,8 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Deleting existing storage container"><properties><entry name="text">Deleting existing storage container</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="1" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" separator=";" showaspassword="0" text="Container name" tooltip="Name of the Storage Container to delete" upper="0" required="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Deleting existing storage container"><properties><entry name="text">Deleting existing storage container</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="1" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z]+" required="0" separator=";" showaspassword="0" text="Container name" tooltip="Name of the Storage Container to delete" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -25,7 +25,7 @@
         <entry name="len"/>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_CONTAINER_NAMEs.00</entry>
-        <entry name="regex"/>
+        <entry name="regex">[0-9a-z]+</entry>
         <entry name="inputassistance">0</entry>
         <entry name="enabled">0</entry>
         <entry name="required">1</entry>
@@ -37,9 +37,10 @@
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
+      <entry name="initvalue"/>
+         </properties>
     </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_LEASE_IDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Lease ID" tooltip="Provide Lease ID if the container has an active lease" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -64,7 +65,8 @@
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
+      <entry name="initvalue"/>
+         </properties>
     </text></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">

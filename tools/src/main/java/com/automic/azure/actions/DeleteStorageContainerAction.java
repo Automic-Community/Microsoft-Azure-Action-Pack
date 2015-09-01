@@ -20,65 +20,63 @@ import com.sun.jersey.api.client.WebResource;
  */
 public class DeleteStorageContainerAction extends AbstractStorageAction {
 
-	private static final Logger LOGGER = LogManager.getLogger(DeleteStorageContainerAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(DeleteStorageContainerAction.class);
 
-	/**
-	 * Storage container name
-	 */
-	private String containerName;
-	/**
-	 * Storage lease Id
-	 */
-	private String leaseId;
+    /**
+     * Storage container name
+     */
+    private String containerName;
+    /**
+     * Storage lease Id
+     */
+    private String leaseId;
 
-	public DeleteStorageContainerAction() {
-		addOption("containername", true, "Storage Container Name");
-		addOption("leaseid", false, "Storage Lease Id");
-	}
+    public DeleteStorageContainerAction() {
+        addOption("containername", true, "Storage Container Name");
+        addOption("leaseid", false, "Storage Lease Id");
+    }
 
-	/**
-	 * The Delete Container action marks the specified container for deletion.
-	 * The container and any blobs contained within it are later deleted during
-	 * garbage collection. To call this action on a container that has an active
-	 * lease, specify the lease ID.If no value is provided for lease id when
-	 * there is an active lease, Delete Container action will return 409
-	 * (Conflict).If wrong lease ID is provided or a lease ID is provided for a
-	 * container that does not have an active lease Delete Container action will
-	 * return 412 (Precondition failed).
-	 * */
-	@Override
-	protected void executeSpecific(Client storageHttpClient) throws AzureException {
-		initialize();
-		validate();
+    /**
+     * The Delete Container action marks the specified container for deletion. The container and any blobs contained
+     * within it are later deleted during garbage collection. To call this action on a container that has an active
+     * lease, specify the lease ID.If no value is provided for lease id when there is an active lease, Delete Container
+     * action will return 409 (Conflict).If wrong lease ID is provided or a lease ID is provided for a container that
+     * does not have an active lease Delete Container action will return 412 (Precondition failed).
+     * */
+    @Override
+    protected void executeSpecific(Client storageHttpClient) throws AzureException {
+        initialize();
+        validate();
 
-		WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName)
-				.queryParam("restype", "container");
+        WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName)
+                .queryParam("restype", "container");
 
-		WebResource.Builder builder = resource.entity(Strings.EMPTY, "text/plain")
-				.header("x-ms-version", this.restapiVersion)
-				.header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
+        WebResource.Builder builder = resource.entity(Strings.EMPTY, "text/plain")
+                .header("x-ms-version", this.restapiVersion)
+                .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
 
-		LOGGER.info("Calling URL:" + resource.getURI());
-		if (!this.leaseId.isEmpty()) {
-			builder = builder.header("x-ms-lease-id", leaseId);
-		}
-		builder.delete();
+        LOGGER.info("Calling URL:" + resource.getURI());
+        
+        if (this.leaseId != null && !this.leaseId.isEmpty()) {
+            builder = builder.header("x-ms-lease-id", leaseId);
+        }
+        builder.delete();
 
-	}
+    }
 
-	private void initialize() {
-		this.containerName = getOptionValue("containername");
-		this.leaseId = getOptionValue("leaseid");
+    private void initialize() {
+        this.containerName = getOptionValue("containername");
+        this.leaseId = getOptionValue("leaseid");
 
-	}
+    }
 
-	private void validate() throws AzureException {
-		// validate storage container name
-		if (!Validator.checkNotEmpty(this.containerName)) {
-			LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-			throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-		}
+    private void validate() throws AzureException {
+        // validate storage container name
+        if (!Validator.checkNotEmpty(this.containerName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+        }
 
-	}
+    }
 
 }
