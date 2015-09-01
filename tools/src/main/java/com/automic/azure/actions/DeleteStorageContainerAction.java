@@ -36,6 +36,16 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
 		addOption("leaseid", false, "Storage Lease Id");
 	}
 
+	/**
+	 * The Delete Container action marks the specified container for deletion.
+	 * The container and any blobs contained within it are later deleted during
+	 * garbage collection. To call this action on a container that has an active
+	 * lease, specify the lease ID.If no value is provided for lease id when
+	 * there is an active lease, Delete Container action will return 409
+	 * (Conflict).If wrong lease ID is provided or a lease ID is provided for a
+	 * container that does not have an active lease Delete Container action will
+	 * return 412 (Precondition failed).
+	 * */
 	@Override
 	protected void executeSpecific(Client storageHttpClient) throws AzureException {
 		initialize();
