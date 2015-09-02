@@ -11,7 +11,7 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="422" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide retry information about checking the request status"><properties><entry name="text">Provide retry information about checking the request status</entry><entry name="modifiable">0</entry></properties><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_RETRY_COUNTs.00" max="500" min="1" nl="1" text="Retry Count" tooltip="Number of retry attempts to check the status of request.">
+<XUIEDITOR><![CDATA[<dialog height="422" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide retry information about checking the request status"><properties><entry name="text">Provide retry information about checking the request status</entry><entry name="modifiable">0</entry></properties><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_RETRY_COUNTs.00" max="500" min="1" nl="1" text="Retry Count" tooltip="Number of retry attempts to check the status of request.Value should be between 1 and 500.">
       <properties>
         <entry listparam="N" name="reference" reftype="STATIC">UC_DATATYPE_NUMERIC</entry>
         <entry name="text">Retry Count</entry>
@@ -21,22 +21,22 @@
         <entry name="id">UC4RB_AZR_RETRY_COUNTs.00</entry>
         <entry name="enabled">0</entry>
         <entry name="focus">0</entry>
-        <entry name="tooltip">Number of retry attempts to check the status of request.</entry>
+        <entry name="tooltip">Number of retry attempts to check the status of request.Value should be between 1 and 500.</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
       <entry name="initvalue">0</entry>
          </properties>
-    </integer><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_RETRY_INTERVALs.00" max="600" min="10" nl="1" text="Retry Interval (seconds)" tooltip="Specify how frequently you want to check the status of request.">
+    </integer><integer alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_RETRY_INTERVALs.00" max="600" min="5" nl="1" text="Retry Interval (seconds)" tooltip="Specify how frequently you want to check the status of request.Value should be between 5 and 600.">
       <properties>
         <entry listparam="N" name="reference" reftype="STATIC">UC_DATATYPE_NUMERIC</entry>
         <entry name="text">Retry Interval (seconds)</entry>
-        <entry name="min">10</entry>
+        <entry name="min">5</entry>
         <entry name="max">600</entry>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_RETRY_INTERVALs.00</entry>
         <entry name="enabled">0</entry>
         <entry name="focus">0</entry>
-        <entry name="tooltip">Specify how frequently you want to check the status of request.</entry>
+        <entry name="tooltip">Specify how frequently you want to check the status of request.Value should be between 5 and 600.</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
       <entry name="initvalue">0</entry>
@@ -44,7 +44,7 @@
     </integer></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_RETRY_COUNTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_RETRY_COUNT#" ReadFromTable="OPSE">5</UC4RB_AZR_RETRY_COUNTs.00><UC4RB_AZR_RETRY_INTERVALs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_RETRY_INTERVAL#" ReadFromTable="OPSE">10</UC4RB_AZR_RETRY_INTERVALs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_RETRY_COUNTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_RETRY_COUNT#" ReadFromTable="OPSE">30</UC4RB_AZR_RETRY_COUNTs.00><UC4RB_AZR_RETRY_INTERVALs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_RETRY_INTERVAL#" ReadFromTable="OPSE">10</UC4RB_AZR_RETRY_INTERVALs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>
