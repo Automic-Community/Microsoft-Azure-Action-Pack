@@ -6,12 +6,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 
 /**
  * Utility class to validate URLs
  * 
- *
+ * 
  */
 public final class URLValidator {
 
@@ -28,18 +28,18 @@ public final class URLValidator {
      *            String representing Azure URL
      * @return true if URL is valid else false
      */
-    public static boolean validateURL(String azureUrl) throws AzureBusinessException {
+    public static boolean validateURL(String azureUrl) throws AzureException {
         URI uri = null;
 
         try {
             uri = URI.create(azureUrl);
         } catch (IllegalArgumentException e) {
             LOGGER.error("Error while validating azure url :: ", e);
-            throw new AzureBusinessException(String.format("%s ,%s",
-                    String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl), e.getMessage()), e);
+            throw new AzureException(String.format("%s ,%s",
+                    String.format(ExceptionConstants.INVALID_AZURE_URL, azureUrl), e.getMessage()));
 
         }
 
-        return (uri != null) ;
+        return (uri != null);
     }
 }

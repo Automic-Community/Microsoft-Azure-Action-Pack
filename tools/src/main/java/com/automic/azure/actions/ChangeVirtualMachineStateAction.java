@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 import com.automic.azure.model.RestartRequestModel;
 import com.automic.azure.model.ShutdownRequestModel;
 import com.automic.azure.model.StartRequestModel;
@@ -50,7 +50,7 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
      * 
      */
     @Override
-    public void executeSpecific(Client client) throws AzureBusinessException {
+    public void executeSpecific(Client client) throws AzureException {
         initialize();
         validate();
         ClientResponse response = null;
@@ -70,22 +70,22 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
         vmState = getOptionValue("vmstate");
     }
 
-    private void validate() throws AzureBusinessException {
+    private void validate() throws AzureException {
         if (!Validator.checkNotEmpty(this.serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_SERVICE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
         }
         if (!Validator.checkNotEmpty(this.deploymentName)) {
             LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
         }
         if (!Validator.checkNotEmpty(this.vmName)) {
             LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_ROLE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
         }
         if (!Validator.checkNotEmpty(vmState)) {
             LOGGER.error(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
+            throw new AzureException(ExceptionConstants.EMPTY_VM_OPERATION_ACTION);
         }
     }
 
@@ -96,7 +96,7 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
      * @return Object
      */
 
-    private Object getRequestBody(String vmState) throws AzureBusinessException {
+    private Object getRequestBody(String vmState) throws AzureException {
         Object obj = null;
         switch (vmState.toUpperCase()) {
             case "START":
@@ -110,13 +110,13 @@ public final class ChangeVirtualMachineStateAction extends AbstractManagementAct
                 obj = new RestartRequestModel();
                 break;
             default:
-                throw new AzureBusinessException(String.format(ExceptionConstants.INVALID_VMSTATE_COMMAND, vmState,
+                throw new AzureException(String.format(ExceptionConstants.INVALID_VMSTATE_COMMAND, vmState,
                         "Start|Stopped|StoppedDeallocated|Restart"));
         }
         return obj;
     }
 
-    private void prepareOutput(ClientResponse response) throws AzureBusinessException {
+    private void prepareOutput(ClientResponse response) throws AzureException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }

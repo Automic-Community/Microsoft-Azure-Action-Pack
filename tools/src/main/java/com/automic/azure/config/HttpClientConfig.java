@@ -1,6 +1,6 @@
 package com.automic.azure.config;
 
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.client.urlconnection.HTTPSProperties;
@@ -27,10 +27,10 @@ public final class HttpClientConfig {
      * @param readTimeOut
      *            read timeout
      * @return
-     * @throws AzureBusinessException
+     * @throws AzureException
      */
     public static ClientConfig getClientConfig(String keyStore, String password, int connectionTimeOut, int readTimeOut)
-            throws AzureBusinessException {
+            throws AzureException {
         ClientConfig config = new DefaultClientConfig();
 
         config.getProperties().put(ClientConfig.PROPERTY_CONNECT_TIMEOUT, connectionTimeOut);
@@ -52,9 +52,9 @@ public final class HttpClientConfig {
      * @param connectionTimeOut
      * @param readTimeOut
      * @return
-     * @throws AzureBusinessException
+     * @throws AzureException
      */
-    public static ClientConfig getClientConfig(int connectionTimeOut, int readTimeOut) throws AzureBusinessException {
+    public static ClientConfig getClientConfig(int connectionTimeOut, int readTimeOut) throws AzureException {
 
         return getClientConfig(null, null, connectionTimeOut, readTimeOut);
     }

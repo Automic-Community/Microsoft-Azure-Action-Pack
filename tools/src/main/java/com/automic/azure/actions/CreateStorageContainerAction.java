@@ -9,7 +9,7 @@ import org.apache.logging.log4j.util.Strings;
 
 import com.automic.azure.constants.ContainerAccess;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -45,7 +45,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
      * 
      */
     @Override
-    public void executeSpecific(Client storageHttpClient) throws AzureBusinessException {
+    public void executeSpecific(Client storageHttpClient) throws AzureException {
         initialize();
         validate();
         // get URL
@@ -72,20 +72,20 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
         }
     }
 
-    private void validate() throws AzureBusinessException {
+    private void validate() throws AzureException {
         // validate storage container name
         if (!Validator.checkNotEmpty(this.containerName)) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
         } else if (!this.containerName.matches("[0-9a-z]+")) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
-            throw new AzureBusinessException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
 
         // validate storage container access
         if (!Validator.checkNotNull(this.containerAccess)) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_ACCESS);
         }
     }
 

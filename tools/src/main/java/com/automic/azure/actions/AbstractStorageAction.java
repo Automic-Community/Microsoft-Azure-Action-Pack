@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 import com.automic.azure.filter.GenericResponseFilter;
 import com.automic.azure.filter.StorageAuthenticationFilter;
 import com.automic.azure.model.AzureStorageAccount;
@@ -60,17 +60,17 @@ public abstract class AbstractStorageAction extends AbstractAction {
      * Retrieve the ClientConfig which can be used to create client
      * @return ClientConfig Object
      */
-    protected ClientConfig getConfig() throws AzureBusinessException {
+    protected ClientConfig getConfig() throws AzureException {
         return HttpClientConfig.getClientConfig(this.connectionTimeOut, this.readTimeOut);
     }
 
     /**
      * Method to execute the action.
      * 
-     * @throws AzureBusinessException
+     * @throws AzureException
      */
     @Override
-    public final void execute() throws AzureBusinessException {
+    public final void execute() throws AzureException {
         Client client = null;
         try {
             initialize();
@@ -89,9 +89,9 @@ public abstract class AbstractStorageAction extends AbstractAction {
     /**
      * Method to execute the action.
      * @param client represents Jersey Client Object
-     * @throws AzureBusinessException
+     * @throws AzureException
      */
-    protected abstract void executeSpecific(Client client) throws AzureBusinessException;
+    protected abstract void executeSpecific(Client client) throws AzureException;
     
     private void initialize() {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
@@ -100,35 +100,35 @@ public abstract class AbstractStorageAction extends AbstractAction {
         this.storageAccount = new AzureStorageAccount(getOptionValue("storage"), getOptionValue("accesskey"));
     }
 
-    private void validate() throws AzureBusinessException {
+    private void validate() throws AzureException {
         if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
-            throw new AzureBusinessException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
+            throw new AzureException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
         }
 
         if (this.readTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
-            throw new AzureBusinessException(ExceptionConstants.INVALID_READ_TIMEOUT);
+            throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
         if (!Validator.checkNotEmpty(restapiVersion)) {
             LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_X_MS_VERSION);
+            throw new AzureException(ExceptionConstants.EMPTY_X_MS_VERSION);
         }
 
         // validate storage name and matches [0-9a-z]{3,24}
         if (!Validator.checkNotEmpty(storageAccount.getAccountName())) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
         } else if (!storageAccount.getAccountName().matches("[0-9a-z]{3,24}")) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_ACC_NAME);
-            throw new AzureBusinessException(ExceptionConstants.INVALID_STORAGE_ACC_NAME);
+            throw new AzureException(ExceptionConstants.INVALID_STORAGE_ACC_NAME);
         }
 
         // validate storage access key
         if (!Validator.checkNotEmpty(storageAccount.getPrimaryAccessKey())) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
         }
     }
     

@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -44,7 +44,7 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
      * does not have an active lease Delete Container action will return 412 (Precondition failed).
      * */
     @Override
-    protected void executeSpecific(Client storageHttpClient) throws AzureBusinessException {
+    protected void executeSpecific(Client storageHttpClient) throws AzureException {
         initialize();
         validate();
 
@@ -70,14 +70,14 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
 
     }
 
-    private void validate() throws AzureBusinessException {
+    private void validate() throws AzureException {
         // validate storage container name
         if (!Validator.checkNotEmpty(this.containerName)) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
         }else if (!this.containerName.matches("[0-9a-z]+")) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
-            throw new AzureBusinessException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
 
     }

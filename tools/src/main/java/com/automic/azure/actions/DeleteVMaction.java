@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
 import com.automic.azure.util.Validator;
@@ -48,7 +48,7 @@ public class DeleteVMaction extends AbstractManagementAction {
      * attached data disks, and the source blobs for the disks should also be deleted from storage.
      */
     @Override
-    public void executeSpecific(Client client) throws AzureBusinessException {
+    public void executeSpecific(Client client) throws AzureException {
         initialize();
         validate();
         ClientResponse response = null;
@@ -73,18 +73,18 @@ public class DeleteVMaction extends AbstractManagementAction {
         deleteMedia = CommonUtil.convert2Bool(getOptionValue("deletemedia"));
     }
 
-    private void validate() throws AzureBusinessException {
+    private void validate() throws AzureException {
         if (!Validator.checkNotEmpty(vmName)) {
             LOGGER.error(ExceptionConstants.EMPTY_ROLE_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_ROLE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_ROLE_NAME);
         }
         if (!Validator.checkNotEmpty(serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_SERVICE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
         }
         if (!Validator.checkNotEmpty(deploymentName)) {
             LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
-            throw new AzureBusinessException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
         }
     }
 

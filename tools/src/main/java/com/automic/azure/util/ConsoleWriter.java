@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 
 /**
  * This class writes content to standard console
@@ -30,7 +30,7 @@ public final class ConsoleWriter {
         String temp = content != null ? content.toString() : "null";
         try {
             WRITER.write(temp);
-        } catch (AzureBusinessException ae) {
+        } catch (AzureException ae) {
             LOGGER.error(ae.getMessage());
         }
     }
@@ -65,7 +65,7 @@ public final class ConsoleWriter {
     public static void flush() {
         try {
             WRITER.flush();
-        } catch (AzureBusinessException ae) {
+        } catch (AzureException ae) {
             LOGGER.error(ae.getMessage());
         }
     }

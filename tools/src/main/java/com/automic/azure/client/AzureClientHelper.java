@@ -12,7 +12,7 @@ import com.automic.azure.cli.AzureCli;
 import com.automic.azure.cli.AzureOptions;
 import com.automic.azure.constants.Action;
 import com.automic.azure.constants.Constants;
-import com.automic.azure.exception.AzureBusinessException;
+import com.automic.azure.exception.AzureException;
 
 /**
  * Helper class to delegate request to specific Action based on input arguments .
@@ -29,9 +29,9 @@ public final class AzureClientHelper {
      * 
      * @param map
      *            of options with key as option name and value is option value
-     * @throws AzureBusinessException
+     * @throws AzureException
      */
-    public static void executeAction(String[] args) throws AzureBusinessException {
+    public static void executeAction(String[] args) throws AzureException {
         String action = new AzureCli(new AzureOptions(), args).getOptionValue(Constants.ACTION).toUpperCase();
         LOGGER.info("Execution starts for action [" + action + "]...");
         AbstractAction useraction = ActionFactory.getAction(Action.valueOf(action));

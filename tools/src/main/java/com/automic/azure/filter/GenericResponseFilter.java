@@ -3,7 +3,7 @@ package com.automic.azure.filter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import com.automic.azure.exception.AzureTechnicalException;
+import com.automic.azure.exception.AzureRuntimeException;
 import com.automic.azure.model.ErrorResponse;
 import com.sun.jersey.api.client.ClientRequest;
 import com.sun.jersey.api.client.ClientResponse;
@@ -32,7 +32,7 @@ public class GenericResponseFilter extends ClientFilter {
         ClientResponse response = getNext().handle(arg0);
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
-            throw new AzureTechnicalException(response.getEntity(errorHandler).toString());
+            throw new AzureRuntimeException(response.getEntity(errorHandler).toString());
         }
         return response;
     }
