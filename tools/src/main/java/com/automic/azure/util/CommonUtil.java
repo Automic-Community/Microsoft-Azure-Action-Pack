@@ -22,7 +22,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 
 /**
  * Azure utility class
@@ -97,10 +97,10 @@ public final class CommonUtil {
      *            Stream to write formatted xml to
      * @param indent
      *            indentation value. usually 2
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
     public static void printFormattedXml(final InputStream input, final OutputStream out, final int indent)
-            throws AzureException {
+            throws AzureBusinessException {
         try {
             final Source xmlInput = new StreamSource(new InputStreamReader(input));
             final StreamResult xmlOutput = new StreamResult(out);
@@ -112,7 +112,7 @@ public final class CommonUtil {
         } catch (final TransformerException e) {
             final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, input);
             LOGGER.error(msg, e);
-            throw new AzureException(msg, e);
+            throw new AzureBusinessException(msg, e);
         }
     }
 
@@ -136,9 +136,9 @@ public final class CommonUtil {
      *            {@link InputStream} to read from
      * @param dest
      *            {@link OutputStream} to write to
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public static void copyData(final InputStream source, final OutputStream dest) throws AzureException {
+    public static void copyData(final InputStream source, final OutputStream dest) throws AzureBusinessException {
         final byte[] buffer = new byte[Constants.IO_BUFFER_SIZE];
         int length;
         try {
@@ -150,7 +150,7 @@ public final class CommonUtil {
         } catch (final IOException e) {
             final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
             LOGGER.error(msg, e);
-            throw new AzureException(msg, e);
+            throw new AzureBusinessException(msg, e);
         } finally {
 
             try {
@@ -159,7 +159,7 @@ public final class CommonUtil {
             } catch (final IOException e) {
                 final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
                 LOGGER.error(msg, e);
-                throw new AzureException(msg, e);
+                throw new AzureBusinessException(msg, e);
             }
 
         }

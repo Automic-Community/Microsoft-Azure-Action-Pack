@@ -22,7 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 
 /**
  * AzureCertificatesManagement holds certificates for connecting to an HTTPS-secured Azure instance with client/server
@@ -33,18 +33,18 @@ public class AzureCertificatesManagement {
     private static final Logger LOGGER = LogManager.getLogger(AzureCertificatesManagement.class);
     private final SSLContext sslContext;
 
-    AzureCertificatesManagement(String keyStoreLoc, String password) throws AzureException {
+    AzureCertificatesManagement(String keyStoreLoc, String password) throws AzureBusinessException {
         try {
             this.sslContext = setSSLSocketContext(keyStoreLoc, password);
         } catch (UnrecoverableKeyException | KeyManagementException | KeyStoreException | NoSuchAlgorithmException
                 | IOException e) {
             LOGGER.error(ExceptionConstants.SSLCONTEXT_ERROR, e);
-            throw new AzureException(ExceptionConstants.SSLCONTEXT_ERROR + e.getMessage(), e);
+            throw new AzureBusinessException(ExceptionConstants.SSLCONTEXT_ERROR + e.getMessage(), e);
         }
     }
 
     private SSLContext setSSLSocketContext(String keyStoreName, String password) throws UnrecoverableKeyException,
-            KeyStoreException, NoSuchAlgorithmException, KeyManagementException, IOException, AzureException {
+            KeyStoreException, NoSuchAlgorithmException, KeyManagementException, IOException, AzureBusinessException {
         KeyStore ks = getKeyStore(keyStoreName, password);
         KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
         keyManagerFactory.init(ks, password.toCharArray());
@@ -55,7 +55,7 @@ public class AzureCertificatesManagement {
         return context;
     }
 
-    private KeyStore getKeyStore(String keyStoreName, String password) throws IOException, AzureException {
+    private KeyStore getKeyStore(String keyStoreName, String password) throws IOException, AzureBusinessException {
         KeyStore ks = null;
         try (FileInputStream fis = new java.io.FileInputStream(keyStoreName)) {
             ks = KeyStore.getInstance("JKS");
@@ -64,7 +64,7 @@ public class AzureCertificatesManagement {
             fis.close();
         } catch (KeyStoreException | NoSuchAlgorithmException | CertificateException e) {
             LOGGER.error(ExceptionConstants.INVALID_KEYSTORE, e);
-            throw new AzureException(ExceptionConstants.INVALID_KEYSTORE, e);
+            throw new AzureBusinessException(ExceptionConstants.INVALID_KEYSTORE, e);
         }
         return ks;
     }

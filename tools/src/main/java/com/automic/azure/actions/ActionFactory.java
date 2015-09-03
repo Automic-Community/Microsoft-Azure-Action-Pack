@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Action;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 
 /**
  * Factory class to create instances of implementations of {@link AbstractAction}. This class will create the instances
@@ -23,10 +23,10 @@ public final class ActionFactory {
      * 
      * @param enumAction
      * @return an implementation of {@link AbstractAction}
-     * @throws AzureException
+     * @throws AzureBusinessException
      *             if no matching implementation could be found
      */
-    public static AbstractAction getAction(Action enumAction) throws AzureException {
+    public static AbstractAction getAction(Action enumAction) throws AzureBusinessException {
 
         AbstractAction action = null;
 
@@ -55,7 +55,7 @@ public final class ActionFactory {
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
-                throw new AzureException(msg);
+                throw new AzureBusinessException(msg);
         }
         return action;
     }

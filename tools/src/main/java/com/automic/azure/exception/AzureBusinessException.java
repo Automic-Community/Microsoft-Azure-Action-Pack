@@ -14,14 +14,14 @@ package com.automic.azure.exception;
  * </li>
  * 
  */
-public class AzureException extends Exception {
+public class AzureBusinessException extends Exception {
 
     private static final long serialVersionUID = -3274150618150755200L;
 
     /**
      * No-args constructor
      */
-    public AzureException() {
+    public AzureBusinessException() {
         super();
 
     }
@@ -32,7 +32,7 @@ public class AzureException extends Exception {
      * @param message
      * @param cause
      */
-    public AzureException(String message, Throwable cause) {
+    public AzureBusinessException(String message, Throwable cause) {
         super(message, cause);
 
     }
@@ -42,7 +42,7 @@ public class AzureException extends Exception {
      * 
      * @param message
      */
-    public AzureException(String message) {
+    public AzureBusinessException(String message) {
         super(message);
 
     }

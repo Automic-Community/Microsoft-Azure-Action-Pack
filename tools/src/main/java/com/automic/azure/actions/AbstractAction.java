@@ -7,7 +7,7 @@ import java.util.List;
 
 import com.automic.azure.cli.AzureCli;
 import com.automic.azure.cli.AzureOptions;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 
 /**
  * An abstract action which parses the command line parameters using apache cli and further calls the execute method.
@@ -51,10 +51,10 @@ public abstract class AbstractAction {
     /**
      * This method initializes the arguments and calls the execute method.
      * 
-     * @throws AzureException
+     * @throws AzureBusinessException
      *             exception while executing an action
      */
-    public final void executeAction(String[] commandLineArgs) throws AzureException {
+    public final void executeAction(String[] commandLineArgs) throws AzureBusinessException {
         cli = new AzureCli(actionOptions, commandLineArgs);
         cli.log(noLogging());
         execute();
@@ -68,8 +68,8 @@ public abstract class AbstractAction {
     /**
      * Method to execute the action.
      * 
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    protected abstract void execute() throws AzureException;
+    protected abstract void execute() throws AzureBusinessException;
 
 }

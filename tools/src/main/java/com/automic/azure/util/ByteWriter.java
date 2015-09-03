@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 
 /**
  * 
@@ -37,9 +37,9 @@ public class ByteWriter {
      * Method to write bytes to Stream
      * 
      * @param bytes
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public void write(byte[] bytes) throws AzureException {
+    public void write(byte[] bytes) throws AzureBusinessException {
         write(bytes, 0, bytes.length);
     }
 
@@ -49,14 +49,14 @@ public class ByteWriter {
      * @param bytes
      * @param offset
      * @param length
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public void write(byte[] bytes, int offset, int length) throws AzureException {
+    public void write(byte[] bytes, int offset, int length) throws AzureBusinessException {
         try {
             bos.write(bytes, offset, length);
         } catch (IOException e) {
             LOGGER.error(ExceptionConstants.UNABLE_TO_WRITEFILE, e);
-            throw new AzureException(ExceptionConstants.UNABLE_TO_WRITEFILE, e);
+            throw new AzureBusinessException(ExceptionConstants.UNABLE_TO_WRITEFILE, e);
         }
     }
 
@@ -64,53 +64,53 @@ public class ByteWriter {
      * Method to write a String to stream
      * 
      * @param field
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public void write(String field) throws AzureException {
+    public void write(String field) throws AzureBusinessException {
         write(field.getBytes());
     }
 
     /**
      * Method to write a new line character to stream
      * 
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public void writeNewLine() throws AzureException {
+    public void writeNewLine() throws AzureBusinessException {
         write(System.lineSeparator());
     }
 
     /**
      * Close the underlying stream
      * 
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public void close() throws AzureException {
+    public void close() throws AzureBusinessException {
         try {
             if (bos != null) {
                 bos.close();
             } else {
                 LOGGER.error("Stream null!! Unable to close stream");
-                throw new AzureException(ExceptionConstants.UNABLE_TO_CLOSE_STREAM);
+                throw new AzureBusinessException(ExceptionConstants.UNABLE_TO_CLOSE_STREAM);
             }
 
         } catch (IOException e) {
             LOGGER.error(ExceptionConstants.UNABLE_TO_CLOSE_STREAM, e);
-            throw new AzureException(ExceptionConstants.UNABLE_TO_CLOSE_STREAM, e);
+            throw new AzureBusinessException(ExceptionConstants.UNABLE_TO_CLOSE_STREAM, e);
         }
     }
 
     /**
      * Method to flush to stream
      * 
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    public void flush() throws AzureException {
+    public void flush() throws AzureBusinessException {
         if (bos != null) {
             try {
                 bos.flush();
             } catch (IOException e) {
                 LOGGER.error(ExceptionConstants.UNABLE_TO_FLUSH_STREAM, e);
-                throw new AzureException(ExceptionConstants.UNABLE_TO_FLUSH_STREAM, e);
+                throw new AzureBusinessException(ExceptionConstants.UNABLE_TO_FLUSH_STREAM, e);
             }
         }
     }

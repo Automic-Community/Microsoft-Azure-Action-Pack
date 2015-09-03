@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.model.AzureRequestStatusModel;
 import com.automic.azure.util.ConsoleWriter;
@@ -42,7 +42,7 @@ public final class CheckRequestStatusAction extends AbstractManagementAction {
      * 
      */
     @Override
-    public void executeSpecific(Client client) throws AzureException {
+    public void executeSpecific(Client client) throws AzureBusinessException {
         initialize();
         validate();
         ClientResponse response = null;
@@ -57,14 +57,14 @@ public final class CheckRequestStatusAction extends AbstractManagementAction {
         this.requestTokenId = getOptionValue("requestid");
     }
 
-    private void validate() throws AzureException {
+    private void validate() throws AzureBusinessException {
         if (!Validator.checkNotEmpty(this.requestTokenId)) {
             LOGGER.error(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
+            throw new AzureBusinessException(ExceptionConstants.EMPTY_REQUEST_TOKEN_ID);
         }
     }
 
-    private void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureBusinessException {
         AzureRequestStatusModel azReqstatus = response.getEntity(AzureRequestStatusModel.class);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_STATUS ::= " + azReqstatus.getRequestStatus());
         ConsoleWriter.writeln("HTTPStatusCode : " + azReqstatus.getHttpStatusCode());

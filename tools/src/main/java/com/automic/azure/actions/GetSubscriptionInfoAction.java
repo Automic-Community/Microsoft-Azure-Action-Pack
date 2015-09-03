@@ -8,7 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
 import com.sun.jersey.api.client.Client;
@@ -39,7 +39,7 @@ public final class GetSubscriptionInfoAction extends AbstractManagementAction {
      * 
      */
     @Override
-    protected void executeSpecific(Client client) throws AzureException {
+    protected void executeSpecific(Client client) throws AzureBusinessException {
         WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(this.subscriptionId);
         LOGGER.info("Calling url " + webResource.getURI());
         ClientResponse cr = webResource.header(Constants.X_MS_VERSION, restapiVersion)
@@ -47,7 +47,7 @@ public final class GetSubscriptionInfoAction extends AbstractManagementAction {
         prepareOutput(cr);
     }
 
-    private void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureBusinessException {
         InputStream inputStream = response.getEntityInputStream();
 
         ConsoleWriter.writeln("Subscription details:");

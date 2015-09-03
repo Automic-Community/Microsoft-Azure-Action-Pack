@@ -13,7 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 
 /**
  * This class is used to parse the arguments against provided options using apache cli library.
@@ -25,14 +25,14 @@ public class AzureCli {
     
     private CommandLine cmd = null;
     
-    public AzureCli(AzureOptions options, String[] args) throws AzureException {        
+    public AzureCli(AzureOptions options, String[] args) throws AzureBusinessException {        
         try {
             CommandLineParser parser = new DefaultParser();
             cmd = parser.parse(options.getOptions(), args, true);
         } catch (ParseException e) {
             LOGGER.error("Error parsing the command line options", e);
             printHelp(options.getOptions());
-            throw new AzureException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()), e);
+            throw new AzureBusinessException(String.format(ExceptionConstants.INVALID_ARGS, e.getMessage()), e);
         }
     }
     

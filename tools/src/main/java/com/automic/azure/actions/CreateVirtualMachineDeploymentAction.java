@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 import com.automic.azure.util.ConsoleWriter;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
@@ -50,7 +50,7 @@ public class CreateVirtualMachineDeploymentAction extends AbstractManagementActi
      * 
      */
     @Override
-    public void executeSpecific(Client client) throws AzureException {
+    public void executeSpecific(Client client) throws AzureBusinessException {
         initialize();
         validate();
         ClientResponse response = null;
@@ -69,23 +69,23 @@ public class CreateVirtualMachineDeploymentAction extends AbstractManagementActi
         configFilePath = getOptionValue("configfilepath");
     }
 
-    private void validate() throws AzureException {
+    private void validate() throws AzureBusinessException {
         if (!Validator.checkNotEmpty(subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+            throw new AzureBusinessException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
         }
         if (!Validator.checkNotEmpty(serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
+            throw new AzureBusinessException(ExceptionConstants.EMPTY_SERVICE_NAME);
         }
         if (!Validator.checkFileExists(configFilePath)) {
             String errMsg = String.format(ExceptionConstants.INVALID_FILE, configFilePath);
             LOGGER.error(errMsg);
-            throw new AzureException(errMsg);
+            throw new AzureBusinessException(errMsg);
         }
     }
 
-    private void prepareOutput(ClientResponse response) throws AzureException {
+    private void prepareOutput(ClientResponse response) throws AzureBusinessException {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }

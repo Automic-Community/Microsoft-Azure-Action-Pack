@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import com.automic.azure.config.HttpClientConfig;
 import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 import com.automic.azure.filter.GenericResponseFilter;
 import com.automic.azure.model.AzureErrorResponse;
 import com.automic.azure.util.CommonUtil;
@@ -53,10 +53,10 @@ public abstract class AbstractManagementAction extends AbstractAction {
     /**
      * Method to execute the action.
      * 
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
     @Override
-    public final void execute() throws AzureException {
+    public final void execute() throws AzureBusinessException {
         Client client = null;
         try {
             initialize();
@@ -75,16 +75,16 @@ public abstract class AbstractManagementAction extends AbstractAction {
      * Retrieve the ClientConfig which can be used to create client
      * @return ClientConfig Object
      */
-    protected ClientConfig getConfig() throws AzureException {
+    protected ClientConfig getConfig() throws AzureBusinessException {
         return HttpClientConfig.getClientConfig(this.keyStore, this.password, connectionTimeOut, readTimeOut);
     }
 
     /**
      * Method to execute the action.
      * @param client represents Jersey Client Object
-     * @throws AzureException
+     * @throws AzureBusinessException
      */
-    protected abstract void executeSpecific(Client client) throws AzureException;
+    protected abstract void executeSpecific(Client client) throws AzureBusinessException;
 
     private void initialize() {
         this.connectionTimeOut = CommonUtil.getAndCheckUnsignedValue(getOptionValue(Constants.CONNECTION_TIMEOUT));
@@ -95,35 +95,35 @@ public abstract class AbstractManagementAction extends AbstractAction {
         this.password = getOptionValue(Constants.PASSWORD);
     }
 
-    private void validate() throws AzureException {
+    private void validate() throws AzureBusinessException {
 
         if (this.connectionTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
-            throw new AzureException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
+            throw new AzureBusinessException(ExceptionConstants.INVALID_CONNECTION_TIMEOUT);
         }
 
         if (this.readTimeOut < 0) {
             LOGGER.error(ExceptionConstants.INVALID_READ_TIMEOUT);
-            throw new AzureException(ExceptionConstants.INVALID_READ_TIMEOUT);
+            throw new AzureBusinessException(ExceptionConstants.INVALID_READ_TIMEOUT);
         }
 
         if (!Validator.checkNotEmpty(restapiVersion)) {
             LOGGER.error(ExceptionConstants.EMPTY_X_MS_VERSION);
-            throw new AzureException(ExceptionConstants.EMPTY_X_MS_VERSION);
+            throw new AzureBusinessException(ExceptionConstants.EMPTY_X_MS_VERSION);
         }
 
         if (!Validator.checkNotEmpty(this.subscriptionId)) {
             LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
+            throw new AzureBusinessException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
         }
         if (!Validator.checkFileExists(this.keyStore)) {
             LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+            throw new AzureBusinessException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
         }
 
         if (!Validator.checkNotEmpty(this.password)) {
             LOGGER.error(ExceptionConstants.EMPTY_PASSWORD);
-            throw new AzureException(ExceptionConstants.EMPTY_PASSWORD);
+            throw new AzureBusinessException(ExceptionConstants.EMPTY_PASSWORD);
         }
     }
 

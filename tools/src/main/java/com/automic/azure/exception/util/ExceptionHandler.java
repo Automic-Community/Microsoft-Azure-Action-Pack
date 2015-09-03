@@ -4,7 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.ExceptionConstants;
-import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.AzureBusinessException;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.ConsoleWriter;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -29,10 +29,11 @@ public class ExceptionHandler {
     public static int handleException(Exception ex) {
         int responseCode = RESPONSE_NOT_OK;
         String errorMsg;
-        if (ex instanceof AzureException) {
+        if (ex instanceof AzureBusinessException) {
             errorMsg = ex.getMessage();
         } else {
-            LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, ex);
+            LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, ex);                
+            
             if (ex instanceof ClientHandlerException) {
                 Throwable th = ex.getCause();
                 if (th instanceof java.net.SocketTimeoutException) {
