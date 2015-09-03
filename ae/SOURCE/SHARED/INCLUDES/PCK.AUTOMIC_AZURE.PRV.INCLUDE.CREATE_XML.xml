@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<JOBI name="PCK.AUTOMIC_AZURE.PRV.INCLUDE.CREATE_XML">
+<HEADER state="1">
+<Title>This will be used to create xml on agent machine</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[
+! --------------- XML file path -----------------------------------------      
+:  SET &AGENT_CURR_DIR# = GET_VAR('UC_EX_PATH_TEMP', &AGENT#)
+:  SET &UC4RB_AZR_FILENAME# = "&UC4RB_AZR_FILENAME#-&$TOP_PROCESSFLOW_RUNID#.xml" 
+:  set &UC4RB_AZR_XML_FILE_PATH# = STR_CAT(&AGENT_CURR_DIR#,&UC4RB_AZR_FILENAME#)
+  
+! ----------------- Writing XML File-------------------------------------
+:    PRINT &UC4RB_AZR_CONFIG_XML#
+:    SET &HND# = CREATE_PROCESS(NEW) 
+:    SET &RET# = PUT_PROCESS_LINE(&HND#, &UC4RB_AZR_CONFIG_XML#) 
+:    SET &RET# = WRITE_PROCESS(&HND#,&UC4RB_AZR_XML_FILE_PATH#,&AGENT#,&LOGIN#,OVERWRITE) 
+:    CLOSE_PROCESS &HND#
+:    IF &RET# > 0 
+:      PRINT "Error in writing file to path : &UC4RB_AZR_XML_FILE_PATH#"
+:    ENDIF 
+
+
+
+
+]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBI>
+</uc-export>

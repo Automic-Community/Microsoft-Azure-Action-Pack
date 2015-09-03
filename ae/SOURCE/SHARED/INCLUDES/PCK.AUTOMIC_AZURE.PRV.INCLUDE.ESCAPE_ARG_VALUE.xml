@@ -9,11 +9,11 @@
 </HEADER>
 <SCRIPT mode="1" state="1">
 <MSCRI><![CDATA[! We escape double-quotes for java Strings 
-: SET &TEMP# = STR_SUB("$AZR_OPTION_VALUE.", """", "\""")
+: SET &TEMP# = STR_SUB("TEMP_OPTION_VALUE", """", "\""")
 
 ! then we add double-quotes to String to preserve spaces in value 
-: SET &TEMP# = STR_CAT("""", &TEMP#)
-: SET &TEMP# = STR_CAT(&TEMP#, """")
+: SET &TEMP# = STR_CAT(""" ", &TEMP#)
+: SET &TEMP# = STR_CAT(&TEMP#, " """)
 
 : SET &UC4RB_AZR_OPTION_VALUE# = &TEMP#]]></MSCRI>
 </SCRIPT>
