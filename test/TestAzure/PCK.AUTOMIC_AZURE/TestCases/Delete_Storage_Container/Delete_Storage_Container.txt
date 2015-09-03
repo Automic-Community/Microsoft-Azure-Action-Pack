@@ -21,7 +21,7 @@ Removing Container with an invalid container name
 Removing Container with an non-existing container name
                       NOK       ${Name_Account}    ${Key_Access}    test2015         ${EMPTY}
 
-Removing Container with an non-existing acoount name
+Removing Container with an non-existing account name
                       NOK       testabc            ${Key_Access}    test2015         ${EMPTY}
 
 Removing Container with an invalid access key
