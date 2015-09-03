@@ -27,7 +27,6 @@
 <Variables>
 <row Name="CONNECTION_TIMEOUT" Value="30000" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="READ_TIMEOUT" Value="60000" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="STORAGE_X_MS_VERSION" Value="2015-02-21" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="X_MS_VERSION" Value="2015-04-01" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>

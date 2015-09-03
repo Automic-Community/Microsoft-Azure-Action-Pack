@@ -11,7 +11,7 @@
 <MSCRI><![CDATA[:ATTACH_RES "PCK.AUTOMIC_AZURE.PRV.STORE" ,"AZURE", C, N
 
 ! Setting jar class path into variable
-:SET &UC4RB_AZR_PATH_JAR#= STR_CAT(&$AGENT_RESOURCES_CLIENT#,"azuretool.jar")]]></MSCRI>
+:SET &UC4RB_AZR_PATH_JAR#= STR_CAT(&$AGENT_RESOURCES_CLIENT#,"azure-tool.jar")]]></MSCRI>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC/>

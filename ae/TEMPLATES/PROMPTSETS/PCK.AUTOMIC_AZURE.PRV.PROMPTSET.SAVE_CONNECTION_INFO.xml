@@ -39,25 +39,10 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><dynradiogroup alt="1" enabled="1" fill="b" focus="" id="UC4RB_AZR_OVERWRITE_CONNs.00" nl="1" text="Overwrite if exist" tooltip="Check this flag to overwrite an existing connection with same name" required="0">
-      <properties>
-        <entry listparam="C,N" name="reference" reftype="STATIC">PCK.ITPA_SHARED.PRV.VARA.TRUE_FALSE</entry>
-        <entry name="xmlkey"/>
-        <entry name="xmlpath"/>
-        <entry name="text">Overwrite if exist</entry>
-        <entry name="quotes"/>
-        <entry name="id">UC4RB_AZR_OVERWRITE_CONNs.00</entry>
-        <entry name="enabled">0</entry>
-        <entry name="focus">0</entry>
-        <entry name="tooltip">Check this flag to overwrite an existing connection with same name</entry>
-        <entry name="modifiable">1</entry>
-        <entry name="customfield"/>
-      <entry name="initvalue"/>
-         </properties>
-    </dynradiogroup></readpanel></dialog>]]></XUIEDITOR>
+    </text></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CONNECTION_NAMEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CONNECTION_NAME#" ReadFromTable="OPSE"></UC4RB_AZR_CONNECTION_NAMEs.00><UC4RB_AZR_OVERWRITE_CONNs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_OVERWRITE_CONN#" ReadFromTable="OPSE">false</UC4RB_AZR_OVERWRITE_CONNs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CONNECTION_NAMEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CONNECTION_NAME#" ReadFromTable="OPSE"></UC4RB_AZR_CONNECTION_NAMEs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>

@@ -56,7 +56,7 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
                 .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
 
         LOGGER.info("Calling URL:" + resource.getURI());
-        
+
         if (Validator.checkNotEmpty(this.leaseId)) {
             builder = builder.header("x-ms-lease-id", leaseId);
         }
@@ -75,7 +75,7 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
         if (!Validator.checkNotEmpty(this.containerName)) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        }else if (!this.containerName.matches("[0-9a-z]+")) {
+        } else if (!this.containerName.matches("[0-9a-z]+")) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }

@@ -188,7 +188,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>7</Ert>
+<Ert>5</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -259,39 +259,40 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.GET_SUBSCRIPTION_INFO
-
 = General description =
-This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication Keystore .jks file and Keystore password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription. The XML will have the following structure:
-
-<?xml version="1.0" encoding="UTF-8"?>
-<Subscription xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
-    <SubscriptionID>39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</SubscriptionID>
-    <SubscriptionName>Microsoft Partner Network</SubscriptionName>
-    <SubscriptionStatus>Active</SubscriptionStatus>
-    <AccountAdminLiveEmailId>florian.krebs@uc4.com</AccountAdminLiveEmailId>
-    <ServiceAdminLiveEmailId>florian.krebs@uc4.com</ServiceAdminLiveEmailId>
-    <MaxCoreCount>20</MaxCoreCount>
-    <MaxStorageAccounts>100</MaxStorageAccounts>
-    <MaxHostedServices>20</MaxHostedServices>
-    <CurrentCoreCount>10</CurrentCoreCount>
-    <CurrentHostedServices>19</CurrentHostedServices>
-    <CurrentStorageAccounts>14</CurrentStorageAccounts>
-    <MaxVirtualNetworkSites>50</MaxVirtualNetworkSites>
-    <CurrentVirtualNetworkSites>4</CurrentVirtualNetworkSites>
-    <MaxLocalNetworkSites>20</MaxLocalNetworkSites>
-    <CurrentLocalNetworkSites>1</CurrentLocalNetworkSites>
-    <MaxDnsServers>20</MaxDnsServers>
-</Subscription>
+This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription.
 
 = Inputs =
 * Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path including Keystore file name Example: C:\certs\mykeystore.jks
-* Keystore Password: Password to your Keystore
-* Overwrite Agent: Overwrites the default agent
+* Certificate Path: Path including certificate name Example: C:\certificates\mycertificate.jsk
+* Certificate Password: Password to your certificate
+ * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 
 = Behavior =
 (see general description)
+
+=Return Value=
+The XML will have the following structure.
+<?xml version="1.0" encoding="UTF-8"?>
+<Subscription xmlns="http://schemas.microsoft.com/windowsazure" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+ 	<SubscriptionID>39f62c91-1d8a-4ada-8fa7-eeca3d8b7a92</SubscriptionID>
+ 	<SubscriptionName>Microsoft Partner Network</SubscriptionName>
+ 	<SubscriptionStatus>Active</SubscriptionStatus>
+ 	<AccountAdminLiveEmailId>florian.krebs@uc4.com</AccountAdminLiveEmailId>
+ 	<ServiceAdminLiveEmailId>florian.krebs@uc4.com</ServiceAdminLiveEmailId>
+ 	<MaxCoreCount>20</MaxCoreCount>
+ 	<MaxStorageAccounts>100</MaxStorageAccounts>
+ 	<MaxHostedServices>20</MaxHostedServices>
+ 	<CurrentCoreCount>10</CurrentCoreCount>
+ 	<CurrentHostedServices>19</CurrentHostedServices>
+ 	<CurrentStorageAccounts>14</CurrentStorageAccounts>
+ 	<MaxVirtualNetworkSites>50</MaxVirtualNetworkSites>
+ 	<CurrentVirtualNetworkSites>4</CurrentVirtualNetworkSites>
+ 	<MaxLocalNetworkSites>20</MaxLocalNetworkSites>
+ 	<CurrentLocalNetworkSites>1</CurrentLocalNetworkSites>
+ 	<MaxDnsServers>20</MaxDnsServers>
+</Subscription>
 
 = Outputs =
 * Return code is 0 in case of success.
