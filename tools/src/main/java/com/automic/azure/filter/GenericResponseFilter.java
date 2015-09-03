@@ -32,7 +32,9 @@ public class GenericResponseFilter extends ClientFilter {
         ClientResponse response = getNext().handle(arg0);
         LOGGER.info("Response code for action " + response.getStatus());
         if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
-            throw new AzureRuntimeException(response.getEntity(errorHandler).toString());
+            String errorMsg = response.getEntity(errorHandler).toString();
+            LOGGER.error(errorMsg);
+            throw new AzureRuntimeException(errorMsg);
         }
         return response;
     }
