@@ -112,7 +112,7 @@ public final class CommonUtil {
         } catch (final TransformerException e) {
             final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, input);
             LOGGER.error(msg, e);
-            throw new AzureException(msg, e);
+            throw new AzureException(msg);
         }
     }
 
@@ -150,7 +150,7 @@ public final class CommonUtil {
         } catch (final IOException e) {
             final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
             LOGGER.error(msg, e);
-            throw new AzureException(msg, e);
+            throw new AzureException(msg);
         } finally {
 
             try {
@@ -159,7 +159,7 @@ public final class CommonUtil {
             } catch (final IOException e) {
                 final String msg = String.format(ExceptionConstants.UNABLE_TO_COPY_DATA, source);
                 LOGGER.error(msg, e);
-                throw new AzureException(msg, e);
+                throw new AzureException(msg);
             }
 
         }

@@ -56,7 +56,7 @@ public class ByteWriter {
             bos.write(bytes, offset, length);
         } catch (IOException e) {
             LOGGER.error(ExceptionConstants.UNABLE_TO_WRITEFILE, e);
-            throw new AzureException(ExceptionConstants.UNABLE_TO_WRITEFILE, e);
+            throw new AzureException(ExceptionConstants.UNABLE_TO_WRITEFILE);
         }
     }
 
@@ -95,7 +95,7 @@ public class ByteWriter {
 
         } catch (IOException e) {
             LOGGER.error(ExceptionConstants.UNABLE_TO_CLOSE_STREAM, e);
-            throw new AzureException(ExceptionConstants.UNABLE_TO_CLOSE_STREAM, e);
+            throw new AzureException(ExceptionConstants.UNABLE_TO_CLOSE_STREAM);
         }
     }
 
@@ -110,7 +110,7 @@ public class ByteWriter {
                 bos.flush();
             } catch (IOException e) {
                 LOGGER.error(ExceptionConstants.UNABLE_TO_FLUSH_STREAM, e);
-                throw new AzureException(ExceptionConstants.UNABLE_TO_FLUSH_STREAM, e);
+                throw new AzureException(ExceptionConstants.UNABLE_TO_FLUSH_STREAM);
             }
         }
     }

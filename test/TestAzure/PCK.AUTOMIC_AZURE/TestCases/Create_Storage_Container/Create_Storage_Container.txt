@@ -61,7 +61,6 @@ Create Storage Container Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
-    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_AZR_REQUEST_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_AZR_REQUEST_ID#
-
+    
 Teardown
     Log    *******End Test "CREATE STORAGE CONTAINER"*******
