@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.TEMPLATE.CREATE_CLOUD_SERVICE">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.TEMPLATE.CREATE_QUICK_CLOUD_SERVICE">
 <XHEADER state="1">
 <Title>Creates a new cloud service in Azure</Title>
 <ArchiveKey1/>
@@ -97,7 +97,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="2" Lnr="2" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.TEMPLATE.RETRIEVE_CONN_DETAILS" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="CONNECTION" BranchType="0" Col="2" Lnr="2" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.TEMPLATE.RETRIEVE_CONN_DETAILS" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -171,7 +171,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_XML_FOR_CLOUD_SERVICE" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="CREATE_XML" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_XML_FOR_CLOUD_SERVICE" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -245,7 +245,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="4" Lnr="4" OType="JOBP" Object="PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE" ParentAlias="" ParentObject="" Row="3" Text2="">
+<task Alias="CREATE_CLOUD_SERVICE" BranchType="0" Col="4" Lnr="4" OType="JOBP" Object="PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE" ParentAlias="" ParentObject="" Row="3" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -343,7 +343,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="5" Lnr="5" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.RETRY_REQUEST_STATUS" ParentAlias="" ParentObject="" Row="3" Text2="">
+<task Alias="RETRY_REQUEST_STATUS" BranchType="0" Col="5" Lnr="5" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.RETRY_REQUEST_STATUS" ParentAlias="" ParentObject="" Row="3" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -451,7 +451,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="7" Lnr="6" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.PROCESS_RQUEST_STATUS" ParentAlias="" ParentObject="" Row="3" Text2="">
+<task Alias="REQUEST_STATUS" BranchType="0" Col="6" Lnr="6" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.PROCESS_RQUEST_STATUS" ParentAlias="" ParentObject="" Row="3" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="0" WElseH="1" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -527,7 +527,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="5" Lnr="7" OType="JOBP" Object="PCK.AUTOMIC_FILESYSTEM.PUB.ACTION.DELETE" ParentAlias="" ParentObject="" Row="2" Text2="">
+<task Alias="DELETE_FILE" BranchType="0" Col="5" Lnr="7" OType="JOBP" Object="PCK.AUTOMIC_FILESYSTEM.PUB.ACTION.DELETE" ParentAlias="" ParentObject="" Row="2" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -617,7 +617,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="" BranchType="0" Col="8" Lnr="8" OType="&lt;END&gt;" Object="END" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="" BranchType="0" Col="7" Lnr="8" OType="&lt;END&gt;" Object="END" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="0" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="0" WElseH="0" WElseS="1" WElseX="0" WhenExecute="" WtimOn="0"/>
