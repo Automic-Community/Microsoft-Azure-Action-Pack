@@ -51,7 +51,7 @@ public final class CreateCloudServiceAction extends AbstractManagementAction {
     }
 
     private void initialize() {
-        configFilePath = getOptionValue("configFilePath");
+        configFilePath = getOptionValue("configfilepath");
     }
 
     private void validate() throws AzureException {
