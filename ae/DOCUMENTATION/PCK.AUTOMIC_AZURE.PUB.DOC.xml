@@ -37,7 +37,10 @@ The Action will fail when:
 * A container with the same name is being deleted at the same time 
 
 * Action name :PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_STORAGE_CONTAINER
-Action description :This action is used to delete a Container in the Azure Storage account provided by the user. The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection.To call this action on a container that has an active lease, specify the lease ID.If no value is provided for lease id when there is an active lease,Delete Container action will return 409 (Conflict).If wrong lease ID is provided or a lease ID is provided for a container that does not have an active lease Delete Container action will return 412 (Precondition failed).]]></DOC>
+Action description :This action is used to delete a Container in the Azure Storage account provided by the user. The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection.To call this action on a container that has an active lease, specify the lease ID.If no value is provided for lease id when there is an active lease,Delete Container action will return 409 (Conflict).If wrong lease ID is provided or a lease ID is provided for a container that does not have an active lease Delete Container action will return 412 (Precondition failed).
+
+* Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE
+Action description :This action is used to create cloud service in Microsoft Azure asynchronously at specified geographical location by user. This action will return request id which can be further used to query the status of the action.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

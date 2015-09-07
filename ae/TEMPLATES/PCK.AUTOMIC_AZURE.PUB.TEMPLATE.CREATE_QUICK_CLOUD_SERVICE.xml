@@ -26,7 +26,7 @@
 <DeactWhen/>
 <AutoDeactAlways>0</AutoDeactAlways>
 <DeactDelay>0</DeactDelay>
-<ActAtRun>0</ActAtRun>
+<ActAtRun>1</ActAtRun>
 <UC4Priority>0</UC4Priority>
 <MaxParallel2>0</MaxParallel2>
 <ReuseHG>1</ReuseHG>
@@ -561,7 +561,7 @@
 <PROMPTSET name="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">
 <PRPTBOX promptset="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">
 <UC4RB_DIR_FILE_RM_FAILs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_RM_FAIL#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">YES</UC4RB_DIR_FILE_RM_FAILs.00>
-<UC4RB_DIR_FILE_RM_NAMEs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_RM_NAME#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">&amp;UC4RB_AZR_CS_CONFIG_FILE#</UC4RB_DIR_FILE_RM_NAMEs.00>
+<UC4RB_DIR_FILE_RM_NAMEs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_DIR_FILE_RM_NAME#" promptsetname="PCK.AUTOMIC_FILESYSTEM.PRV.PROMPTSET.DELETE">&amp;UC4RB_AZR_XML_FILE_PATH#</UC4RB_DIR_FILE_RM_NAMEs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
