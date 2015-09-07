@@ -1,0 +1,51 @@
+*** Settings ***
+Suite Setup       Startup
+Suite Teardown    Teardown
+Force Tags        create_cloud_service
+Default Tags
+Test Template     Create Cloud Service Template
+Library           com.automic.robot.itpa.ItpaLibrary
+Resource          ../../Resources/messages.txt
+Resource          ../../Resources/keywords.txt
+Resource          ../../Resources/variables.txt
+Resource          ../../Resources/actions.txt
+
+*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        ParameterFile
+Create Cloud Service with valid Parameter file
+                      [Tags]    main_scenarios
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_File}
+
+Create Cloud Service with invalid path to Parameter File
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    c://abc.xml
+
+Create Cloud Service with invalid Parameter File
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_Cloud_Service_File}
+
+Assert Parameter File as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${EMPTY}
+
+*** Keywords ***
+Startup
+    Log    *******Start Test "CREATE CLOUD SERVICE"*******
+    Log    *******Connect to AE*******
+    Connect AE
+
+Create Cloud Service Template
+    [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}
+    [Documentation]    This test validates creation of cloud service on azure portal.
+    ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
+    ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
+    ...    -${Keystore_Password}: This field specifies the password for Keystore.
+    ...    -${Cloud_Service_Config_File}: This field specifies path to the cloud service configuration file.
+    Action Create    ${_CREATE_CLOUD_SERVICE_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    Action Set    &UC4RB_AZR_CS_CONFIG_FILE#    ${Parameter_File}
+    Set Overwrite Agent
+    Action Execute
+    Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
+    ...    Assert Mandatory
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_AZR_REQUEST_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_AZR_REQUEST_ID#
+
+Teardown
+    Log    *******End Test "CREATE CLOUD SERVICE"*******
