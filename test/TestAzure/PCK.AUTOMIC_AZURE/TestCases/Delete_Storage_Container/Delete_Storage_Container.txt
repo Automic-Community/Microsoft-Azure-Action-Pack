@@ -1,0 +1,66 @@
+*** Settings ***
+Suite Setup       Startup
+Suite Teardown    Teardown
+Force Tags        delete_storage_container
+Default Tags
+Test Template     Delete Storage Container Template
+Library           com.automic.robot.itpa.ItpaLibrary
+Resource          ../../Resources/messages.txt
+Resource          ../../Resources/keywords.txt
+Resource          ../../Resources/variables.txt
+Resource          ../../Resources/actions.txt
+
+*** Test Cases ***    OK_NOK    AccountName        AccessKey        ContainerName    LeaseID
+Removing a Container with valid inputs
+                      [Tags]    main_scenarios
+                      OK        ${Name_Account}    ${Key_Access}    blank            ${EMPTY}
+
+Removing Container with an invalid container name
+                      NOK       ${Name_Account}    ${Key_Access}    ABC=1            ${EMPTY}
+
+Removing Container with an non-existing container name
+                      NOK       ${Name_Account}    ${Key_Access}    test2015         ${EMPTY}
+
+Removing Container with an non-existing account name
+                      NOK       testabc            ${Key_Access}    test2015         ${EMPTY}
+
+Removing Container with an invalid access key
+                      NOK       ${Name_Account}    1232424312       test2015         ${EMPTY}
+
+Assert Container Name as a mandatory field
+                      OTHER     ${Name_Account}    ${Key_Access}    ${EMPTY}         ${EMPTY}
+
+Assert Account Name as a mandatory field
+                      OTHER     ${EMPTY}           ${Key_Access}    test2015         ${EMPTY}
+
+Assert Access Key as a mandatory field
+                      OTHER     ${Name_Account}    ${EMPTY}         test2015         ${EMPTY}
+
+*** Keywords ***
+Startup
+    Log    *******Start Test "DELETE STORAGE CONTAINER"*******
+    Log    *******Connect to AE*******
+    Connect AE
+
+Delete Storage Container Template
+    [Arguments]    ${OK_NOK}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Lease_ID}
+    [Documentation]    This test validates storage container creation in provided account name.
+    ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -${Account_Name}: This field specifies name of the storage account in whcih storage conatiner is to br created.
+    ...    -${Access_Key}: This field specifies Access Key for the provided storage account.
+    ...    -${Container_Name}: This field specifies name of the container to be deleted.
+    ...    -${Lease_ID}: This field specifies ID for the lease created on container
+    Run Keyword If    '${OK_NOK}' == 'OK'    Create Storage Container    ${_CREATE_STORAGE_ACTION}    ${Name_Account}    ${Key_Access}    test123
+    ...    BLOB
+    Action Create    ${_DELETE_STORAGE_CONTAINER_ACTION}
+    Storage Account Info    ${Account_Name}    ${Access_Key}
+    Run Keyword If    '${Container_Name}' == 'blank'    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Generated_Container_Name}
+    Run Keyword If    '${Container_Name}' != 'blank'    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Container_Name}
+    Action Set    &UC4RB_AZR_LEASE_ID#    ${Lease_ID}
+    Set Overwrite Agent
+    Action Execute
+    Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
+    ...    Assert Mandatory
+
+Teardown
+    Log    *******End Test "DELETE STORAGE CONTAINER"*******

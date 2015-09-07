@@ -49,6 +49,9 @@ public final class ActionFactory {
             case CREATE_STORAGE_CONTAINER:
                 action = new CreateStorageContainerAction();
                 break;
+            case DELETE_STORAGE_CONTAINER:
+                action = new DeleteStorageContainerAction();
+                break;
             case CREATE_CLOUD_SERVICE:
                 action = new CreateCloudServiceAction();
                 break;
