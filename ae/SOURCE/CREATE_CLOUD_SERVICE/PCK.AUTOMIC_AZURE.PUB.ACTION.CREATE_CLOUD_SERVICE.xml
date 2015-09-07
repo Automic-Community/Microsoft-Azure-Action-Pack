@@ -300,9 +300,9 @@ This action is used to create cloud service in Microsoft Azure asynchronously at
 = Behavior =
 When we execute Create Cloud Service action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
 
-* If provided cloud service name is unique within Azure, action will be success. IIt will return status code and ms request token id.
-* If provided cloud service name which is already exist, action will fails. It will return status code and ms request token id.
-* If provided cloud service Label is not base-64-encoded, action will fails. Azure Error Response code and message.
+* If provided cloud service name is unique within Azure, action will pass. It will return status code and ms request token id.
+* If provided cloud service name which is already exist, action will fail.  Azure Error Response code and message.
+* If provided cloud service Label is not base-64-encoded, action will fail. Azure Error Response code and message.
 
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
