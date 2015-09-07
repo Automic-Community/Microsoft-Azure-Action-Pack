@@ -29,13 +29,14 @@ public final class CreateCloudServiceAction extends AbstractManagementAction {
     private String configFilePath;
 
     public CreateCloudServiceAction() {
-        addOption("configFilePath", true, "xml configration file path to create cloud service");
+        addOption("configfilepath", true, "xml configration file path to create cloud service");
     }
 
     /**
-     * Method to make a call to Azure Management API to create a new cloud service in Azure
-     * 
-     */
+    * Method to make a call to Azure Management API to create a new cloud service in Azure. 
+    * To create a new cloud service, we make a POST
+    * https://management.core.windows.net/<subscription-id>/services/hostedservices
+    */
     @Override
     public void executeSpecific(Client client) throws AzureException {
         initialize();
