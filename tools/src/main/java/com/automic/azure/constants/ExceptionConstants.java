@@ -53,6 +53,7 @@ public final class ExceptionConstants {
     public static final String INVALID_BLOB_FILE = "Blob File does not exists";
     public static final String INVALID_BLOB_CONTENT_TYPE = "Content-Type of blob should be valid";
     public static final String ERROR_FILE_SIZE = "Error while calculating size for %s";
+    public static final String ERROR_BLOB_MAX_SIZE = "Size of blob is larger than %d GB";
     public static final String ERROR_BLOCK_BLOB_UPLOAD = "Error while uploading blob as a Block blob";
     public static final String ERROR_COMMITING_BLOCK_BLOB = "Error while commiting block blob";
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "

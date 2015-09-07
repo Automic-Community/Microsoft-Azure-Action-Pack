@@ -47,6 +47,8 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
 
     private static final int BLOCK_SIZE = 4000000;
 
+    private static final long MAX_BLOB_SIZE = 195000000000L;
+
     /**
      * Storage container name
      */
@@ -70,7 +72,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     /**
      * size of blob file
      */
-    private Long fileSize;
+    private long fileSize;
 
     /**
      * 
@@ -115,7 +117,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         initialize();
 
         // if file size is greated than 64MB we upload using block blob
-        if (this.fileSize > 8000000L) {
+        if (this.fileSize > 64000000L) {
             LOGGER.info(String.format("File size %s bytes larger than 64 MB: ", fileSize));
             uploadBlockBlobInBlocks(storageHttpClient);
             commitBlockList(storageHttpClient);
@@ -149,11 +151,11 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                 // add blockid to a list to commit later
                 this.blockIdList.add(new String(blockId));
                 // set query parameters and headers
-                WebResource.Builder builder = resource.queryParam("blockid", new String(blockId))
-                        .header("Content-Length", blockSize).header("x-ms-version", this.restapiVersion)
-                        .header("x-ms-blob-type", "BlockBlob")
+                WebResource blockUploadResource = resource.queryParam("blockid", new String(blockId));
+                WebResource.Builder builder = blockUploadResource.header("Content-Length", blockSize)
+                        .header("x-ms-version", this.restapiVersion).header("x-ms-blob-type", "BlockBlob")
                         .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-                LOGGER.info("Calling URL:" + resource.getURI());
+                LOGGER.info("Calling URL:" + blockUploadResource.getURI());
                 // add the block entity
                 builder = builder.entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType);
                 // upload block in a separate thread
@@ -169,24 +171,21 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             throw new AzureException(ExceptionConstants.ERROR_BLOCK_BLOB_UPLOAD);
         }
 
-        System.out.println("block id of blocks uploaded:" + blockIdList);
-
     }
 
     //
     private void commitBlockList(Client storageHttpClient) throws AzureException {
         // get URL
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName)
-                .path(blobName);
+                .path(blobName).queryParam("comp", "blocklist");
         AzurePutBlockBlobList blockList = new AzurePutBlockBlobList();
-
+        LOGGER.info("Commiting the blocks");
         blockList.setCode(blockIdList);
         // set query parameters and headers
         WebResource.Builder builder = null;
         try {
-            builder = resource.queryParam("comp", "blocklist")
-
-            .header("Content-Length", blockList.getJaxbLength()).header("x-ms-version", this.restapiVersion)
+            builder = resource.header("Content-Length", blockList.getJaxbLength())
+                    .header("x-ms-version", this.restapiVersion)
                     .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
         } catch (JAXBException e) {
             LOGGER.error(ExceptionConstants.ERROR_COMMITING_BLOCK_BLOB, e);
@@ -194,7 +193,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         }
 
         LOGGER.info("Calling URL:" + resource.getURI());
-        LOGGER.info("Block id list:" + blockList);
+        LOGGER.info("Block id to commit:" + blockList);
         // call the create container service and return response
         builder.entity(blockList, MediaType.APPLICATION_XML).put(ClientResponse.class);
 
@@ -234,6 +233,12 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         // size of file
         try {
             this.fileSize = Files.size(blobFile);
+
+            if (fileSize > MAX_BLOB_SIZE) {
+                String msg = String.format(ExceptionConstants.ERROR_BLOB_MAX_SIZE, MAX_BLOB_SIZE);
+                LOGGER.error(msg);
+                throw new AzureException(msg);
+            }
         } catch (IOException e) {
             String msg = String.format(ExceptionConstants.ERROR_FILE_SIZE, blobFile.toString());
             LOGGER.error(msg, e);
@@ -241,7 +246,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         }
 
         // blob content-type
-        this.contentType = getOptionValue("contenttype") != null ? getOptionValue("contenttype")
+        this.contentType = Validator.checkNotEmpty(getOptionValue("contenttype")) ? getOptionValue("contenttype")
                 : MediaType.APPLICATION_OCTET_STREAM;
 
     }
@@ -260,6 +265,18 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         if (!Validator.checkFileExists(getOptionValue("blobfile"))) {
             LOGGER.error(ExceptionConstants.INVALID_BLOB_FILE);
             throw new AzureException(ExceptionConstants.INVALID_BLOB_FILE);
+        }
+
+        // validate content-type
+        String contentType = getOptionValue("contenttype");
+        if (Validator.checkNotEmpty(getOptionValue("contenttype"))) {
+            try {
+                MediaType.valueOf(contentType);
+            } catch (IllegalArgumentException e) {
+
+                LOGGER.error(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
+                throw new AzureException(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
+            }
         }
     }
 
