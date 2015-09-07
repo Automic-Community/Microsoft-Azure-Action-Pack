@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <PRPT name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_CLOUD_SERVICE">
 <HEADER state="1">
-<Title>Create a new cloud service in Microsoft Azure from XML</Title>
+<Title>Create a new cloud service in Azure from XML</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType/>
@@ -11,8 +11,8 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="422" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide information to create a cloud service in Azure"><properties><entry name="text">Provide information to create a cloud service in Azure</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CS_CONFIG_FILEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" separator=";" showaspassword="0" text="Cloud Service Configuration File" tooltip="Xml file name with full path which contains cloud service configuration set&#10;Example:  C:\files\config\cloudserviceconfig.xml&#10;" upper="0" required="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+<XUIEDITOR><![CDATA[<dialog height="422" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Provide information to create a new cloud service in Azure"><properties><entry name="text">Provide information to create a new cloud service in Azure</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CS_CONFIG_FILEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Cloud Service Configuration File" tooltip="Xml file name with full path which contains cloud service configuration set. For example:  C:\files\config\cloudserviceconfig.xml " upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -32,14 +32,13 @@
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Xml file name with full path which contains cloud service configuration set
-Example:  C:\files\config\cloudserviceconfig.xml
-</entry>
+        <entry name="tooltip">Xml file name with full path which contains cloud service configuration set. For example:  C:\files\config\cloudserviceconfig.xml </entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
+      <entry name="initvalue"/>
+         </properties>
     </text></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
