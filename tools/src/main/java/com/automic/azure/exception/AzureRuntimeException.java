@@ -9,6 +9,8 @@ package com.automic.azure.exception;
  */
 public class AzureRuntimeException extends RuntimeException {
 
+    private static final long serialVersionUID = 8908847435912088181L;
+
     /**
      * @param message
      */
@@ -16,7 +18,5 @@ public class AzureRuntimeException extends RuntimeException {
         super(message);
 
     }
-
-    private static final long serialVersionUID = 8908847435912088181L;
 
 }

@@ -49,6 +49,9 @@ public final class ActionFactory {
             case CREATE_STORAGE_CONTAINER:
                 action = new CreateStorageContainerAction();
                 break;
+            case PUT_BLOB:
+                action = new PutBlockBlobAction();
+                break;
             case DELETE_STORAGE_CONTAINER:
                 action = new DeleteStorageContainerAction();
                 break;

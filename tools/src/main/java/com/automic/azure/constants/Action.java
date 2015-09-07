@@ -9,7 +9,7 @@ package com.automic.azure.constants;
 public enum Action {
 
     VERSION, GET_SUBSCRIPTION_INFO, VM_STATE, CHECK_REQUEST_STATUS, DELETE_VM, 
-    CREATE_VM_DEPLOYMENT, CREATE_STORAGE_CONTAINER,DELETE_STORAGE_CONTAINER;
+    CREATE_VM_DEPLOYMENT, CREATE_STORAGE_CONTAINER, PUT_BLOB, DELETE_STORAGE_CONTAINER;
 
     public static String getActionNames() {
         Action[] actions = Action.values();
