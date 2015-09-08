@@ -24,7 +24,9 @@ import org.apache.logging.log4j.Logger;
 
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
+import com.automic.azure.exception.util.AzureRejectedExecutionHandler;
 import com.automic.azure.model.AzurePutBlockBlobList;
+import com.automic.azure.util.AzureThreadFactory;
 import com.automic.azure.util.AzureThreadPoolExecutor;
 import com.automic.azure.util.CommonUtil;
 import com.automic.azure.util.Validator;
@@ -42,6 +44,8 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     private static final Logger LOGGER = LogManager.getLogger(PutBlockBlobAction.class);
 
     private static final int THREAD_POOL_SIZE = 4;
+    
+    private static final int WORKER_QUEUE_SIZE = 6;
 
     private static final int THREADPOOL_TERMINATE_TIMEOUT = 60;
 
@@ -141,8 +145,10 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         try (InputStream inputStream = Files.newInputStream(blobFile)) {
             int blockSize;
             // create a thread pool of 4 threads
-            AzureThreadPoolExecutor executor = new AzureThreadPoolExecutor(THREAD_POOL_SIZE,
-                    THREADPOOL_TERMINATE_TIMEOUT, TimeUnit.MINUTES);
+            AzureThreadPoolExecutor executor = new AzureThreadPoolExecutor(THREAD_POOL_SIZE, WORKER_QUEUE_SIZE,
+                    THREADPOOL_TERMINATE_TIMEOUT, new AzureThreadFactory(), TimeUnit.MINUTES);
+            // set an rejected execution handler
+            executor.setRejectedExecutionHandler(new AzureRejectedExecutionHandler("Error while uploading Blob"));
             LOGGER.info("uploading blob in chunks of 4MB blocks!");
             while ((blockSize = inputStream.read(fileBlock)) != -1) {
 
@@ -230,10 +236,10 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             this.blobName = blobName + "." + FilenameUtils.getExtension(blobFile.toString());
         }
 
-        // size of file
+        // reads the size of file from its attributes
         try {
             this.fileSize = Files.size(blobFile);
-
+            // if size of file is greater than 195 GB
             if (fileSize > MAX_BLOB_SIZE) {
                 String msg = String.format(ExceptionConstants.ERROR_BLOB_MAX_SIZE, MAX_BLOB_SIZE);
                 LOGGER.error(msg);
