@@ -120,3 +120,46 @@ Storage Account Info
     [Arguments]    ${Account_Name}    ${Access_Key}
     Action Set    &UC4RB_AZR_STORAGE_ACCOUNT_NAME#    ${Account_Name}
     Action Set    &UC4RB_AZR_STORAGE_ACCESS_KEY#    ${Access_Key}
+
+Create Storage Container
+    [Arguments]    ${_CREATE_STORAGE_ACTION}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Access_Type}
+    Action Create    ${_CREATE_STORAGE_ACTION}
+    Storage Account Info    ${Name_Account}    ${Key_Access}
+    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Container_Name}
+    Action Set    &UC4RB_AZR_CONTAINER_ACCESS#    ${Access_Type}
+    Set Overwrite Agent
+    Action Execute
+    ${Generated_Container_Name}=    Action Get Variable    &UC4RB_AZR_CONTAINER_NAME#
+    Set Global Variable    ${Generated_Container_Name}
+
+Delete Storage Container
+    [Arguments]    ${_DELETE_STORAGE_CONTAINER_ACTION}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Lease_ID}
+    Action Create    ${_DELETE_STORAGE_CONTAINER_ACTION}
+    Storage Account Info    ${Name_Account}    ${Key_Access}
+    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Container_Name}
+    Action Set    &UC4RB_AZR_LEASE_ID#    ${EMPTY}
+    Set Overwrite Agent
+    Action Execute
+
+Create VM
+    [Arguments]    ${_CREATE_VM_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_Cloud_Service}    ${VM_Configuration_File}
+    Action Create    ${_CREATE_VM_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}
+    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Cloud_Service_Name}
+    Action Set    &UC4RB_AZR_FILE_PATH#    ${Create_VM_FilePath}
+    Set Overwrite Agent
+    Action Execute
+    ${Generated_ID}=    Action Get Variable    &UC4RB_AZR_REQUEST_ID#
+    Set Global Variable    ${Generated_ID}
+
+Delete VM
+    [Arguments]    ${_DELETE_VM_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_VM}    ${Name_Cloud_Service}
+    ...    ${Name_Deployment}    ${Delete_Attached_Media}
+    Action Create    ${_DELETE_VM_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}
+    Action Set    &UC4RB_AZR_VM_NAME#    ${VM_Name}
+    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Cloud_Service_Name}
+    Action Set    &UC4RB_AZR_DEPLOYMENT#    ${Deployment_Name}
+    Action Set    &UC4RB_AZR_VM_MEDIA#    YES
+    Set Overwrite Agent
+    Action Execute
