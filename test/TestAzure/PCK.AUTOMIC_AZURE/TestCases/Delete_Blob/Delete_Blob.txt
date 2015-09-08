@@ -1,0 +1,85 @@
+*** Settings ***
+Suite Setup       Startup
+Suite Teardown    Teardown
+Force Tags        delete_blob
+Default Tags
+Test Template     Delete Blob Template
+Library           com.automic.robot.itpa.ItpaLibrary
+Resource          ../../Resources/messages.txt
+Resource          ../../Resources/keywords.txt
+Resource          ../../Resources/variables.txt
+Resource          ../../Resources/actions.txt
+
+*** Test Cases ***    OK_NOK    AccountName                AccessKey                ContainerName    BlobName       Snapshot                          LeaseId
+Delete Blob and its Snapshots
+                      [Tags]    main_scenarios
+                      OK        ${Name_Account}            ${Key_Access}            blank            blank          ${EMPTY}                          ${EMPTY}
+
+Delete all Snapshots Only
+                      OK        ${Name_Account}            ${Key_Access}            blank            blank          *                                 ${EMPTY}
+
+Delete Specific snapshot only
+                      OK        ${Name_Account}            ${Key_Access}            blank            blank          Sun, 06 Sept 2015 08:49:37 GMT    ${EMPTY}
+
+Delete Blob with Invalid Account Name
+                      NOK       ${Invalid_Name_Account}    ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Delete Blob with Invalid Access Key
+                      NOK       ${Name_Account}            ${Invalid_Key_Access}    blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Delete Blob Invalid Container Name
+                      NOK       ${Name_Account}            ${Key_Access}            Invalid          HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Delete Blob Invalid Blob Name
+                      NOK       ${Name_Account}            ${Key_Access}            cactest          HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Assert Account Name as a mandatory field
+                      OTHER     ${EMPTY}                   ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Assert Access Key as a mandatory field
+                      OTHER     ${Name_Account}            ${EMPTY}                 blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Assert Container Name as a mandatory field
+                      OTHER     ${Name_Account}            ${Key_Access}            ${EMPTY}         HR_Form.doc    ${EMPTY}                          ${EMPTY}
+
+Assert Blob Name as a mandatory field
+                      OTHER     ${Name_Account}            ${Key_Access}            blobcontainer    ${EMPTY}       ${EMPTY}                          ${EMPTY}
+
+*** Keywords ***
+Startup
+    Log    *******Start Test "DELETE BLOB" *******
+    Log    *******Connect to AE*******
+    Connect AE
+
+Delete Blob Template
+    [Arguments]    ${OK_NOK}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Blob_Name}    ${Snapshot}
+    ...    ${Lease_Id}
+    [Documentation]    This test validates the deletion of blobs and its snapshots.
+    ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -${Account_Name}: This field specifies name of the storage account in whcih storage conatiner is to br created.
+    ...    -${Access_Key}: This field specifies Access Key for the provided storage account.
+    ...    -${Container_Name}: This field specifies name of the container in which blob is located.
+    ...    -${Blob_Name}: This field specifies the Blob to be removed.
+    ...    -${Snapshot}: This field specifies the date-time snapshot of the Blob to delete.
+    ...    -${Lease_Id}: This field specifies the Lease Id if the Blob has active lease.
+    Run Keyword If    '${OK_NOK}' == 'OK'    Create Storage Container    ${_CREATE_STORAGE_ACTION}    ${Name_Account}    ${Key_Access}    testblob
+    ...    BLOB
+    Run Keyword If    '${OK_NOK}' == 'OK'    Put Blob    ${_PUT_BLOB_ACTION}    ${Name_Account}    ${Key_Access}    ${Generated_Container_Name}
+    ...    test    ${Put_Blob_File}    ${EMPTY}
+    Action Create    ${_DELETE_BLOB_ACTION}
+    Storage Account Info    ${Account_Name}    ${Access_Key}
+    Run Keyword If    '${Container_Name}' == 'blank'    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Generated_Container_Name}
+    Run Keyword If    '${Container_Name}' != 'blank'    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Container_Name}
+    Run Keyword If    '${Blob_Name}' == 'blank'    Action Set    &UC4RB_AZR_BLOB_NAME#    ${Generated_Blob_Name}
+    Run Keyword If    '${Blob_Name}' != 'blank'    Action Set    &UC4RB_AZR_BLOB_NAME#    ${Blob_Name}
+    Action Set    &UC4RB_AZR_SNAPSHOT#    ${Snapshot}
+    Action Set    &UC4RB_AZR_LEASE_ID#    ${Lease_Id}
+    Set Overwrite Agent
+    Action Execute
+    Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
+    ...    Assert Mandatory
+    Run Keyword If    '${Container_Name}' == 'blank'    Delete Storage Container    ${_DELETE_STORAGE_CONTAINER_ACTION}    ${Name_Account}    ${Key_Access}    ${Generated_Container_Name}
+    ...    ${EMPTY}
+
+Teardown
+    Log    *******End Test "DELETE BLOB" *******
