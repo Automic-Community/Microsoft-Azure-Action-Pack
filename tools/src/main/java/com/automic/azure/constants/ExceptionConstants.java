@@ -49,7 +49,9 @@ public final class ExceptionConstants {
     public static final String INVALID_STORAGE_CONTAINER_NAME = "Storage container name can only include numbers "
             + "and lower-case characters and must match [0-9a-z]+";
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
-    public static final String EMPTY_BLOB_NAME = "Blob Name should not left blank";
+    public static final String INVALID_BLOB_NAME = "Invalid Blob Name. Max 1024 characters and "
+            + "must match [a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+ ";
+
     public static final String INVALID_BLOB_FILE = "Blob File does not exists";
     public static final String INVALID_BLOB_CONTENT_TYPE = "Content-Type of blob should be valid";
     public static final String ERROR_FILE_SIZE = "Error while calculating size for %s";

@@ -30,7 +30,7 @@ public class GenericResponseFilter extends ClientFilter {
     @Override
     public ClientResponse handle(ClientRequest arg0) {
         ClientResponse response = getNext().handle(arg0);
-        LOGGER.info("Response code for action " + response.getStatus());
+        LOGGER.info("Response code for " + arg0.getURI() + " is " + response.getStatus());
         if (!(response.getStatus() >= HTTP_SUCCESS_START && response.getStatus() <= HTTP_SUCCESS_END)) {
             String errorMsg = response.getEntity(errorHandler).toString();
             LOGGER.error(errorMsg);

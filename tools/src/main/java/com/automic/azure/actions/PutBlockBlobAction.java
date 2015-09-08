@@ -5,11 +5,11 @@ package com.automic.azure.actions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +18,6 @@ import java.util.concurrent.TimeUnit;
 import javax.ws.rs.core.MediaType;
 import javax.xml.bind.JAXBException;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -41,10 +40,27 @@ import com.sun.jersey.core.util.Base64;
  */
 public final class PutBlockBlobAction extends AbstractStorageAction {
 
+    /**
+     * 
+     * Utility class to generate blockid
+     *
+     */
+    private static class BlockIdGenerator {
+        private static int blockId = 0;
+        private static ByteBuffer buffer = ByteBuffer.allocate(Integer.SIZE);
+
+        public static synchronized String generateBlockIdBase64encoded() {
+            buffer.putInt(0, ++blockId);
+            byte[] blockIdBase64 = Base64.encode(buffer.array());
+            return new String(blockIdBase64);
+        }
+    }
+
     private static final Logger LOGGER = LogManager.getLogger(PutBlockBlobAction.class);
+    private static final Logger THREAD_LOGGER = LogManager.getLogger(BlockUploadTask.class);
 
     private static final int THREAD_POOL_SIZE = 4;
-    
+
     private static final int WORKER_QUEUE_SIZE = 6;
 
     private static final int THREADPOOL_TERMINATE_TIMEOUT = 60;
@@ -89,14 +105,35 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
      *
      */
     class BlockUploadTask implements Runnable {
-        WebResource.Builder builder;
 
-        BlockUploadTask(WebResource.Builder builder) {
-            this.builder = builder;
+        private WebResource resource;
+        private String blockId;
+        private byte[] fileBlock;
+        private int blockSize;
+
+        BlockUploadTask(WebResource.Builder builder, URI uri) {
+
+        }
+
+        public BlockUploadTask(WebResource blockUploadResource, int blockSize, byte[] fileBlock, String blockId) {
+            this.resource = blockUploadResource;
+            this.blockId = blockId;
+            this.fileBlock = fileBlock;
+            this.blockSize = blockSize;
         }
 
         @Override
         public void run() {
+            // set query parameters and headers
+            WebResource blockUploadResource = resource.queryParam("blockid", blockId);
+            WebResource.Builder builder = blockUploadResource.header("Content-Length", blockSize)
+                    .header("x-ms-version", PutBlockBlobAction.this.restapiVersion)
+                    .header("x-ms-blob-type", "BlockBlob")
+                    .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
+
+            // add the block entity
+            builder = builder.entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType);
+            THREAD_LOGGER.info("Calling URL: " + blockUploadResource.getURI());
             builder.put(ClientResponse.class);
         }
     }
@@ -140,10 +177,9 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName)
                 .path(blobName).queryParam("comp", "block");
         byte[] fileBlock = new byte[BLOCK_SIZE];
-        SecureRandom random = new SecureRandom();
-        ByteBuffer buffer = ByteBuffer.allocate(Integer.SIZE);
         try (InputStream inputStream = Files.newInputStream(blobFile)) {
             int blockSize;
+            String blockId = null;
             // create a thread pool of 4 threads
             AzureThreadPoolExecutor executor = new AzureThreadPoolExecutor(THREAD_POOL_SIZE, WORKER_QUEUE_SIZE,
                     THREADPOOL_TERMINATE_TIMEOUT, new AzureThreadFactory(), TimeUnit.MINUTES);
@@ -151,21 +187,12 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             executor.setRejectedExecutionHandler(new AzureRejectedExecutionHandler("Error while uploading Blob"));
             LOGGER.info("uploading blob in chunks of 4MB blocks!");
             while ((blockSize = inputStream.read(fileBlock)) != -1) {
-
-                buffer.putInt(0, random.nextInt());
-                byte[] blockId = Base64.encode(buffer.array());
+                // generate blockid
+                blockId = BlockIdGenerator.generateBlockIdBase64encoded();
                 // add blockid to a list to commit later
-                this.blockIdList.add(new String(blockId));
-                // set query parameters and headers
-                WebResource blockUploadResource = resource.queryParam("blockid", new String(blockId));
-                WebResource.Builder builder = blockUploadResource.header("Content-Length", blockSize)
-                        .header("x-ms-version", this.restapiVersion).header("x-ms-blob-type", "BlockBlob")
-                        .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-                LOGGER.info("Calling URL:" + blockUploadResource.getURI());
-                // add the block entity
-                builder = builder.entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType);
+                this.blockIdList.add(blockId);
                 // upload block in a separate thread
-                Runnable newBlockUploadThread = new BlockUploadTask(builder);
+                Runnable newBlockUploadThread = new BlockUploadTask(resource, blockSize, fileBlock, blockId);
                 executor.execute(newBlockUploadThread);
 
             }
@@ -232,8 +259,6 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         // construct the blob name from blob file path
         if (this.blobName == null) {
             this.blobName = blobFile.getFileName().toString();
-        } else {
-            this.blobName = blobName + "." + FilenameUtils.getExtension(blobFile.toString());
         }
 
         // reads the size of file from its attributes
@@ -262,7 +287,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         if (!Validator.checkNotEmpty(getOptionValue("containername"))) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!getOptionValue("containername").matches("[0-9a-z]+")) {
+        } else if (!getOptionValue("containername").matches("[0-9a-z]{3,63}")) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
@@ -284,6 +309,12 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                 throw new AzureException(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
             }
         }
+        String blobName = getOptionValue("blobname");
+        if (Validator.checkNotEmpty(blobName)
+                && (!blobName.matches("[a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+") || blobName
+                        .length() > 1024)) {
+            LOGGER.error(ExceptionConstants.INVALID_BLOB_NAME);
+            throw new AzureException(ExceptionConstants.INVALID_BLOB_NAME);
+        }
     }
-
 }
