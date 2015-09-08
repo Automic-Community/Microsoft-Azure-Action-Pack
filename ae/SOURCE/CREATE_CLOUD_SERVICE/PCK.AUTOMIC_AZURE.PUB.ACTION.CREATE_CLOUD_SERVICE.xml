@@ -306,9 +306,9 @@ Cloud Service will be created at the specified geographical location. Possible g
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 = Behavior =
-When we execute Create Cloud Service action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
+When we execute Create Cloud Service action, Success response will be Microsoft (ms) request token id that will be used to track the further status of executed action.
 * If provided cloud service name is unique within Azure, action will pass. It will return status code and ms request token id.
-* If provided cloud service name which is already exist, action will fail.  Azure Error Response code and message.
+* If provided cloud service name is already exist, action will fail.  Azure Error Response code and message.
 * If provided cloud service Label is not base-64-encoded, action will fail. Azure Error Response code and message.
 * If provided parameter file path is invalid, action will fail. Azure Error Response code and message.
 =Return Value=
