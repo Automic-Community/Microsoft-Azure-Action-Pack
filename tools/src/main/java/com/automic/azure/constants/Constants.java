@@ -21,6 +21,8 @@ public final class Constants {
     public static final String SUBSCRIPTION_ID = "subscriptionid";
     public static final String STORAGE = "storage";
     public static final String ACCESS_KEY = "accesskey";
+    public static final String CONTAINER_NAME = "containername";
+    public static final String CONTENT_TYPE = "contenttype";
     public static final String OPTION_X_MS_VERSION = "xmsversion";
     public static final String CONNECTION_TIMEOUT = "connectiontimeout";
     public static final String READ_TIMEOUT = "readtimeout";

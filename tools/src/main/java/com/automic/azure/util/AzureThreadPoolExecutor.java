@@ -26,7 +26,7 @@ import org.apache.logging.log4j.Logger;
  * </p>
  * 
  */
-public final class AzureThreadPoolExecutor extends ThreadPoolExecutor {
+public class AzureThreadPoolExecutor extends ThreadPoolExecutor {
 
     private static final Logger LOGGER = LogManager.getLogger(AzureThreadPoolExecutor.class);
 
@@ -115,7 +115,7 @@ public final class AzureThreadPoolExecutor extends ThreadPoolExecutor {
         super.afterExecute(r, t);
         if (t != null) {
             this.shutdownNow();
-            //throw new AzureRuntimeException("Error in task " + r);
+            
         }
         long endTime = System.currentTimeMillis();
         long taskTime = endTime - startTime.get();

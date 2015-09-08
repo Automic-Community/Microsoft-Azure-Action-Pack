@@ -5,6 +5,7 @@ package com.automic.azure.actions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
@@ -21,6 +22,7 @@ import javax.xml.bind.JAXBException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.exception.util.AzureRejectedExecutionHandler;
@@ -49,10 +51,10 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         private static int blockId = 0;
         private static ByteBuffer buffer = ByteBuffer.allocate(Integer.SIZE);
 
-        public static synchronized String generateBlockIdBase64encoded() {
+        public static synchronized String generateBlockIdBase64encoded() throws UnsupportedEncodingException {
             buffer.putInt(0, ++blockId);
             byte[] blockIdBase64 = Base64.encode(buffer.array());
-            return new String(blockIdBase64);
+            return new String(blockIdBase64, "UTF-8");
         }
     }
 
@@ -65,9 +67,14 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
 
     private static final int THREADPOOL_TERMINATE_TIMEOUT = 60;
 
-    private static final int BLOCK_SIZE = 4000000;
+    // 4 MB
+    private static final int BLOCK_SIZE = 4194304;
 
-    private static final long MAX_BLOB_SIZE = 195000000000L;
+    // 195 GB
+    private static final long MAX_BLOB_SIZE = 209379655680L;
+
+    // 64 MB
+    private static final long FILE_SIZE_FOR_BLOCK_UPLOAD = 67108864L;
 
     /**
      * Storage container name
@@ -139,10 +146,10 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     }
 
     public PutBlockBlobAction() {
-        addOption("containername", true, "Storage Container Name");
+        addOption(Constants.CONTAINER_NAME, true, "Storage Container Name");
         addOption("blobname", false, "Container Blob Name");
         addOption("blobfile", true, "Blob file path");
-        addOption("contenttype", false, "Content-Type of the blob file");
+        addOption(Constants.CONTENT_TYPE, false, "Content-Type of the blob file");
     }
 
     /**
@@ -158,13 +165,13 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         initialize();
 
         // if file size is greated than 64MB we upload using block blob
-        if (this.fileSize > 64000000L) {
-            LOGGER.info(String.format("File size %s bytes larger than 64 MB: ", fileSize));
+        if (this.fileSize > FILE_SIZE_FOR_BLOCK_UPLOAD) {
+            LOGGER.info(String.format("File size %s MB larger than 64 MB: ", fileSize / 1048576));
             uploadBlockBlobInBlocks(storageHttpClient);
             commitBlockList(storageHttpClient);
 
         } else {
-            LOGGER.info(String.format("File size %s bytes less than 64 MB: ", fileSize));
+            LOGGER.info(String.format("File size %s MB less than 64 MB: ", fileSize / 1048576));
             uploadBlockBlob(storageHttpClient);
 
         }
@@ -251,13 +258,13 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
 
     private void initialize() throws AzureException {
         // container Name
-        this.containerName = getOptionValue("containername");
+        this.containerName = getOptionValue(Constants.CONTAINER_NAME);
         // blob file
         this.blobFile = Paths.get(getOptionValue("blobfile"));
         // Blob Name
         this.blobName = getOptionValue("blobname");
         // construct the blob name from blob file path
-        if (this.blobName == null) {
+        if (this.blobName == null && this.blobFile != null) {
             this.blobName = blobFile.getFileName().toString();
         }
 
@@ -266,7 +273,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             this.fileSize = Files.size(blobFile);
             // if size of file is greater than 195 GB
             if (fileSize > MAX_BLOB_SIZE) {
-                String msg = String.format(ExceptionConstants.ERROR_BLOB_MAX_SIZE, MAX_BLOB_SIZE);
+                String msg = String.format(ExceptionConstants.ERROR_BLOB_MAX_SIZE, MAX_BLOB_SIZE / 1073741824);
                 LOGGER.error(msg);
                 throw new AzureException(msg);
             }
@@ -277,17 +284,18 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         }
 
         // blob content-type
-        this.contentType = Validator.checkNotEmpty(getOptionValue("contenttype")) ? getOptionValue("contenttype")
+        this.contentType = Validator.checkNotEmpty(getOptionValue(Constants.CONTENT_TYPE)) 
+                ? getOptionValue(Constants.CONTENT_TYPE)
                 : MediaType.APPLICATION_OCTET_STREAM;
 
     }
 
     private void validate() throws AzureException {
         // validate storage container name
-        if (!Validator.checkNotEmpty(getOptionValue("containername"))) {
+        if (!Validator.checkNotEmpty(getOptionValue(Constants.CONTAINER_NAME))) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!getOptionValue("containername").matches("[0-9a-z]{3,63}")) {
+        } else if (!getOptionValue(Constants.CONTAINER_NAME).matches("[0-9a-z]{3,63}")) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
@@ -299,19 +307,19 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         }
 
         // validate content-type
-        String contentType = getOptionValue("contenttype");
-        if (Validator.checkNotEmpty(getOptionValue("contenttype"))) {
+        String contentTypeArgs = getOptionValue(Constants.CONTENT_TYPE);
+        if (Validator.checkNotEmpty(contentTypeArgs)) {
             try {
-                MediaType.valueOf(contentType);
+                MediaType.valueOf(contentTypeArgs);
             } catch (IllegalArgumentException e) {
 
                 LOGGER.error(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
                 throw new AzureException(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
             }
         }
-        String blobName = getOptionValue("blobname");
-        if (Validator.checkNotEmpty(blobName)
-                && (!blobName.matches("[a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+") || blobName
+        String blobNameArgs = getOptionValue("blobname");
+        if (Validator.checkNotEmpty(blobNameArgs)
+                && (!blobNameArgs.matches("[a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+") || blobNameArgs
                         .length() > 1024)) {
             LOGGER.error(ExceptionConstants.INVALID_BLOB_NAME);
             throw new AzureException(ExceptionConstants.INVALID_BLOB_NAME);
