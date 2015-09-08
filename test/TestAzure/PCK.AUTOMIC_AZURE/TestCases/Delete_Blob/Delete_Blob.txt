@@ -15,12 +15,6 @@ Delete Blob and its Snapshots
                       [Tags]    main_scenarios
                       OK        ${Name_Account}            ${Key_Access}            blank            blank          ${EMPTY}                          ${EMPTY}
 
-Delete all Snapshots Only
-                      OK        ${Name_Account}            ${Key_Access}            blank            blank          *                                 ${EMPTY}
-
-Delete Specific snapshot only
-                      OK        ${Name_Account}            ${Key_Access}            blank            blank          Sun, 06 Sept 2015 08:49:37 GMT    ${EMPTY}
-
 Delete Blob with Invalid Account Name
                       NOK       ${Invalid_Name_Account}    ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
 
