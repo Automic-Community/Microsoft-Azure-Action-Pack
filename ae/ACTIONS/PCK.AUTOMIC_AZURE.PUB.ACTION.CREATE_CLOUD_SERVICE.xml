@@ -285,41 +285,46 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE
-
 = General description =
-This action is used to create cloud service in Microsoft Azure asynchronously at specified geographical location by user. This action will return request id which can be further used to query the status of the action.
-
-= Inputs =
-* Cloud Service Configuration File : Create a new cloud service xml configuration file
+This action will create a new cloud service in Microsoft Azure as per the specified parameter file. Output of this action will return request status id.
+ The parameter file will have the following structure:
+ 
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CreateHostedService xmlns="http://schemas.microsoft.com/windowsazure">
+    <ServiceName>test-cloud</ServiceName>
+    <Label>U2FtcGxlTGFiZWw=</Label>
+    <Description>This is a sample CS</Description>
+    <Location>East US</Location>
+    <ReverseDnsFqdn>test-cloud.cloudapp.net.</ReverseDnsFqdn>
+</CreateHostedService>
+Cloud Service will be created at the specified geographical location. Possible geographical locations can be found at http://azure.microsoft.com/en-us/regions/ 
+ = Inputs =
 * Subscription ID: ID of the subscription which will be used for this connection
 * Keystore location: Path for keystore
 * keystore Password: Password for keystore
+* Parameter File : Configuration file containing the information to create a cloud service in Azure 
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
-
 = Behavior =
 When we execute Create Cloud Service action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
-
 * If provided cloud service name is unique within Azure, action will pass. It will return status code and ms request token id.
 * If provided cloud service name which is already exist, action will fail.  Azure Error Response code and message.
 * If provided cloud service Label is not base-64-encoded, action will fail. Azure Error Response code and message.
-
+* If provided parameter file path is invalid, action will fail. Azure Error Response code and message.
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
-
 = Rollback =
 (none)
-
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
-
 = Example =
-(none)]]></DOC>
+(none)
+]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
