@@ -21,3 +21,4 @@ ${Name_Account}    cactest
 ${Key_Access}     FTeaAJDf8Fx8bG008bgeIueUZMZOF4wpgX+fDjB4zleMm9r6bVR4aQRRsd3WHGeo5t4CyruXiKHR+g+bgW/Bgg==
 ${Invalid_Name_Account}    ABCCDOC
 ${Invalid_Key_Access}    FTeaAJDf8Fx8bG008bgeIueUZtestB4zleMm9r6bVR4aQRRsd3WHGeo5t4CyruXiKHR+g+bgW/Bgg==
+${Put_Blob_File}    ${EXECDIR}\\put_blob.zip
