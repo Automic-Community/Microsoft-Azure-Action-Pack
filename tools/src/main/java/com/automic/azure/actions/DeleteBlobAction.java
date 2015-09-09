@@ -53,14 +53,19 @@ public class DeleteBlobAction extends AbstractStorageAction {
         WebResource.Builder webBuilder = null;
 
         /*
-         * If snapshot value is 'include', it will delete the blob along with its snapshot(s) else it will delete only
-         * the snapshot(s).
+         * If snapshot value is 'only' i.e. user entry is *, it won't delete the blob but its snapshot(s). If snapshot
+         * value is date-time format, it will delete the particular snapshot. If snapshot value is 'include' i.e. when
+         * user doesn't give any input, it will delete the blob along with its snapshot(s).
          */
-        if (("include").equals(snapshot) || ("only").equals(snapshot)) {
-            webBuilder = webResource.header("x-ms-delete-snapshots", snapshot);
+
+        if (Validator.checkNotEmpty(snapshot)) {
+            if (("*").equals(snapshot)) {
+                webBuilder = webResource.header("x-ms-delete-snapshots", "only");
+            } else {
+                webBuilder = webResource.queryParam("snapshot", snapshot).getRequestBuilder();
+            }
         } else {
-            /* delete one particular snapshot of a blob */
-            webBuilder = webResource.queryParam("snapshot", snapshot).getRequestBuilder();
+            webBuilder = webResource.header("x-ms-delete-snapshots", "include");
         }
 
         webBuilder = webBuilder.header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
@@ -74,16 +79,7 @@ public class DeleteBlobAction extends AbstractStorageAction {
     private void initialize() {
         containerName = getOptionValue("containername");
         blobName = getOptionValue("blobname");
-
-        String snapshotValue = getOptionValue("snapshot");
-        snapshot = "include";
-        if (Validator.checkNotEmpty(snapshotValue)) {
-            if (("*").equals(snapshotValue)) {
-                snapshot = "only";
-            } else {
-                snapshot = snapshotValue;
-            }
-        }
+        snapshot = getOptionValue("snapshot");
     }
 
     private void validate() throws AzureException {

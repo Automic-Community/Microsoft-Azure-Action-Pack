@@ -43,7 +43,10 @@ Action description :This action is used to delete a Container in the Azure Stora
 Action description :This action is used to create cloud service in Microsoft Azure asynchronously at specified geographical location by user. This action will return request id which can be further used to query the status of the action.
 The Action will fail when:
 * If provided cloud service name which is already exist
-* If provided cloud service Label is not base-64-encodede]]></DOC>
+* If provided cloud service Label is not base-64-encodede
+
+*Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB
+Action description :This action is used to delete an existing blob from storage container in Microsoft Azure asynchronously.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>

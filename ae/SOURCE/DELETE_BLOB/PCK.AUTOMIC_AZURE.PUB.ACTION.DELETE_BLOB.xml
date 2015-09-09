@@ -289,7 +289,48 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB
+
+= General description =
+This action will delete an existing blob from Storage container in Microsoft Azure as per the specified inputs.
+There are 3 different ways in which a user can provide the value for 'Snapshot' input and the corresponding behavior is as follows :
+* If a date-time format is entered, it will delete the specific date-time snapshot of the given blob.
+* If empty, it will delete the blob along with its associated snapshot(s).
+* If a "*" is entered, it will delete the snapshots but not the blob.
+
+= Inputs =
+* Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123
+* Access Key: Access key for this storage account
+* Container Name: Name of the container in which blob is located. It can contain length: 3 to 63 characters, numbers and lower-case letters only. Example mycontainer123
+* Blob Name: Name of the Blob to be removed. Max length 1024 characters. Example myBlob.jpg
+* Snapshot: Snapshot of the blob in the date-time format (Example 2011-03-09T01:42:34.9360000Z) or * to remove all the snapshots but not the blob.
+* Lease ID: Provide lease ID if blob has an active lease.
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+
+= Behavior =
+* If a blob has a large number of snapshots, it's possible that the Delete Blob operation will time out. If this happens, user should retry the request.
+* If a blob doesn?t have snapshots and you want to delete the snapshots, the action will fail.
+* If an invalid container/blob name is supplied in the input, the action will fail.
+
+=Return Value=
+The request ID will be printed in the AE job report which can be further used for troubleshooting purpose if action fails.
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\azure.log under agent installation directory.
+
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
