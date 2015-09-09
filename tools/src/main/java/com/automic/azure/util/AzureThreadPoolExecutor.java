@@ -35,7 +35,7 @@ public class AzureThreadPoolExecutor extends ThreadPoolExecutor {
     private final AtomicLong numTasks = new AtomicLong();
     private int waitTimeout;
     private TimeUnit timeUnit;
-
+    private Throwable taskException;
     private Semaphore semaphore;
 
     /**
@@ -114,8 +114,9 @@ public class AzureThreadPoolExecutor extends ThreadPoolExecutor {
     protected final void afterExecute(Runnable r, Throwable t) {
         super.afterExecute(r, t);
         if (t != null) {
+            this.taskException = t;
             this.shutdownNow();
-            
+
         }
         long endTime = System.currentTimeMillis();
         long taskTime = endTime - startTime.get();
@@ -144,5 +145,14 @@ public class AzureThreadPoolExecutor extends ThreadPoolExecutor {
         LOGGER.info("Terminating Executor and waiting for threads to complete");
         super.shutdown();
         super.awaitTermination(waitTimeout, timeUnit);
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public final Throwable getTaskException() {
+        //
+        return this.taskException;
     }
 }

@@ -14,9 +14,14 @@ import com.automic.azure.exception.util.AzureUncaughtExceptionHandler;
  */
 public class AzureThreadFactory implements ThreadFactory {
 
+    public AzureThreadFactory() {
+
+    }
+
     @Override
     public Thread newThread(Runnable r) {
         Thread thread = new Thread(r);
+        thread.setDaemon(true);
         thread.setUncaughtExceptionHandler(new AzureUncaughtExceptionHandler());
         return thread;
     }

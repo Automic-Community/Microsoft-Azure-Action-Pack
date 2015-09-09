@@ -6,7 +6,6 @@ package com.automic.azure.actions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -118,10 +117,6 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         private byte[] fileBlock;
         private int blockSize;
 
-        BlockUploadTask(WebResource.Builder builder, URI uri) {
-
-        }
-
         public BlockUploadTask(WebResource blockUploadResource, int blockSize, byte[] fileBlock, String blockId) {
             this.resource = blockUploadResource;
             this.blockId = blockId;
@@ -136,11 +131,10 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             WebResource.Builder builder = blockUploadResource.header("Content-Length", blockSize)
                     .header("x-ms-version", PutBlockBlobAction.this.restapiVersion)
                     .header("x-ms-blob-type", "BlockBlob")
-                    .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService());
-
-            // add the block entity
-            builder = builder.entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType);
+                    .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
+                    .entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType);
             THREAD_LOGGER.info("Calling URL: " + blockUploadResource.getURI());
+            Thread.currentThread();
             builder.put(ClientResponse.class);
         }
     }
@@ -191,7 +185,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             AzureThreadPoolExecutor executor = new AzureThreadPoolExecutor(THREAD_POOL_SIZE, WORKER_QUEUE_SIZE,
                     THREADPOOL_TERMINATE_TIMEOUT, new AzureThreadFactory(), TimeUnit.MINUTES);
             // set an rejected execution handler
-            executor.setRejectedExecutionHandler(new AzureRejectedExecutionHandler("Error while uploading Blob"));
+            executor.setRejectedExecutionHandler(new AzureRejectedExecutionHandler());
             LOGGER.info("uploading blob in chunks of 4MB blocks!");
             while ((blockSize = inputStream.read(fileBlock)) != -1) {
                 // generate blockid
@@ -264,7 +258,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         // Blob Name
         this.blobName = getOptionValue("blobname");
         // construct the blob name from blob file path
-        if (this.blobName == null && this.blobFile != null) {
+        if (!Validator.checkNotEmpty(this.blobName) && this.blobFile != null) {
             this.blobName = blobFile.getFileName().toString();
         }
 
