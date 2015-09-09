@@ -10,34 +10,37 @@ Resource          ../../Resources/keywords.txt
 Resource          ../../Resources/variables.txt
 Resource          ../../Resources/actions.txt
 
-*** Test Cases ***    OK_NOK    AccountName                AccessKey                ContainerName    BlobName       Snapshot                          LeaseId
+*** Test Cases ***    OK_NOK    AccountName                AccessKey                ContainerName    BlobName       Snapshot    LeaseId
 Delete Blob and its Snapshots
                       [Tags]    main_scenarios
-                      OK        ${Name_Account}            ${Key_Access}            blank            blank          ${EMPTY}                          ${EMPTY}
+                      OK        ${Name_Account}            ${Key_Access}            blank            blank          ${EMPTY}    ${EMPTY}
+
+Delete Blob Containing No Snapshots but input "*" to Snapshot field
+                      NOK       ${Name_Account}            ${Key_Access}            blank            blank          *           ${EMPTY}
 
 Delete Blob with Invalid Account Name
-                      NOK       ${Invalid_Name_Account}    ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      NOK       ${Invalid_Name_Account}    ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Delete Blob with Invalid Access Key
-                      NOK       ${Name_Account}            ${Invalid_Key_Access}    blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      NOK       ${Name_Account}            ${Invalid_Key_Access}    blobcontainer    HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Delete Blob Invalid Container Name
-                      NOK       ${Name_Account}            ${Key_Access}            Invalid          HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      NOK       ${Name_Account}            ${Key_Access}            Invalid          HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Delete Blob Invalid Blob Name
-                      NOK       ${Name_Account}            ${Key_Access}            cactest          HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      NOK       ${Name_Account}            ${Key_Access}            cactest          HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Assert Account Name as a mandatory field
-                      OTHER     ${EMPTY}                   ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      OTHER     ${EMPTY}                   ${Key_Access}            blobcontainer    HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Assert Access Key as a mandatory field
-                      OTHER     ${Name_Account}            ${EMPTY}                 blobcontainer    HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      OTHER     ${Name_Account}            ${EMPTY}                 blobcontainer    HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Assert Container Name as a mandatory field
-                      OTHER     ${Name_Account}            ${Key_Access}            ${EMPTY}         HR_Form.doc    ${EMPTY}                          ${EMPTY}
+                      OTHER     ${Name_Account}            ${Key_Access}            ${EMPTY}         HR_Form.doc    ${EMPTY}    ${EMPTY}
 
 Assert Blob Name as a mandatory field
-                      OTHER     ${Name_Account}            ${Key_Access}            blobcontainer    ${EMPTY}       ${EMPTY}                          ${EMPTY}
+                      OTHER     ${Name_Account}            ${Key_Access}            blobcontainer    ${EMPTY}       ${EMPTY}    ${EMPTY}
 
 *** Keywords ***
 Startup
@@ -56,9 +59,9 @@ Delete Blob Template
     ...    -${Blob_Name}: This field specifies the Blob to be removed.
     ...    -${Snapshot}: This field specifies the date-time snapshot of the Blob to delete.
     ...    -${Lease_Id}: This field specifies the Lease Id if the Blob has active lease.
-    Run Keyword If    '${OK_NOK}' == 'OK'    Create Storage Container    ${_CREATE_STORAGE_ACTION}    ${Name_Account}    ${Key_Access}    testblob
+    Run Keyword If    '${Container_Name}' == 'blank'    Create Storage Container    ${_CREATE_STORAGE_ACTION}    ${Name_Account}    ${Key_Access}    testblob
     ...    BLOB
-    Run Keyword If    '${OK_NOK}' == 'OK'    Put Blob    ${_PUT_BLOB_ACTION}    ${Name_Account}    ${Key_Access}    ${Generated_Container_Name}
+    Run Keyword If    '${Container_Name}' == 'blank'    Put Blob    ${_PUT_BLOB_ACTION}    ${Name_Account}    ${Key_Access}    ${Generated_Container_Name}
     ...    test    ${Put_Blob_File}    ${EMPTY}
     Action Create    ${_DELETE_BLOB_ACTION}
     Storage Account Info    ${Account_Name}    ${Access_Key}
