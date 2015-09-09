@@ -98,8 +98,7 @@ public class DeleteBlobAction extends AbstractStorageAction {
         if (!Validator.checkNotEmpty(blobName)) {
             LOGGER.error(ExceptionConstants.EMPTY_BLOB_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_BLOB_NAME);
-        } else if (!blobName.matches(Constants.BLOB_NAME_REGEX)
-                || blobName.length() > 1024) {
+        } else if (!blobName.matches(Constants.BLOB_NAME_REGEX) || blobName.length() > 1024) {
             LOGGER.error(ExceptionConstants.INVALID_BLOB_NAME);
             throw new AzureException(ExceptionConstants.INVALID_BLOB_NAME);
         }

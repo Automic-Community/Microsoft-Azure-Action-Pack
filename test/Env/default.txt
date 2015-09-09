@@ -18,5 +18,5 @@ ${_AE_PASS}       @{AE}[4]
 ${_AE_TEMP_FOLD}    TEST_AZURE_PCK
 ${_PROMPTSET_AGENT_WIN}    @{Promptset_Overwrite_Agent_WIN}[0]
 ${_PROMPTSET_LOGIN_WIN}    @{Promptset_Overwrite_Agent_WIN}[1]
-${_PROMPTSET_AGENT_UNIX}    @{Promptset_Overwrite_Agent_UNIX}[0]
-${_PROMPTSET_LOGIN_UNIX}    @{Promptset_Overwrite_Agent_UNIX}[1]
+#${_PROMPTSET_AGENT_UNIX}    @{Promptset_Overwrite_Agent_UNIX}[0]
+#${_PROMPTSET_LOGIN_UNIX}    @{Promptset_Overwrite_Agent_UNIX}[1]
