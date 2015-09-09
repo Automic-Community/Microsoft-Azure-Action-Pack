@@ -50,11 +50,14 @@ public final class ExceptionConstants {
             + "and lowercase letters only. Must match [0-9a-z]{3,24}";
     public static final String EMPTY_STORAGE_ACCESS_KEY = "Storage account access key should not left blank";
     public static final String EMPTY_STORAGE_CONTAINER_NAME = "Storage container name should not be blank";
-    public static final String INVALID_STORAGE_CONTAINER_NAME = "Storage container name can only include numbers "
-            + "and lower-case characters and must match [0-9a-z]+";
+    public static final String INVALID_STORAGE_CONTAINER_NAME = "Storage container name length: 3 to 63, "
+            + "numbers and lower-case characters and must match [0-9a-z]{3,63}";
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
             + "Authentication Signature for Storage Service";
+    public static final String EMPTY_BLOB_NAME = "Blob name should not be left blank";
+    public static final String INVALID_BLOB_NAME = "Blob name cannot have more than 1024 characters and it must match "
+            + "[a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+";
 
     private ExceptionConstants() {
     }
