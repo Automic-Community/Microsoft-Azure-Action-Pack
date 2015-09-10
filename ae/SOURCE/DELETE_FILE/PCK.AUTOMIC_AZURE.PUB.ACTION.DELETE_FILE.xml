@@ -2,7 +2,7 @@
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
 <JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_FILE">
 <XHEADER state="1">
-<Title>Delete an existing file/dir</Title>
+<Title>Delete an existing file</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -58,7 +58,7 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
 <UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
-<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">NO</UC4RB_AZR_STATUSs.00>
+<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -115,7 +115,7 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
 <UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
-<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">NO</UC4RB_AZR_STATUSs.00>
+<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -158,7 +158,7 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
 <UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
-<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">NO</UC4RB_AZR_STATUSs.00>
+<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -188,7 +188,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0| |</FcstStatus>
-<Ert>10</Ert>
+<Ert>1</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>

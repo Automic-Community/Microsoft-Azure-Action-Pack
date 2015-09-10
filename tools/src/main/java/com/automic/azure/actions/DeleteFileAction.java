@@ -20,7 +20,7 @@ import com.automic.azure.util.ConsoleWriter;
 /**
  * 
  * @author kamalgarg
- *
+ * 
  */
 public final class DeleteFileAction extends AbstractAction {
 
@@ -31,7 +31,6 @@ public final class DeleteFileAction extends AbstractAction {
     private File file;
     private boolean isExist;
     private boolean isFile;
-    private boolean isDirectory;
 
     public DeleteFileAction() {
         addOption("filepath", true, "File path to be deleted");
@@ -48,23 +47,27 @@ public final class DeleteFileAction extends AbstractAction {
 
         boolean isDeleted = false;
         if (isExist) {
-            isDeleted = file.delete();
-            if (!isDeleted) {
-                String msg = String.format("Unable to delete file/dir [%s]", filePath);
+            if (!isFile) {
+                String msg = String.format("Unable to delete file [%s]. Provided path is not pointing to a file",
+                        filePath);
                 LOGGER.error(msg);
                 throw new AzureException(msg);
             }
+            isDeleted = file.delete();
+            if (!isDeleted) {
+                String msg = String.format("Unable to delete file [%s]", filePath);
+                LOGGER.error(msg);
+                throw new AzureException(msg);
+            }
+
         } else if (failMissing) {
-            String msg = String.format("Unable to delete file [%s]. Provided file/dir does not exist", filePath);
+            String msg = String.format("Unable to delete file [%s]. Provided file does not exist", filePath);
             LOGGER.error(msg);
             throw new AzureException(msg);
         }
 
-        if (isDeleted) {
-            ConsoleWriter.writeln("File/Dir deleted [true]");
-        } else {
-            ConsoleWriter.writeln("File/Dir deleted [false]");
-        }
+        ConsoleWriter.writeln("File deleted [" + isDeleted + "]");
+
     }
 
     private void initialize() {
@@ -73,12 +76,10 @@ public final class DeleteFileAction extends AbstractAction {
         isExist = file.exists();
         if (isExist) {
             isFile = file.isFile();
-            isDirectory = isFile ? Boolean.valueOf("false") : Boolean.valueOf("true");
         }
         failMissing = CommonUtil.convert2Bool(getOptionValue("failifmissing"));
 
-        ConsoleWriter.writeln("EXISTS [" + isExist + "] " + "FILE [" + isFile + "] " + "DIRECTORY [" + isDirectory
-                + "]");
+        ConsoleWriter.writeln("EXISTS [" + isExist + "] " + "FILE [" + isFile + "] ");
     }
 
     protected List<String> noLogging() {
