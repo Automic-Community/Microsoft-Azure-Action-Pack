@@ -55,6 +55,9 @@ public final class ActionFactory {
             case CREATE_CLOUD_SERVICE:
                 action = new CreateCloudServiceAction();
                 break;
+            case DELETE_FILE:
+            	 action = new DeleteFileAction();
+            	 break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
