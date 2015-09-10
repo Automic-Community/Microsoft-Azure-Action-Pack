@@ -15,6 +15,10 @@ import com.automic.azure.util.ConsoleWriter;
  */
 
 public class ExceptionHandler {
+    
+    private ExceptionHandler(){
+        
+    }
 
     private static final Logger LOGGER = LogManager.getLogger(ExceptionHandler.class);
 
@@ -37,10 +41,12 @@ public class ExceptionHandler {
         } else {
             LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, ex);
             errorMsg = th.getMessage();
-            if (th instanceof java.net.SocketTimeoutException) {
+            if (th instanceof java.net.SocketTimeoutException || th instanceof java.net.SocketException) {
                 errorMsg = CONNECTION_TIMEOUT;
                 responseCode = RESPONSE_CONNECT_TIMEOUT;
             } else if (th instanceof java.net.ConnectException) {
+                errorMsg = UNABLE_TO_CONNECT;
+            } else if (th instanceof java.net.UnknownHostException) {
                 errorMsg = UNABLE_TO_CONNECT;
             }
         }
