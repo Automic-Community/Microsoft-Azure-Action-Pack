@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<JOBI name="PCK.AUTOMIC_AZURE.PRV.INCLUDE.BUILD_ACTION_SPECIFIC_JAVA_ARGUMENTS">
+<HEADER state="1">
+<Title>Build action specific java arguments</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType/>
+</HEADER>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[: SET &UC4RB_AZR_JAVA_ARGUMENTS# = ""
+
+: SET &LEN# = LENGTH(&UC4RB_AZR_OPTIONS#[],SIZE)
+: SET &IDX# = 1 
+
+: WHILE &IDX# LE &LEN#
+
+! Concatinate option and its value
+:   SET &UC4RB_AZR_JAVA_ARGUMENTS# = STR_CAT( &UC4RB_AZR_JAVA_ARGUMENTS#, &UC4RB_AZR_OPTIONS#[&IDX#])
+:   SET &UC4RB_AZR_JAVA_ARGUMENTS# = STR_CAT( &UC4RB_AZR_JAVA_ARGUMENTS#, " ")
+
+:SET &IDX# = &IDX# + 1
+:ENDWHILE]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</JOBI>
+</uc-export>
