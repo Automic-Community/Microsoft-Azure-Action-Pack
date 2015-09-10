@@ -46,11 +46,13 @@ public final class ExceptionConstants {
             + "and lowercase letters only. Must match [0-9a-z]{3,24}";
     public static final String EMPTY_STORAGE_ACCESS_KEY = "Storage account access key should not left blank";
     public static final String EMPTY_STORAGE_CONTAINER_NAME = "Storage container name should not be blank";
-    public static final String INVALID_STORAGE_CONTAINER_NAME = "Storage container name can only include numbers "
-            + "and lower-case characters and must match [0-9a-z]+";
+    public static final String INVALID_STORAGE_CONTAINER_NAME = "Invalid Storage container name length: "
+            + "3 to 63 characters, numbers, lower-case letters and - only. "
+            + "Dash (-) must be immediately preceded and followed by a letter or number";
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
-    public static final String INVALID_BLOB_NAME = "Invalid Blob Name. Max 1024 characters and "
-            + "must match [a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+ ";
+    public static final String INVALID_BLOB_NAME = "Invalid Blob name as it cannot end "
+            + "with dot(.) or / and contain \\. "
+            + "max 1024 characters only (please provide file extension)";
 
     public static final String INVALID_BLOB_FILE = "Blob File does not exists";
     public static final String INVALID_BLOB_CONTENT_TYPE = "Content-Type of blob should be valid";

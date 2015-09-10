@@ -61,7 +61,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     private static final long MAX_BLOB_SIZE = 209379655680L;
 
     // min size of blob to be uploaded as a block blob 64 MB
-    private static final long FILE_SIZE_FOR_BLOCK_UPLOAD = 4108864L;
+    private static final long FILE_SIZE_FOR_BLOCK_UPLOAD = 67108864L;
 
     private static final String BLOCKID_XML_ROOT_ELEMENT = "<BlockList>";
 
@@ -147,7 +147,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     //
     private void uploadBlockBlobInBlocks(Client storageHttpClient) throws AzureException {
         WebResource resource = storageHttpClient.resource(this.storageAccount.blobURL()).path(containerName)
-                .path(blobName);
+                .path(blobName).queryParam("comp", "block");
         // define fileblock
         byte[] fileBlock = new byte[BLOCK_SIZE];
         BufferedOutputStream blockIdListXml = null;
