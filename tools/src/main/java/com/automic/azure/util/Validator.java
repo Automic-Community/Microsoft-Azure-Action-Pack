@@ -91,4 +91,34 @@ public final class Validator {
     public static boolean isValidText(String pattern, String text) {
         return Pattern.matches(pattern, text);
     }
+
+    /**
+     * Method to validate a container name
+     * 
+     * @param containerName
+     * @return true if it is a valid container name else false
+     */
+    public static boolean isStorageContainerNameValid(String containerName) {
+        if (Validator.checkNotEmpty(containerName) && containerName.matches("[0-9a-z-]{3,63}")
+                && !containerName.contains("--")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 
+     * Method to validate a blob name
+     * 
+     * @param blobName
+     * @return true if it is a valid blob name else false
+     */
+    public static boolean isContainerBlobNameValid(String blobName) {
+        if (Validator.checkNotEmpty(blobName) && !blobName.endsWith(".") && !blobName.endsWith("/")
+                && blobName.length() < 1025 && !blobName.contains("\\")) {
+            return true;
+        }
+
+        return false;
+    }
 }
