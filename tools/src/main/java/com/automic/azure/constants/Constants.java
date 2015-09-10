@@ -31,8 +31,6 @@ public final class Constants {
     public static final String AZURE_ERROR_NAMESPACE = "http://schemas.microsoft.com/windowsazure";
     
     public static final String STORAGE_DATE_PATTERN = "EEE, dd MMM yyyy HH:mm:ss z";
-    public static final String BLOB_NAME_REGEX = "[a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+";
-    public static final String CONTAINER_NAME_REGEX = "[0-9a-z]{3,63}";
 
     private Constants() {
     }

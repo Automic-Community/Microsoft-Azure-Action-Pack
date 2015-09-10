@@ -69,7 +69,7 @@ public class DeleteBlobAction extends AbstractStorageAction {
         }
 
         webBuilder = webBuilder.header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
-                .header("x-ms-version", restapiVersion).header("x-ms-lease-id", leaseId);
+                .header(Constants.X_MS_VERSION, restapiVersion).header("x-ms-lease-id", leaseId);
 
         LOGGER.info("Calling URL:" + webResource.getURI());
         ClientResponse response = webBuilder.delete(ClientResponse.class);
@@ -83,26 +83,23 @@ public class DeleteBlobAction extends AbstractStorageAction {
     }
 
     private void validate() throws AzureException {
-        if (!Validator.checkNotEmpty(containerName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!containerName.matches(Constants.CONTAINER_NAME_REGEX)) {
+        if (!Validator.isStorageContainerNameValid(containerName)) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
 
         if (!Validator.checkNotEmpty(blobName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_BLOB_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_BLOB_NAME);
-        } else if (!blobName.matches(Constants.BLOB_NAME_REGEX) || blobName.length() > 1024) {
-            LOGGER.error(ExceptionConstants.INVALID_BLOB_NAME);
-            throw new AzureException(ExceptionConstants.INVALID_BLOB_NAME);
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_BLOB_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_BLOB_NAME);
+        } else if (!Validator.isContainerBlobNameValid(blobName)) {
+            LOGGER.error(ExceptionConstants.INVALID_STORAGE_BLOB_NAME);
+            throw new AzureException(ExceptionConstants.INVALID_STORAGE_BLOB_NAME);
         }
     }
 
     private void prepareOutput(ClientResponse response) {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
-        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
+        ConsoleWriter.writeln("Request ID : " + tokenid.get(0));
     }
 
 }
