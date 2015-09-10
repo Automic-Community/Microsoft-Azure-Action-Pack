@@ -46,7 +46,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>594</Ert>
+<Ert>508</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -164,8 +164,6 @@
 ! Setting execution environment
 :INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.SET_EXEC_ENVIRONMENT
 
-:PRINT '&UC4RB_AZR_JAVA_ARGUMENTS#'
-
 ! Invoking java binary
 :IF &UC4RB_AGENT_OS# = "WINDOWS"
 java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -accesskey %UC4_DECRYPTED_PWD%
@@ -177,7 +175,7 @@ java -jar &UC4RB_AZR_PATH_JAR# &UC4RB_AZR_JAVA_ARGUMENTS# -accesskey $UC4_DECRYP
 
 ! Status messages
 :SET &UC4RB_LOGGING_INFO# = "******** PUT BLOB ACTION EXECUTED SUCCESSFULLY ********"
-:SET &UC4RB_LOGGING_ERROR# = "******** PUT BLOB CONTAINER ACTION FAILED ********" 
+:SET &UC4RB_LOGGING_ERROR# = "******** PUT BLOB ACTION FAILED ********" 
 
 !------------------------------------------ Error Handling -----------------------------------------------------------------------------------------------------
 

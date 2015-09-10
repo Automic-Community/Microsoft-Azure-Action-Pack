@@ -64,7 +64,6 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_CONTENT_TYPEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_CONTENT_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
@@ -131,7 +130,6 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_CONTENT_TYPEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_CONTENT_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
@@ -184,7 +182,6 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_CONTENT_TYPEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_CONTENT_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 <UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
