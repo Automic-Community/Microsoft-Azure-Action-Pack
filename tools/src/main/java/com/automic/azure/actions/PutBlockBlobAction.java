@@ -156,16 +156,16 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             int blockSize;
             String blockId = null;
             blockIdListXml = new BufferedOutputStream(Files.newOutputStream(blobIdListFile), 600);
-            blockIdListXml.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>".getBytes("UTF-8"));
-            blockIdListXml.write("\n".getBytes("UTF-8"));
-            blockIdListXml.write(BLOCKID_XML_ROOT_ELEMENT.getBytes("UTF-8"));
-            blockIdListXml.write("\n".getBytes("UTF-8"));
+            blockIdListXml.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>".getBytes());
+            blockIdListXml.write("\n".getBytes());
+            blockIdListXml.write(BLOCKID_XML_ROOT_ELEMENT.getBytes());
+            blockIdListXml.write("\n".getBytes());
             LOGGER.info("uploading blob in chunks of 4MB blocks!");
             while ((blockSize = inputStream.read(fileBlock)) != -1) {
                 // generate blockid
                 blockId = BlockIdGenerator.generateBlockIdBase64encoded();
                 // add blockid to xml file to commit later
-                blockIdListXml.write(BLOCKID_XML_ELEMENT.replace("BLOCK_ID", blockId).getBytes("UTF-8"));
+                blockIdListXml.write(BLOCKID_XML_ELEMENT.replace("BLOCK_ID", blockId).getBytes());
                 blockIdListXml.write("\n".getBytes("UTF-8"));
                 // set query parameters and headers and upload block of 4MB
                 resource.queryParam("blockid", blockId).header("Content-Length", blockSize)
@@ -175,7 +175,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                         .entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType).put(ClientResponse.class);
 
             }
-            blockIdListXml.write(BLOCKID_XML_ROOT_END_ELEMENT.getBytes("UTF-8"));
+            blockIdListXml.write(BLOCKID_XML_ROOT_END_ELEMENT.getBytes());
 
         } catch (IOException e) {
             LOGGER.error(ExceptionConstants.ERROR_BLOCK_BLOB_UPLOAD, e);
