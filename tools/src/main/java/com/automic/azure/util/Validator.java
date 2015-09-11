@@ -100,7 +100,7 @@ public final class Validator {
      */
     public static boolean isStorageContainerNameValid(String containerName) {
         if (Validator.checkNotEmpty(containerName) && containerName.matches("[0-9a-z-]{3,63}")
-                && !containerName.contains("--")) {
+                && !containerName.contains("--") && !containerName.startsWith("-") && !containerName.endsWith("-")) {
             return true;
         }
         return false;
