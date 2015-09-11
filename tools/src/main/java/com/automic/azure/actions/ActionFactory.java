@@ -55,6 +55,9 @@ public final class ActionFactory {
             case CREATE_CLOUD_SERVICE:
                 action = new CreateCloudServiceAction();
                 break;
+            case CREATE_VIRTUAL_NETWORK:
+                action = new VirtualNetworkConfigurationAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);
