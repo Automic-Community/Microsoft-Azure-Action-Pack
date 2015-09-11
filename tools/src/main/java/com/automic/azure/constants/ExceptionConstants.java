@@ -49,6 +49,7 @@ public final class ExceptionConstants {
     public static final String INVALID_STORAGE_CONTAINER_NAME = "Invalid Storage container name length: "
             + "3 to 63 characters, numbers, lower-case letters and - only. "
             + "Dash (-) must be immediately preceded and followed by a letter or number";
+
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
     public static final String INVALID_BLOB_NAME = "Invalid Blob name as it cannot end "
             + "with dot(.) or / and contain \\. "
@@ -63,6 +64,9 @@ public final class ExceptionConstants {
     public static final String ERROR_COMMITING_BLOCK_BLOB = "Error while commiting block blob";
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
             + "Authentication Signature for Storage Service";
+    public static final String EMPTY_STORAGE_BLOB_NAME = "Blob name should not be left blank";
+    public static final String INVALID_STORAGE_BLOB_NAME = "Blob name cannot have more than 1024 characters and "
+            + "it must match [a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+";
 
     private ExceptionConstants() {
     }

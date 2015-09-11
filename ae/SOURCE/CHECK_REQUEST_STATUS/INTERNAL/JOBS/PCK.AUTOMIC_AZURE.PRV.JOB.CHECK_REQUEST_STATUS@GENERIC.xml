@@ -45,7 +45,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<FcstStatus>0| |</FcstStatus>
 <Ert>4</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -105,7 +105,7 @@
 :SET &UC4RB_LOGGING_PARAMETER# = "Subscription ID"
 :SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_SUBSCRIPTION_ID#"
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
-:SET &UC4RB_LOGGING_PARAMETER# = "Keystore location"
+:SET &UC4RB_LOGGING_PARAMETER# = "Keystore Location"
 :SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_KEYSTORE_PATH#"
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
 :SET &UC4RB_LOGGING_PARAMETER# = "Keystore Password"
