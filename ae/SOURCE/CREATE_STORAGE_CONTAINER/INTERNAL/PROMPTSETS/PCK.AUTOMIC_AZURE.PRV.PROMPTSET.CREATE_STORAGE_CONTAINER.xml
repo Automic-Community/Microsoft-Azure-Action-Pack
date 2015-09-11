@@ -11,7 +11,7 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Create Azure Storage Container"><properties><entry name="text">Create Azure Storage Container</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z] ]{3,63}" required="0" separator=";" showaspassword="0" text="Container name" tooltip="Storage container name length: 3 to 63 characters, numbers and lower-case letters only. Example mycontainer123" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Create Azure Storage Container"><properties><entry name="text">Create Azure Storage Container</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z-]{3,63}" required="0" separator=";" showaspassword="0" text="Container name" tooltip="Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together. Example mycontainer123" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -25,14 +25,14 @@
         <entry name="len"/>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_CONTAINER_NAMEs.00</entry>
-        <entry name="regex">[0-9a-z] ]{3,63}</entry>
+        <entry name="regex">[0-9a-z-]{3,63}</entry>
         <entry name="inputassistance">0</entry>
         <entry name="enabled">0</entry>
         <entry name="required">1</entry>
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Storage container name length: 3 to 63 characters, numbers and lower-case letters only. Example mycontainer123</entry>
+        <entry name="tooltip">Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together. Example mycontainer123</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>

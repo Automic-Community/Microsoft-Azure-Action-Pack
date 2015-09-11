@@ -304,7 +304,7 @@ The Action will fail when:
 = Inputs =
 * Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
 * Access Key: Access key for this storage account 
-* Container name: Storage container name can only include numbers and lower-case characters. Example mycontainer123
+* Container name: Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together. Example mycontainer123
 * Access Type: Select the access type for the storage container.
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login

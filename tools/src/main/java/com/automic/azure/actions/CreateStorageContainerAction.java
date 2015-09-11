@@ -77,7 +77,7 @@ public final class CreateStorageContainerAction extends AbstractStorageAction {
         if (!Validator.checkNotEmpty(this.containerName)) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!this.containerName.matches("[0-9a-z]{3,63}")) {
+        } else if (!Validator.isStorageContainerNameValid(this.containerName)) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
