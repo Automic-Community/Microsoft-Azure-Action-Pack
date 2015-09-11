@@ -65,9 +65,7 @@ public final class ExceptionConstants {
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
             + "Authentication Signature for Storage Service";
     public static final String EMPTY_STORAGE_BLOB_NAME = "Blob name should not be left blank";
-    public static final String INVALID_STORAGE_BLOB_NAME = "Blob name cannot have more than 1024 characters and "
-            + "it must match [a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+";
-
+    
     private ExceptionConstants() {
     }
 

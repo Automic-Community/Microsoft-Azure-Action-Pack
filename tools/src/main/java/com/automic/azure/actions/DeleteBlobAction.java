@@ -83,21 +83,16 @@ public class DeleteBlobAction extends AbstractStorageAction {
     }
 
     private void validate() throws AzureException {
-
-        if (!Validator.checkNotEmpty(containerName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!Validator.isStorageContainerNameValid(containerName)) {
+        // validate container name
+        if (!Validator.isStorageContainerNameValid(containerName)) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
 
-        if (!Validator.checkNotEmpty(blobName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_BLOB_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_BLOB_NAME);
-        } else if (!Validator.isContainerBlobNameValid(blobName)) {
-            LOGGER.error(ExceptionConstants.INVALID_STORAGE_BLOB_NAME);
-            throw new AzureException(ExceptionConstants.INVALID_STORAGE_BLOB_NAME);
+        // validate blob name
+        if (!Validator.isContainerBlobNameValid(blobName)) {
+            LOGGER.error(ExceptionConstants.INVALID_BLOB_NAME);
+            throw new AzureException(ExceptionConstants.INVALID_BLOB_NAME);
         }
     }
 

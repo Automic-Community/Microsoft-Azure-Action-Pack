@@ -37,6 +37,8 @@ import com.sun.jersey.core.util.Base64;
  */
 public final class PutBlockBlobAction extends AbstractStorageAction {
 
+    private static final String UT8_ENCODING = "UTF-8";
+
     /**
      * 
      * Utility class to generate blockid
@@ -49,7 +51,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         public static synchronized String generateBlockIdBase64encoded() throws UnsupportedEncodingException {
             buffer.putInt(0, ++blockId);
             byte[] blockIdBase64 = Base64.encode(buffer.array());
-            return new String(blockIdBase64, "UTF-8");
+            return new String(blockIdBase64, UT8_ENCODING);
         }
     }
 
@@ -112,11 +114,11 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
      */
     @Override
     public void executeSpecific(Client storageHttpClient) throws AzureException {
-        // validate the inputs
-        validate();
-
         // initialize the inputs
         initialize();
+
+        // validate the inputs
+        validate();
 
         // if file size is greated than 64MB we upload using block blob
         if (this.fileSize > FILE_SIZE_FOR_BLOCK_UPLOAD) {
@@ -157,17 +159,17 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
             int blockSize;
             String blockId = null;
             blockIdListXml = new BufferedOutputStream(Files.newOutputStream(blockIdListFile), 600);
-            blockIdListXml.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>".getBytes("UTF-8"));
-            blockIdListXml.write("\n".getBytes("UTF-8"));
-            blockIdListXml.write(BLOCKID_XML_ROOT_ELEMENT.getBytes("UTF-8"));
-            blockIdListXml.write("\n".getBytes("UTF-8"));
+            blockIdListXml.write("<?xml version=\"1.0\" encoding=\"utf-8\"?>".getBytes(UT8_ENCODING));
+            blockIdListXml.write("\n".getBytes(UT8_ENCODING));
+            blockIdListXml.write(BLOCKID_XML_ROOT_ELEMENT.getBytes(UT8_ENCODING));
+            blockIdListXml.write("\n".getBytes(UT8_ENCODING));
             LOGGER.info("uploading blob in chunks of 4MB blocks!");
             while ((blockSize = inputStream.read(fileBlock)) != -1) {
                 // generate blockid
                 blockId = BlockIdGenerator.generateBlockIdBase64encoded();
                 // add blockid to xml file to commit later
-                blockIdListXml.write(BLOCKID_XML_ELEMENT.replace("BLOCK_ID", blockId).getBytes("UTF-8"));
-                blockIdListXml.write("\n".getBytes("UTF-8"));
+                blockIdListXml.write(BLOCKID_XML_ELEMENT.replace("BLOCK_ID", blockId).getBytes(UT8_ENCODING));
+                blockIdListXml.write("\n".getBytes(UT8_ENCODING));
                 // set query parameters and headers and upload block of 4MB
                 resource.queryParam("blockid", blockId).header("Content-Length", blockSize)
                         .header("x-ms-version", PutBlockBlobAction.this.restapiVersion)
@@ -176,7 +178,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                         .entity(Arrays.copyOfRange(fileBlock, 0, blockSize), contentType).put(ClientResponse.class);
 
             }
-            blockIdListXml.write(BLOCKID_XML_ROOT_END_ELEMENT.getBytes("UTF-8"));
+            blockIdListXml.write(BLOCKID_XML_ROOT_END_ELEMENT.getBytes(UT8_ENCODING));
 
         } catch (IOException e) {
             LOGGER.error(ExceptionConstants.ERROR_BLOCK_BLOB_UPLOAD, e);
@@ -184,7 +186,9 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         } finally {
             // close stream for block Id xml
             try {
-                blockIdListXml.close();
+                if (blockIdListXml != null) {
+                    blockIdListXml.close();
+                }
             } catch (IOException e) {
                 LOGGER.error(ExceptionConstants.ERROR_BLOCK_BLOB_UPLOAD, e);
                 throw new AzureException(ExceptionConstants.ERROR_BLOCK_BLOB_UPLOAD);
@@ -259,9 +263,8 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                 throw new AzureException(msg);
             }
         } catch (IOException e) {
-            String msg = String.format(ExceptionConstants.ERROR_FILE_SIZE, blobFile.toString());
-            LOGGER.error(msg, e);
-            throw new AzureException(msg);
+            LOGGER.error(ExceptionConstants.INVALID_BLOB_FILE);
+            throw new AzureException(ExceptionConstants.INVALID_BLOB_FILE);
         }
 
         // blob content-type
@@ -273,11 +276,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
 
     private void validate() throws AzureException {
         // validate storage container name
-        String containerNameArgs = getOptionValue(Constants.CONTAINER_NAME);
-        if (!Validator.checkNotEmpty(containerNameArgs)) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!Validator.isStorageContainerNameValid(containerNameArgs)) {
+        if (!Validator.isStorageContainerNameValid(this.containerName)) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
@@ -289,19 +288,16 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
         }
 
         // validate content-type
-        String contentTypeArgs = getOptionValue(Constants.CONTENT_TYPE);
-        if (Validator.checkNotEmpty(contentTypeArgs)) {
-            try {
-                MediaType.valueOf(contentTypeArgs);
-            } catch (IllegalArgumentException e) {
+        try {
+            MediaType.valueOf(this.contentType);
+        } catch (IllegalArgumentException e) {
 
-                LOGGER.error(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
-                throw new AzureException(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
-            }
+            LOGGER.error(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
+            throw new AzureException(ExceptionConstants.INVALID_BLOB_CONTENT_TYPE);
         }
+
         // validate blob name
-        String blobNameArgs = getOptionValue("blobname");
-        if (Validator.checkNotEmpty(blobNameArgs) && !Validator.isContainerBlobNameValid(blobNameArgs)) {
+        if (!Validator.isContainerBlobNameValid(this.blobName)) {
             LOGGER.error(ExceptionConstants.INVALID_BLOB_NAME);
             throw new AzureException(ExceptionConstants.INVALID_BLOB_NAME);
         }
