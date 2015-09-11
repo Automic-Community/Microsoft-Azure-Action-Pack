@@ -93,7 +93,13 @@ public final class Validator {
     }
 
     /**
-     * Method to validate a container name
+     * <p>
+     * Method to validate a container name. Rules are as:
+     * <ul>
+     * <li>length: 3 to 63 characters. numbers, lower-case letters and - only</li>
+     * <li>Dash (-) must be immediately preceded and followed by a letter or number</li>
+     * </ul>
+     * </p>
      * 
      * @param containerName
      * @return true if it is a valid container name else false
@@ -109,8 +115,14 @@ public final class Validator {
     }
 
     /**
-     * 
-     * Method to validate a blob name
+     * <p>
+     * Method to validate a blob name. Rules are as:
+     * <ul>
+     * <li>cannot end with dot(.) or /</li>
+     * <li>cannot contain \\.</li>
+     * <li>can hav max 1024 characters only</li>
+     * </ul>
+     * </p>
      * 
      * @param blobName
      * @return true if it is a valid blob name else false
