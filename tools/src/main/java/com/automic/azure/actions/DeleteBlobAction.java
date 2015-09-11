@@ -20,7 +20,7 @@ import com.sun.jersey.api.client.WebResource;
  * snapshot for deletion. The blob is later deleted during garbage collection.
  * 
  * @author shrutinambiar
- *
+ * 
  */
 public class DeleteBlobAction extends AbstractStorageAction {
 
@@ -83,7 +83,11 @@ public class DeleteBlobAction extends AbstractStorageAction {
     }
 
     private void validate() throws AzureException {
-        if (!Validator.isStorageContainerNameValid(containerName)) {
+
+        if (!Validator.checkNotEmpty(containerName)) {
+            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
+        } else if (!Validator.isStorageContainerNameValid(containerName)) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
