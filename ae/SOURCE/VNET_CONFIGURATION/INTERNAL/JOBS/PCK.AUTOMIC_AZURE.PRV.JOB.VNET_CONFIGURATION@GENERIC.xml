@@ -46,7 +46,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>5</Ert>
+<Ert>4</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -111,7 +111,7 @@
 :SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_KEYSTORE_PSWD#"
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
 :SET &UC4RB_LOGGING_PARAMETER# = "Parameter File"
-:SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_VNC_CONFIG_FILE#"
+:SET &UC4RB_LOGGING_PARAMETER_VAL# = "&UC4RB_AZR_VN_CONFIG_FILE#"
 :INC PCK.ITPA_SHARED.PRV.INCLUDE.LOGGING.PARAM
 
 !------------------------------------------ Buidling java arguments --------------------------------------------------------------------------------------------
@@ -134,7 +134,7 @@
 : SET &UC4RB_AZR_OPTIONS#[6] = "&UC4RB_AZR_OPTION_VALUE#"
 
 : SET &UC4RB_AZR_OPTIONS#[7] = "-configfilepath"
-: INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_AZR_VNC_CONFIG_FILE#"
+: INC PCK.AUTOMIC_AZURE.PRV.INCLUDE.ESCAPE_ARG_VALUE "TEMP_OPTION_VALUE"="&UC4RB_AZR_VN_CONFIG_FILE#"
 : SET &UC4RB_AZR_OPTIONS#[8] = "&UC4RB_AZR_OPTION_VALUE#"
 
 ! Decrypte certificate password
