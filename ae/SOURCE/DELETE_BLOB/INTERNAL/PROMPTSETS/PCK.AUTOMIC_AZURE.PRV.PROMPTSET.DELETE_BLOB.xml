@@ -11,7 +11,7 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Delete Azure Storage Blob"><properties><entry name="text">Delete Azure Storage Blob</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z-]{3,63}" required="0" separator=";" showaspassword="0" text="Container Name" tooltip="Name of the container in which blob is located.Can contain length:?3 to 63 characters, numbers and lower-case letters and?dash(-)?only.&#10;No two?dash(-)?can occur together.Example?mycontainer123 " upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="435" top="0" width="565"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Delete Azure Storage Blob"><properties><entry name="text">Delete Azure Storage Blob</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z-]{3,63}" required="0" separator=";" showaspassword="0" text="Container Name" tooltip="Container name can contain length:3 to 63 characters, numbers and lower-case letters and dash(-)only.&#10;No two dash(-)can occur together.Example mycontainer123" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -32,15 +32,15 @@
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Name of the container in which blob is located.Can contain length:?3 to 63 characters, numbers and lower-case letters and?dash(-)?only.
-No two?dash(-)?can occur together.Example?mycontainer123 </entry>
+        <entry name="tooltip">Container name can contain length:3 to 63 characters, numbers and lower-case letters and dash(-)only.
+No two dash(-)can occur together.Example mycontainer123</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_NAMEs.00" inputassistance="0" len="1024" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Blob Name" tooltip="Name of the Blob to be removed. Max length 1024 characters,?cannot contain \ and end with dot(.) or /.?Example?myBlob.jpg" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_NAMEs.00" inputassistance="0" len="1024" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Blob Name" tooltip="Name of the Blob to be removed. Max length 1024 characters,cannot contain \ and end with dot(.) or /.Example myBlob.jpg" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -61,7 +61,7 @@ No two?dash(-)?can occur together.Example?mycontainer123 </entry>
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Name of the Blob to be removed. Max length 1024 characters,?cannot contain \ and end with dot(.) or /.?Example?myBlob.jpg</entry>
+        <entry name="tooltip">Name of the Blob to be removed. Max length 1024 characters,cannot contain \ and end with dot(.) or /.Example myBlob.jpg</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
