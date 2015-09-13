@@ -48,8 +48,6 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     // min size of blob to be uploaded as a block blob 64 MB
     private static final long FILE_SIZE_FOR_BLOCK_UPLOAD = 64L * 1024 * 1024;
 
-    // Log the information after how many blocks uploaded.
-    private static final int LOG_BLOCKS_COUNT = 10;
     /**
      * Storage container name
      */
@@ -158,7 +156,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                 .queryParam("comp", "block");
 
         long temp = fileSize;
-        int count = 0;
+        long minutes = 0;
         BlockInputStream inputStream = null;
         long start = System.currentTimeMillis();
 
@@ -182,16 +180,16 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                         .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
                         .entity(inputStream, contentType).put(ClientResponse.class);
 
-                // Log the information to see the upload progress.
-                if (++count == LOG_BLOCKS_COUNT) {
-                    long elapsedTime = ((System.currentTimeMillis() - start) / 1000);
+                // Log the information to see the upload progress every minute.
+                long elapsedTime = (System.currentTimeMillis() - start) / 1000;
+                if ( (elapsedTime / 60) > minutes) {
+                    minutes++;
                     long avgRate = fileSize - temp;
                     if (elapsedTime != 0) {
                         avgRate = avgRate / elapsedTime;
                     }
-                    LOGGER.info("Avg. uploading rate (Bytes/sec) " + avgRate);
+                    LOGGER.info("Avg. uploading rate (bytes/sec) " + avgRate);
                     LOGGER.info("Remaining bytes to upload " + temp + ". Estimated time(seconds) " + temp / avgRate);
-                    count = 0;
                 }
             }
         } finally {
