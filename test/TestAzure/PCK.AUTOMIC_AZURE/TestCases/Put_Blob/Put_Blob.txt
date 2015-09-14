@@ -13,7 +13,7 @@ Resource          ../../Resources/actions.txt
 *** Test Cases ***    OK_NOK    AccountName        AccessKey        ContainerName    BlobName    FileToUpload        ContentType
 Put Blob with valid inputs with file less than 64 mb
                       [Tags]    main_scenarios
-                      OK        ${Name_Account}    ${Key_Access}    blank            test        ${Put_Blob_File}    ${EMPTY}
+                      OK        ${Name_Account}    ${Key_Access}    blank            test.zip    ${Put_Blob_File}    ${EMPTY}
 
 Put Blob with an invalid container name
                       NOK       ${Name_Account}    ${Key_Access}    ABC=1            ${EMPTY}    ${Put_Blob_File}    ${EMPTY}
@@ -25,16 +25,13 @@ Put Blob with an non-existing container name
                       NOK       ${Name_Account}    ${Key_Access}    test2015         ${EMPTY}    ${Put_Blob_File}    ${EMPTY}
 
 Put Blob with an invalid blob name
-                      NOK       ${Name_Account}    ${Key_Access}    blank            @@@#        ${Put_Blob_File}    ${EMPTY}
+                      NOK       ${Name_Account}    ${Key_Access}    test2015         @@@#        ${Put_Blob_File}    ${EMPTY}
 
 Put Blob with an non-existing account name
                       NOK       testabc            ${Key_Access}    test2015         ${EMPTY}    ${Put_Blob_File}    ${EMPTY}
 
 Put Blob with an invalid access key
                       NOK       ${Name_Account}    1232424312       test2015         ${EMPTY}    ${Put_Blob_File}    ${EMPTY}
-
-Assert blob name and content type as optional field
-                      OK        ${Name_Account}    ${Key_Access}    blank            ${EMPTY}    ${Put_Blob_File}    ${EMPTY}
 
 Assert Container Name as a mandatory field
                       OTHER     ${Name_Account}    ${Key_Access}    ${EMPTY}         xyz         ${Put_Blob_File}    zip
@@ -48,6 +45,9 @@ Assert Access Key as a mandatory field
 Assert File to Upload as a mandatory field
                       OTHER     ${Name_Account}    ${Key_Access}    test2015         xyz         ${EMPTY}            zip
 
+Assert blob name and content type as optional field
+                      OK        ${Name_Account}    ${Key_Access}    blank            ${EMPTY}    ${Put_Blob_File}    ${EMPTY}
+
 *** Keywords ***
 Startup
     Log    *******Start Test "PUT BLOB"*******
@@ -58,7 +58,8 @@ Put Blob Template
     [Arguments]    ${OK_NOK}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Blob_Name}    ${File_To_Upload}
     ...    ${Content_Type}
     [Documentation]    This test validates uploading a blob to an existing container.
-    ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -Preconditions: To run this test valid Account name should exist on Azure portal and its access key should be used.
+    ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Account_Name}: This field specifies name of the storage account in whcih storage conatiner is to br created.
     ...    -${Access_Key}: This field specifies Access Key for the provided storage account.
     ...    -${Container_Name}: This field specifies name of the container to be deleted.
@@ -78,6 +79,7 @@ Put Blob Template
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Report Should Contain    UC4RB_AZR_BLOB_NAME
     Run Keyword If    '${Container_Name}' == 'blank'    Delete Storage Container    ${_DELETE_STORAGE_CONTAINER_ACTION}    ${Account_Name}    ${Access_Key}    ${Generated_Container_Name}
     ...    ${EMPTY}
 
