@@ -11,8 +11,8 @@
 <DESIGNER/>
 </PROMPTDESIGNER>
 <PROMPTSETXUI state="1">
-<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="441"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Delete Azure Storage Blob"><properties><entry name="text">Delete Azure Storage Blob</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z]{3,63}" separator=";" showaspassword="0" text="Container Name" tooltip="Name of the container in which blob is located. Can contain length: 3 to 63 characters, numbers and lower-case letters only. Example mycontainer123" upper="0" required="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+<XUIEDITOR><![CDATA[<dialog height="424" icon="PRPT" id="PRPTS" left="0" top="0" width="565"><readpanel fill="b" id="PRPTBOX" nl="1" scroll="v" text="Delete Azure Storage Blob"><properties><entry name="text">Delete Azure Storage Blob</entry><entry name="modifiable">0</entry></properties><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_CONTAINER_NAMEs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="[0-9a-z-]{3,63}" required="0" separator=";" showaspassword="0" text="Container Name" tooltip="Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together.Example mycontainer123" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -25,21 +25,22 @@
         <entry name="len"/>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_CONTAINER_NAMEs.00</entry>
-        <entry name="regex">[0-9a-z]{3,63}</entry>
+        <entry name="regex">[0-9a-z-]{3,63}</entry>
         <entry name="inputassistance">0</entry>
         <entry name="enabled">0</entry>
         <entry name="required">1</entry>
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Name of the container in which blob is located. Can contain length: 3 to 63 characters, numbers and lower-case letters only. Example mycontainer123</entry>
+        <entry name="tooltip">Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together.Example mycontainer123</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
-    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_NAMEs.00" inputassistance="0" len="1024" multiline="0" multilineIcon="0" nl="1" regex="[a-zA-Z0-9_.\-\+\$\&amp;\,\/\:\;\=\?\@]+\.[a-zA-Z]+" separator=";" showaspassword="0" text="Blob Name" tooltip="Name of the Blob to be removed. Max length 1024 characters. Example myBlob.jpg" upper="0" required="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+      <entry name="initvalue"/>
+         </properties>
+    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_NAMEs.00" inputassistance="0" len="1024" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Blob Name" tooltip="Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension).Example myBlob.jpg" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -52,21 +53,22 @@
         <entry name="len">1024</entry>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_BLOB_NAMEs.00</entry>
-        <entry name="regex">[a-zA-Z0-9_.\-\+\$\&amp;\,\/\:\;\=\?\@]+\.[a-zA-Z]+</entry>
+        <entry name="regex"/>
         <entry name="inputassistance">0</entry>
         <entry name="enabled">0</entry>
         <entry name="required">1</entry>
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Name of the Blob to be removed. Max length 1024 characters. Example myBlob.jpg</entry>
+        <entry name="tooltip">Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension).Example myBlob.jpg</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
+      <entry name="initvalue"/>
+         </properties>
     </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_SNAPSHOTs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Snapshot" tooltip="Snapshot of the blob in the date-time format (Example 2011-03-09T01:42:34.9360000Z) or &apos;*&apos; to remove all the snapshots but not the blob." upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -91,9 +93,10 @@
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
+      <entry name="initvalue"/>
+         </properties>
     </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_LEASE_IDs.00" inputassistance="0" len="" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Lease ID" tooltip="Provide lease ID if blob has an active lease" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
-      
+         
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
         <entry name="xmlkey"/>
@@ -118,7 +121,8 @@
         <entry name="customfield"/>
         <entry name="onchangereset"/>
         <entry name="resetable">1</entry>
-      <entry name="initvalue"/></properties>
+      <entry name="initvalue"/>
+         </properties>
     </text></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">

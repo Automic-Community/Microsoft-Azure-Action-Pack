@@ -49,15 +49,21 @@ public final class ActionFactory {
             case CREATE_STORAGE_CONTAINER:
                 action = new CreateStorageContainerAction();
                 break;
+            case PUT_BLOB:
+                action = new PutBlockBlobAction();
+                break;
             case DELETE_STORAGE_CONTAINER:
                 action = new DeleteStorageContainerAction();
                 break;
             case CREATE_CLOUD_SERVICE:
                 action = new CreateCloudServiceAction();
                 break;
+            case DELETE_BLOB:
+                action = new DeleteBlobAction();
+                break;
             case DELETE_FILE:
-            	 action = new DeleteFileAction();
-            	 break;
+                action = new DeleteFileAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.PUT_BLOB">
 <XHEADER state="1">
-<Title>Delete an existing Blob from Storage Container in Azure</Title>
+<Title>Upload blob to a storage container</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -61,13 +61,13 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB">
-<UC4RB_AZR_BLOB_LEASE_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_LEASE_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_BLOB_SNAPSHOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_SNAPSHOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
+<UC4RB_AZR_BLOB_CONTENT_TYPEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_CONTENT_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_BLOB_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -89,7 +89,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="DELETE_BLOB" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.DELETE_BLOB@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="PUT_BLOB" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.PUT_BLOB@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -127,13 +127,13 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB">
-<UC4RB_AZR_BLOB_LEASE_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_LEASE_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_BLOB_SNAPSHOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_SNAPSHOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
+<UC4RB_AZR_BLOB_CONTENT_TYPEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_CONTENT_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_BLOB_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -179,13 +179,13 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB">
-<UC4RB_AZR_BLOB_LEASE_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_LEASE_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_BLOB_SNAPSHOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_SNAPSHOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
-<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB">
+<UC4RB_AZR_BLOB_CONTENT_TYPEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_CONTENT_TYPE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_BLOB_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_BLOB_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_BLOB_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
+<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -215,7 +215,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>8</Ert>
+<Ert>620</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -257,9 +257,9 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" prptmode="1"/>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_BLOB" prptmode="1"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.PUT_BLOB" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -290,39 +290,32 @@
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
-PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB
-
+PCK.AUTOMIC_AZURE.PUB.ACTION.PUT_BLOB
 = General description =
-This action is used to delete the blob or its snapshots or both as per the specified inputs from Storage container in Microsoft Azure.
-
-There are 3 different ways in which a user can provide the value for 'Snapshot' input and the corresponding behavior is as follows :
-* If snapshot's date-time format is entered, it will delete the given snapshot only.
-* If empty, it will delete the blob along with its associated snapshot(s) if exists.
-* If a "*" is entered, it will delete the snapshots but not the blob.
+The Put Blob action uploads a new block blob. The content of the existing blob is overwritten with the content of the new blob and overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob. The default MIME type is application/octet-stream. Using this action user can save his/her contents(images, videos, documents etc.) in the form of blob for future usage. This action will also publish the blob name in AE variable on successful upload.
+The Action will fail when:
+* User provides a blob with file size greater than 195 GB.
+* Container provided does not exists in Storage account.
 
 = Inputs =
-* Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123
-* Access Key: Access key for this storage account
-* Container Name:Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together. Example mycontainer123
-* Blob Name: Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension). Example myBlob.jpg
-* Snapshot: Snapshot of the blob in the date-time format (Example 2011-03-09T01:42:34.9360000Z) or * to remove all the snapshots but not the blob.
-* Lease ID: Provide lease ID if blob has an active lease.
+* Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
+* Access Key: Access key for this storage account 
+* Container name: Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. Dash (-) must be immediately preceded and followed by a letter or number. Example mycontainer123
+* Blob name: Blob name: Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension) Example myBlob.pdf
+* Path of the blob file :Path to a file that should be uploaded. Max file size is 195 GB.
+* Content Type: Content Type of file. Example application/xml
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
 
 = Behavior =
-* If a blob has a large number of snapshots, it's possible that the Delete Blob operation will time out. If this happens, user should retry the request.
-* If a blob doesn?t have snapshots and you want to delete the snapshots, the action will fail.
-* If an invalid container/blob name is supplied in the input, the action will fail.
-
-=Return Value=
-The request ID will be printed in the AE job report which can be further used for troubleshooting purpose if action fails.
+The content of the existing blob is overwritten with the content of the new blob if their blob names are same.
 
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
-
+Action will publish the blob name in AE variable UC4RB_AZR_BLOB_NAME. Also the job report will contain a request id which could be used to troubleshoot the request.
+ 
 = Rollback =
 (none)
 

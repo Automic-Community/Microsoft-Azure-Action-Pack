@@ -214,8 +214,8 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
-<Ert>0</Ert>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<Ert>8</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -293,17 +293,18 @@
 PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB
 
 = General description =
-This action will delete an existing blob from Storage container in Microsoft Azure as per the specified inputs.
+This action is used to delete the blob or its snapshots or both as per the specified inputs from Storage container in Microsoft Azure.
+
 There are 3 different ways in which a user can provide the value for 'Snapshot' input and the corresponding behavior is as follows :
-* If a date-time format is entered, it will delete the specific date-time snapshot of the given blob.
-* If empty, it will delete the blob along with its associated snapshot(s).
+* If snapshot's date-time format is entered, it will delete the given snapshot only.
+* If empty, it will delete the blob along with its associated snapshot(s) if exists.
 * If a "*" is entered, it will delete the snapshots but not the blob.
 
 = Inputs =
 * Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123
 * Access Key: Access key for this storage account
-* Container Name: Name of the container in which blob is located. It can contain length: 3 to 63 characters, numbers and lower-case letters only. Example mycontainer123
-* Blob Name: Name of the Blob to be removed. Max length 1024 characters. Example myBlob.jpg
+* Container Name:Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together. Example mycontainer123
+* Blob Name: Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension). Example myBlob.jpg
 * Snapshot: Snapshot of the blob in the date-time format (Example 2011-03-09T01:42:34.9360000Z) or * to remove all the snapshots but not the blob.
 * Lease ID: Provide lease ID if blob has an active lease.
 * Overwrite Agent: Overwrites the default agent

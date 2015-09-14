@@ -46,15 +46,26 @@ public final class ExceptionConstants {
             + "and lowercase letters only. Must match [0-9a-z]{3,24}";
     public static final String EMPTY_STORAGE_ACCESS_KEY = "Storage account access key should not left blank";
     public static final String EMPTY_STORAGE_CONTAINER_NAME = "Storage container name should not be blank";
-    public static final String INVALID_STORAGE_CONTAINER_NAME = "Storage container name length: 3 to 63, "
-            + "numbers and lower-case characters and must match [0-9a-z]{3,63}";
+    public static final String INVALID_STORAGE_CONTAINER_NAME = "Invalid Storage container name length: "
+            + "3 to 63 characters, numbers, lower-case letters and - only. "
+            + "Dash (-) must be immediately preceded and followed by a letter or number";
+
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
+    public static final String INVALID_BLOB_NAME = "Invalid Blob name as it cannot end "
+            + "with dot(.) or / and contain \\. "
+            + "max 1024 characters only (please provide file extension)";
+
+    public static final String INVALID_BLOB_FILE = "Blob File does not exists";
+    public static final String INVALID_BLOB_CONTENT_TYPE = "Content-Type of blob should be valid";
+    public static final String ERROR_FILE_SIZE = "Error while calculating size for %s";
+    public static final String ERROR_BLOB_MAX_SIZE = "Blob size is exceeded.Expected [<=%s] and actual [%s] bytes";
+    public static final String ERROR_BLOCK_BLOB_UPLOAD = "Error while uploading blob as a Block blob";
+    public static final String ERROR_DELETING_BLOCKID_FILE = "Error while deleting block id xml file";
+    public static final String ERROR_COMMITING_BLOCK_BLOB = "Error while commiting block blob";
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
             + "Authentication Signature for Storage Service";
     public static final String EMPTY_STORAGE_BLOB_NAME = "Blob name should not be left blank";
-    public static final String INVALID_STORAGE_BLOB_NAME = "Blob name cannot have more than 1024 characters and "
-            + "it must match [a-zA-Z0-9_.\\-\\+\\$\\&\\,\\/\\:\\;\\=\\?\\@]+\\.[a-zA-Z]+";
-
+    
     private ExceptionConstants() {
     }
 

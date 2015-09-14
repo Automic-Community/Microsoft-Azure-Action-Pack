@@ -93,30 +93,47 @@ public final class Validator {
     }
 
     /**
-     * Method to validate a container name
+     * <p>
+     * Method to validate a container name. Rules are as:
+     * <ul>
+     * <li>length: 3 to 63 characters. numbers, lower-case letters and - only</li>
+     * <li>Dash (-) must be immediately preceded and followed by a letter or number</li>
+     * </ul>
+     * </p>
      * 
      * @param containerName
      * @return true if it is a valid container name else false
      */
     public static boolean isStorageContainerNameValid(String containerName) {
-        if (Validator.checkNotEmpty(containerName) && containerName.matches("[0-9a-z-]{3,63}")
-                && !containerName.contains("--")) {
-            return true;
+        if (Validator.checkNotEmpty(containerName) && containerName.matches("[0-9a-z-]{3,63}")) {
+
+            if (!containerName.contains("--") && !containerName.startsWith("-") && !containerName.endsWith("-")) {
+                return true;
+            }
         }
         return false;
     }
 
     /**
-     * 
-     * Method to validate a blob name
+     * <p>
+     * Method to validate a blob name. Rules are as:
+     * <ul>
+     * <li>cannot end with dot(.) or /</li>
+     * <li>cannot contain \\.</li>
+     * <li>can hav max 1024 characters only</li>
+     * </ul>
+     * </p>
      * 
      * @param blobName
      * @return true if it is a valid blob name else false
      */
     public static boolean isContainerBlobNameValid(String blobName) {
-        if (Validator.checkNotEmpty(blobName) && !blobName.endsWith(".") && !blobName.endsWith("/")
-                && blobName.length() < 1025 && !blobName.contains("\\")) {
-            return true;
+        if (Validator.checkNotEmpty(blobName) && !blobName.endsWith(".") && !blobName.endsWith("/")) {
+
+            if (blobName.length() < 1025 && !blobName.contains("\\")) {
+                return true;
+            }
+
         }
 
         return false;
