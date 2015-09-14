@@ -39,6 +39,9 @@ public class DeleteCloudServiceAction extends AbstractManagementAction {
     /**
      * Method to make a call to Azure Management API to delete an existing cloud service in Azure. To do so, we make a
      * DELETE call https://management.core.windows.net/<subscription-id>/services/hostedservices/<cloud-service-name>
+     * 
+     * This action is executed in asynchronous mode only if Delete attached media’=’true’ otherwise it will always
+     * execute in synchronous mode
      */
     @Override
     public void executeSpecific(Client client) throws AzureException {
@@ -71,7 +74,7 @@ public class DeleteCloudServiceAction extends AbstractManagementAction {
 
     private void prepareOutput(ClientResponse response) {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
-        ConsoleWriter.writeln("Request ID : " + tokenid.get(0));
+        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }
 
 }
