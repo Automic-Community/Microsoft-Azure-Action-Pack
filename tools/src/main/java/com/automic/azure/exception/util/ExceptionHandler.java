@@ -14,8 +14,9 @@ import com.automic.azure.util.ConsoleWriter;
  * addition to this, it also writes the exception message to console.
  */
 
-public class ExceptionHandler {
+public final class ExceptionHandler {
 
+    
     private static final Logger LOGGER = LogManager.getLogger(ExceptionHandler.class);
 
     private static final int RESPONSE_NOT_OK = 1;
@@ -24,6 +25,11 @@ public class ExceptionHandler {
     private static final String ERRORMSG = "Please check the input parameters. For more details refer java logs";
     private static final String CONNECTION_TIMEOUT = "Connection Timeout.";
     private static final String UNABLE_TO_CONNECT = "Unable to connect.";
+    
+    private ExceptionHandler() {
+
+    }
+
 
     public static int handleException(Exception ex) {
         int responseCode = RESPONSE_NOT_OK;
@@ -37,10 +43,12 @@ public class ExceptionHandler {
         } else {
             LOGGER.error(ExceptionConstants.GENERIC_ERROR_MSG, ex);
             errorMsg = th.getMessage();
-            if (th instanceof java.net.SocketTimeoutException) {
+            if (th instanceof java.net.SocketTimeoutException || th instanceof java.net.SocketException) {
                 errorMsg = CONNECTION_TIMEOUT;
                 responseCode = RESPONSE_CONNECT_TIMEOUT;
             } else if (th instanceof java.net.ConnectException) {
+                errorMsg = UNABLE_TO_CONNECT;
+            } else if (th instanceof java.net.UnknownHostException) {
                 errorMsg = UNABLE_TO_CONNECT;
             }
         }
