@@ -10,7 +10,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.ws.rs.core.MediaType;
 
@@ -151,6 +155,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
 
     private void uploadBlocks(ByteWriter bw) throws IOException, AzureException {
         BlockIdGenerator generator = new BlockIdGenerator();
+        DateHeader dateHeader = new DateHeader();
 
         WebResource resource = storageClient.resource(this.storageAccount.blobURL()).path(containerName).path(blobName)
                 .queryParam("comp", "block");
@@ -176,13 +181,12 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
                 temp = temp - blockSize;
                 resource.queryParam("blockid", blockId).header("Content-Length", blockSize)
                         .header("x-ms-version", PutBlockBlobAction.this.restapiVersion)
-                        .header("x-ms-blob-type", "BlockBlob")
-                        .header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
+                        .header("x-ms-blob-type", "BlockBlob").header("x-ms-date", dateHeader.getCurrentDate())
                         .entity(inputStream, contentType).put(ClientResponse.class);
 
                 // Log the information to see the upload progress every minute.
                 long elapsedTime = (System.currentTimeMillis() - start) / 1000;
-                if ( (elapsedTime / 60) > minutes) {
+                if ((elapsedTime / 60) > minutes) {
                     minutes++;
                     long avgRate = fileSize - temp;
                     if (elapsedTime != 0) {
@@ -205,6 +209,7 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
 
     //
     private void commitBlockList(File file) {
+        LOGGER.info("Uploading block list to commit");
         WebResource resource = storageClient.resource(this.storageAccount.blobURL()).path(containerName).path(blobName)
                 .queryParam("comp", "blocklist");
         WebResource.Builder builder = resource.header("Content-Length", file.length())
@@ -267,14 +272,30 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
     }
 
     /**
+     * Utility class to generate the date header
+     */
+    private static class DateHeader {
+        private final DateFormat rfc1123Format;
+
+        public DateHeader() {
+            rfc1123Format = new SimpleDateFormat(Constants.STORAGE_DATE_PATTERN);
+            rfc1123Format.setTimeZone(TimeZone.getTimeZone("GMT"));
+        }
+
+        public String getCurrentDate() {
+            return rfc1123Format.format(new Date());
+        }
+    }
+
+    /**
      * Utility class to generate blockid
      */
     private static class BlockIdGenerator {
-        private short blockId = -MAX_BLOCKS / 2;
-        private ByteBuffer buffer = ByteBuffer.allocate(Short.SIZE);
+        private int blockId = 0;
+        private ByteBuffer buffer = ByteBuffer.allocate(Integer.SIZE);
 
         public String generateBlockIdBase64encoded() throws UnsupportedEncodingException {
-            buffer.putShort(0, blockId++);
+            buffer.putInt(0, blockId++);
             byte[] blockIdBase64 = Base64.encode(buffer.array());
             return new String(blockIdBase64, UT8_ENCODING);
         }
