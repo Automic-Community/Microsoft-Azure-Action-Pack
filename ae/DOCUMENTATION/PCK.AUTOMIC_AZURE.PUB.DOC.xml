@@ -49,7 +49,10 @@ The Action will fail when:
 * If provided cloud service Label is not base-64-encodede
 
 *Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB
-Action description :This action is used to delete an existing blob from storage container in Microsoft Azure asynchronously.]]></DOC>
+Action description :This action is used to delete an existing blob from storage container in Microsoft Azure asynchronously.
+
+*Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.VNET_CONFIGURATION
+This action will allow you to configure a Virtual Networks in Microsoft Azure asynchronously as per the specified parameter file.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>
