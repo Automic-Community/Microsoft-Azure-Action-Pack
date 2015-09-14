@@ -26,7 +26,7 @@
 <DeactWhen/>
 <AutoDeactAlways>0</AutoDeactAlways>
 <DeactDelay>0</DeactDelay>
-<ActAtRun>0</ActAtRun>
+<ActAtRun>1</ActAtRun>
 <UC4Priority>0</UC4Priority>
 <MaxParallel2>0</MaxParallel2>
 <ReuseHG>1</ReuseHG>
@@ -66,7 +66,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
 <ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
-<UC4RB_AZR_VNS_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VNS_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
+<UC4RB_AZR_VN_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VN_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -131,7 +131,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
 <ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
-<UC4RB_AZR_VNS_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VNS_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
+<UC4RB_AZR_VN_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VN_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -182,7 +182,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
 <ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
-<UC4RB_AZR_VNS_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VNS_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
+<UC4RB_AZR_VN_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VN_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
