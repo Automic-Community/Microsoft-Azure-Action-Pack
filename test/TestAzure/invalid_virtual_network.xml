@@ -1,10 +1,5 @@
 <NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
   <VirtualNetworkConfiguration>
-    <Dns>
-      <DnsServers>
-        <DnsServer name="test" IPAddress="192.168.77.77" />
-      </DnsServers>
-    </Dns>
     <LocalNetworkSites>
       <LocalNetworkSite name="testTest">
         <AddressSpace>
@@ -13,7 +8,6 @@
       </LocalNetworkSite>
     </LocalNetworkSites>
     <VirtualNetworkSites>
-      <VirtualNetworkSite name="Ankit Test Network" Location="Southeast Asia">
         <AddressSpace>
           <AddressPrefix>10.7.0.0/8</AddressPrefix>
         </AddressSpace>
