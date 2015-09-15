@@ -301,7 +301,7 @@ The Action will fail when:
 * Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
 * Access Key: Access key for this storage account 
 * Container name: Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. Dash (-) must be immediately preceded and followed by a letter or number. Example mycontainer123
-* Blob name: Blob name: Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension) Example myBlob.pdf
+* Blob name: Blob name should not end with [.] or [/]. Should not contain [\]. Max Length 1024 characters. (please provide file extension) E.g. myBlob.jpg
 * Path of the blob file :Path to a file that should be uploaded. Max file size is 195 GB.
 * Content Type: Content Type of file. Example application/xml
 * Overwrite Agent: Overwrites the default agent

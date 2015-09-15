@@ -64,7 +64,7 @@ public final class ActionFactory {
     		case DELETE_FILE:
     			action = new DeleteFileAction();
     			break;	
-            case CREATE_VIRTUAL_NETWORK:
+            case SET_VIRTUAL_NETWORK:
                 action = new VirtualNetworkConfigurationAction();
                 break;
             default:

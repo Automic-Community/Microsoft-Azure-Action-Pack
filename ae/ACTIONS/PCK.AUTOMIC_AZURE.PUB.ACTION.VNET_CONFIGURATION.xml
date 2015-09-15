@@ -287,7 +287,8 @@
 PCK.AUTOMIC_AZURE.PUB.ACTION.VNET_CONFIGURATION
 = General description =
 This action will allow you to configure a Virtual Networks in Microsoft Azure asynchronously as per the specified parameter file. Output of this action will return request status id.
- The parameter file will have the following structure:
+Parameter file should be accessible from agent OS.
+The parameter file will have the following structure:
  
 <NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
   <VirtualNetworkConfiguration>  
@@ -333,13 +334,10 @@ This action will allow you to configure a Virtual Networks in Microsoft Azure as
 * Overwrite Login: Overwrites the default login
 
 = Behavior =
-When we execute Set Virtual Network Configuration, Success response will be Microsoft (ms) request token id that will be used to track the further status of executed action.
-* If provided virtual network configuration inside xml file is already in use, action will pass. It will return status code and ms request token id.
-* If provided virtual network configuration inside xml file is not in use, action will pass. It will return status code and ms request token id.
-* If provided configuration file is invalid, action will fail. Azure Error Response code and message.
+* If provided configuration file content(s) are invalid, It will fail.
 
 =Return Value=
-The response will contain the request id which can be further used to query the status of the action.
+This action publishes the request id which can be further used to check the status of the action.
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.

@@ -39,7 +39,7 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_NAMEs.00" inputassistance="0" len="1024" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Blob name" tooltip="Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension) Example myBlob123.pdf" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
+    </text><text alt="1" enabled="1" fill="b" focus="0" id="UC4RB_AZR_BLOB_NAMEs.00" inputassistance="0" len="1024" multiline="0" multilineIcon="0" nl="1" regex="" required="0" separator=";" showaspassword="0" text="Blob name" tooltip="Blob name should not end with [.] or [/]. Should not contain [\]. Max Length 1024 characters. (please provide file extension).Example myBlob.jpg" upper="0"><oninputassistant><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptname|@id"/><command request="_internal" target="_view" targetaction="setAttribute" targetparam="promptvalue|@value"/><command owner="_promptsetcontainer" owneraction="getData" request="getpromptinputassistance" target="_chainwindow"/></oninputassistant>
          
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">UC_DATATYPE_STRING</entry>
@@ -60,7 +60,7 @@
         <entry name="upper">0</entry>
         <entry name="focus">0</entry>
         <entry name="showaspassword">0</entry>
-        <entry name="tooltip">Blob name cannot end with dot(.) or / and contain \. max 1024 characters only (please provide file extension) Example myBlob123.pdf</entry>
+        <entry name="tooltip">Blob name should not end with [.] or [/]. Should not contain [\]. Max Length 1024 characters. (please provide file extension).Example myBlob.jpg</entry>
         <entry name="modifiable">1</entry>
         <entry name="customfield"/>
         <entry name="onchangereset"/>
