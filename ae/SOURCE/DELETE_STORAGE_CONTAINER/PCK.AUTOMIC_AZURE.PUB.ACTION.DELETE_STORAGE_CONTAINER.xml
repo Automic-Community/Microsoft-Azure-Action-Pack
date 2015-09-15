@@ -300,8 +300,8 @@ This action is used to delete a Container in the Azure Storage account provided 
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
-The job report will contain a request id which could be used to troubleshoot the request.
- 
+The job report will always contain a request id which could be used to troubleshoot the request
+
 = Rollback =
 (none)
 = Logging =
