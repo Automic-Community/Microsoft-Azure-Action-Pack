@@ -57,16 +57,23 @@ public class DeleteBlobAction extends AbstractStorageAction {
          * value is date-time format, it will delete the particular snapshot. If snapshot value is 'include' i.e. when
          * user doesn't give any input, it will delete the blob along with its snapshot(s).
          */
+        
+        String msg = null;
 
         if (Validator.checkNotEmpty(snapshot)) {
             if (("*").equals(snapshot)) {
                 webBuilder = webResource.header("x-ms-delete-snapshots", "only");
+                msg = "All the snapshots have been deleted for the given blob.";
             } else {
                 webBuilder = webResource.queryParam("snapshot", snapshot).getRequestBuilder();
+                msg = "Snapshot ["+snapshot+"] has been deleted for the given blob.";
             }
         } else {
             webBuilder = webResource.header("x-ms-delete-snapshots", "include");
+            msg = "Blob ["+blobName+"] has been deleted.";
         }
+        
+        ConsoleWriter.writeln(msg);
 
         webBuilder = webBuilder.header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
                 .header(Constants.X_MS_VERSION, restapiVersion).header("x-ms-lease-id", leaseId);

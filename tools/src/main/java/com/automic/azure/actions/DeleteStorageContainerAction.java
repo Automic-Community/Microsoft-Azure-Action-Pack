@@ -76,14 +76,10 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
 
     private void validate() throws AzureException {
         // validate storage container name
-        if (!Validator.checkNotEmpty(this.containerName)) {
-            LOGGER.error(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-            throw new AzureException(ExceptionConstants.EMPTY_STORAGE_CONTAINER_NAME);
-        } else if (!this.containerName.matches("[0-9a-z]+")) {
+        if (!Validator.isStorageContainerNameValid(this.containerName)) {
             LOGGER.error(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_CONTAINER_NAME);
         }
-
     }
 
     private void prepareOutput(ClientResponse response) throws AzureException {
