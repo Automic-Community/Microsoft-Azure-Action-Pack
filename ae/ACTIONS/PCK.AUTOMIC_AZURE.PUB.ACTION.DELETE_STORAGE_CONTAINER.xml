@@ -286,7 +286,8 @@
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_STORAGE_CONTAINER
 = General description =
-This action is used to delete a Container in the Azure Storage account provided by the user. The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection.To call this action on a container that has an active lease, specify the lease ID.If no value is provided for lease id when there is an active lease,Delete Container action will return 409 (Conflict).If wrong lease ID is provided or a lease ID is provided for a container that does not have an active lease Delete Container action will return 412 (Precondition failed).
+This action is used to delete a Container in the Azure Storage account provided by the user. The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection.To call this action on a container that has an active lease, specify the lease ID.
+
 = Inputs =
 * Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
 * Access Key: Access key for this storage account 
