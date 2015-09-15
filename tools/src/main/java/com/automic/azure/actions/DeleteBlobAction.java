@@ -71,15 +71,14 @@ public class DeleteBlobAction extends AbstractStorageAction {
         } else {
             webBuilder = webResource.header("x-ms-delete-snapshots", "include");
             msg = "Blob ["+blobName+"] has been deleted.";
-        }
-        
-        ConsoleWriter.writeln(msg);
+        }        
 
         webBuilder = webBuilder.header("x-ms-date", CommonUtil.getCurrentUTCDateForStorageService())
                 .header(Constants.X_MS_VERSION, restapiVersion).header("x-ms-lease-id", leaseId);
 
         LOGGER.info("Calling URL:" + webResource.getURI());
         ClientResponse response = webBuilder.delete(ClientResponse.class);
+        ConsoleWriter.writeln(msg);
         prepareOutput(response);
     }
 
