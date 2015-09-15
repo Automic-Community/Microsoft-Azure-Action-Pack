@@ -2,6 +2,6 @@
 <CreateHostedService xmlns="http://schemas.microsoft.com/windowsazure">
     <ServiceName>test-ankit23</ServiceName>
 	<Label>U2FtcGxlTGFiZWw=</Label>
-	<Description>Sample CloudService</Description>
+	<Description>This is a sample CS</Description>
     <Location>Southeast Asia</Location>
 </CreateHostedService>

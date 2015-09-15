@@ -48,6 +48,7 @@ Startup
 Create Storage Container Template
     [Arguments]    ${OK_NOK}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Access_Type}
     [Documentation]    This test validates storage container creation in provided account name.
+    ...    -Preconditions: To run this test valid Account name should exist on Azure portal and its access key should be used.
     ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Account_Name}: This field specifies name of the storage account in whcih storage conatiner is to br created.
     ...    -${Access_Key}: This field specifies Access Key for the provided storage account.

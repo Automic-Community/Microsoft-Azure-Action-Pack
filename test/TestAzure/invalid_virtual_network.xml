@@ -1,0 +1,54 @@
+<NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
+  <VirtualNetworkConfiguration>
+    <LocalNetworkSites>
+      <LocalNetworkSite name="testTest">
+        <AddressSpace>
+          <AddressPrefix>192.168.112.64/16</AddressPrefix>
+        </AddressSpace>
+      </LocalNetworkSite>
+    </LocalNetworkSites>
+    <VirtualNetworkSites>
+        <AddressSpace>
+          <AddressPrefix>10.7.0.0/8</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="Subnet-1">
+            <AddressPrefix>10.0.0.0/11</AddressPrefix>
+          </Subnet>
+          <Subnet name="GatewaySubnet">
+            <AddressPrefix>10.32.0.0/29</AddressPrefix>
+          </Subnet>
+        </Subnets>
+        <DnsServersRef>
+          <DnsServerRef name="test" />
+        </DnsServersRef>
+        <Gateway>
+          <VPNClientAddressPool>
+            <AddressPrefix>172.16.0.0/24</AddressPrefix>
+          </VPNClientAddressPool>
+          <ConnectionsToLocalNetwork />
+        </Gateway>
+      </VirtualNetworkSite>
+      <VirtualNetworkSite name="Group Group-2 dk-hadoop" Location="South Central US">
+        <AddressSpace>
+          <AddressPrefix>10.2.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="Subnet-1">
+            <AddressPrefix>10.2.0.0/24</AddressPrefix>
+          </Subnet>
+        </Subnets>
+      </VirtualNetworkSite>
+      <VirtualNetworkSite name="Group ulanscloud ulansdockervm" Location="West Europe">
+        <AddressSpace>
+          <AddressPrefix>172.16.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="Subnet-1">
+            <AddressPrefix>172.16.0.0/24</AddressPrefix>
+          </Subnet>
+        </Subnets>
+      </VirtualNetworkSite>
+    </VirtualNetworkSites>
+  </VirtualNetworkConfiguration>
+</NetworkConfiguration>
