@@ -291,11 +291,11 @@ public final class PutBlockBlobAction extends AbstractStorageAction {
      * Utility class to generate blockid
      */
     private static class BlockIdGenerator {
-        private int blockId = 0;
-        private ByteBuffer buffer = ByteBuffer.allocate(Integer.SIZE);
+        private short blockId = 0;
+        private ByteBuffer buffer = ByteBuffer.allocate(Short.SIZE);
 
         public String generateBlockIdBase64encoded() throws UnsupportedEncodingException {
-            buffer.putInt(0, blockId++);
+            buffer.putShort(0, blockId++);
             byte[] blockIdBase64 = Base64.encode(buffer.array());
             return new String(blockIdBase64, UT8_ENCODING);
         }
