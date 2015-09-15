@@ -34,7 +34,7 @@ public final class AzureClient {
      * @param args
      *            array of Arguments
      */
-    public static void main(String[] args) {      
+    public static void main(String[] args) {
         int responseCode = RESPONSE_OK;
         try {
             AzureClientHelper.executeAction(args);

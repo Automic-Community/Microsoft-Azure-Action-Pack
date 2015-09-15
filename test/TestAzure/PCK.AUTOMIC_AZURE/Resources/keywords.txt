@@ -177,3 +177,11 @@ Put Blob
     Action Execute
     ${Generated_Blob_Name}=    Action Get Variable    &UC4RB_AZR_BLOB_NAME#
     Set Global Variable    ${Generated_Blob_Name}
+
+Create Cloud Service
+    [Arguments]    ${_CREATE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}
+    Action Create    ${_CREATE_CLOUD_SERVICE_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}
+    Action Set    &UC4RB_AZR_CS_CONFIG_FILE#    ${Parameter_File}
+    Set Overwrite Agent
+    Action Execute

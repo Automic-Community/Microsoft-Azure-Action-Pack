@@ -21,68 +21,59 @@ import com.sun.jersey.api.client.WebResource;
  * Action class to configures the virtual network.
  * 
  * @author anuragupadhyay
- *
+ * 
  */
 public class VirtualNetworkConfigurationAction extends AbstractManagementAction {
 
-	private static final Logger LOGGER = LogManager
-			.getLogger(VirtualNetworkConfigurationAction.class);
+    private static final Logger LOGGER = LogManager.getLogger(VirtualNetworkConfigurationAction.class);
 
-	private String subscriptionId;
+    private String subscriptionId;
 
-	private String configFilePath;
+    private String configFilePath;
 
-	/**
-	 * Initializes a newly created {@code VirtualNetworkConfigurationAction}
-	 * object.
-	 */
-	public VirtualNetworkConfigurationAction() {
-		addOption("subscriptionid", true, "Subscription ID");
-		addOption("configfilepath", true, "Xml configration file path");
-	}
+    /**
+     * Initializes a newly created {@code VirtualNetworkConfigurationAction} object.
+     */
+    public VirtualNetworkConfigurationAction() {
+        addOption("subscriptionid", true, "Subscription ID");
+        addOption("configfilepath", true, "Xml configration file path");
+    }
 
-	private void initialize() {
-		subscriptionId = getOptionValue("subscriptionid");
-		configFilePath = getOptionValue("configfilepath");
-	}
+    private void initialize() {
+        subscriptionId = getOptionValue("subscriptionid");
+        configFilePath = getOptionValue("configfilepath");
+    }
 
-	private void validate() throws AzureException {
-			if (!Validator.checkFileExists(configFilePath)) {
-			String errMsg = String.format(ExceptionConstants.INVALID_FILE,
-					configFilePath);
-			LOGGER.error(errMsg);
-			throw new AzureException(errMsg);
-		}
-	}
+    private void validate() throws AzureException {
+        if (!Validator.checkFileExists(configFilePath)) {
+            String errMsg = String.format(ExceptionConstants.INVALID_FILE, configFilePath);
+            LOGGER.error(errMsg);
+            throw new AzureException(errMsg);
+        }
+    }
 
-	/**
-	 * Method to make a call to Azure Management API. To Set Virtual Network
-	 * Configuration we make a put request to
-	 * https://management.core.windows.net
-	 * /<subscription-id>/services/networking/media
-	 * 
-	 */
-	@Override
-	public void executeSpecific(Client client) throws AzureException {
-		initialize();
-		validate();
-		ClientResponse response = null;
-		WebResource webResource = client.resource(Constants.AZURE_MGMT_URL)
-				.path(subscriptionId).path("services").path("networking")
-				.path("media");
-		LOGGER.info("Calling url " + webResource.getURI());
-		response = webResource
-				.entity(new File(configFilePath), MediaType.TEXT_PLAIN)
-				.header(Constants.X_MS_VERSION, restapiVersion)
-				.put(ClientResponse.class);
+    /**
+     * Method to make a call to Azure Management API. To Set Virtual Network Configuration we make a put request to
+     * https://management.core.windows.net /<subscription-id>/services/networking/media
+     * 
+     */
+    @Override
+    public void executeSpecific(Client client) throws AzureException {
+        initialize();
+        validate();
+        ClientResponse response = null;
+        WebResource webResource = client.resource(Constants.AZURE_MGMT_URL).path(subscriptionId).path("services")
+                .path("networking").path("media");
+        LOGGER.info("Calling url " + webResource.getURI());
+        response = webResource.entity(new File(configFilePath), MediaType.TEXT_PLAIN)
+                .header(Constants.X_MS_VERSION, restapiVersion).put(ClientResponse.class);
 
-		prepareOutput(response);
-	}
+        prepareOutput(response);
+    }
 
-	private void prepareOutput(ClientResponse response) throws AzureException {
-		List<String> tokenid = response.getHeaders().get(
-				Constants.REQUEST_TOKENID_KEY);
-		ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
-	}
+    private void prepareOutput(ClientResponse response) throws AzureException {
+        List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
+        ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
+    }
 
 }
