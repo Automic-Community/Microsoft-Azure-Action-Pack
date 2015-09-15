@@ -52,6 +52,7 @@ Delete Blob Template
     [Arguments]    ${OK_NOK}    ${Account_Name}    ${Access_Key}    ${Container_Name}    ${Blob_Name}    ${Snapshot}
     ...    ${Lease_Id}
     [Documentation]    This test validates the deletion of blobs and its snapshots.
+    ...    -Preconditions: To run this test valid Account name should exist on Azure portal and its access key should be used.
     ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Account_Name}: This field specifies name of the storage account in whcih storage conatiner is to br created.
     ...    -${Access_Key}: This field specifies Access Key for the provided storage account.
@@ -62,7 +63,7 @@ Delete Blob Template
     Run Keyword If    '${Container_Name}' == 'blank'    Create Storage Container    ${_CREATE_STORAGE_ACTION}    ${Name_Account}    ${Key_Access}    testblob
     ...    BLOB
     Run Keyword If    '${Container_Name}' == 'blank'    Put Blob    ${_PUT_BLOB_ACTION}    ${Name_Account}    ${Key_Access}    ${Generated_Container_Name}
-    ...    test    ${Put_Blob_File}    ${EMPTY}
+    ...    test.zip    ${Put_Blob_File}    ${EMPTY}
     Action Create    ${_DELETE_BLOB_ACTION}
     Storage Account Info    ${Account_Name}    ${Access_Key}
     Run Keyword If    '${Container_Name}' == 'blank'    Action Set    &UC4RB_AZR_CONTAINER_NAME#    ${Generated_Container_Name}
