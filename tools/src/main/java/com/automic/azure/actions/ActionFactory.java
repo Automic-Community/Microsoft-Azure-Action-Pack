@@ -58,6 +58,12 @@ public final class ActionFactory {
             case DELETE_FILE:
                 action = new DeleteFileAction();
                 break;
+            case DELETE_BLOB:
+                action = new DeleteBlobAction();
+                break;
+            case PUT_BLOB:
+                action = new PutBlockBlobAction();
+                break;
             case DELETE_CLOUD_SERVICE:
                 action = new DeleteCloudServiceAction();
                 break;
