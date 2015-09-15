@@ -52,7 +52,7 @@ The Action will fail when:
 Action description :This action is used to delete an existing blob from storage container in Microsoft Azure asynchronously.
 
 *Action name : PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_CLOUD_SERVICE
-Action description :This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable.This action is executed in asynchronous mode only if Delete attached media?=?true?.
+Action description :This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable.This action is executed in asynchronous mode only if Delete attached media=true.
 ]]></DOC>
 </DOCU_Docu>
 </DOCU>
