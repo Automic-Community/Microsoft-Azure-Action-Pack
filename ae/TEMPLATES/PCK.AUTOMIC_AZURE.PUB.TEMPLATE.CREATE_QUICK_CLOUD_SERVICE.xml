@@ -171,7 +171,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="CREATE_CLOUD" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_XML_FOR_CLOUD_SERVICE" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="CREATE_XML_FILE" BranchType="0" Col="3" Lnr="3" OType="SCRI" Object="PCK.AUTOMIC_AZURE.PUB.SCRIPT.CREATE_XML_FOR_CLOUD_SERVICE" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -362,7 +362,7 @@
 <node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
 <VALUE state="2">
 <Values>
-<row ERTUsage="0" Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+<row Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
 </Values>
 <Mode>0</Mode>
 </VALUE>
@@ -470,7 +470,7 @@
 <node content="1" id="VALUE" name="Variables" parent="" type="TASKVALUE">
 <VALUE state="2">
 <Values>
-<row ERTUsage="0" Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+<row Mod="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
 </Values>
 <Mode>0</Mode>
 </VALUE>
@@ -560,7 +560,6 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
 <UC4RB_AZR_FILE_PATHs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">&amp;UC4RB_AZR_XML_FILE_PATH#</UC4RB_AZR_FILE_PATHs.00>
 <UC4RB_AZR_STATUSs.00 ReadFromTable="JPPV" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
@@ -686,7 +685,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>0</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>

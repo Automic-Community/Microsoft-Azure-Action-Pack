@@ -3,15 +3,20 @@
  */
 package com.automic.azure.actions;
 
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.util.Strings;
 
+import com.automic.azure.constants.Constants;
 import com.automic.azure.constants.ExceptionConstants;
 import com.automic.azure.exception.AzureException;
 import com.automic.azure.util.CommonUtil;
+import com.automic.azure.util.ConsoleWriter;
 import com.automic.azure.util.Validator;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
@@ -60,8 +65,7 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
         if (Validator.checkNotEmpty(this.leaseId)) {
             builder = builder.header("x-ms-lease-id", leaseId);
         }
-        builder.delete();
-
+        prepareOutput(builder.delete(ClientResponse.class));
     }
 
     private void initialize() {
@@ -81,5 +85,10 @@ public class DeleteStorageContainerAction extends AbstractStorageAction {
         }
 
     }
-
+    
+    private void prepareOutput(ClientResponse response) throws AzureException {
+		List<String> tokenid = response.getHeaders().get(
+				Constants.REQUEST_TOKENID_KEY);
+		ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
+	}
 }
