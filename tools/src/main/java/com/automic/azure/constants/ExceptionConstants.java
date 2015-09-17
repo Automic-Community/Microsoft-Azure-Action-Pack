@@ -31,6 +31,7 @@ public final class ExceptionConstants {
 
     public static final String EMPTY_SERVICE_NAME = "Service name should not be empty";
     public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not be empty";
+    public static final String INVALID_DEPLYMENT_TYPE_MODE = "please provide a valid type of deployment: SLOT or NAME";
     public static final String EMPTY_ROLE_NAME = "Role name should not be empty";
     public static final String EMPTY_POSTSHUTDOWN_ACTION = "Post shutdown action should not be empty";
     public static final String EMPTY_VM_OPERATION_ACTION = "VM operation should not be empty";
