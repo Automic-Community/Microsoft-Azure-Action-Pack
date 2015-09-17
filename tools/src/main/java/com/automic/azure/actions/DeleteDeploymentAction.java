@@ -44,7 +44,7 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
         addOption("cloudservicename", true, "Cloud service name");
         addOption("deletemode", true, "Deployment delete mode either Slot or Deployemnt name");
         addOption("deploymentidentifier", true,
-                "Deployment Identifier could be Production/Staging or a deployment name");
+                "Deployment Identifier could be Production/Staging slot or a deployment name");
         addOption("deletemedia", true,
                 "Delete the media(operating system disk, attached data disks & the source blobs)");
     }
