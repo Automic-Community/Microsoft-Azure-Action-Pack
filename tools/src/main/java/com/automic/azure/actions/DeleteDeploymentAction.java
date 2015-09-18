@@ -18,35 +18,54 @@ import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 
 /**
- * Class to delete an existing deployment in Azure. There are two ways to delete a deployment in Azure
- * 
+ * <p>
+ * Class to delete an existing deployment in Azure. There are two ways to delete a deployment in Azure:
+ * <li>
+ * <ul>
+ * by calling api with deployment slot https://management.core.windows.net/{@literal <subscription-id>}
+ * /services/hostedservices/<cloud-service-name >/deploymentslots/{@literal <deployment-slot>}
+ * </ul>
+ * <ul>
+ * by calling api with deployment name https://management.core.windows.net/{@literal <subscription-id>}
+ * /services/hostedservices/<cloud-service-name >/deployments/{@literal <deployment-name>}
+ * </ul>
+ * </li>
+ * </p>
  */
 public class DeleteDeploymentAction extends AbstractManagementAction {
 
     private static final Logger LOGGER = LogManager.getLogger(DeleteDeploymentAction.class);
 
     /**
-     * 
-     * Enum for different modes for deleting deployment
-     *
+     * Cloud service name
      */
-    private static enum DeleteMode {
-        SLOT, NAME
-    }
-
     private String cloudServiceName;
-    private String deploymentIdentifier;
-    private String deploymentDeleteMode;
 
+    /**
+     * Deployment Identifier: could be a deployment slot or a deployment name
+     */
+    private String deploymentIdentifier;
+
+    /**
+     * whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks
+     * from storage
+     */
+    private boolean deleteBySlot;
+
+    /**
+     * whether to delete
+     */
     private boolean deleteMedia;
 
     public DeleteDeploymentAction() {
         addOption("cloudservicename", true, "Cloud service name");
-        addOption("deletemode", true, "Deployment delete mode either Slot or Deployemnt name");
+        addOption("deletebyslot", true, "Deployment delete mode either Slot or Deployemnt name");
         addOption("deploymentidentifier", true,
                 "Deployment Identifier could be Production/Staging slot or a deployment name");
-        addOption("deletemedia", true,
-                "Delete the media(operating system disk, attached data disks & the source blobs)");
+        addOption(
+                "deletemedia",
+                true,
+                "whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage");
     }
 
     /**
@@ -80,9 +99,9 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
                 .path("hostedservices").path(cloudServiceName);
 
         // check if we delete deployment based on slot or deployment name
-        if (DeleteMode.SLOT.toString().equals(deploymentDeleteMode)) {
+        if (deleteBySlot) {
             webResource = webResource.path("deploymentslots").path(deploymentIdentifier);
-        } else if (DeleteMode.NAME.toString().equals(deploymentDeleteMode)) {
+        } else {
             webResource = webResource.path("deployments").path(deploymentIdentifier);
         }
 
@@ -104,7 +123,7 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
     // initialize the parameters
     private void initialize() {
         cloudServiceName = getOptionValue("cloudservicename");
-        deploymentDeleteMode = getOptionValue("deletemode");
+        deleteBySlot = CommonUtil.convert2Bool(getOptionValue("deletebyslot"));
         deploymentIdentifier = getOptionValue("deploymentidentifier");
         deleteMedia = CommonUtil.convert2Bool(getOptionValue("deletemedia"));
     }
@@ -115,11 +134,6 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
         if (!Validator.checkNotEmpty(cloudServiceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
-        }
-
-        if (!validateDeleteMode()) {
-            LOGGER.error(ExceptionConstants.INVALID_DEPLYMENT_TYPE_MODE);
-            throw new AzureException(ExceptionConstants.INVALID_DEPLYMENT_TYPE_MODE);
         }
 
         if (!Validator.checkNotEmpty(deploymentIdentifier)) {
@@ -133,18 +147,4 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
         List<String> tokenid = response.getHeaders().get(Constants.REQUEST_TOKENID_KEY);
         ConsoleWriter.writeln("UC4RB_AZR_REQUEST_ID  ::=" + tokenid.get(0));
     }
-
-    // validate delete mode of deployment
-    private boolean validateDeleteMode() {
-        boolean isValid = false;
-        try {
-            DeleteMode.valueOf(deploymentDeleteMode);
-            isValid = true;
-        } catch (IllegalArgumentException ex) {
-            
-        }
-
-        return isValid;
-    }
-
 }
