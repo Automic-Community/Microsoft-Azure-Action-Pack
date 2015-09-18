@@ -66,7 +66,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
+<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -132,7 +132,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
+<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -184,7 +184,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
+<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
 <UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -289,7 +289,70 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT
+= General description =
+This action will allow you to create a deployment in azure asynchronously as per the specified parameter file. Output of this action will return request status id.
+Parameter file should be accessible from agent OS.
+The parameter file will have the following structure:
+<?xml version="1.0" encoding="utf-8"?>
+<CreateDeployment xmlns="http://schemas.microsoft.com/windowsazure">
+  <Name>deployment-name</Name>
+  <PackageUrl>package-url-in-blob-storage</PackageUrl>
+  <Label>base64-encoded-deployment-label</Label>
+  <Configuration>base64-encoded-configuration-file</Configuration>
+  <StartDeployment>start-deployment</StartDeployment>
+  <TreatWarningsAsError>prioritize-warnings</TreatWarningsAsError>
+  <ExtendedProperties>
+    <ExtendedProperty>
+      <Name>property-name</Name>
+      <Value>property-value</Value>
+    </ExtendedProperty>
+  </ExtendedProperties>
+  <ExtensionConfiguration>
+    <AllRoles>
+      <Extension>
+        <Id>identifier-of-extension</Id>
+        <State>state-of-extension</State>
+      </Extension>
+    </AllRoles>
+    <NamedRoles>
+      <Role>
+        <RoleName>role_name1</RoleName>
+        <Extensions>
+          <Extension>
+            <Id>identifier-of-extension</Id>
+            <State>state-of-extension</State>
+          </Extension>
+        </Extensions>
+      </Role>
+    </NamedRoles>
+  </ExtensionConfiguration>
+</CreateDeployment>
+= Inputs =
+* Subscription ID: ID of the subscription which will be used for this connection
+* Keystore location: Path for keystore
+* keystore Password: Password for keystore
+*Cloud Service Name :Cloud Service name in which you want to create a deployment
+*Deployment Slot: Target deployment slot
+* Configuration file : Name of the XML parameter file with full path 
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+= Behavior =
+* If provided configuration file content(s) are invalid, It will fail.
+=Return Value=
+This action publishes the request id which can be further used to check the status of the action.
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+= Rollback =
+(none)
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\azure.log under agent installation directory.
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>

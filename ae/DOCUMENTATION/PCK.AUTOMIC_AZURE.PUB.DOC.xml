@@ -48,6 +48,9 @@ Action description: This action will allow you to configure a Virtual Network in
 
 *Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_CLOUD_SERVICE
 Action description: This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable.This action is executed in asynchronous mode only if Delete attached media = true
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT
+Action description :This action will allow you to create a deployment in azure asynchronously as per the specified parameter file. Output of this action will return request status id.By default it will create a deployment in the staging.
 ]]></DOC>
 </DOCU_Docu>
 </DOCU>
