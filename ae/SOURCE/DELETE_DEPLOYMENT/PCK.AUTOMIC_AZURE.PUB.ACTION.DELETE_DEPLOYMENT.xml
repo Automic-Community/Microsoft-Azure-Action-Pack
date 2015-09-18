@@ -66,7 +66,6 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
-<UC4RB_AZR_CLOUD_SERVICE_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 <UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
 <UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
 <UC4RB_AZR_DEPLOYMENT_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
@@ -134,7 +133,6 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
-<UC4RB_AZR_CLOUD_SERVICE_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 <UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
 <UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
 <UC4RB_AZR_DEPLOYMENT_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
@@ -188,7 +186,6 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
-<UC4RB_AZR_CLOUD_SERVICE_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 <UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
 <UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
 <UC4RB_AZR_DEPLOYMENT_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
@@ -295,7 +292,51 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_DEPLOYMENT
+
+= General description =
+This action will delete an existing deployment in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable. You could either delete deployment based on deployment slots or a deployment name. User could also delete Operating system disk, attached data disks, and the source blobs for the disks from storage using appropriate flag.
+
+The Action will fail when:
+* Specified deployment slot/name does not exist within Azure cloud
+* Specified cloud service does not exists
+Note: If the deployment that is being deleted is using a reserved IP address, the address continues to be reserved for your subscription. The unused reserved IP address continues to incur charges. This is assumed that you as user will delete the reserved IP address if you don?t need it anymore.
+
+ = Inputs =
+* Subscription ID: ID of the subscription which will be used for this connection
+* Keystore location: Path for keystore
+* Keystore Password: Password for keystore
+* Cloud Service Name : Cloud Service name in which your Deployment is located. Example cloudservice123
+* Delete Deployment by Slot : Yes means delete by deployment slot. No means delete by deployment name
+* Deployment Identifier : Deployment slot or Deployment name
+* Delete attached media : Specify whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage
+* Delete attached media : Deletes operating system disk,attached data disks, and the source blobs from storage.(Default is NO)
+* Overwrite Agent: Overwrites the default agent
+* Overwrite Login: Overwrites the default login
+ 
+= Behavior =
+When we execute Delete Deployment action, Success response will be request id that will be used to track the further status of executed action.
+* If user tries to delete a deployment which does not exist the action will fail.
+* If user tries to delete a deployment/slot with ?Delete attached media? set as ?Yes? it deletes the operating system disk, attached data disks, and the source blobs for the disks from storage.
+
+=Return Value=
+The response will contain the request id which can be further used to query the status of the action.
+
+= Outputs =
+* Return code is 0 in case of success.
+* Return code is 1 in case of failure.
+* Return code is 2 in case of connection timed out !!
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\azure.log under agent installation directory.
+
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
