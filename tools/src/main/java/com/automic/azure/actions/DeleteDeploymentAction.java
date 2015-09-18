@@ -62,10 +62,8 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
         addOption("deletebyslot", true, "Deployment delete mode either Slot or Deployemnt name");
         addOption("deploymentidentifier", true,
                 "Deployment Identifier could be Production/Staging slot or a deployment name");
-        addOption(
-                "deletemedia",
-                true,
-                "whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage");
+        addOption("deletemedia", true, "whether you want to delete the operating system disk, "
+                + "attached data disks, and the source blobs for the disks from storage");
     }
 
     /**
