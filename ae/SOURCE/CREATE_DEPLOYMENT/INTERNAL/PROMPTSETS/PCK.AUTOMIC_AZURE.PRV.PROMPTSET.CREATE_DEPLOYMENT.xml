@@ -91,7 +91,7 @@
     </text></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CLOUD_SERVICEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CLOUD_SERVICE#" ReadFromTable="OPSE"></UC4RB_AZR_CLOUD_SERVICEs.00><UC4RB_AZR_DEPLOYMENT_SLOTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" ReadFromTable="OPSE">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00><UC4RB_AZR_PARAM_FILEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_PARAM_FILE#" ReadFromTable="OPSE"></UC4RB_AZR_PARAM_FILEs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CLOUD_SERVICEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CLOUD_SERVICE#" ReadFromTable="OPSE"></UC4RB_AZR_CLOUD_SERVICEs.00><UC4RB_AZR_DEPLOYMENT_SLOTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" ReadFromTable="OPSE">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00><UC4RB_AZR_PARAM_FILEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_PARAM_FILE#" ReadFromTable="OPSE"></UC4RB_AZR_PARAM_FILEs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>
