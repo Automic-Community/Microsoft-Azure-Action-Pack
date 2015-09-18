@@ -185,3 +185,12 @@ Create Cloud Service
     Action Set    &UC4RB_AZR_CS_CONFIG_FILE#    ${Parameter_File}
     Set Overwrite Agent
     Action Execute
+
+Delete Cloud Service
+    [Arguments]    ${_DELETE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_Cloud_Service}    ${Delete_Attached_Media}
+    Action Create    ${_DELETE_CLOUD_SERVICE_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}
+    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
+    Action Set    &UC4RB_AZR_DELETE_MEDIA#    ${Delete_Attached_Media}
+    Set Overwrite Agent
+    Action Execute
