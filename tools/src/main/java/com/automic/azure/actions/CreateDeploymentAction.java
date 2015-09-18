@@ -58,7 +58,12 @@ public class CreateDeploymentAction extends AbstractManagementAction {
 
         if (!Validator.checkNotEmpty(deploymentSlot)) {
             LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_SLOT);
-            throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
+            throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_SLOT);
+        }
+        
+        if(!"production".equalsIgnoreCase(deploymentSlot) && !"staging".equalsIgnoreCase(deploymentSlot) ){
+            LOGGER.error(ExceptionConstants.INVALID_DEPLOYMENT_SLOT);
+            throw new AzureException(ExceptionConstants.INVALID_DEPLOYMENT_SLOT);
         }
 
         if (!Validator.checkFileExists(paramterFile)) {

@@ -65,10 +65,9 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 <UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
-<UC4RB_AZR_VM_MEDIA_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
+<UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -132,10 +131,9 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 <UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
-<UC4RB_AZR_VM_MEDIA_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
+<UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -160,14 +158,14 @@
 <task Alias="" BranchType="0" Col="3" Lnr="3" OType="&lt;END&gt;" Object="END" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="0" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
-<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="0" WElseH="0" WElseS="1" WElseX="0" WhenExecute="" WtimOn="0"/>
+<when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
 <preconditions>
 <PreCon>
 <conditions id="CONDITIONS"/>
 </PreCon>
 </preconditions>
 <predecessors>
-<pre BranchType="0" Lnr="1" PreLnr="2" When="" type="container"/>
+<pre BranchType="0" Lnr="1" PreLnr="2" When="ANY_OK" type="container"/>
 </predecessors>
 <runtime MrtCancel="0" MrtDays="0" MrtErt="0" MrtExecute="0" MrtExecuteObj="" MrtFix="0" MrtMethodDate="0" MrtMethodErt="0" MrtMethodFix="0" MrtMethodNone="1" MrtOn="1" MrtTZ="" MrtTime="00:00" SrtErt="0" SrtFix="0" SrtMethodErt="0" SrtMethodFix="0" SrtMethodNone="1"/>
 <result ChkRExec="0" RElseHalt="0" RElseIgn="0" RElseJPAbend="0" RExecFlag="0" RExecute="" RRepMTimes="0" RRepOn="0" RRepWait="0" RWhen=""/>
@@ -185,10 +183,9 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<ELEMENT ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="ELEMENT" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 <UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Production</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
-<UC4RB_AZR_VM_MEDIA_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VM_MEDIA_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
+<UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -218,7 +215,7 @@
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
 <FcstStatus>0|U00000000 ??? ""</FcstStatus>
-<Ert>13</Ert>
+<Ert>8</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>

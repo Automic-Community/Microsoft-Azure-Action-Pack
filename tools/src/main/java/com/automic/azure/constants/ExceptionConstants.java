@@ -1,5 +1,6 @@
 package com.automic.azure.constants;
 
+
 /**
  * Constant class containing messages to describe Exception Scenarios.
  * 
@@ -62,6 +63,8 @@ public final class ExceptionConstants {
 
     public static final String EMPTY_DEPLOYMENT_SLOT = "Deployment slot cannot be empty ,possible "
             + "values [staging/production]";
+
+    public static final String INVALID_DEPLOYMENT_SLOT = "Invalid deployment slot,possible values [staging/production] ";
 
     private ExceptionConstants() {
     }
