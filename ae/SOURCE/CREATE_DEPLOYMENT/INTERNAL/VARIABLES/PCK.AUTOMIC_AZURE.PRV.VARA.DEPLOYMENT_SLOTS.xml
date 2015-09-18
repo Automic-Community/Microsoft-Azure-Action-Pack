@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PRV.VARA.CREATE_DEPLOYMENT" replacementmode="2">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PRV.VARA.DEPLOYMENT_SLOTS" replacementmode="2">
 <HEADER state="1">
-<Title>Environment for creating deployment</Title>
+<Title>Deployment slots</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <OH_SubType>STATIC</OH_SubType>
