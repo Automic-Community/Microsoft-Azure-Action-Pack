@@ -61,7 +61,7 @@ public class CreateDeploymentAction extends AbstractManagementAction {
             throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_SLOT);
         }
         
-        if(!"production".equalsIgnoreCase(deploymentSlot) && !"staging".equalsIgnoreCase(deploymentSlot) ){
+        if (!"production".equalsIgnoreCase(deploymentSlot) && !"staging".equalsIgnoreCase(deploymentSlot) ) {
             LOGGER.error(ExceptionConstants.INVALID_DEPLOYMENT_SLOT);
             throw new AzureException(ExceptionConstants.INVALID_DEPLOYMENT_SLOT);
         }
