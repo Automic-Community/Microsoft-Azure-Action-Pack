@@ -1,5 +1,6 @@
 package com.automic.azure.constants;
 
+
 /**
  * Constant class containing messages to describe Exception Scenarios.
  * 
@@ -30,7 +31,7 @@ public final class ExceptionConstants {
     public static final String INVALID_ARGS = "Improper Args. Possible cause : %s";
 
     public static final String EMPTY_SERVICE_NAME = "Service name should not be empty";
-    public static final String EMPTY_DEPLOYMENT_NAME = "Deployment name should not be empty";
+    public static final String EMPTY_DEPLOYMENT_NAME = "Deployment slot/name should not be empty";
     public static final String INVALID_DEPLYMENT_TYPE_MODE = "please provide a valid type of deployment: SLOT or NAME";
     public static final String EMPTY_ROLE_NAME = "Role name should not be empty";
     public static final String EMPTY_POSTSHUTDOWN_ACTION = "Post shutdown action should not be empty";
@@ -60,6 +61,8 @@ public final class ExceptionConstants {
     public static final String ERROR_COMMITING_BLOCK_BLOB = "Error while commiting block blob";
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
             + "Authentication Signature for Storage Service";
+
+    public static final String INVALID_DEPLOYMENT_SLOT = "";
 
     private ExceptionConstants() {
     }

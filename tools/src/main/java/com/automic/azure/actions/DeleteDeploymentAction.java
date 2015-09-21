@@ -59,10 +59,10 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
 
     public DeleteDeploymentAction() {
         addOption("cloudservicename", true, "Cloud service name");
-        addOption("deletebyslot", true, "Deployment delete mode either Slot or Deployemnt name");
+        addOption("deletebyslot", false, "Deployment delete mode either Slot or Deployemnt name");
         addOption("deploymentidentifier", true,
                 "Deployment Identifier could be Production/Staging slot or a deployment name");
-        addOption("deletemedia", true, "whether you want to delete the operating system disk, "
+        addOption("deletemedia", false, "whether you want to delete the operating system disk, "
                 + "attached data disks, and the source blobs for the disks from storage");
     }
 
@@ -137,7 +137,12 @@ public class DeleteDeploymentAction extends AbstractManagementAction {
         if (!Validator.checkNotEmpty(deploymentIdentifier)) {
             LOGGER.error(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_DEPLOYMENT_NAME);
+        } else if (deleteBySlot && !"production".equalsIgnoreCase(deploymentIdentifier)
+                && !"staging".equalsIgnoreCase(deploymentIdentifier)) {
+            LOGGER.error(ExceptionConstants.INVALID_DEPLOYMENT_SLOT);
+            throw new AzureException(ExceptionConstants.INVALID_DEPLOYMENT_SLOT);
         }
+
     }
 
     // publish the request id
