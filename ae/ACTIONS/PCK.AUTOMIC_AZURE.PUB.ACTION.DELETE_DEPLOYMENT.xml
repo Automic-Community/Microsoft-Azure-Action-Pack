@@ -296,12 +296,12 @@
 PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_DEPLOYMENT
 
 = General description =
-This action will delete an existing deployment in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable. You could either delete deployment based on deployment slots or a deployment name. User could also delete Operating system disk, attached data disks, and the source blobs for the disks from storage using appropriate flag.
+This action will delete an existing deployment in Microsoft Azure as per the specified inputs. Output of this action will be a request id which will be stored in AE variable. You could either delete deployment based on deployment slots or a deployment name. User could also delete Operating system disk, attached data disks, and the source blobs for the disks from storage using appropriate flag.
 
 The Action will fail when:
 * Specified deployment slot/name does not exist within Azure cloud
 * Specified cloud service does not exists
-Note: If the deployment that is being deleted is using a reserved IP address, the address continues to be reserved for your subscription. The unused reserved IP address continues to incur charges. This is assumed that you as user will delete the reserved IP address if you don?t need it anymore.
+Note: If the deployment that is being deleted is using a reserved IP address, the address continues to be reserved for your subscription. The unused reserved IP address continues to incur charges. It is assumed that you as user will delete the reserved IP address if you don't need it anymore.
 
  = Inputs =
 * Subscription ID: ID of the subscription which will be used for this connection
@@ -318,7 +318,7 @@ Note: If the deployment that is being deleted is using a reserved IP address, th
 = Behavior =
 When we execute Delete Deployment action, Success response will be request id that will be used to track the further status of executed action.
 * If user tries to delete a deployment which does not exist the action will fail.
-* If user tries to delete a deployment/slot with ?Delete attached media? set as ?Yes? it deletes the operating system disk, attached data disks, and the source blobs for the disks from storage.
+* If user tries to delete a deployment/slot with Delete attached media set as "Yes" it deletes the operating system disk, attached data disks, and the source blobs for the disks from storage.
 
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
