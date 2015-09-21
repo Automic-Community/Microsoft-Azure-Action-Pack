@@ -214,7 +214,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0| </FcstStatus>
 <Ert>620</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -291,6 +291,7 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.PUT_BLOB
+
 = General description =
 The Put Blob action uploads a new block blob. The content of the existing blob is overwritten with the content of the new blob and overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob. The default MIME type is application/octet-stream. Using this action user can save his/her contents(images, videos, documents etc.) in the form of blob for future usage. This action will also publish the blob name in AE variable on successful upload.
 The Action will fail when:
@@ -298,14 +299,15 @@ The Action will fail when:
 * Container provided does not exists in Storage account.
 
 = Inputs =
-* Account Name: Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
-* Access Key: Access key for this storage account 
-* Container name: Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. Dash (-) must be immediately preceded and followed by a letter or number. Example mycontainer123
-* Blob name: Blob name should not end with [.] or [/]. Should not contain [\]. Max Length 1024 characters.
-* Path of the blob file: Path to a file that should be uploaded. Max file size is 195 GB.
-* Content Type: Content Type of file. Example application/xml
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Account Name          : Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
+* Access Key            : Access key for this storage account 
+* Container name        : Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. Dash (-) must be immediately preceded and followed by a letter or number.
+                          Example mycontainer123
+* Blob name             : Blob name should not end with [.] or [/]. Should not contain [\]. Max Length 1024 characters.
+* Path of the blob file : Path to a file that should be uploaded. Max file size is 195 GB.
+* Content Type          : Content Type of file. Example application/xml
+* Overwrite Agent       : Overwrites the default agent
+* Overwrite Login       : Overwrites the default login
 
 = Behavior =
 The content of the existing blob is overwritten with the content of the new blob if their blob names are same.
