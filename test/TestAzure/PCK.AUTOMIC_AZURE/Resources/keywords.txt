@@ -185,6 +185,8 @@ Create Cloud Service
     Action Set    &UC4RB_AZR_CS_CONFIG_FILE#    ${Parameter_File}
     Set Overwrite Agent
     Action Execute
+    ${Generated_ID}=    Action Get Variable    &UC4RB_AZR_REQUEST_ID#
+    Set Global Variable    ${Generated_ID}
 
 Delete Cloud Service
     [Arguments]    ${_DELETE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_Cloud_Service}    ${Delete_Attached_Media}
@@ -192,5 +194,17 @@ Delete Cloud Service
     Configure Connection    ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}
     Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
     Action Set    &UC4RB_AZR_DELETE_MEDIA#    ${Delete_Attached_Media}
+    Set Overwrite Agent
+    Action Execute
+
+Create Deployment
+    Arguments]    ${_CREATE_DEPLOYMENT_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}    ${Name_Cloud_Service}
+    ...    ${Deployment_Slot}    ${Parameter_File_Deployment}
+    Create Cloud Service    ${_CREATE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}
+    Action Create    ${_CREATE_DEPLOYMENT_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
+    Action Set    &UC4RB_AZR_DEPLOYMENT_SLOT#    ${Deployment_Slot}
+    Action Set    &UC4RB_AZR_PARAM_FILE#    ${Parameter_File_Deployment}
     Set Overwrite Agent
     Action Execute

@@ -8,11 +8,54 @@
 <OH_SubType/>
 </HEADER>
 <DOCU_Docu state="1" type="text">
-<DOC><![CDATA[Package Name: PCK.AUTOMIC_AZURE
-Package Description: This package contains the actions for AE integration with the Azure system. 
+<DOC><![CDATA[About Automic's Azure Package
+================================
 
-  
-This package contains the following actions:
+Automate the Microsoft Azure Management and Storage services through various actions. These actions are basic building blocks to achieve the given business goal.
+Azure package supports the following functionalities.
+* Manage Cloud Service
+* Manage Virtual Machine(s)
+* Manage Storage Container
+* Manage Blob (Block) storage 
+* Manage Deployments
+* Manage Virtual Network Configuration
+
+=Supported Azure versions=
+
+Following versions of Azure Rest API(s) are supported:
+
+* For Management Services 2015-04-01
+* For Storage Services 2015-02-21
+
+=Limitations=
+
+* No known limitation.
+
+=Setup=
+
+* Oracle JDK 1.7 or higher must be installed on Agent OS and "java" must be set as executable on the same.
+
+* The Agent should be able to access the Azure URL(s) in order to make HTTPs requests.
+
+* Modify the HTTPS timeout parameters as per your environment. By default "CONNECTION_TIMEOUT" is defined as 30000 and "REAS_TIMEOUT" is defined as 60000. Both are defined in milliseconds. 0 means no timeout.
+
+* You should have active subscription provided by Microsoft Azure Services.
+
+* REST API(s) should be enabled for your subscription.
+
+* Certificate should be setup and uploaded in Azure Portal for your subscription.
+
+=Variables=
+
+PCK.AUTOMIC_AZURE.PRV.VARA.PACKAGE_PARAMETERS
+* HTTP timeout parameters can be configured in this variable. Values are defined in milliseconds. 0 means no timeout.
+* x-ms-version for Management and Storage services can also be configured in this variable.
+
+
+=Actions=
+
+Following actions are supported for Azure.
+
 * Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.GET_SUBSCRIPTION_INFO
 Action Description: This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription.
 
@@ -48,6 +91,9 @@ Action description: This action will allow you to configure a Virtual Network in
 
 *Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_CLOUD_SERVICE
 Action description: This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable.This action is executed in asynchronous mode only if Delete attached media = true
+
+* Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_DEPLOYMENT
+Action description: This action will delete an existing deployment in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable. You could either delete deployment based on deployment slots or a deployment name. User could also delete Operating system disk, attached data disks, and the source blobs for the disks from storage using appropriate flag.
 
 *Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT
 Action description :This action will allow you to create a deployment in azure asynchronously as per the specified parameter file. Output of this action will return request status id.By default it will create a deployment in the staging.

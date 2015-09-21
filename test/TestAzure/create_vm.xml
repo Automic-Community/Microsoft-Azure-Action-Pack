@@ -17,7 +17,7 @@
 	   <OSVirtualHardDisk>
         <HostCaching>ReadWrite</HostCaching>
         <DiskLabel>Windows Server</DiskLabel>
-        <DiskName>stk_disk_6</DiskName>
+        <DiskName>stk_disk_21</DiskName>
         <MediaLink>https://cactest.blob.core.windows.net/ankittetest/tempateQuick_VM.vhd</MediaLink>
         <SourceImageName>3a50f22b388a4ff7ab41029918570fa6__Windows-Server-2012-Essentials-20140327-enus</SourceImageName>
       </OSVirtualHardDisk>

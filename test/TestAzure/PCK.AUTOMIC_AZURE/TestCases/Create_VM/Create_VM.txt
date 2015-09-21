@@ -13,7 +13,7 @@ Resource          ../../Resources/actions.txt
 *** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        NameCloudService                 VMConfigurationFile
 Create VM with valid inputs
                       [Tags]    main_scenarios
-                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_Name}            ${Create_VM_FilePath}
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    blank                            ${Create_VM_FilePath}
 
 Create VM with non-existing Cloud Service
                       NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_Cloud_Service_Name}    ${Create_VM_FilePath}
@@ -39,21 +39,27 @@ Startup
 Create VM Deployment Template
     [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_Cloud_Service}    ${VM_Configuration_File}
     [Documentation]    This test validates creation of vm on azure portal.
-    ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -Precondition: Parameter File used should contain unique parameters used to create a VM, i.e. non existing name/configuration on azure portal.
+    ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
     ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
     ...    -${Keystore_Password}: This field specifies the password for Keystore.
     ...    -${Name_Cloud_Service}: This field specifies the Cloud Service name in which VM is to be created.
     ...    -${VM_Configuration_File}: This field specifies path to the VM configuration file.
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Create Cloud Service    ${_CREATE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    ...    ${Cloud_Service_File}
     Action Create    ${_CREATE_VM_ACTION}
     Configure Connection    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
-    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    test-ankit23
+    Run Keyword If    '${Name_Cloud_Service}' != 'blank'    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
     Action Set    &UC4RB_AZR_FILE_PATH#    ${VM_Configuration_File}
     Set Overwrite Agent
     Action Execute
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_AZR_REQUEST_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_AZR_REQUEST_ID#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Delete Cloud Service    ${_DELETE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    ...    test-ankit23    YES
 
 Teardown
     Log    *******End Test "CREATE VM DEPLOYMENT"*******

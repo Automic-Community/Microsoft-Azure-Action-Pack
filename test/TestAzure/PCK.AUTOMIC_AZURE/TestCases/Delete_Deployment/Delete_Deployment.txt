@@ -1,0 +1,76 @@
+*** Settings ***
+Suite Setup       Startup
+Suite Teardown    Teardown
+Force Tags        delete_deployment
+Default Tags
+Test Template     Delete Deployment Template
+Library           com.automic.robot.itpa.ItpaLibrary
+Resource          ../../Resources/messages.txt
+Resource          ../../Resources/keywords.txt
+Resource          ../../Resources/variables.txt
+Resource          ../../Resources/actions.txt
+
+*** Test Cases ***    OK_NOK    SubscriptionID        KeystorePath        KeystorePassword        NameCloudService                 DeleteDeploymentBySlot    DeploymentIdentifier    DeleteAttachedMedia
+Delete Deployment by Deployment Slot also Deleting Attached Media
+                      [Tags]    main_scenarios
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    blank                            YES                       Production              YES
+
+Delete Deployment by Deployment Name also Deleting Attached Media
+                      OK        ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    blank                            NO                        HelloMartiansWeb        YES
+
+Delete Deployment with non-existing Cloud Service
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_Cloud_Service_Name}    YES                       HelloMartiansWeb        YES
+
+Delete Deployment with invalid deployment slot
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_Name}            NO                        HelloMartiansWeb        YES
+
+Delete Deployment with invalid deployment name
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    blank                            YES                       Production              YES
+
+Assert cloud service name as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${EMPTY}                         YES                       Production              YES
+
+Assert Deployment Identifier as a mandatory field
+                      OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_Name}            YES                       ${EMPTY}                YES
+
+*** Keywords ***
+Startup
+    Log    *******Start Test "DELETE DEPLOYMENT"*******
+    Log    *******Connect to AE*******
+    Connect AE
+
+Delete Deployment Template
+    [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_Cloud_Service}    ${Delete_Deployment_By_Slot}
+    ...    ${Deployment_Identifier}    ${Delete_Attached_Media}
+    [Documentation]    This test validates removal of a Deployment on azure portal.
+    ...    -Precondition: To run this test, parameter file should contain unique cloud service name i.e. non-existing on azure portal.
+    ...    -Precondition 2: For this action a container "test" under "cactest" storage account name should contain "HelloMartians.cspkg" file which is under EXECDIR of Robot Automation Test.
+    ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
+    ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
+    ...    -${Keystore_Password}: This field specifies the password for Keystore.
+    ...    -${Name_Cloud_Service}: This field specifies the Cloud Service name from which deployment is to be deleted.
+    ...    -${Delete_Deployment_By_Slot}: This filed specifies whether you want to delete deployment by slot or name.
+    ...    -${Deployment_Identifier}: This field specifies identifier used for deployment to delete.
+    ...    -${Delete_Attached_Media}: This field specifies whether you want to delete media attached with deployment or not.
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Create Deployment    ${_CREATE_DEPLOYMENT_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    ...    ${Cloud_Service_File}    test-ankit23    Production    ${Create_Deployment_FilePath}
+    Action Create    ${_DELETE_DEPLOYMENT_ACTION}
+    Configure Connection    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    test-ankit23
+    Run Keyword If    '${Name_Cloud_Service}' != 'blank'    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
+    Action Set    &UC4RB_AZR_DELETE_BY_SLOT#    ${Delete_Deployment_By_Slot}
+    Action Set    &UC4RB_AZR_DEPLOY_IDENTIFIER#    ${Deployment_Identifier}
+    Action Set    &UC4RB_AZR_DELETE_MEDIA#    ${Delete_Attached_Media}
+    Set Overwrite Agent
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Sleep    120s
+    Action Execute
+    Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
+    ...    Assert Mandatory
+    Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_AZR_REQUEST_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_AZR_REQUEST_ID#
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Sleep    20s
+    Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Delete Cloud Service    ${_DELETE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    ...    test-ankit23    YES
+
+Teardown
+    Log    *******End Test "DELETE DEPLOYMENT"*******

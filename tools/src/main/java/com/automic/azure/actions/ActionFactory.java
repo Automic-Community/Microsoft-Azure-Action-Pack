@@ -70,6 +70,9 @@ public final class ActionFactory {
             case DELETE_CLOUD_SERVICE:
                 action = new DeleteCloudServiceAction();
                 break;
+            case DELETE_DEPLOYMENT:
+                action = new DeleteDeploymentAction();
+                break;
             case CREATE_DEPLOYMENT:
                 action = new CreateDeploymentAction();
                 break;

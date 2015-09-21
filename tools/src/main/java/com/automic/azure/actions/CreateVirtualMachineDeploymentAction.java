@@ -31,7 +31,6 @@ public class CreateVirtualMachineDeploymentAction extends AbstractManagementActi
 
     private static final Logger LOGGER = LogManager.getLogger(CreateVirtualMachineDeploymentAction.class);
 
-    private String subscriptionId;
     private String serviceName;
     private String configFilePath;
 
@@ -39,7 +38,6 @@ public class CreateVirtualMachineDeploymentAction extends AbstractManagementActi
      * Initializes a newly created {@code CreateVirtualMachineAction} object.
      */
     public CreateVirtualMachineDeploymentAction() {
-        addOption("subscriptionid", true, "Subscription ID");
         addOption("servicename", true, "Azure cloud service name");
         addOption("configfilepath", true, "Xml configration file path");
     }
@@ -64,16 +62,11 @@ public class CreateVirtualMachineDeploymentAction extends AbstractManagementActi
     }
 
     private void initialize() {
-        subscriptionId = getOptionValue("subscriptionid");
         serviceName = getOptionValue("servicename");
         configFilePath = getOptionValue("configfilepath");
     }
 
     private void validate() throws AzureException {
-        if (!Validator.checkNotEmpty(subscriptionId)) {
-            LOGGER.error(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-            throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
-        }
         if (!Validator.checkNotEmpty(serviceName)) {
             LOGGER.error(ExceptionConstants.EMPTY_SERVICE_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_SERVICE_NAME);
