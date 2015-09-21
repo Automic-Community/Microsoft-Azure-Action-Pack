@@ -50,8 +50,7 @@ public final class ExceptionConstants {
 
     public static final String EMPTY_STORAGE_CONTAINER_ACCESS = "Storage container access should not left blank";
     public static final String INVALID_BLOB_NAME = "Invalid Blob name. Should not end with . or / character."
-    		+ " Should not contain \\ character."
-            + " Max 1024 characters";
+            + " Should not contain \\ character." + " Max 1024 characters";
 
     public static final String INVALID_BLOB_FILE = "Blob File does not exists";
     public static final String INVALID_BLOB_CONTENT_TYPE = "Content-Type of blob should be valid";
@@ -60,7 +59,13 @@ public final class ExceptionConstants {
     public static final String ERROR_COMMITING_BLOCK_BLOB = "Error while commiting block blob";
     public static final String ERROR_STORAGE_AUTHENTICATION = "Error in Creating "
             + "Authentication Signature for Storage Service";
-    
+
+    public static final String EMPTY_DEPLOYMENT_SLOT = "Deployment slot cannot be empty ,possible "
+            + "values [staging/production]";
+
+    public static final String INVALID_DEPLOYMENT_SLOT = "Invalid deployment slot,"
+            + "possible values [staging/production] ";
+
     private ExceptionConstants() {
     }
 

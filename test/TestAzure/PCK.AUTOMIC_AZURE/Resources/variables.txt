@@ -26,3 +26,5 @@ ${Invalid_Cloud_Service_File}    ${EXECDIR}\\invalid_create_cloud_service.xml
 ${Put_Blob_File}    ${EXECDIR}\\put_blob.zip
 ${VN_FilePath}    ${EXECDIR}\\virtual_network.xml
 ${Invalid_VN_FilePath}    ${EXECDIR}\\invalid_virtual_network.xml
+${Create_Deployment_FilePath}    ${EXECDIR}\\create_deployment.xml
+${Invalid_Create_Deployment_FilePath}    ${EXECDIR}\\invalid_create_deployment.xml

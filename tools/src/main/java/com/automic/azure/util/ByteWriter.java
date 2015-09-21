@@ -3,6 +3,7 @@ package com.automic.azure.util;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,7 +68,7 @@ public class ByteWriter {
      * @throws AzureException
      */
     public void write(String field) throws AzureException {
-        write(field.getBytes());
+        write(field.getBytes(StandardCharsets.UTF_8));
     }
 
     /**
