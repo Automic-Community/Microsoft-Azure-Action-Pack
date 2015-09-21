@@ -22,10 +22,10 @@ Delete Deployment with non-existing Cloud Service
                       NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Invalid_Cloud_Service_Name}    YES                       HelloMartiansWeb        YES
 
 Delete Deployment with invalid deployment slot
-                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_Name}            NO                        HelloMartiansWeb        YES
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_Name}            YES                       HelloMartiansWeb        YES
 
 Delete Deployment with invalid deployment name
-                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    blank                            YES                       Production              YES
+                      NOK       ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${Cloud_Service_Name}            NO                        Production              YES
 
 Assert cloud service name as a mandatory field
                       OTHER     ${Subscription_ID}    ${Path_Keystore}    ${Password_Keystore}    ${EMPTY}                         YES                       Production              YES

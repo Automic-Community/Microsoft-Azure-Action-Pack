@@ -46,7 +46,8 @@ Delete Virtual Machine Template
     [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Name_VM}    ${Name_Cloud_Service}
     ...    ${Name_Deployment}    ${Delete_Attached_Media}
     [Documentation]    This test asserts removal of VM from Azure portal.
-    ...    - ${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
+    ...    -Precondition: To run this test, two VM's should be present under CAC-TEST cloud service with name VM1 and VM2(VM2 should contain media disk)
+    ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
     ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
     ...    -${Keystore_Password}: This field specifies the password for Keystore.
