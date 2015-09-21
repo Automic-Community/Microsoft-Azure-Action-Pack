@@ -68,7 +68,7 @@
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 <UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
 <UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
-<UC4RB_AZR_DEPLOYMENT_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
+<UC4RB_AZR_DEPLOY_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -135,7 +135,7 @@
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 <UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
 <UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
-<UC4RB_AZR_DEPLOYMENT_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
+<UC4RB_AZR_DEPLOY_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -188,7 +188,7 @@
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 <UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
 <UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
-<UC4RB_AZR_DEPLOYMENT_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
+<UC4RB_AZR_DEPLOY_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
