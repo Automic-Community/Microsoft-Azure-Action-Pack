@@ -198,7 +198,7 @@ Delete Cloud Service
     Action Execute
 
 Create Deployment
-    Arguments]    ${_CREATE_DEPLOYMENT_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}    ${Name_Cloud_Service}
+    [Arguments]    ${_CREATE_DEPLOYMENT_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}    ${Name_Cloud_Service}
     ...    ${Deployment_Slot}    ${Parameter_File_Deployment}
     Create Cloud Service    ${_CREATE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}
     Action Create    ${_CREATE_DEPLOYMENT_ACTION}
