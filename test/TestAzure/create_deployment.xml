@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CreateDeployment xmlns="http://schemas.microsoft.com/windowsazure">
+  <Name>HelloMartiansWeb</Name>
+  <PackageUrl>https://cactest.blob.core.windows.net/test/HelloMartians.cspkg</PackageUrl>
+  <Label>YW5raXR0ZXN0</Label>
+  <Configuration>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxTZXJ2aWNlQ29uZmlndXJhdGlvbiBzZXJ2aWNlTmFtZT0iSGVsbG9NYXJ0aWFucyIgeG1sbnM9Imh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vU2VydmljZUhvc3RpbmcvMjAwOC8xMC9TZXJ2aWNlQ29uZmlndXJhdGlvbiIgb3NGYW1pbHk9IjQiIG9zVmVyc2lvbj0iKiIgc2NoZW1hVmVyc2lvbj0iMjAxNS0wNC4yLjYiPg0KICA8Um9sZSBuYW1lPSJIZWxsb01hcnRpYW5zV2ViIj4NCiAgICA8SW5zdGFuY2VzIGNvdW50PSIxIiAvPg0KICAgIDxDb25maWd1cmF0aW9uU2V0dGluZ3M+DQogICAgICA8U2V0dGluZyBuYW1lPSJNaWNyb3NvZnQuV2luZG93c0F6dXJlLlBsdWdpbnMuRGlhZ25vc3RpY3MuQ29ubmVjdGlvblN0cmluZyIgdmFsdWU9IlVzZURldmVsb3BtZW50U3RvcmFnZT10cnVlIiAvPg0KICAgIDwvQ29uZmlndXJhdGlvblNldHRpbmdzPg0KICA8L1JvbGU+DQo8L1NlcnZpY2VDb25maWd1cmF0aW9uPg0K</Configuration>
+  <StartDeployment>false</StartDeployment>
+  <TreatWarningsAsError>false</TreatWarningsAsError> 
+</CreateDeployment>

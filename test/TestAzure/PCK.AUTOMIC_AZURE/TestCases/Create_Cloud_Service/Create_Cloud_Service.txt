@@ -33,7 +33,7 @@ Startup
 Create Cloud Service Template
     [Arguments]    ${OK_NOK}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}    ${Parameter_File}
     [Documentation]    This test validates creation of cloud service on azure portal.
-    ...    -Note: To run this test, change the parameter file according to your requirement.
+    ...    -Precondition: To run this test, parameter file should contain unique cloud service name i.e. non-existing on azure portal.
     ...    -${OK_NOK}: Boolean value indicate if the action is ENDED_OK or ENDED_NOT_OK. Value of this variable should be OK, NOK or OTHER.
     ...    -${Subscription_ID}: This field specifies Subscription ID for Azure.
     ...    -${Keystore_Path}: This field specifies the path to the Keystore(.jks file).
@@ -47,6 +47,8 @@ Create Cloud Service Template
     Run Keyword If    '${OK_NOK}' == 'OK'    Assert Success    ELSE IF    '${OK_NOK}' == 'NOK'    Assert Failure    ELSE
     ...    Assert Mandatory
     Run Keyword If    '${OK_NOK}' == 'OK'    Action Object Variable Should Be Found    &UC4RB_AZR_REQUEST_ID#    ELSE    Action Object Variable Should Not Be Found    &UC4RB_AZR_REQUEST_ID#
+    Run Keyword If    '${OK_NOK}' == 'OK'    Delete Cloud Service    ${_DELETE_CLOUD_SERVICE_ACTION}    ${Subscription_ID}    ${Keystore_Path}    ${Keystore_Password}
+    ...    test-ankit23    YES
 
 Teardown
     Log    *******End Test "CREATE CLOUD SERVICE"*******
