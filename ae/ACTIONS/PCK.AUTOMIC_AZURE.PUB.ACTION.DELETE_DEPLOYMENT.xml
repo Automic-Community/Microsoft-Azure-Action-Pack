@@ -311,7 +311,6 @@ Note: If the deployment that is being deleted is using a reserved IP address, th
 * Delete Deployment by Slot : Yes means delete by deployment slot. No means delete by deployment name
 * Deployment Identifier : Deployment slot or Deployment name
 * Delete attached media : Specify whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage
-* Delete attached media : Deletes operating system disk,attached data disks, and the source blobs from storage.(Default is NO)
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
  

@@ -332,9 +332,9 @@ The parameter file will have the following structure:
 = Inputs =
 * Subscription ID: ID of the subscription which will be used for this connection
 * Keystore location: Path for keystore
-* keystore Password: Password for keystore
-*Cloud Service Name :Cloud Service name in which you want to create a deployment
-*Deployment Slot: Target deployment slot
+* Keystore Password: Password for keystore
+* Cloud Service Name :Cloud Service name in which you want to create a deployment
+* Deployment Slot: Target deployment slot
 * Configuration file : Name of the XML parameter file with full path 
 * Overwrite Agent: Overwrites the default agent
 * Overwrite Login: Overwrites the default login
