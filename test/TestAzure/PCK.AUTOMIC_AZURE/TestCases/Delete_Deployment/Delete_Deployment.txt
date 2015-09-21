@@ -60,7 +60,7 @@ Delete Deployment Template
     Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    test-ankit23
     Run Keyword If    '${Name_Cloud_Service}' != 'blank'    Action Set    &UC4RB_AZR_CLOUD_SERVICE#    ${Name_Cloud_Service}
     Action Set    &UC4RB_AZR_DELETE_BY_SLOT#    ${Delete_Deployment_By_Slot}
-    Action Set    &UC4RB_AZR_DEPLOYMENT_IDENTIFIER#    ${Deployment_Identifier}
+    Action Set    &UC4RB_AZR_DEPLOY_IDENTIFIER#    ${Deployment_Identifier}
     Action Set    &UC4RB_AZR_DELETE_MEDIA#    ${Delete_Attached_Media}
     Set Overwrite Agent
     Run Keyword If    '${Name_Cloud_Service}' == 'blank'    Sleep    120s
