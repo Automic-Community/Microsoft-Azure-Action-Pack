@@ -116,7 +116,6 @@ public abstract class AbstractStorageAction extends AbstractAction {
             throw new AzureException(ExceptionConstants.EMPTY_X_MS_VERSION);
         }
 
-        // validate storage name and matches [0-9a-z]{3,24}
         if (!Validator.checkNotEmpty(storageAccount.getAccountName())) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACC_NAME);
@@ -125,7 +124,6 @@ public abstract class AbstractStorageAction extends AbstractAction {
             throw new AzureException(ExceptionConstants.INVALID_STORAGE_ACC_NAME);
         }
 
-        // validate storage access key
         if (!Validator.checkNotEmpty(storageAccount.getPrimaryAccessKey())) {
             LOGGER.error(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);
             throw new AzureException(ExceptionConstants.EMPTY_STORAGE_ACCESS_KEY);

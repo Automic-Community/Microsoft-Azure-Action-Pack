@@ -73,6 +73,9 @@ public final class ActionFactory {
             case DELETE_DEPLOYMENT:
                 action = new DeleteDeploymentAction();
                 break;
+            case CREATE_DEPLOYMENT:
+                action = new CreateDeploymentAction();
+                break;
             default:
                 String msg = "Invalid Action.. Please enter valid action " + Action.getActionNames();
                 LOGGER.error(msg);

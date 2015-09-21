@@ -11,6 +11,6 @@ public interface ErrorResponse {
      * Implements toString functionality
      * @return error response
      */
-    public String toString();
+    String toString();
 
 }

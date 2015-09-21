@@ -105,11 +105,10 @@ public final class Validator {
      * @return true if it is a valid container name else false
      */
     public static boolean isStorageContainerNameValid(String containerName) {
-        if (Validator.checkNotEmpty(containerName) && containerName.matches("[0-9a-z-]{3,63}")) {
+        if (Validator.checkNotEmpty(containerName) && containerName.matches("[0-9a-z-]{3,63}")
+                && !containerName.contains("--") && !containerName.startsWith("-") && !containerName.endsWith("-")) {
+            return true;
 
-            if (!containerName.contains("--") && !containerName.startsWith("-") && !containerName.endsWith("-")) {
-                return true;
-            }
         }
         return false;
     }
@@ -128,12 +127,9 @@ public final class Validator {
      * @return true if it is a valid blob name else false
      */
     public static boolean isContainerBlobNameValid(String blobName) {
-        if (Validator.checkNotEmpty(blobName) && !blobName.endsWith(".") && !blobName.endsWith("/")) {
-
-            if (blobName.length() < 1025 && !blobName.contains("\\")) {
-                return true;
-            }
-
+        if (Validator.checkNotEmpty(blobName) && !blobName.endsWith(".") && !blobName.endsWith("/")
+                && blobName.length() < 1025 && !blobName.contains("\\")) {
+            return true;
         }
 
         return false;
