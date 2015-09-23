@@ -328,15 +328,15 @@ The parameter file will have the following structure:
 
  = Inputs =
 * Subscription ID    : ID of the subscription which will be used for this connection
-* Keystore Location  : Path for keystore
-* Keystore Password  : Password for keystore
+* Keystore Location  : Path to keystore file
+* Keystore Password  : Password to access the keystore
 * Configuration File : Configuration file containing the information to configure a Virtual
                        Networks in Azure 
 * Overwrite Agent    : Overwrites the default agent
 * Overwrite Login    : Overwrites the default login
 
 = Behavior =
-The Action will return status code 2XX When executed successfully.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
 
 =Return Value=
 This action publishes the request id which can be further used to check the status of the action.

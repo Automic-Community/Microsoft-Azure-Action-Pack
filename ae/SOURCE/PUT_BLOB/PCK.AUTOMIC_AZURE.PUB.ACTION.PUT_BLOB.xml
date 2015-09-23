@@ -214,7 +214,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| </FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>620</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -310,7 +310,7 @@ The Action will fail when:
 * Overwrite Login       : Overwrites the default login
 
 = Behavior =
-The content of the existing blob is overwritten with the content of the new blob if their blob names are same.
+The content of the existing blob is overwritten with the content of the new blob if blob with the same name already exists.
 
 = Outputs =
 * Return code is 0 in case of success.

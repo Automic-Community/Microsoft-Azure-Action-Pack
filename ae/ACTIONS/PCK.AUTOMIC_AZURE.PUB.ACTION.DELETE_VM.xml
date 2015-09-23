@@ -217,7 +217,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| </FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>6</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -309,13 +309,13 @@ Also if delete attached media is selected YES than it will delete the associated
 * Deployment Name       : Name of the Deployment in which VM is located
 * Delete Attached Media : Deletes operating system disk,attached data disks, and the source blobs from storage.(Default is NO)
 * Subscription ID       : ID of the subscription which will be used for this connection
-* Keystore Location     : Path for keystore
-* Keystore Password     : Password for keystore
+* Keystore Location     : Path to keystore file
+* Keystore Password     : Password to access the keystore
 * Overwrite Agent       : Overwrites the default agent
 * Overwrite Login       : Overwrites the default login
 
 = Behaviour=
-The Action will return status code 2XX When executed successfully.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
 
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.

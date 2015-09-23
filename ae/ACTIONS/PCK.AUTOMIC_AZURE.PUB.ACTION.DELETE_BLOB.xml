@@ -214,7 +214,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| </FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>8</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -312,11 +312,11 @@ There are 3 different ways in which a user can provide the value for 'Snapshot' 
 
 = Behavior =
 * If a blob has a large number of snapshots, it's possible that the Delete Blob operation will time out. If this happens, user should retry the request.
-* If a blob doesn?t have snapshots and you want to delete the snapshots, the action will fail.
+* If a blob does not have snapshots and you want to delete the snapshots, the action will fail.
 * If an invalid container/blob name is supplied in the input, the action will fail.
 
 =Return Value=
-The request ID will be printed in the AE job report which can be further used for troubleshooting purpose if action fails.
+(none)
 
 = Outputs =
 * Return code is 0 in case of success.
