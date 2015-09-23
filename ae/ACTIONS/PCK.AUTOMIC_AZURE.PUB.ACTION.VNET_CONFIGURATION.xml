@@ -208,7 +208,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| </FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>11</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -330,7 +330,8 @@ The parameter file will have the following structure:
 * Subscription ID    : ID of the subscription which will be used for this connection
 * Keystore Location  : Path for keystore
 * Keystore Password  : Password for keystore
-* Configuration File : Configuration file containing the information to configure a Virtual Networks in Azure 
+* Configuration File : Configuration file containing the information to configure a Virtual
+                       Networks in Azure 
 * Overwrite Agent    : Overwrites the default agent
 * Overwrite Login    : Overwrites the default login
 

@@ -100,7 +100,7 @@
     </dynradiogroup></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CLOUD_SERVICEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CLOUD_SERVICE#" ReadFromTable="OPSE"></UC4RB_AZR_CLOUD_SERVICEs.00><UC4RB_AZR_DELETE_BY_SLOTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_BY_SLOT#" ReadFromTable="OPSE">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00><UC4RB_AZR_DEPLOY_IDENTIFIERs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" ReadFromTable="OPSE"></UC4RB_AZR_DEPLOY_IDENTIFIERs.00><UC4RB_AZR_DELETE_MEDIAs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_MEDIA#" ReadFromTable="OPSE">No</UC4RB_AZR_DELETE_MEDIAs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CLOUD_SERVICEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CLOUD_SERVICE#" ReadFromTable="OPSE"></UC4RB_AZR_CLOUD_SERVICEs.00><UC4RB_AZR_DELETE_BY_SLOTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_BY_SLOT#" ReadFromTable="OPSE">YES</UC4RB_AZR_DELETE_BY_SLOTs.00><UC4RB_AZR_DEPLOY_IDENTIFIERs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" ReadFromTable="OPSE"></UC4RB_AZR_DEPLOY_IDENTIFIERs.00><UC4RB_AZR_DELETE_MEDIAs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_MEDIA#" ReadFromTable="OPSE">NO</UC4RB_AZR_DELETE_MEDIAs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>
