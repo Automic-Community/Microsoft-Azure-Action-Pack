@@ -285,6 +285,7 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.VNET_CONFIGURATION
+
 = General description =
 This action will allow you to configure a Virtual Networks in Microsoft Azure asynchronously as per the specified parameter file. Output of this action will return request status id.
 Parameter file should be accessible from agent OS.
@@ -326,27 +327,32 @@ The parameter file will have the following structure:
 </NetworkConfiguration>
 
  = Inputs =
-* Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path for keystore
-* keystore Password: Password for keystore
-* Configuration file : Configuration file containing the information to configure a Virtual Networks in Azure 
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Subscription ID    : ID of the subscription which will be used for this connection
+* Keystore Location  : Path to keystore file
+* Keystore Password  : Password to access the keystore
+* Configuration File : Configuration file containing the information to configure a Virtual
+                       Networks in Azure 
+* Overwrite Agent    : Overwrites the default agent
+* Overwrite Login    : Overwrites the default login
 
 = Behavior =
-* If provided configuration file content(s) are invalid, It will fail.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
 
 =Return Value=
 This action publishes the request id which can be further used to check the status of the action.
+
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
+
 = Rollback =
 (none)
+
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
+
 = Example =
 (none)
 ]]></DOC>

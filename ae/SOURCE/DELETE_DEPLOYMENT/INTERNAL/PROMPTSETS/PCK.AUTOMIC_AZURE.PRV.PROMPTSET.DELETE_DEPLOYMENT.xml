@@ -39,12 +39,12 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><dynradiogroup alt="1" enabled="1" fill="b" focus="" id="UC4RB_AZR_DELETE_BY_SLOTs.00" nl="1" text="Delete Deployment by slot" tooltip="Yes  means delete by deployment slot. No means delete by deployment name" required="0">
+    </text><dynradiogroup alt="1" enabled="1" fill="b" focus="" id="UC4RB_AZR_DELETE_BY_SLOTs.00" nl="1" text="Delete Deployment by Slot" tooltip="Yes  means delete by deployment slot. No means delete by deployment name" required="0">
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">PCK.ITPA_SHARED.PRV.VARA.YES_NO</entry>
         <entry name="xmlkey"/>
         <entry name="xmlpath"/>
-        <entry name="text">Delete Deployment by slot</entry>
+        <entry name="text">Delete Deployment by Slot</entry>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_DELETE_BY_SLOTs.00</entry>
         <entry name="enabled">0</entry>
@@ -82,12 +82,12 @@
         <entry name="resetable">1</entry>
       <entry name="initvalue"/>
          </properties>
-    </text><dynradiogroup alt="1" enabled="1" fill="b" focus="" id="UC4RB_AZR_DELETE_MEDIAs.00" nl="1" text="Delete attached media" tooltip="Specify whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage" required="0">
+    </text><dynradiogroup alt="1" enabled="1" fill="b" focus="" id="UC4RB_AZR_DELETE_MEDIAs.00" nl="1" text="Delete Attached Media" tooltip="Specify whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage" required="0">
       <properties>
         <entry listparam="C,N" name="reference" reftype="STATIC">PCK.ITPA_SHARED.PRV.VARA.YES_NO</entry>
         <entry name="xmlkey"/>
         <entry name="xmlpath"/>
-        <entry name="text">Delete attached media</entry>
+        <entry name="text">Delete Attached Media</entry>
         <entry name="quotes"/>
         <entry name="id">UC4RB_AZR_DELETE_MEDIAs.00</entry>
         <entry name="enabled">0</entry>
@@ -100,7 +100,7 @@
     </dynradiogroup></readpanel></dialog>]]></XUIEDITOR>
 </PROMPTSETXUI>
 <PROMPTSETDATA state="1">
-<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CLOUD_SERVICEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CLOUD_SERVICE#" ReadFromTable="OPSE"></UC4RB_AZR_CLOUD_SERVICEs.00><UC4RB_AZR_DELETE_BY_SLOTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_BY_SLOT#" ReadFromTable="OPSE">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00><UC4RB_AZR_DEPLOY_IDENTIFIERs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" ReadFromTable="OPSE"></UC4RB_AZR_DEPLOY_IDENTIFIERs.00><UC4RB_AZR_DELETE_MEDIAs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_MEDIA#" ReadFromTable="OPSE">No</UC4RB_AZR_DELETE_MEDIAs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
+<DATAEDITOR><![CDATA[<PRPTS ontop="1"><PRPTBOX><UC4RB_AZR_CLOUD_SERVICEs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_CLOUD_SERVICE#" ReadFromTable="OPSE"></UC4RB_AZR_CLOUD_SERVICEs.00><UC4RB_AZR_DELETE_BY_SLOTs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_BY_SLOT#" ReadFromTable="OPSE">YES</UC4RB_AZR_DELETE_BY_SLOTs.00><UC4RB_AZR_DEPLOY_IDENTIFIERs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" ReadFromTable="OPSE"></UC4RB_AZR_DEPLOY_IDENTIFIERs.00><UC4RB_AZR_DELETE_MEDIAs.00 haslist="0" msgnr="-1" msginsert="" altview="0" promptname="UC4RB_AZR_DELETE_MEDIA#" ReadFromTable="OPSE">NO</UC4RB_AZR_DELETE_MEDIAs.00></PRPTBOX></PRPTS>]]></DATAEDITOR>
 </PROMPTSETDATA>
 <DOCU_Docu state="1" type="text">
 <DOC/>

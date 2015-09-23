@@ -66,7 +66,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE"/>
-<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">NO</UC4RB_AZR_DELETE_MEDIAs.00>
+<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -131,7 +131,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE"/>
-<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">NO</UC4RB_AZR_DELETE_MEDIAs.00>
+<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -182,7 +182,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE"/>
-<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE">NO</UC4RB_AZR_DELETE_MEDIAs.00>
+<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -211,7 +211,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>10</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -258,6 +258,7 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE" ontop="1">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_CLOUD_SERVICE" prptmode="1">
 <UC4RB_AZR_CLOUD_SERVICEs.00 altview="0" haslist="0"/>
+<UC4RB_AZR_DELETE_MEDIAs.00 altview="1" haslist="0"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -290,34 +291,38 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_CLOUD_SERVICE
+
 = General description =
 This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable.
 Note: This action is executed in asynchronous mode only if Delete attached media = true , so in this case, passing this action does not mean that operation got successfully executed. This action returns the request id which can be used to check the status of this operation. See CheckRequestStatus action for more details.
- = Inputs =
-* Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path for keystore
-* keystore Password: Password for keystore
-* Cloud Service Name : Cloud Service name which you want to delete
-* Delete attached media : Deletes operating system disk,attached data disks, and the source blobs from storage.(Default is NO)
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+ 
+= Inputs =
+* Subscription ID       : ID of the subscription which will be used for this connection
+* Keystore Location     : Path to keystore file
+* Keystore Password     : Password to access the keystore
+* Cloud Service Name    : Cloud Service name which you want to delete
+* Delete Attached Media : Deletes operating system disk,attached data disks, and the source blobs from storage.(Default is NO)
+* Overwrite Agent       : Overwrites the default agent
+* Overwrite Login       : Overwrites the default login
+
 = Behavior =
-When we execute Delete Cloud Service action, Success response will be Microsoft (ms) request token id that will be used to track the further status of executed action.
-* If provided cloud service contained deployments and Delete attached media = true, given cloud service will be deleted with deployments and action will pass.
-* If provided cloud service contained deployments and Delete attached media = false, given cloud service will not be deleted and action will fail.
-* If provided cloud service contained no deployments, given cloud service will be deleted and action will pass.
-* If provided non-existing cloud service, action will fail.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
+
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
+
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
+
 = Rollback =
 (none)
+
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
+
 = Example =
 (none)
 ]]></DOC>

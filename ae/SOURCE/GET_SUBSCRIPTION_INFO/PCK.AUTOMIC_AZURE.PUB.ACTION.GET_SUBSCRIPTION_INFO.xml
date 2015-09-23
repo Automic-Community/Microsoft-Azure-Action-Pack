@@ -187,7 +187,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>94</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -284,11 +284,11 @@ This action is used to fetch Subscription details from Azure system as per the s
 </Subscription>
 
 = Inputs =
-* Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path including Keystore file name Example: C:\certs\mykeystore.jks
-* Keystore Password: Password to your Keystore
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Subscription ID   : ID of the subscription which will be used for this connection
+* Keystore Location : Path to keystore file
+* Keystore Password : Password to access the keystore
+* Overwrite Agent   : Overwrites the default agent
+* Overwrite Login   : Overwrites the default login
 
 = Behavior =
 (see general description)

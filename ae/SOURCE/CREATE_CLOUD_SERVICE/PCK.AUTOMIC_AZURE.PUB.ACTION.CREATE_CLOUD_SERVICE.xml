@@ -208,7 +208,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>6</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -285,6 +285,7 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE
+
 = General description =
 This action will create a new cloud service in Microsoft Azure as per the specified parameter file. Output of this action will return request status id.
  The parameter file will have the following structure:
@@ -298,26 +299,33 @@ This action will create a new cloud service in Microsoft Azure as per the specif
     <ReverseDnsFqdn>test-cloud.cloudapp.net.</ReverseDnsFqdn>
 </CreateHostedService>
 Cloud Service will be created at the specified geographical location. Possible geographical locations can be found at http://azure.microsoft.com/en-us/regions/ 
+
  = Inputs =
-* Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path for keystore
-* keystore Password: Password for keystore
-* Parameter File : Configuration file containing the information to create a cloud service in Azure 
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Subscription ID   : ID of the subscription which will be used for this connection
+* Keystore Location : Path to keystore file
+* Keystore Password : Password to access the keystore
+* Parameter File    : Configuration file containing the information to create a cloud service in Azure 
+* Overwrite Agent   : Overwrites the default agent
+* Overwrite Login   : Overwrites the default login
+
 = Behavior =
-When we execute Create Cloud Service action, Success response will be Microsoft (ms) request token id that will be used to track the further status of executed action.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
+
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
+
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
+
 = Rollback =
 (none)
+
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
+
 = Example =
 (none)
 ]]></DOC>

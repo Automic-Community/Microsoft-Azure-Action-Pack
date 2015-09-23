@@ -66,8 +66,8 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
-<UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
-<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
+<UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">YES</UC4RB_AZR_DELETE_BY_SLOTs.00>
+<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">NO</UC4RB_AZR_DELETE_MEDIAs.00>
 <UC4RB_AZR_DEPLOY_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -133,8 +133,8 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
-<UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
-<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
+<UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">YES</UC4RB_AZR_DELETE_BY_SLOTs.00>
+<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">NO</UC4RB_AZR_DELETE_MEDIAs.00>
 <UC4RB_AZR_DEPLOY_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -186,8 +186,8 @@
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">
 <UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
-<UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">Yes</UC4RB_AZR_DELETE_BY_SLOTs.00>
-<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">No</UC4RB_AZR_DELETE_MEDIAs.00>
+<UC4RB_AZR_DELETE_BY_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_BY_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">YES</UC4RB_AZR_DELETE_BY_SLOTs.00>
+<UC4RB_AZR_DELETE_MEDIAs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DELETE_MEDIA#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT">NO</UC4RB_AZR_DELETE_MEDIAs.00>
 <UC4RB_AZR_DEPLOY_IDENTIFIERs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOY_IDENTIFIER#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_DEPLOYMENT"/>
 </PRPTBOX>
 </PROMPTSET>
@@ -304,20 +304,19 @@ The Action will fail when:
 Note: If the deployment that is being deleted is using a reserved IP address, the address continues to be reserved for your subscription. The unused reserved IP address continues to incur charges. It is assumed that you as user will delete the reserved IP address if you don't need it anymore.
 
  = Inputs =
-* Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path for keystore
-* Keystore Password: Password for keystore
-* Cloud Service Name : Cloud Service name in which your Deployment is located. Example cloudservice123
+* Subscription ID           : ID of the subscription which will be used for this connection
+* Keystore Location         : Path to keystore file
+* Keystore Password         : Password to access the keystore
+* Cloud Service Name        : Cloud Service name in which your Deployment is located. Example cloudservice123
 * Delete Deployment by Slot : Yes means delete by deployment slot. No means delete by deployment name
-* Deployment Identifier : Deployment slot or Deployment name
-* Delete attached media : Specify whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Deployment Identifier     : Deployment slot or Deployment name
+* Delete Attached Media     : Specify whether you want to delete the operating system disk, attached data disks, and the source blobs for the disks from storage
+* Delete Attached Media     : Deletes operating system disk,attached data disks, and the source blobs from storage.(Default is NO)
+* Overwrite Agent           : Overwrites the default agent
+* Overwrite Login           : Overwrites the default login
  
 = Behavior =
-When we execute Delete Deployment action, Success response will be request id that will be used to track the further status of executed action.
-* If user tries to delete a deployment which does not exist the action will fail.
-* If user tries to delete a deployment/slot with Delete attached media set as "Yes" it deletes the operating system disk, attached data disks, and the source blobs for the disks from storage.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
 
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.

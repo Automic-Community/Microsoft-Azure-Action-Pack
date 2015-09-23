@@ -211,7 +211,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>9</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -288,23 +288,22 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
  PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM_DEPLOYMENT
+
 = General description =
 The Create Virtual Machine Deployment Action creates a deployment and then creates a Virtual Machine in the deployment based on the provided xml configuration file and service name. If action executed successfully, it will return request status id that will be used to check status of executed action.
 
 = Inputs =
 * Cloud service name    : Name of the cloud service in which virtual machine is created 
 * VM Configuration File : Xml file name with full path which contains virtual machine configuration set
-* Subscription ID   	: ID of the subscription which will be used for this connection
-* Keystore location	: Path for keystore
-* keystore Password	: Password for keystore
-* Overwrite Agent	: Overwrites the default agent
-* Overwrite Login	: Overwrites the default login
+* Subscription ID    : ID of the subscription which will be used for this connection
+* Keystore Location  : Path to keystore file
+* Keystore Password  : Password to access the keystore
+* Overwrite Agent    : Overwrites the default agent
+* Overwrite Login    : Overwrites the default login
 
 = Behavior =
-When we execute change Create Virtual Machine Deployment action, Success response will be Microsoft (ms) request token id that will be use to track the status of executed action.
-* If provided cloud service name doesn't exist on Azure cloud then action will be fail. It will return status code and message.
-* If provided VM Configuration File is invalid xml then action will be fail. It will return status code and message.
-* Provided cloud service name and VM Configuration File is valid then action will be execute successfully. It will return ms request token id.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
+
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
 = Outputs =

@@ -217,7 +217,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
 <Ert>9</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -294,33 +294,28 @@
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
 PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE
+
 = General description =
 This action is used to change the virtual machine state (start ,restart ,shutdown and shutdown & deallocate).Difference between shutdown and shutdown deallocate is that latter 
 will release all the resources acquired by the Virtual machine.This action will return request id which can be further used to query the status of the action.
 
 = Inputs =
-* VM Name : Name of the Virtual Machine
+* VM Name	     : Name of the Virtual Machine
 * Cloud Service Name : Name of the Cloud Service in which VM is located
-* Deployment Name :Name of the Deployment in which VM is located
-* Command : Action to perform on a given VM(Start, Restart ,Shutdown,Shutdown_Deallocate)
-* Subscription ID: ID of the subscription which will be used for this connection
-* Keystore location: Path for keystore
-* keystore Password: Password for keystore
-* Overwrite Agent: Overwrites the default agent
-* Overwrite Login: Overwrites the default login
+* Deployment Name    : Name of the Deployment in which VM is located
+* Command            : Action to perform on a given VM(Start, Restart ,Shutdown,Shutdown_Deallocate)
+* Subscription ID    : ID of the subscription which will be used for this connection
+* Keystore Location  : Path to keystore file
+* Keystore Password  : Password to access the keystore
+* Overwrite Agent    : Overwrites the default agent
+* Overwrite Login    : Overwrites the default login
 
 = Behavior =
-When we execute change virtual machine action, Success response will be Microsoft (ms) request token id that will be use to track the further status of executed action.
-* If provided vm-name doesn't exist on Azure cloud then action will not fail. It will return status code and ms request token id.
-* if provided deployment-name doesn't exist on Azure cloud then action will be fail. It will return status code and message.
-* If virtual machine is already Shutdown and Shutdown command is executed again then action will not fail. It will return status code and ms request token id.
-* If virtual machine is already Shutdown and Shutdown Deallocated command is executed then the action will not fail. It will return status code and ms request token id.
-* if virtual machine is Shutdown Deallocated and Shutdown command is executed then the action will be failed. It will return status code and message.
-* if virtual machine is Shutdown Deallocated and Restart command is executed then the action will be failed. It will return status code and message.
-* if virtual machine is Shutdown Deallocated and Start command is executed then the action will not fail. It will return status code and message.
+Success or failure conditions for this action will depend on the specified inputs and Azure response. If Azure http response is in the range of 2XX, then this action's return code will be zero otherwise will be non-zero value. In case of failure scenarios, failure cause will be printed in job report as well.
 
 =Return Value=
 The response will contain the request id which can be further used to query the status of the action.
+
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
