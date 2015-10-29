@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_STORAGE_CONTAINER">
 <XHEADER state="1">
-<Title>Create a Storage Container in Azure</Title>
+<Title>Delete storage container</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -56,16 +56,16 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS">
-<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCESS_KEY#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
-<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCOUNT_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
+<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCESS_KEY#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
+<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCOUNT_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">
-<UC4RB_AZR_CONTAINER_ACCESSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_ACCESS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">PRIVATE</UC4RB_AZR_CONTAINER_ACCESSs.00>
-<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER">
+<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER"/>
+<UC4RB_AZR_LEASE_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_LEASE_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -87,7 +87,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="CREATE_STORAGE_CONTAINER" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.CREATE_STORAGE_CONTAINER@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="DELETE_STORAGE_CONTAINER" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.DELETE_STORAGE_CONTAINER@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -120,16 +120,16 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS">
-<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCESS_KEY#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
-<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCOUNT_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
+<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCESS_KEY#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
+<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCOUNT_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">
-<UC4RB_AZR_CONTAINER_ACCESSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_ACCESS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">PRIVATE</UC4RB_AZR_CONTAINER_ACCESSs.00>
-<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER">
+<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER"/>
+<UC4RB_AZR_LEASE_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_LEASE_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -170,16 +170,16 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS">
-<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCESS_KEY#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
-<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 ReadFromTable="OPUD" altview="1" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCOUNT_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
+<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCESS_KEY#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
+<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STORAGE_ACCOUNT_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">
-<UC4RB_AZR_CONTAINER_ACCESSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_ACCESS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER">PRIVATE</UC4RB_AZR_CONTAINER_ACCESSs.00>
-<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER">
+<UC4RB_AZR_CONTAINER_NAMEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CONTAINER_NAME#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER"/>
+<UC4RB_AZR_LEASE_IDs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_LEASE_ID#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -208,8 +208,8 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| </FcstStatus>
-<Ert>25</Ert>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<Ert>0</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -248,18 +248,12 @@
 </node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" prptmode="1">
-<UC4RB_AZR_STORAGE_ACCOUNT_NAMEs.00 altview="1" haslist="0"/>
-<UC4RB_AZR_STORAGE_ACCESS_KEYs.00 altview="1" haslist="0"/>
-</PRPTBOX>
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PUB.PROMPTSET.STORAGE_DETAILS" prptmode="1"/>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_STORAGE_CONTAINER" prptmode="1">
-<UC4RB_AZR_CONTAINER_NAMEs.00 altview="0" haslist="0"/>
-<UC4RB_AZR_CONTAINER_ACCESSs.00 altview="0" haslist="0">PRIVATE</UC4RB_AZR_CONTAINER_ACCESSs.00>
-</PRPTBOX>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_STORAGE_CONTAINER" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -290,22 +284,16 @@
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
-PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER
+PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_STORAGE_CONTAINER
 
 = General description =
-This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type. User can choose from the following access types:
-* PRIVATE - By default, the container is PRIVATE and can be accessed only by the account owner.
-* CONTAINER - To allow full public read access for the container and blobs
-* BLOB - To allow public read access to the blobs in the container, but not the container properties and metadata.
-The Action will fail when:
-* A container with the same name already exists in storage account
-* A container with the same name is being deleted at the same time
- 
+This action is used to delete a Container in the Azure Storage account provided by the user. The Delete Container action marks the specified container for deletion. The container and any blobs contained within it are later deleted during garbage collection.To call this action on a container that has an active lease, specify the lease ID.
+
 = Inputs =
-* Account Name	  : Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
-* Access Key	  : Access key for this storage account 
-* Container name  : Storage container name length: 3 to 63 characters, numbers, lower-case letters and - only. No two - can occur together. Example mycontainer123
-* Access Type	  : Select the access type for the storage container.
+* Account Name    : Storage account name length: 3 to 24 characters, numbers and lowercase letters only.  Example mystorage123 
+* Access Key      : Access key for this storage account 
+* Container name  : Name of the Storage Container to delete.Storage container name can only include numbers and lower-case characters. Example mycontainer123
+* Lease ID        : Provide Lease ID if the container has an active lease
 * Overwrite Agent : Overwrites the default agent
 * Overwrite Login : Overwrites the default login
 
@@ -316,15 +304,13 @@ The Action will fail when:
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
 * Return code is 2 in case of connection timed out !!
-When action fails the job report will contain a request id which could be used to troubleshoot the request.
+The job report will always contain a request id which could be used to troubleshoot the request
 
 = Rollback =
 (none)
-
 = Logging =
 AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
-
 = Example =
 (none)]]></DOC>
 </DOCU_Docu>
