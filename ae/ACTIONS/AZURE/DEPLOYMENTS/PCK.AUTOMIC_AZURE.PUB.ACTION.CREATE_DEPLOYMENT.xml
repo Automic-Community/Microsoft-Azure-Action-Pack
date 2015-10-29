@@ -214,7 +214,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<FcstStatus>0| |</FcstStatus>
 <Ert>8</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -338,7 +338,7 @@ The parameter file will have the following structure:
 * Keystore Password  : Password to access the keystore
 * Cloud Service Name : Cloud Service name in which you want to create a deployment
 * Deployment Slot    : Target deployment slot
-* Configuration file : Name of the XML parameter file with full path 
+* Configuration File : Name of the XML parameter file with full path 
 * Overwrite Agent    : Overwrites the default agent
 * Overwrite Login    : Overwrites the default login
 

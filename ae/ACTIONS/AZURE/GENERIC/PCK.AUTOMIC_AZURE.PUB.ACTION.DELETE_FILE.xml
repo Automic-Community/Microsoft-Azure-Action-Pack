@@ -56,8 +56,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
-<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
-<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
+<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
+<UC4RB_AZR_STATUSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -112,8 +112,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
-<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
-<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
+<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
+<UC4RB_AZR_STATUSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -154,8 +154,8 @@
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" parent="PPRPTS" type="PPROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">
-<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
-<UC4RB_AZR_STATUSs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
+<UC4RB_AZR_FILE_PATHs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_FILE_PATH#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE"/>
+<UC4RB_AZR_STATUSs.00 ReadFromTable="OPUD" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_STATUS#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE">YES</UC4RB_AZR_STATUSs.00>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -184,7 +184,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<FcstStatus>0| |</FcstStatus>
 <Ert>1</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -224,7 +224,10 @@
 </node>
 <node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" parent="PRPTS" type="PROMPTSET">
 <PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" prptmode="1"/>
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.DELETE_FILE" prptmode="1">
+<UC4RB_AZR_FILE_PATHs.00 altview="0" haslist="0"/>
+<UC4RB_AZR_STATUSs.00 altview="0" haslist="0">YES</UC4RB_AZR_STATUSs.00>
+</PRPTBOX>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -254,7 +257,36 @@
 <MSCRI/>
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
-<DOC/>
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_FILE
+
+= General description =
+This action is used to delete the specified file.
+
+= Inputs =
+* File Path		: File path to be deleted. Example: C:\agents\windows\Temp\image.txt
+* Fail If Missing	: Yes means action will fail if file does not exist.
+* Overwrite Agent   	: Overwrites the default agent
+* Overwrite Login   	: Overwrites the default login
+
+= Behavior =
+The specified file will be deleted if the file exist.
+
+=Return Value=
+(none)
+
+= Outputs =
+(none)
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+Java logs will be created at \temp\azure.log under agent installation directory.
+
+= Example =
+(none)]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>

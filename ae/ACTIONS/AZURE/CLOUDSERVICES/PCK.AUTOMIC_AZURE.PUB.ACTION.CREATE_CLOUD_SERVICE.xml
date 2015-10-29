@@ -208,7 +208,7 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<FcstStatus>0| |</FcstStatus>
 <Ert>6</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
@@ -288,7 +288,7 @@ PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE
 
 = General description =
 This action will create a new cloud service in Microsoft Azure as per the specified parameter file. Output of this action will return request status id.
- The parameter file will have the following structure:
+The parameter file will have the following structure:
  
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <CreateHostedService xmlns="http://schemas.microsoft.com/windowsazure">
