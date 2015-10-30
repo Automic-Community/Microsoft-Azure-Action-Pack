@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-15"?>
 <uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
-<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT">
+<JOBP AllowExternal="1" name="PCK.AUTOMIC_AZURE.PUB.ACTION.VNET_CONFIGURATION">
 <XHEADER state="1">
-<Title>Create a Deployment in Azure</Title>
+<Title>Set Virtual Network Configuration in Azure</Title>
 <ArchiveKey1/>
 <ArchiveKey2/>
 <Active>1</Active>
@@ -62,12 +62,10 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
-<UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
+<UC4RB_AZR_VN_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VN_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -89,7 +87,7 @@
 </PostCon>
 </postconditions>
 </task>
-<task Alias="CREATE_DEPLOYMENT" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.CREATE_DEPLOYMENT@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
+<task Alias="VNET_CONFIGURATION" BranchType="0" Col="2" Lnr="2" OType="JOBS" Object="PCK.AUTOMIC_AZURE.PRV.JOB.VNET_CONFIGURATION@GENERIC" ParentAlias="" ParentObject="" Row="1" Text2="">
 <checkpoint RollbackFlag="1" RunPerPatch="0" RunPerTarget="0" TcpADays="0" TcpATime="00:00" TcpATimeTZ="" TcpExecute="" TcpOn="0" promptatgen="0" showprompt="0"/>
 <after ActFlg="1" AtimOn="0" ErlstStDays="0" ErlstStTime="00:00" ErlstStTimeTZ="" HoldFlg="0"/>
 <when ChkWhenExec="0" LtstEnd="0" LtstEndDays="0" LtstEndTime="00:00" LtstSt="0" LtstStDays="0" LtstStTime="00:00" LtstTimeTZ="" WCTypeAND="1" WCTypeOR="0" WElseA="1" WElseH="0" WElseS="0" WElseX="0" WhenExecute="" WtimOn="0"/>
@@ -128,12 +126,10 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
-<UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
+<UC4RB_AZR_VN_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VN_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -180,12 +176,10 @@
 </PRPTBOX>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PPRPTS" type="PPROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">
-<UC4RB_AZR_CLOUD_SERVICEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_CLOUD_SERVICE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
-<UC4RB_AZR_DEPLOYMENT_SLOTs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_DEPLOYMENT_SLOT#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT">Staging</UC4RB_AZR_DEPLOYMENT_SLOTs.00>
-<UC4RB_AZR_PARAM_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_PARAM_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" parent="PPRPTS" type="PPROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION">
+<UC4RB_AZR_VN_CONFIG_FILEs.00 ReadFromTable="OPSE" altview="0" haslist="0" msginsert="" msgnr="" promptname="UC4RB_AZR_VN_CONFIG_FILE#" promptsetname="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION"/>
 </PRPTBOX>
 </PROMPTSET>
 </node>
@@ -214,8 +208,8 @@
 <MaxRetCode>0</MaxRetCode>
 <MrcExecute/>
 <MrcElseE>0</MrcElseE>
-<FcstStatus>0| |</FcstStatus>
-<Ert>8</Ert>
+<FcstStatus>0|U00000000 ??? ""</FcstStatus>
+<Ert>11</Ert>
 <ErtMethodDef>1</ErtMethodDef>
 <ErtMethodFix>0</ErtMethodFix>
 <ErtFix>0</ErtFix>
@@ -257,9 +251,9 @@
 <PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" prptmode="1"/>
 </PROMPTSET>
 </node>
-<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" parent="PRPTS" type="PROMPTSET">
-<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" ontop="1">
-<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.CREATE_DEPLOYMENT" prptmode="1"/>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.VNET_CONFIGURATION" prptmode="1"/>
 </PROMPTSET>
 </node>
 <node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
@@ -290,55 +284,54 @@
 </SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
-PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT
+PCK.AUTOMIC_AZURE.PUB.ACTION.VNET_CONFIGURATION
 
 = General description =
-This action will allow you to create a deployment in azure asynchronously as per the specified parameter file. Output of this action will return request status id.
+This action will allow you to configure a Virtual Networks in Microsoft Azure asynchronously as per the specified parameter file. Output of this action will return request status id.
 Parameter file should be accessible from agent OS.
-
 The parameter file will have the following structure:
-<?xml version="1.0" encoding="utf-8"?>
-<CreateDeployment xmlns="http://schemas.microsoft.com/windowsazure">
-  <Name>deployment-name</Name>
-  <PackageUrl>package-url-in-blob-storage</PackageUrl>
-  <Label>base64-encoded-deployment-label</Label>
-  <Configuration>base64-encoded-configuration-file</Configuration>
-  <StartDeployment>start-deployment</StartDeployment>
-  <TreatWarningsAsError>prioritize-warnings</TreatWarningsAsError>
-  <ExtendedProperties>
-    <ExtendedProperty>
-      <Name>property-name</Name>
-      <Value>property-value</Value>
-    </ExtendedProperty>
-  </ExtendedProperties>
-  <ExtensionConfiguration>
-    <AllRoles>
-      <Extension>
-        <Id>identifier-of-extension</Id>
-        <State>state-of-extension</State>
-      </Extension>
-    </AllRoles>
-    <NamedRoles>
-      <Role>
-        <RoleName>role_name1</RoleName>
-        <Extensions>
-          <Extension>
-            <Id>identifier-of-extension</Id>
-            <State>state-of-extension</State>
-          </Extension>
-        </Extensions>
-      </Role>
-    </NamedRoles>
-  </ExtensionConfiguration>
-</CreateDeployment>
+ 
+<NetworkConfiguration xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://schemas.microsoft.com/ServiceHosting/2011/07/NetworkConfiguration">
+  <VirtualNetworkConfiguration>  
+    <Dns />	
+    <LocalNetworkSites>
+      <LocalNetworkSite name="AnuragTest">
+        <AddressSpace>
+          <AddressPrefix>192.168.113.65/16</AddressPrefix>
+        </AddressSpace>
+      </LocalNetworkSite>
+    </LocalNetworkSites>	
+    <VirtualNetworkSites>	
+      <VirtualNetworkSite name="Group Anu Test" Location="South Central US">
+        <AddressSpace>
+          <AddressPrefix>10.2.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="Subnet-1">
+            <AddressPrefix>10.2.0.0/24</AddressPrefix>
+          </Subnet>
+        </Subnets>
+      </VirtualNetworkSite>	  
+      <VirtualNetworkSite name="Group Anurag Test" Location="West Europe">
+        <AddressSpace>
+          <AddressPrefix>172.16.0.0/16</AddressPrefix>
+        </AddressSpace>
+        <Subnets>
+          <Subnet name="Subnet-1">
+            <AddressPrefix>172.16.0.0/24</AddressPrefix>
+          </Subnet>
+        </Subnets>
+      </VirtualNetworkSite>	  
+    </VirtualNetworkSites>	
+  </VirtualNetworkConfiguration>
+</NetworkConfiguration>
 
-= Inputs =
+ = Inputs =
 * Subscription ID    : ID of the subscription which will be used for this connection
 * Keystore Location  : Path to keystore file
 * Keystore Password  : Password to access the keystore
-* Cloud Service Name : Cloud Service name in which you want to create a deployment
-* Deployment Slot    : Target deployment slot
-* Configuration File : Name of the XML parameter file with full path 
+* Configuration File : Configuration file containing the information to configure a Virtual
+                       Networks in Azure 
 * Overwrite Agent    : Overwrites the default agent
 * Overwrite Login    : Overwrites the default login
 
@@ -347,6 +340,7 @@ Success or failure conditions for this action will depend on the specified input
 
 =Return Value=
 This action publishes the request id which can be further used to check the status of the action.
+
 = Outputs =
 * Return code is 0 in case of success.
 * Return code is 1 in case of failure.
@@ -360,7 +354,8 @@ AE logs will be displayed in the AE report.
 Java logs will be created at \temp\azure.log under agent installation directory.
 
 = Example =
-(none)]]></DOC>
+(none)
+]]></DOC>
 </DOCU_Docu>
 </JOBP>
 </uc-export>
