@@ -3,7 +3,7 @@ name: PCK.AUTOMIC_AZURE
 
 source: ae
 
-# binary object resource testing mapping will be defined here
+# binary object resource mapping will be defined here
 # please add resources here
 binaries:
   - object: RESOURCES/LIBS/PCK.AUTOMIC_AZURE.PRV.STORE
