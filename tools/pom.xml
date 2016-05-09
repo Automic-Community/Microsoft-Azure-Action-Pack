@@ -5,13 +5,17 @@
 	<groupId>com.automic.actions</groupId>
 	<artifactId>azure-tool</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0</version>
-	<name>AzureTool</name>
+	<version>${version}</version>
+	<name>azure-tool</name>
 	<description>Azure tool provides functionalities to integrate with Azure Rest API.</description>
 
 	<properties>
+	        <version>1.0.0-SNAPSHOT</version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<vendor>Automic Software GmbH</vendor>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>		
 	</properties>
 
 	<dependencies>
@@ -63,73 +67,95 @@
 		</dependency>
 
 	</dependencies>
-	
-	<build>
-		 <finalName>azuretool</finalName> 
-		<plugins>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-					<encoding>UTF-8</encoding>
-				</configuration>
-			</plugin>
+        <build>
+           <plugins>
+              <plugin>
+   	          <groupId>org.apache.maven.plugins</groupId>
+	          <artifactId>maven-compiler-plugin</artifactId>
+	          <version>3.1</version>
+	          <configuration>
+	             <source>1.7</source>
+	             <target>1.7</target>
+	          </configuration>
+              </plugin>
 
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-						</manifest>
-						<manifestEntries>
-							<Implementation-Version>${project.version} ${maven.build.timestamp}</Implementation-Version>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-shade-plugin</artifactId>
-				<version>1.6</version>
-				<configuration>
-					<createDependencyReducedPom>true</createDependencyReducedPom>
-					<filters>
-						<filter>
-							<artifact>*:*</artifact>
-							<excludes>
-								<exclude>META-INF/*.SF</exclude>
-								<exclude>META-INF/*.DSA</exclude>
-								<exclude>META-INF/*.RSA</exclude>
-							</excludes>
-						</filter>
-					</filters>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>shade</goal>
-						</goals>
-						<configuration>
-							<transformers>
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<mainClass>com.automic.azure.client.AzureClient</mainClass>
-								</transformer>
-							</transformers>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-		</plugins>
-	</build>
+              <plugin>
+   	         <artifactId>maven-assembly-plugin</artifactId>
+	         <configuration>
+	             <archive>
+	  	         <manifest>
+		             <mainClass>com.automic.azure.client.AzureClient</mainClass>
+		         </manifest>
+		
+		         <manifestSections>
+		             <manifestSection>
+		                 <name>azure-tool</name>
+		                 <manifestEntries>
+		   	             <Application-BuildDate>${timestamp}</Application-BuildDate>
+		                     <Application-Version>${version}</Application-Version>
+			             <Implementation-Vendor>${vendor}</Implementation-Vendor>
+		                 </manifestEntries>
+		             </manifestSection>
+		         </manifestSections>
+		     </archive>	      
+	             <finalName>azure-tool</finalName>
+		     <descriptorRefs>
+			<descriptorRef>jar-with-dependencies</descriptorRef>
+		     </descriptorRefs>
+		     <appendAssemblyId>false</appendAssemblyId>
+    	         </configuration>
+	         
+	         <executions>
+	             <execution>
+	                 <id>make-assembly</id> <!-- this is used for inheritance merges -->
+	                 <phase>package</phase> <!-- bind to the packaging phase -->
+	                 <goals>
+		            <goal>single</goal>
+	                 </goals>
+	             </execution>
+                     
+                     <execution>
+                         <id>make-clm-zip</id>
+                         <!-- this is used for inheritance merges -->
+                         <phase>package</phase>
+                         <!-- bind to the packaging phase -->
+                         <goals>
+                            <goal>single</goal>
+                         </goals>
+                         <configuration>
+                             <descriptors>
+                                 <descriptor>clm-libs-assembly.xml</descriptor>
+                             </descriptors>
+                         </configuration>
+                     </execution>	      
+	      
+	         </executions>
+              </plugin>
+       
+              <plugin>
+                  <groupId>org.sonatype.plugins</groupId>
+                  <artifactId>nexus-staging-maven-plugin</artifactId>
+                  <version>1.6.5</version>
+                  <extensions>true</extensions>
+                  <configuration>
+                      <!-- The server "id" element from settings to use authentication from -->
+                      <serverId>com.automic.nexusvie</serverId>
+                      <!-- The Base URL of Nexus instance where we want to stage -->
+                      <nexusUrl>https://nexusvie.automic.com/nexus</nexusUrl>
+                      <stagingProfileId>13476f800d2c4a</stagingProfileId>
+                      <!-- do NOT auto release after close as we need to retrieve CLM base url as long the staged repo exists -->
+                      <!-- explicit release step in build script required (outside of POM) -->
+                      <!-- <autoReleaseAfterClose>true</autoReleaseAfterClose>-->
+                      <!-- staging will remain open to publish the full action pack bundle into the repository -->
+                      <!-- beaware: staging repository needs to be closed within the buildsteps -->
+                      <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                      <!-- will keep the deployed artifact even in case of errors for further debugging -->
+                      <keepStagingRepositoryOnCloseRuleFailure>true</keepStagingRepositoryOnCloseRuleFailure>
+                  </configuration>
+              </plugin>
+           
+           </plugins>
+        
+        </build>
 </project>

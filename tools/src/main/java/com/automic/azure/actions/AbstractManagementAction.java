@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.automic.azure.actions;
 
@@ -49,10 +49,10 @@ public abstract class AbstractManagementAction extends AbstractAction {
     protected List<String> noLogging() {
         return Arrays.asList(new String[] { Constants.PASSWORD });
     }
-    
+
     /**
      * Method to execute the action.
-     * 
+     *
      * @throws AzureException
      */
     @Override
@@ -70,7 +70,7 @@ public abstract class AbstractManagementAction extends AbstractAction {
             }
         }
     }
-    
+
     /**
      * Retrieve the ClientConfig which can be used to create client
      * @return ClientConfig Object
@@ -117,8 +117,9 @@ public abstract class AbstractManagementAction extends AbstractAction {
             throw new AzureException(ExceptionConstants.EMPTY_SUBSCRIPTION_ID);
         }
         if (!Validator.checkFileExists(this.keyStore)) {
-            LOGGER.error(ExceptionConstants.INVALID_FILE);
-            throw new AzureException(String.format(ExceptionConstants.INVALID_FILE, this.keyStore));
+			String errMsg = String.format(ExceptionConstants.INVALID_FILE, this.keyStore);
+            LOGGER.error(errMsg);
+            throw new AzureException(errMsg);
         }
 
         if (!Validator.checkNotEmpty(this.password)) {

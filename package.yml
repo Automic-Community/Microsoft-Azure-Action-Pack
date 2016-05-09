@@ -8,7 +8,7 @@ source: ae
 binaries:
   - object: RESOURCES/LIBS/PCK.AUTOMIC_AZURE.PRV.STORE
     resources:
-      - name: AZURE 
+      - name: AZURETOOL
         type: BINARY
-        path: tools/target/azuretool.jar
+        path: tools/target/azure-tool.jar
         version: 1.0.0 
