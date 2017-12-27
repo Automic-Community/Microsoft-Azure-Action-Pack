@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<JOBS_CIT AttrType="CIT" name="PCK.AUTOMIC_AZURE.PUB.ACTION.GET_ACCESS_TOKEN">
+<XHEADER state="1">
+<Title>Get Access Token</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<Active>1</Active>
+<OH_SubType/>
+<CustomAttributes KeyListID="0" dataRequestID="0"/>
+</XHEADER>
+<OUTPUTREG state="1">
+<FileReg/>
+</OUTPUTREG>
+<SYNCREF state="1">
+<Syncs/>
+</SYNCREF>
+<ATTR_JOBS state="1">
+<Queue>CLIENT_QUEUE</Queue>
+<StartType/>
+<HostDst>|&lt;CIT&gt;|HOST</HostDst>
+<HostATTR_Type>CIT</HostATTR_Type>
+<CodeName/>
+<Login/>
+<IntAccount/>
+<ExtRepDef>1</ExtRepDef>
+<ExtRepAll>0</ExtRepAll>
+<ExtRepNone>0</ExtRepNone>
+<AutoDeactNo>0</AutoDeactNo>
+<AutoDeact1ErrorFree>0</AutoDeact1ErrorFree>
+<AutoDeactErrorFree>1</AutoDeactErrorFree>
+<DeactWhen>ANY_OK</DeactWhen>
+<DeactDelay>0</DeactDelay>
+<AutoDeactAlways>0</AutoDeactAlways>
+<AttDialog>0</AttDialog>
+<ActAtRun>1</ActAtRun>
+<Consumption>0</Consumption>
+<UC4Priority>0</UC4Priority>
+<MaxParallel2>0</MaxParallel2>
+<MpElse1>0</MpElse1>
+<MpElse2>1</MpElse2>
+<TZ/>
+</ATTR_JOBS>
+<ATTR_CIT state="1">
+<OutputDb>1</OutputDb>
+<OutputDbErr>0</OutputDbErr>
+<OutputFile>0</OutputFile>
+<OptReportPLOG>1</OptReportPLOG>
+<RequTaskParams>0</RequTaskParams>
+</ATTR_CIT>
+<CIT state="2">
+<citcont agentname="&lt;CIT&gt;" jobtype="WEBSERVICEREST" text="Web Service Rest">
+<cit cittype="2" icon="" id="" subtype="REST" text="REST Web Service">
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_aws_accesskey"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_aws_secret_accesskey"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_aws_sign_version"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_basic_host"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_basic_password"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_basic_port"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_basic_preemptive"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_basic_realm"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_basic_username"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_method"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_clientkey"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_clientsecret"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_refresh_token"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_refresh_uri"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_signature_type"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_token"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_token_secret"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_verifier"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_auth_oauth_version_method"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_connection_timeout"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_endpoint_url"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_follow_redirects"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_from_prompts"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_auth_method"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_host"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_password"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_port"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_realm"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_type"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_proxy_username"/>
+<component con="0" enc="0" type="2" value="" xmlName="conn_read_timeout"/>
+<component con="0" enc="0" type="2" value="30" xmlName="connectTimeout"/>
+<component con="0" enc="0" type="2" value="" xmlName="curl"/>
+<component con="0" enc="0" type="2" value="" xmlName="file"/>
+<component con="0" enc="0" type="2" value="false" xmlName="isCurl"/>
+<component con="0" enc="0" type="2" value="false" xmlName="jobHeaders"/>
+<component con="0" enc="0" type="2" value="false" xmlName="jobQuery"/>
+<component con="0" enc="0" type="2" value="application/x-www-form-urlencoded" xmlName="mediaType"/>
+<component con="0" enc="0" type="2" value="POST" xmlName="method"/>
+<component con="0" enc="0" type="2" value="false" xmlName="multiPart"/>
+<component con="0" enc="0" type="2" value="false" xmlName="multiPartResp"/>
+<component con="0" enc="0" type="2" value="Part 1" xmlName="partName"/>
+<component con="0" enc="0" type="2" value="grant_type" xmlName="request_part_0_formData_0_0"/>
+<component con="0" enc="0" type="2" value="client_credentials" xmlName="request_part_0_formData_0_1"/>
+<component con="0" enc="0" type="2" value="client_id" xmlName="request_part_0_formData_1_0"/>
+<component con="0" enc="0" type="2" value="&amp;UC4RB_AZ_CLIENT_ID#" xmlName="request_part_0_formData_1_1"/>
+<component con="0" enc="0" type="2" value="client_secret" xmlName="request_part_0_formData_2_0"/>
+<component con="0" enc="0" type="2" value="&amp;UC4RB_AZ_CLIENT_SECRET#" xmlName="request_part_0_formData_2_1"/>
+<component con="0" enc="0" type="2" value="resource" xmlName="request_part_0_formData_3_0"/>
+<component con="0" enc="0" type="2" value="&amp;UC4RB_AZ_RESOURCE#" xmlName="request_part_0_formData_3_1"/>
+<component con="0" enc="0" type="2" value="application/x-www-form-urlencoded" xmlName="request_part_0_mediaType"/>
+<component con="0" enc="0" type="2" value="Part 1" xmlName="request_part_0_partName"/>
+<component con="0" enc="0" type="2" value="text" xmlName="request_part_0_requestDataSource"/>
+<component con="0" enc="0" type="2" value="text" xmlName="requestDataSource"/>
+<component con="0" enc="0" type="2" value="false" xmlName="requestReports"/>
+<component con="0" enc="0" type="2" value="/&amp;UC4RB_AZ_TENANT_ID#/oauth2/token" xmlName="resource"/>
+<component con="0" enc="0" type="2" value="" xmlName="response_part_0_file"/>
+<component con="0" enc="0" type="2" value="$access_token" xmlName="response_part_0_script_0_code_0"/>
+<component con="0" enc="0" type="2" value="JSONPath" xmlName="response_part_0_script_0_queryType"/>
+<component con="0" enc="0" type="2" value="UC4RB_OUT_AZ_ACCESS_TOKEN#" xmlName="response_part_0_script_0_resourceName"/>
+<component con="0" enc="0" type="2" value="variable" xmlName="response_part_0_script_0_saveTo"/>
+<component con="0" enc="0" type="2" value="false" xmlName="response_part_0_script_0_useArray"/>
+<component con="0" enc="0" type="2" value="false" xmlName="responseReport"/>
+<component con="0" enc="0" type="2" value="60" xmlName="responseTimeout"/>
+<component con="0" enc="0" type="2" value="true" xmlName="responseToJobLog"/>
+<component con="1" enc="0" type="2" value="" xmlName="restConnection"/>
+<component con="0" enc="0" type="2" value="false" xmlName="tracePerformance"/>
+<component con="0" enc="0" type="2" value="" xmlName="uriOverride"/>
+</cit>
+<cit cittype="3" icon="" id="" subtype="GENERALJOBPANELDEF" text="General Job Panel"/>
+</citcont>
+</CIT>
+<RUNTIME state="1">
+<MaxRetCode>0</MaxRetCode>
+<MrcExecute/>
+<MrcElseE>0</MrcElseE>
+<FcstStatus>0| |</FcstStatus>
+
+<ErtMethodDef>1</ErtMethodDef>
+<ErtMethodFix>0</ErtMethodFix>
+<ErtFix>0</ErtFix>
+<ErtDynMethod>2|Average</ErtDynMethod>
+<ErtMethodDyn>0</ErtMethodDyn>
+<ErtCnt>0</ErtCnt>
+<ErtCorr>0</ErtCorr>
+<ErtIgn>0</ErtIgn>
+<ErtIgnFlg>0</ErtIgnFlg>
+<ErtMinCnt>0</ErtMinCnt>
+<MrtMethodNone>1</MrtMethodNone>
+<MrtMethodFix>0</MrtMethodFix>
+<MrtFix>0</MrtFix>
+<MrtMethodErt>0</MrtMethodErt>
+<MrtErt>0</MrtErt>
+<MrtMethodDate>0</MrtMethodDate>
+<MrtDays>0</MrtDays>
+<MrtTime>00:00</MrtTime>
+<MrtTZ/>
+<SrtMethodNone>1</SrtMethodNone>
+<SrtMethodFix>0</SrtMethodFix>
+<SrtFix>0</SrtFix>
+<SrtMethodErt>0</SrtMethodErt>
+<SrtErt>0</SrtErt>
+<MrtCancel>0</MrtCancel>
+<MrtExecute>0</MrtExecute>
+<MrtExecuteObj/>
+</RUNTIME>
+<DYNVALUES state="1">
+<dyntree>
+<node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
+<VALUE state="1">
+<Values>
+<row ERTUsage="0" Name="&amp;UC4RB_OUT_AZ_ACCESS_TOKEN#" Value=""/>
+</Values>
+<Mode>0</Mode>
+</VALUE>
+</node>
+<node content="1" id="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ENDPOINT" name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ENDPOINT" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ENDPOINT" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ENDPOINT" prptmode="1">
+<CONN_ENDPOINT_URLs.00 altview="0" haslist="0"/>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.GET_ACCESS_TOKEN" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.GET_ACCESS_TOKEN" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.GET_ACCESS_TOKEN" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.GET_ACCESS_TOKEN" prptmode="1">
+<UC4RB_AZ_TENANT_IDs.00 altview="0" haslist="0"/>
+<UC4RB_AZ_CLIENT_IDs.00 altview="0" haslist="0"/>
+<UC4RB_AZ_CLIENT_SECRETs.00 altview="0" haslist="0"/>
+<UC4RB_AZ_RESOURCEs.00 altview="0" haslist="0"/>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_PROXY" name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_PROXY" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_PROXY" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_PROXY" prptmode="1">
+<CONN_PROXY_TYPEs.00 altview="0" haslist="0">None</CONN_PROXY_TYPEs.00>
+<CONN_PROXY_HOSTs.00 altview="0" haslist="0"/>
+<CONN_PROXY_PORTs.00 altview="0" haslist="0">0</CONN_PROXY_PORTs.00>
+<CONN_PROXY_USERNAMEs.00 altview="0" haslist="0"/>
+<CONN_PROXY_PASSWORDs.00 altview="0" haslist="0">--10</CONN_PROXY_PASSWORDs.00>
+<CONN_PROXY_REALMs.00 altview="0" haslist="0"/>
+<CONN_PROXY_AUTH_METHODs.00 altview="0" haslist="0">None</CONN_PROXY_AUTH_METHODs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ADVANCED" name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ADVANCED" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ADVANCED" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.CONNECTION_ADVANCED" prptmode="1">
+<CONN_CONNECTION_TIMEOUTs.00 altview="0" haslist="0">30</CONN_CONNECTION_TIMEOUTs.00>
+<CONN_READ_TIMEOUTs.00 altview="0" haslist="0">60</CONN_READ_TIMEOUTs.00>
+<CONN_FOLLOW_REDIRECTSs.00 altview="0" haslist="0">NO</CONN_FOLLOW_REDIRECTSs.00>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.OVERWRITE_RA_AGENT" name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.OVERWRITE_RA_AGENT" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.OVERWRITE_RA_AGENT" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_RA_REST.PUB.PROMPTSET.OVERWRITE_RA_AGENT" prptmode="1">
+<OVERWRITE_RA_AGENT_PROMPTs.00 altview="0" haslist="0"/>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+</dyntree>
+</DYNVALUES>
+<ROLLBACK state="1">
+<RollbackFlag>0</RollbackFlag>
+<CBackupObj/>
+<CRollbackObj/>
+<FBackupPath/>
+<FDeleteBefore>0</FDeleteBefore>
+<FInclSubDirs>0</FInclSubDirs>
+</ROLLBACK>
+<PRE_SCRIPT mode="1" replacementmode="1" state="1">
+<PSCRI><![CDATA[:INC PCK.AUTOMIC_RA_REST.PUB.INCLUDE.PREPARE_RA_JOB
+:INC PCK.AUTOMIC_RA_REST.PUB.INCLUDE.SET_CONNECTION_AUTH_NONE]]></PSCRI>
+</PRE_SCRIPT>
+<SCRIPT mode="1" state="1">
+<MSCRI/>
+</SCRIPT>
+<OUTPUTSCAN state="1">
+<Inherit>N</Inherit>
+<filterobjects/>
+<HostFsc/>
+<LoginFsc/>
+</OUTPUTSCAN>
+<POST_SCRIPT mode="1" replacementmode="1" state="1">
+<OSCRI><![CDATA[:IF &UC4RB_OUT_AZ_ACCESS_TOKEN# <> ""
+:  PRINT &UC4RB_OUT_AZ_ACCESS_TOKEN#
+:ENDIF
+
+:PUBLISH &UC4RB_OUT_AZ_ACCESS_TOKEN#,,WORKFLOW]]></OSCRI>
+</POST_SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC><![CDATA[= Action name =
+PCK.AUTOMIC_AZURE.PUB.ACTION.GET_ACCESS_TOKEN
+
+= General description =
+This action is used to get the access token which will be used in the subsequent actions.
+
+= Failure Conditions =
+(none)
+
+= Inputs =
+--Endpoint--
+* URL Endpoint                 : This URL specifies the entry point of the REST service. For example, http://localhost/ARA/api/data/v1/ is the URL Endpoint of the ARA REST API.  The relative resource location (specified on the request tab) is 
+                                                appended to this URL during runtime such as, http://localhost/ARA/api/data/v1/content .E.g https://192.168.44.42:8443
+
+-- Proxy settings --
+* Server Type                       : Allows you to select HTTP or SOCKS as server type or to leave the default of No Proxy to not use a proxy server.
+* Host                                    : The host where the proxy server resides.
+* Port                                     : The port of the proxy server.
+* Password                           : The password to pass to the proxy server (if required).
+* Realm                                 : The realm.
+* Authentication method     : If the proxy server selected in the Server Type field is HTTP, this field allows you to select Basic, Digest or NTLM as the authentication.
+
+-- Advanced connection settings --
+* Connection Timeout(s)    : The number of seconds before timing out while attempting to connect to the URL endpoint. When set to 0, the connection never times out. The default is 30 seconds.
+* Read Timeout(s)               : The number of seconds before timing out when waiting for a method call. When set to 0, the read never times out. The default is 60 seconds.
+* Follow Redirects               : Specifies that the request should follow site redirects. For example, if you are trying to get to http://test.com and that site redirects to http://newtest.com, 
+                                                  the request will automatically follow the redirect and connect with http://newtest.com.
+
+-- Get Access Token Parameters --
+* Tenant ID                         : The ID of the AAD directory in which you created the application. E.g. 1711058c-9414-4ec0-843d-943c39ab4e7b
+* Client ID                          : A GUID that was assigned to your client application during registration, also known as an application ID. E.g. 4150f8c1-5b81-4cb9-b4f5-b67626de38c3
+* Client Secret                   : The authentication key generated on registering the application. E.g. a7oRI39frHZFI2AXUY4Dl7zSdNKpaY/GSsc3Lx8pk68=
+* Resources                      : 
+
+-- Overwrite RA Agent--
+* Overwrite Login		        : Overwrite RA Agent
+
+= Behavior =
+(none)
+
+=Return Value=
+* UC4RB_OUT_AZ_ACCESS_TOKEN: Publish access token
+
+= Outputs =
+(none)
+
+= Rollback =
+(none)
+
+= Logging =
+AE logs will be displayed in the AE report.
+
+= Example =]]></DOC>
+</DOCU_Docu>
+</JOBS_CIT>
+</uc-export>

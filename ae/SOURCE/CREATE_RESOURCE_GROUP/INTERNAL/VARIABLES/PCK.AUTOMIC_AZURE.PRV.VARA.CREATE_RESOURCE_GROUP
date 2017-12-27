@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
+<VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PRV.VARA.CREATE_RESOURCE_GROUP#LOCATIONS" replacementmode="2">
+<HEADER state="1">
+<Title/>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType>STATIC</OH_SubType>
+</HEADER>
+<ATTR_VARA state="1">
+<Type>C|Text</Type>
+<lblSource>Static</lblSource>
+<source>STATIC</source>
+<VRName>FREI|Freely selected</VRName>
+<NotFoundErr>0</NotFoundErr>
+<NotFoundDef>1</NotFoundDef>
+<ShareN>0</ShareN>
+<ShareL>0</ShareL>
+<ShareR>0</ShareR>
+<MaxValue_C>1024</MaxValue_C>
+<CheckMax_C>0</CheckMax_C>
+<uppercase>0</uppercase>
+<sortColumn>5</sortColumn>
+<sortDirection>0</sortDirection>
+<HostType/>
+</ATTR_VARA>
+<VARA state="1">
+<Variables>
+<row Name="eastasia" Value="eastasia" Value1=" " Value2=" " Value3=" " Value4="01"/>
+<row Name="southeastasia" Value="southeastasia" Value1=" " Value2=" " Value3=" " Value4="02"/>
+<row Name="centralus" Value="centralus" Value1=" " Value2=" " Value3=" " Value4="03"/>
+<row Name="eastus" Value="eastus" Value1=" " Value2=" " Value3=" " Value4="04"/>
+<row Name="eastus2" Value="eastus2" Value1=" " Value2=" " Value3=" " Value4="05"/>
+<row Name="westus" Value="westus" Value1=" " Value2=" " Value3=" " Value4="06"/>
+<row Name="northcentralus" Value="northcentralus" Value1=" " Value2=" " Value3=" " Value4="07"/>
+<row Name="southcentralus" Value="southcentralus" Value1=" " Value2=" " Value3=" " Value4="08"/>
+<row Name="northeurope" Value="northeurope" Value1=" " Value2=" " Value3=" " Value4="09"/>
+<row Name="westeurope" Value="westeurope" Value1=" " Value2=" " Value3=" " Value4="10"/>
+<row Name="japanwest" Value="japanwest" Value1=" " Value2=" " Value3=" " Value4="11"/>
+<row Name="japaneast" Value="japaneast" Value1=" " Value2=" " Value3=" " Value4="12"/>
+<row Name="brazilsouth" Value="brazilsouth" Value1=" " Value2=" " Value3=" " Value4="13"/>
+<row Name="australiaeast" Value="australiaeast" Value1=" " Value2=" " Value3=" " Value4="14"/>
+<row Name="australiasoutheast" Value="australiasoutheast" Value1=" " Value2=" " Value3=" " Value4="15"/>
+<row Name="southindia" Value="southindia" Value1=" " Value2=" " Value3=" " Value4="16"/>
+<row Name="centralindia" Value="centralindia" Value1=" " Value2=" " Value3=" " Value4="17"/>
+<row Name="westindia" Value="westindia" Value1=" " Value2=" " Value3=" " Value4="18"/>
+<row Name="canadacentral" Value="canadacentral" Value1=" " Value2=" " Value3=" " Value4="19"/>
+<row Name="canadaeast" Value="canadaeast" Value1=" " Value2=" " Value3=" " Value4="20"/>
+<row Name="uksouth" Value="uksouth" Value1=" " Value2=" " Value3=" " Value4="21"/>
+<row Name="ukwest" Value="ukwest" Value1=" " Value2=" " Value3=" " Value4="22"/>
+<row Name="westcentralus" Value="westcentralus" Value1=" " Value2=" " Value3=" " Value4="23"/>
+<row Name="westus2" Value="westus2" Value1=" " Value2=" " Value3=" " Value4="24"/>
+<row Name="koreasouth" Value="koreasouth" Value1=" " Value2=" " Value3=" " Value4="25"/>
+</Variables>
+</VARA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</VARA>
+</uc-export>

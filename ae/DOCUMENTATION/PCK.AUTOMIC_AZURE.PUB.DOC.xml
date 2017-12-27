@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <DOCU name="PCK.AUTOMIC_AZURE.PUB.DOC">
 <HEADER state="1">
 <Title>Package documentation</Title>
@@ -100,6 +99,24 @@ Action description :This action will allow you to create a deployment in azure a
 
 *Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_FILE
 Action Description :This action will delete the specified file if it exists.
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_RESOURCE_GROUP
+Action Description : This action is used to create a resource group.
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.DEPLOY_TO_RESOURCE_GROUP
+Action Description : is used to deploy resources to a resource group.
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.GET_DEPLOYMENT_STATUS
+Action Description :This action is used to get the status of a deployment.
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.GET_ACCESS_TOKEN
+Action Description :This action is used to get the access token.
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.LIST_LOCATIONS
+Action Description :This action is used to list the available locations.
+
+*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.LIST_RESOURCE_GROUPS
+Action Description :This action is used to list the available resource groups.
 ]]></DOC>
 </DOCU_Docu>
 </DOCU>
