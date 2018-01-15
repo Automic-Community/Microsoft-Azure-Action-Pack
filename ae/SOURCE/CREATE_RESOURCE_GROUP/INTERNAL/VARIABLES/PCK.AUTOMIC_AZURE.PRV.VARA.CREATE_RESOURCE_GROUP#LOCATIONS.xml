@@ -26,6 +26,7 @@
 </ATTR_VARA>
 <VARA state="1">
 <Variables>
+<row Name="koreacentral" Value="koreacentral" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="eastasia" Value="eastasia" Value1=" " Value2=" " Value3=" " Value4="01"/>
 <row Name="southeastasia" Value="southeastasia" Value1=" " Value2=" " Value3=" " Value4="02"/>
 <row Name="centralus" Value="centralus" Value1=" " Value2=" " Value3=" " Value4="03"/>

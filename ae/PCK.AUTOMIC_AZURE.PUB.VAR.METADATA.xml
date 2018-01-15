@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <VARA OVD_VRName="FREI" data_type="STATIC" name="PCK.AUTOMIC_AZURE.PUB.VAR.METADATA" replacementmode="2">
 <HEADER state="1">
 <Title/>
@@ -22,6 +21,7 @@
 <uppercase>0</uppercase>
 <sortColumn>0</sortColumn>
 <sortDirection>0</sortDirection>
+<HostType/>
 </ATTR_VARA>
 <VARA state="1">
 <Variables>
@@ -34,7 +34,7 @@
 <row Name="Name" Value="PCK.AUTOMIC_AZURE" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Package Format Version" Value="0.1.0" Value1="" Value2="" Value3="" Value4=""/>
 <row Name="Title" Value="Automic Azure Package" Value1="" Value2="" Value3="" Value4=""/>
-<row Name="Version" Value="1.0.2" Value1="" Value2="" Value3="" Value4=""/>
+<row Name="Version" Value="2.0.0" Value1="" Value2="" Value3="" Value4=""/>
 </Variables>
 </VARA>
 <DOCU_Docu state="1" type="text">
