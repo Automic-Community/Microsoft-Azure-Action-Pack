@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-15"?>
-<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<?xml version="1.0" encoding="ISO-8859-15" standalone="no"?><uc-export clientvers="11.0.0">
 <DOCU name="PCK.AUTOMIC_AZURE.PUB.DOC">
 <HEADER state="1">
 <Title>Package documentation</Title>
@@ -11,7 +10,7 @@
 <DOC><![CDATA[About Automic's Azure Package
 ================================
 
-Automate the Microsoft Azure Management and Storage services through various actions. These actions are basic building blocks to achieve the given business goal.
+Automate the Microsoft Azure Management, Storage services and provisioning of Microsoft SaaS Azure VMs through various actions. These actions are basic building blocks to achieve the given business goal.
 Azure package supports the following functionalities.
 * Manage Cloud Service
 * Manage Virtual Machine(s)
@@ -19,6 +18,7 @@ Azure package supports the following functionalities.
 * Manage Blob (Block) storage 
 * Manage Deployments
 * Manage Virtual Network Configuration
+* Azure Resource Manager
 
 =Supported Azure versions=
 
@@ -26,6 +26,7 @@ Following versions of Azure Rest API(s) are supported:
 
 * For Management Services 2015-04-01
 * For Storage Services 2015-02-21
+* For ARM : 2016-09-01
 
 =Limitations=
 
@@ -33,7 +34,7 @@ Following versions of Azure Rest API(s) are supported:
 
 =Setup=
 
-* Oracle JDK 1.7 or higher must be installed on Agent OS and "java" must be set as executable on the same.
+* Oracle JRE 1.7 or higher must be installed on Agent OS and "java" must be set as executable on the same.
 
 * The Agent should be able to access the Azure URL(s) in order to make HTTPs requests.
 
@@ -43,7 +44,7 @@ Following versions of Azure Rest API(s) are supported:
 
 * REST API(s) should be enabled for your subscription.
 
-* Certificate should be setup and uploaded in Azure Portal for your subscription.
+* Certificate should be set up and uploaded to Azure Portal for your subscription.
 
 =Variables=
 
@@ -57,19 +58,19 @@ PCK.AUTOMIC_AZURE.PRV.VARA.PACKAGE_PARAMETERS
 Following actions are supported for Azure.
 
 * Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.GET_SUBSCRIPTION_INFO
-Action Description: This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an xml printed in the Job report containing detailed information of the specified Azure Subscription.
+Action Description: This action is used to fetch Subscription details from Azure system as per the specified Subscription Id. We also need to specify the path to authentication certificate (keystore .jks file) and certificate password in order to connect to Azure system. The Output of this action will be an XML printed in the Job report containing detailed information of the specified Azure Subscription.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.CHANGE_VM_STATE
-Action description: This action is used to change the virtual machine state (start ,restart ,shutdown and shutdown & deallocate). Difference between shutdown and shutdown deallocate is that later will release all the resources accquired by the Virtual machine. This action will return request id which can be further used to query the status of the action.
+Action description: This action is used to change the virtual machine state (start , restart , shutdown and shutdown & deallocate). Difference between shutdown and shutdown deallocate is that later will release all the resources acquired by the Virtual machine. This action will return request id which can be further used to query the status of the action.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.CHECK_REQUEST_STATUS
-Action description: This action is used to fetch the status of a previously submitted Azure request based on the request id provided by user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if user provides an invalid request id which does not exist in Azure system.
+Action description: This action is used to fetch the status of a previously submitted Azure request based on the request id provided by the user. The request status is stored and published in an AE variable. The value of request status will be either Succeeded, InProgress or Failed. This action will fail if the user provides an invalid request id which does not exist in the Azure system.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_VM
 Action description: This action is used to delete the given virtual machine in the cloud service. The action will return the request id which can be further queried to get the status of this action. Also, if delete attached media is selected YES then it will delete all the associated media (operating system disk.data disk and the source blobs) not the container.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_VM_DEPLOYMENT
-Action description: The Create Virtual Machine Deployment Action creates a deployment and then creates a Virtual Machine in that deployment based on the provided xml configuration file and service name. If action executed successfully, it will return request status id that will be used to check status of executed action.
+Action description: The Create Virtual Machine Deployment Action creates a deployment and then creates a Virtual Machine in that deployment based on the provided XML configuration file and service name. If action executed successfully, it will return request status id that will be used to check the status of the executed action.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_STORAGE_CONTAINER
 Action description: This action is used to create a Container in the Azure Storage account provided by the user. The Container is created based on the storage account information(account name and access key) and parameters like container name and access type.
@@ -81,7 +82,7 @@ Action description: This action is used to delete a Container in the Azure Stora
 Action Description: The Put Blob action uploads a new block blob. The content of the existing blob is overwritten with the content of the new blob and overwrites any existing metadata on the blob. Partial updates are not supported with Put Blob. The default MIME type is application/octet-stream. Using this action user can save his/her contents(images, videos, documents etc.) in the form of blob for future usage. This action will also publish the blob name in AE variable on successful upload.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_CLOUD_SERVICE
-Action description: This action is used to create cloud service in Microsoft Azure asynchronously at specified geographical location by user. This action will return request id which can be further used to query the status of the action.
+Action description: This action is used to create cloud service in Microsoft Azure asynchronously at the specified geographical location by the user. This action will return request id which can be further used to query the status of the action.
 
 *Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_BLOB
 Action description: This action is used to delete the blob or its snapshots or both as per the specified inputs from Storage container in Microsoft Azure.
@@ -90,17 +91,34 @@ Action description: This action is used to delete the blob or its snapshots or b
 Action description: This action will allow you to configure a Virtual Network in Microsoft Azure asynchronously as per the specified parameter file.
 
 *Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_CLOUD_SERVICE
-Action description: This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable.This action is executed in asynchronous mode only if Delete attached media = true.
+Action description: This action will delete an existing cloud service in Microsoft Azure as per the specified inputs. The output of this action will be a request status id which will be stored in AE variable.This action is executed in asynchronous mode only if Delete attached media = true.
 
 * Action name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_DEPLOYMENT
-Action description: This action will delete an existing deployment in Microsoft Azure as per the specified inputs. Output of this action will be a request status id which will be stored in AE variable. You could either delete deployment based on deployment slots or a deployment name. User could also delete Operating system disk, attached data disks, and the source blobs for the disks from storage using appropriate flag.
+Action description: This action will delete an existing deployment in Microsoft Azure as per the specified inputs. The output of this action will be a request status id which will be stored in AE variable. You could either delete deployment based on deployment slots or a deployment name. User could also delete Operating system disk, attached data disks, and the source blobs for the disks from storage using appropriate flag.
 
-*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT
-Action description :This action will allow you to create a deployment in azure asynchronously as per the specified parameter file. Output of this action will return request status id.By default it will create a deployment in the staging.
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_DEPLOYMENT
+Action description: This action will allow you to create a deployment in azure asynchronously as per the specified parameter file. The output of this action will return request status id. By default, it will create a deployment in the staging.
 
-*Action Name :PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_FILE
-Action Description :This action will delete the specified file if it exists.
-]]></DOC>
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.DELETE_FILE
+Action Description: This action will delete the specified file if it exists.
+
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.CREATE_RESOURCE_GROUP
+Action Description: This action is used to create a resource group.
+
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.DEPLOY_TO_RESOURCE_GROUP
+Action Description: is used to deploy resources to a resource group.
+
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.GET_DEPLOYMENT_STATUS
+Action Description: This action is used to get the status of a deployment.
+
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.GET_ACCESS_TOKEN
+Action Description: This action is used to get the access token.
+
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.LIST_LOCATIONS
+Action Description: This action is used to list the available locations.
+
+*Action Name: PCK.AUTOMIC_AZURE.PUB.ACTION.LIST_RESOURCE_GROUPS
+Action Description: This action is used to list the available resource groups.]]></DOC>
 </DOCU_Docu>
 </DOCU>
 </uc-export>
