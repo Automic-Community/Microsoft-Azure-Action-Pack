@@ -26,6 +26,7 @@ Following versions of Azure Rest API(s) are supported:
 
 * For Management Services 2015-04-01
 * For Storage Services 2015-02-21
+* For ARM : 2016-09-01
 
 =Limitations=
 
@@ -33,7 +34,7 @@ Following versions of Azure Rest API(s) are supported:
 
 =Setup=
 
-* Oracle JDK 1.7 or higher must be installed on Agent OS and "java" must be set as executable on the same.
+* Oracle JRE 1.7 or higher must be installed on Agent OS and "java" must be set as executable on the same.
 
 * The Agent should be able to access the Azure URL(s) in order to make HTTPs requests.
 
