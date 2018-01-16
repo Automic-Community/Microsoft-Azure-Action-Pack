@@ -109,7 +109,7 @@
 <component con="0" enc="0" type="2" value="" xmlName="response_part_0_file"/>
 <component con="0" enc="0" type="2" value="$access_token" xmlName="response_part_0_script_0_code_0"/>
 <component con="0" enc="0" type="2" value="JSONPath" xmlName="response_part_0_script_0_queryType"/>
-<component con="0" enc="0" type="2" value="UC4RB_OUT_AZ_ACCESS_TOKEN#" xmlName="response_part_0_script_0_resourceName"/>
+<component con="0" enc="0" type="2" value="AZ_ACCESS_TOKEN#" xmlName="response_part_0_script_0_resourceName"/>
 <component con="0" enc="0" type="2" value="variable" xmlName="response_part_0_script_0_saveTo"/>
 <component con="0" enc="0" type="2" value="false" xmlName="response_part_0_script_0_useArray"/>
 <component con="0" enc="0" type="2" value="false" xmlName="responseReport"/>
@@ -161,7 +161,7 @@
 <node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
 <VALUE state="1">
 <Values>
-<row ERTUsage="0" Name="&amp;UC4RB_OUT_AZ_ACCESS_TOKEN#" Value=""/>
+<row ERTUsage="0" Name="&amp;AZ_ACCESS_TOKEN#" Value=""/>
 </Values>
 <Mode>0</Mode>
 </VALUE>
@@ -236,11 +236,12 @@
 <LoginFsc/>
 </OUTPUTSCAN>
 <POST_SCRIPT mode="1" replacementmode="1" state="1">
-<OSCRI><![CDATA[:IF &UC4RB_OUT_AZ_ACCESS_TOKEN# <> ""
-:  PRINT &UC4RB_OUT_AZ_ACCESS_TOKEN#
-:ENDIF
+<OSCRI><![CDATA[:PSET &UC4RB_OUT_AZ_ACCESS_TOKEN# = &AZ_ACCESS_TOKEN#
 
-:PUBLISH &UC4RB_OUT_AZ_ACCESS_TOKEN#,,WORKFLOW]]></OSCRI>
+:IF &AZ_ACCESS_TOKEN# <> ""
+:  PRINT "Access token: &AZ_ACCESS_TOKEN#"
+:ENDIF
+]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =

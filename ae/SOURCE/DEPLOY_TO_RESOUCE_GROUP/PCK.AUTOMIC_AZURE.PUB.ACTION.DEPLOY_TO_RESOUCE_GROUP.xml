@@ -277,7 +277,7 @@ This action is used to deploy resources to a resource group.
 (none)
 
 =Return Value=
-(none)
+* UC4RB_OUT_AZ_DEPL_NAME: Deployment name
 
 = Outputs =
 (none)

@@ -99,7 +99,7 @@
 <component con="0" enc="0" type="2" value="" xmlName="response_part_0_file"/>
 <component con="0" enc="0" type="2" value=".provisioningState" xmlName="response_part_0_script_0_code_0"/>
 <component con="0" enc="0" type="2" value="JSONPath" xmlName="response_part_0_script_0_queryType"/>
-<component con="0" enc="0" type="2" value="UC4RB_OUT_AZ_PROVISION_STATE#" xmlName="response_part_0_script_0_resourceName"/>
+<component con="0" enc="0" type="2" value="AZ_PROVISIONING_STATE#" xmlName="response_part_0_script_0_resourceName"/>
 <component con="0" enc="0" type="2" value="variable" xmlName="response_part_0_script_0_saveTo"/>
 <component con="0" enc="0" type="2" value="false" xmlName="response_part_0_script_0_useArray"/>
 <component con="0" enc="0" type="2" value="false" xmlName="responseReport"/>
@@ -151,7 +151,7 @@
 <node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
 <VALUE state="1">
 <Values>
-<row ERTUsage="0" Name="&amp;UC4RB_OUT_AZ_PROVISION_STATE#" Value=""/>
+<row ERTUsage="0" Name="&amp;AZ_PROVISIONING_STATE#" Value=""/>
 </Values>
 <Mode>0</Mode>
 </VALUE>
@@ -226,11 +226,11 @@
 <LoginFsc/>
 </OUTPUTSCAN>
 <POST_SCRIPT mode="1" replacementmode="1" state="1">
-<OSCRI><![CDATA[:IF &UC4RB_OUT_AZ_PROVISION_STATE# <> ""
-:  PRINT "Provisioning State: &UC4RB_OUT_AZ_PROVISION_STATE#"
-:ENDIF
+<OSCRI><![CDATA[:PSET &UC4RB_OUT_AZ_PROVISION_STATE# = &AZ_PROVISIONING_STATE#
 
-:PUBLISH &UC4RB_OUT_AZ_PROVISION_STATE#,,WORKFLOW]]></OSCRI>
+:IF &AZ_PROVISIONING_STATE# <> ""
+:  PRINT "Provisioning State: &AZ_PROVISIONING_STATE#"
+:ENDIF]]></OSCRI>
 </POST_SCRIPT>
 <DOCU_Docu state="1" type="text">
 <DOC><![CDATA[= Action name =
@@ -274,7 +274,7 @@ This action is used to get the status of a deployment.
 (none)
 
 =Return Value=
-* UC4RB_OUT_AZ_PROVISION_STATE: Provisioning state
+* UC4RB_OUT_AZ_PROVISION_STATE# : Provisioning state
 
 = Outputs =
 (none)
