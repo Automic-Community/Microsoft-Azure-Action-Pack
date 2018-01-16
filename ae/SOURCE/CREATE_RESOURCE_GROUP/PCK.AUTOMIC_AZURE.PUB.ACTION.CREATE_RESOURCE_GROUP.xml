@@ -262,7 +262,7 @@ This action is used to create a resource group.
 
 -- Create Resource Group Parameters --
 * Resource Group Name          : The name of the resource group. E.g. resourceGroup
-* Location                                 : The location of the resource group. It cannot be changed after the resource group has been created. It muct be one of the supported Azure locations. E.g. South Central US
+* Location                                 : The location of the resource group. It cannot be changed after the resource group has been created. It must be one of the supported Azure locations. E.g. southcentralus
 * Azure Subscription ID            : The ID of the target subscription. E.g. 9df4963f-e959-46cb-8c25-071eb7a1b9e1
 * Authentication Access Token : It authenticates to the web API and retrieves the desired resource.
 

@@ -276,7 +276,7 @@ This action is used to get the access token which will be used in the subsequent
 * Tenant ID                         : The ID of the AAD directory in which you created the application. E.g. 1711058c-9414-4ec0-843d-943c39ab4e7b
 * Client ID                          : A GUID that was assigned to your client application during registration, also known as an application ID. E.g. 4150f8c1-5b81-4cb9-b4f5-b67626de38c3
 * Client Secret                   : The authentication key generated on registering the application. E.g. a7oRI39frHZFI2AXUY4Dl7zSdNKpaY/GSsc3Lx8pk68=
-* Resources                      : The App ID URI of the web API (secured resource). E.g. https://automic.org/d68486ef-fb0f-408f-b0f8-4be5a7a00597
+* Resources                      : The App ID URI of the web API (secured resource). E.g.https://management.azure.com
 
 -- Overwrite RA Agent--
 * Overwrite Login		        : Overwrite RA Agent
