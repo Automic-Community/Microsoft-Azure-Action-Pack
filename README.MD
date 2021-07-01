@@ -84,7 +84,7 @@ Select the certificate file (azure.cer) as generated in step 2.
 
 ###### Verify access of Azure using using AE Actions:
 Execute the Action Get Subscription Info.
-Provide the Subscription ID/Key store file and key store password [As created above](#Setup Azure Certificate:)
+Provide the Subscription ID/Key store file and key store password (As created above)
 Choose the agent (Please make sure that Key store file is accessible from Agent)
 Action should be successfully executed and subscription information should be logged into job report as well.
 
