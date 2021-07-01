@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<SCRI name="PCK.AUTOMIC_AZURE.PUB.SCRIPT.RETRY_REQUEST_STATUS">
+<XHEADER state="1">
+<Title>Retry Check request status</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<Active>1</Active>
+<OH_SubType/>
+<CustomAttributes KeyListID="0" dataRequestID="0"/>
+</XHEADER>
+<SYNCREF state="1">
+<Syncs/>
+</SYNCREF>
+<ATTR_SCRI state="1">
+<Queue>CLIENT_QUEUE</Queue>
+<StartType/>
+<ExtRepDef>1</ExtRepDef>
+<ExtRepAll>0</ExtRepAll>
+<ExtRepNone>0</ExtRepNone>
+<IntAccount/>
+<ActAtRun>1</ActAtRun>
+<UC4Priority>0</UC4Priority>
+<MaxParallel2>0</MaxParallel2>
+<MpElse1>1</MpElse1>
+<MpElse2>0</MpElse2>
+<TZ/>
+<AutoDeactNo>0</AutoDeactNo>
+<AutoDeact1ErrorFree>0</AutoDeact1ErrorFree>
+<AutoDeactErrorFree>0</AutoDeactErrorFree>
+<DeactWhen/>
+<AutoDeactAlways>1</AutoDeactAlways>
+<DeactDelay>0</DeactDelay>
+</ATTR_SCRI>
+<RUNTIME state="1">
+<MaxRetCode>0</MaxRetCode>
+<MrcExecute/>
+<MrcElseE>0</MrcElseE>
+<FcstStatus>0| |</FcstStatus>
+<Ert>63</Ert>
+<ErtMethodDef>1</ErtMethodDef>
+<ErtMethodFix>0</ErtMethodFix>
+<ErtFix>0</ErtFix>
+<ErtDynMethod>2|Average</ErtDynMethod>
+<ErtMethodDyn>0</ErtMethodDyn>
+<ErtCnt>0</ErtCnt>
+<ErtCorr>0</ErtCorr>
+<ErtIgn>0</ErtIgn>
+<ErtIgnFlg>0</ErtIgnFlg>
+<ErtMinCnt>0</ErtMinCnt>
+<MrtMethodNone>1</MrtMethodNone>
+<MrtMethodFix>0</MrtMethodFix>
+<MrtFix>0</MrtFix>
+<MrtMethodErt>0</MrtMethodErt>
+<MrtErt>0</MrtErt>
+<MrtMethodDate>0</MrtMethodDate>
+<MrtDays>0</MrtDays>
+<MrtTime>00:00</MrtTime>
+<MrtTZ/>
+<SrtMethodNone>1</SrtMethodNone>
+<SrtMethodFix>0</SrtMethodFix>
+<SrtFix>0</SrtFix>
+<SrtMethodErt>0</SrtMethodErt>
+<SrtErt>0</SrtErt>
+<MrtCancel>0</MrtCancel>
+<MrtExecute>0</MrtExecute>
+<MrtExecuteObj/>
+</RUNTIME>
+<DYNVALUES state="1">
+<dyntree>
+<node content="1" id="VALUE" name="Variables" parent="" type="VALUE">
+<VALUE state="1">
+<Values>
+<row ERTUsage="0" Name="&amp;UC4RB_AZR_REQUEST_STATUS#" Value=""/>
+</Values>
+<Mode>0</Mode>
+</VALUE>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.SUBSCRIPTION_DETAILS" prptmode="1"/>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.REQUEST_INFO" prptmode="1"/>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" ontop="1">
+<PRPTBOX promptset="PCK.AUTOMIC_AZURE.PRV.PROMPTSET.RETRY_REQUEST_STATUS" prptmode="1">
+<UC4RB_AZR_RETRY_COUNTs.00 altview="1" haslist="0"/>
+<UC4RB_AZR_RETRY_INTERVALs.00 altview="1" haslist="0"/>
+</PRPTBOX>
+</PROMPTSET>
+</node>
+<node content="1" id="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" parent="PRPTS" type="PROMPTSET">
+<PROMPTSET name="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" ontop="1">
+<PRPTBOX promptset="PCK.ITPA_SHARED.PRV.PROMPTSET.OVERWRITE_AGENT" prptmode="1"/>
+</PROMPTSET>
+</node>
+</dyntree>
+</DYNVALUES>
+<ROLLBACK state="1">
+<RollbackFlag>0</RollbackFlag>
+<CBackupObj/>
+<CRollbackObj/>
+<FBackupPath/>
+<FDeleteBefore>0</FDeleteBefore>
+<FInclSubDirs>0</FInclSubDirs>
+</ROLLBACK>
+<SCRIPT mode="1" state="1">
+<MSCRI><![CDATA[:  SET &COUNT# = 0
+:  DEFINE &TEMP#, string
+:  WHILE &COUNT# LT &UC4RB_AZR_RETRY_COUNT#
+:   WAIT &UC4RB_AZR_RETRY_INTERVAL#
+:   SET  &COUNT# = &COUNT# +1
+:   print "Retry Count &COUNT#"
+:   SET &ACTOBJ# = ACTIVATE_UC_OBJECT(PCK.AUTOMIC_AZURE.PRV.JOB.CHECK_REQUEST_STATUS@GENERIC,WAIT,,,,PASS_VALUES)
+:   IF &ACTOBJ# = "0"
+:     SET &ERRNR# = SYS_LAST_ERR_NR() 
+:     SET &ERRINS#  = SYS_LAST_ERR_INS() 
+:     SET &MESSAGE# = GET_MSG_TXT(&ERRNR#,&ERRINS#) 
+:     print "Error while activating check request status object :&MESSAGE#"
+:     STOP MSG, 50, "Error while activating check request status object :&MESSAGE#"
+:   ELSE
+:     SET &TEMP# = GET_PUBLISHED_VALUE(&ACTOBJ#,UC4RB_AZR_REQUEST_STATUS#)
+:     PRINT "Request Status = &TEMP#"
+:     IF &TEMP# NE "InProgress"  
+!        Satisfy the condition to quit from while loop as status is no more inprogress state.       
+:        SET  &COUNT# = &UC4RB_AZR_RETRY_COUNT#
+:     ENDIF
+:   ENDIF
+:  ENDWHILE 
+:  PUBLISH &TEMP#,&UC4RB_AZR_REQUEST_STATUS#,"TOP"
+]]></MSCRI>
+</SCRIPT>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</SCRI>
+</uc-export>

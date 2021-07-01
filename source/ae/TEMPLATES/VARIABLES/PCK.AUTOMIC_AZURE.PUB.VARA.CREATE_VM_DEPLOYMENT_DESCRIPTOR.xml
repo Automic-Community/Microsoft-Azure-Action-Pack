@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-15"?>
+<uc-export clientvers="11.0.0-sprint.20141111.1610+build.2828">
+<VARA OVD_VRName="FREI" data_type="XML" name="PCK.AUTOMIC_AZURE.PUB.VARA.CREATE_VM_DEPLOYMENT_DESCRIPTOR" replacementmode="2">
+<HEADER state="1">
+<Title>Create VM Deployment XML</Title>
+<ArchiveKey1/>
+<ArchiveKey2/>
+<OH_SubType>XML</OH_SubType>
+</HEADER>
+<ATTR_VARA state="1">
+<Type>C|Text</Type>
+<lblSource>XML</lblSource>
+<source>XML</source>
+<VRName>FREI|Freely selected</VRName>
+<NotFoundErr>0</NotFoundErr>
+<NotFoundDef>1</NotFoundDef>
+<ShareN>0</ShareN>
+<ShareL>0</ShareL>
+<ShareR>0</ShareR>
+<MaxValue_C>1024</MaxValue_C>
+<CheckMax_C>0</CheckMax_C>
+<uppercase>0</uppercase>
+<sortColumn>0</sortColumn>
+<sortDirection>0</sortDirection>
+</ATTR_VARA>
+<VARA state="1">
+<XML>
+<Parameters>
+<row Name="quick_linux_vm" Value="&lt;Deployment xmlns=&quot;http://schemas.microsoft.com/windowsazure&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;Name&gt;$name&lt;/Name&gt;&lt;DeploymentSlot&gt;$deploymentslot&lt;/DeploymentSlot&gt;&lt;Label&gt;$label&lt;/Label&gt;&lt;RoleList&gt;&lt;Role&gt;&lt;RoleName&gt;$rolename&lt;/RoleName&gt;&lt;RoleType&gt;PersistentVMRole&lt;/RoleType&gt;&lt;ConfigurationSets&gt;&lt;ConfigurationSet i:type=&quot;LinuxProvisioningConfigurationSet&quot;&gt;&lt;ConfigurationSetType&gt;LinuxProvisioningConfiguration&lt;/ConfigurationSetType&gt;&lt;HostName&gt;$hostname&lt;/HostName&gt;&lt;UserName&gt;$username&lt;/UserName&gt;&lt;UserPassword&gt;$userpassword&lt;/UserPassword&gt;&lt;/ConfigurationSet&gt;&lt;/ConfigurationSets&gt;&lt;OSVirtualHardDisk&gt;&lt;DiskName&gt;$diskname&lt;/DiskName&gt;&lt;MediaLink&gt;$medialink&lt;/MediaLink&gt;&lt;SourceImageName&gt;$sourceimagename&lt;/SourceImageName&gt;&lt;/OSVirtualHardDisk&gt;&lt;/Role&gt;&lt;/RoleList&gt;&lt;/Deployment&gt;"/>
+<row Name="quick_windows_vm" Value="&lt;Deployment xmlns=&quot;http://schemas.microsoft.com/windowsazure&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;Name&gt;$name&lt;/Name&gt;&lt;DeploymentSlot&gt;$deploymentslot&lt;/DeploymentSlot&gt;&lt;Label&gt;$label&lt;/Label&gt;&lt;RoleList&gt;&lt;Role&gt;&lt;RoleName&gt;$rolename&lt;/RoleName&gt;&lt;RoleType&gt;PersistentVMRole&lt;/RoleType&gt;&lt;ConfigurationSets&gt;&lt;ConfigurationSet i:type=&quot;WindowsProvisioningConfigurationSet&quot;&gt;&lt;ConfigurationSetType&gt;WindowsProvisioningConfiguration&lt;/ConfigurationSetType&gt;&lt;ComputerName&gt;$computername&lt;/ComputerName&gt;&lt;AdminPassword&gt;$adminpassword&lt;/AdminPassword&gt;&lt;AdminUsername&gt;$adminusername&lt;/AdminUsername&gt;&lt;/ConfigurationSet&gt;&lt;/ConfigurationSets&gt;&lt;OSVirtualHardDisk&gt;&lt;DiskName&gt;$diskname&lt;/DiskName&gt;&lt;MediaLink&gt;$medialink&lt;/MediaLink&gt;&lt;SourceImageName&gt;$sourceimagename&lt;/SourceImageName&gt;&lt;/OSVirtualHardDisk&gt;&lt;/Role&gt;&lt;/RoleList&gt;&lt;/Deployment&gt;"/>
+<row Name="vm_using_captured_image" Value="&lt;Deployment xmlns=&quot;http://schemas.microsoft.com/windowsazure&quot; xmlns:i=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;&gt;&lt;Name&gt;$name&lt;/Name&gt;&lt;DeploymentSlot&gt;$deploymentslot&lt;/DeploymentSlot&gt;&lt;Label&gt;$label&lt;/Label&gt;&lt;RoleList&gt;&lt;Role&gt;&lt;RoleName&gt;$rolename&lt;/RoleName&gt;&lt;RoleType&gt;PersistentVMRole&lt;/RoleType&gt;&lt;VMImageName&gt;$vmimagename&lt;/VMImageName&gt;&lt;/Role&gt;&lt;/RoleList&gt;&lt;/Deployment&gt;"/>
+</Parameters>
+</XML>
+</VARA>
+<DOCU_Docu state="1" type="text">
+<DOC/>
+</DOCU_Docu>
+</VARA>
+</uc-export>

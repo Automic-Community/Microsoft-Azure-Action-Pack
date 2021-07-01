@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<CreateHostedService xmlns="http://schemas.microsoft.com/windowsazure">
-    <ServiceName>CAC</ServiceName>
-	<Label>dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdHRlc3R0ZXN0dGVzdA==</Label>
-	<Description>This is a sample CS</Description>
-    <Location>Southeast Asia</Location>
-</CreateHostedService>
